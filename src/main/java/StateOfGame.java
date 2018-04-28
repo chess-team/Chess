@@ -10,18 +10,18 @@ public class StateOfGame {
 
     private StateOfGame(){}
 
+    public static Color colorOfLastMovedPiece = Color.BLACK;
+
     // return only instance of singleton class
     public static StateOfGame getInstance(){
         return realStateOfGame;
     }
 
-    // method changes state after player move.
-    void changeState(Move change){
-        ;
-    }
 
-    Chessboard chessboard;
-    public static VariantOfGame variant;
+
+    public static Chessboard chessboard = new ClassicChessboard();
+
+    public static VariantOfGame variant = new ClassicChess();
 
     // Method that parse string in format of toString() method and initialize
     // fields of class. This method is used to load saved game from hard drive.
