@@ -4,6 +4,10 @@ public class Pawn extends ChessPiece {
 
     {label = 'P';}
 
+    Pawn(Color a, Position b){
+        super(a,b);
+    }
+
     @Override
     public ArrayList<Move> listOfPossibleMoves() {
         ArrayList <Move> resultList = new ArrayList<Move>();

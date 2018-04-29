@@ -4,6 +4,10 @@ public class Rook extends ChessPiece {
 
     {label = 'R';}
 
+    Rook(Color a, Position b){
+        super(a,b);
+    }
+
     @Override
     public ArrayList<Move> listOfPossibleMoves() {
         ArrayList <Move> resultList = new ArrayList<Move>();

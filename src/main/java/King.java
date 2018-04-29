@@ -4,6 +4,10 @@ public class King extends ChessPiece{
 
     {label = 'W';}
 
+    King(Color a, Position b){
+        super(a,b);
+    }
+
     @Override
     public ArrayList<Move> listOfPossibleMoves() {
         ArrayList <Move> resultList = new ArrayList<Move>();

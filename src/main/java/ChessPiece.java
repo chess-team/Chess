@@ -5,9 +5,9 @@ Class that holds information about chess piece. Chessboard have 64 squares.
  */
 public abstract class ChessPiece {
 
-    private Color color;
+    protected Color color;
 
-    private Position positionOnChessboard;
+    protected Position positionOnChessboard;
 
     protected char label;
 
@@ -17,6 +17,10 @@ public abstract class ChessPiece {
         return positionOnChessboard;
     }
 
+    public void setPosition(Position a){
+        this.positionOnChessboard = a;
+    }
+
     // method used in printing chessBoard in text UI.
     @Override
     public String toString() {
@@ -24,5 +28,10 @@ public abstract class ChessPiece {
         if(this.color == Color.BLACK)
             ret = Character.toString(Character.toLowerCase(label));
         return ret;
+    }
+
+    ChessPiece(Color a, Position b){
+        this.color = a;
+        this.positionOnChessboard = b;
     }
 }
