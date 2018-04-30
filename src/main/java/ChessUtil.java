@@ -3,6 +3,8 @@
 Class having additional functions.
  */
 
+import java.util.ArrayList;
+
 public class ChessUtil {
 
     // simple signum function for integers
@@ -12,6 +14,15 @@ public class ChessUtil {
         return 1;
     }
 
+    public static Color getOtherColor(Color oneColor){
+        switch (oneColor){
+            case BLACK:
+                return Color.WHITE;
+            case WHITE:
+                return Color.BLACK;
+        }
+        return Color.BLACK;
+    }
 
     // check for moves of Rook, Bishop, Queen if
     // moves would pass through some figure
@@ -32,8 +43,33 @@ public class ChessUtil {
         return false;
     }
 
-    // check if King is under attack after move
-    public static boolean isKingUnderAttackAfterMove(Move v){
-        return false;
+    // list of all moves for Player with given color.
+    public static ArrayList<Move> listOfAllMoves(Color playerColor) {
+        ArrayList <Move> resultList = new ArrayList<Move>();
+        for(int i = 0; i < StateOfGame.chessboard.getXWidth(); ++i){
+            for (int j = 0; j < StateOfGame.chessboard.getYWidth(); ++j){
+                ChessPiece figure = StateOfGame.chessboard.
+                        getChessPieceOnPosition(new Position(i,j));
+                if(figure.getColor() == playerColor){
+                    resultList.addAll(figure.listOfPossibleMoves());
+                }
+            }
+        }
+        return resultList;
     }
+
+
+    public static Position getKingPosition(Color kingColor) {
+        for(int i = 0; i < StateOfGame.chessboard.getXWidth(); ++i){
+            for (int j = 0; j < StateOfGame.chessboard.getYWidth(); ++j){
+                ChessPiece figure = StateOfGame.chessboard.
+                        getChessPieceOnPosition(new Position(i,j));
+                if(figure.getColor() == kingColor && figure instanceof King){
+                    return figure.getPosition();
+                }
+            }
+        }
+        return null;
+    }
+
 }

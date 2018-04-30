@@ -28,6 +28,16 @@ public class Move {
 
     @Override
     public String toString() {
+        if(isPromotion){
+            return "from " + from.toString() + " to " + to.toString() +
+                    " promoted to " + promoteTo.toString();
+        }
         return "from " + from.toString() + " to " + to.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return  (obj instanceof Move)&&
+                obj.toString().equals(toString());
     }
 }

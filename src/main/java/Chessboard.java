@@ -8,4 +8,6 @@ public interface Chessboard {
     ChessPiece getChessPieceOnPosition(Position a);
     public void moveFigure(Move v);
     public void setFigure(ChessPiece figure);
+    public int getXWidth();
+    public int getYWidth();
 }

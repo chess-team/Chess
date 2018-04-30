@@ -14,7 +14,7 @@ public class EmptySquare extends ChessPiece{
 
     EmptySquare(Color a, Position b){
 
-        super(a,b);
+        super(null,b);
     }
 
     @Override

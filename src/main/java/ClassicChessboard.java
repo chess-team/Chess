@@ -5,6 +5,14 @@ Chessboard class that represent classic chessboard.
 
 public class ClassicChessboard implements Chessboard {
 
+    public int getXWidth() {
+        return 8;
+    }
+
+    public int getYWidth(){
+        return 8;
+    }
+
     // Uses standard x,y coordinates with coordinate system in left, bottom
     // corner.
     private ChessPiece[][] board = new ChessPiece[8][8];
@@ -36,6 +44,12 @@ public class ClassicChessboard implements Chessboard {
             ret.append('\n');
         }
         return ret.toString();
+    }
+
+    //function used in comparing two game states.
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof ClassicChessboard) && this.toString().equals(obj.toString());
     }
 
     public ChessPiece getChessPieceOnPosition(Position a) {

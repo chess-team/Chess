@@ -13,12 +13,18 @@ public class Position {
     }
 
     // position after translation by a vector [a,b]
-    Position translateByVector(int a, int b){
+    public Position translateByVector(int a, int b){
         return new Position(x+a, y+b);
     }
 
     @Override
     public String toString() {
         return "(" + x + "," + y + ")";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof Position) &&
+                (obj.toString().equals(this.toString()));
     }
 }

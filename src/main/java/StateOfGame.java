@@ -1,10 +1,12 @@
 
+import java.io.Serializable;
+
 /*
 Singleton class that have information about state of game, variant of game and
 history of moves.
 */
 
-public class StateOfGame {
+public class StateOfGame implements Serializable{
 
     private static StateOfGame realStateOfGame = new StateOfGame();
 
@@ -17,11 +19,15 @@ public class StateOfGame {
         return realStateOfGame;
     }
 
-
+    public static HistoryOfMoves historyOfMoves = new HistoryOfMoves();
 
     public static Chessboard chessboard = new ClassicChessboard();
 
     public static VariantOfGame variant = new ClassicChess();
+
+    static {
+        variant.initializeStateOfGame();
+    }
 
     // Method that parse string in format of toString() method and initialize
     // fields of class. This method is used to load saved game from hard drive.

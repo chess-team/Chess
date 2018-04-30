@@ -6,19 +6,26 @@ Class holds information about chess pieces.
 
 public abstract class ChessPiece {
 
-    protected Color color;
+    private Color color;
 
-    protected Position positionOnChessboard;
+    private Position positionOnChessboard;
 
     protected char label;
 
     abstract public ArrayList<Move> listOfPossibleMoves();
 
     public Position getPosition(){
+
         return positionOnChessboard;
     }
 
+    public Color getColor(){
+
+        return this.color;
+    }
+
     public void setPosition(Position a){
+
         this.positionOnChessboard = a;
     }
 
