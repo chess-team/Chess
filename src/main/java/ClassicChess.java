@@ -16,72 +16,109 @@ public class ClassicChess implements VariantOfGame {
                 instanceof EmptySquare)
                 return false;
         if(!(StateOfGame.chessboard.getChessPieceOnPosition(move.from)
-                instanceof Knight) && ChessUtil.isMovePassingThroughFigure(move)){
+           instanceof Knight) && ChessUtil.isMovePassingThroughFigure(move)){
             return false;
         }
-        return true;
+        if(StateOfGame.chessboard.getChessPieceOnPosition(move.from).color ==
+                StateOfGame.chessboard.getChessPieceOnPosition(move.to).color)
+            return false;
+
+        ChessPiece movedChessPiece = StateOfGame.chessboard.
+                getChessPieceOnPosition(move.from);
+
+        int differenceOnXCoordinate = Math.abs(move.from.x - move.to.x);
+        int differenceOnYCoordinate = Math.abs(move.from.y - move.to.y);
+        if(movedChessPiece instanceof Knight){
+            return (Math.min(differenceOnXCoordinate,
+                    differenceOnYCoordinate) == 1
+                && Math.max(differenceOnXCoordinate,
+                    differenceOnYCoordinate) == 2);
+        }
+        else if(movedChessPiece instanceof Rook){
+            return (differenceOnXCoordinate == 0 ||
+                    differenceOnYCoordinate == 0) &&
+                    (differenceOnXCoordinate +
+                    differenceOnYCoordinate > 0);
+        }
+        else if(movedChessPiece instanceof Bishop){
+            return (differenceOnXCoordinate ==
+                    differenceOnYCoordinate)&&
+                    (differenceOnXCoordinate +
+                    differenceOnYCoordinate > 0);
+        }
+        else if(movedChessPiece instanceof Queen){
+            return (differenceOnXCoordinate ==
+                    differenceOnYCoordinate ||
+                    differenceOnXCoordinate == 0 ||
+                    differenceOnYCoordinate == 0) &&
+                    (differenceOnXCoordinate +
+                     differenceOnYCoordinate > 0);
+        }
+        else if(movedChessPiece instanceof Pawn){
+            return false;
+        }
+        return false;
     }
 
     public void initializeStateOfGame() {
         StateOfGame.chessboard = new ClassicChessboard();
         for(int i = 0; i < 8; ++i){
-            Position place = new Position(i,1);
-            StateOfGame.chessboard.setFigure(new Position(i,1),
+            StateOfGame.chessboard.setFigure(
                     new Pawn(Color.WHITE, new Position(i,1)));
         }
         for(int i = 0; i < 8; ++i){
-            StateOfGame.chessboard.setFigure(new Position(i,6),
+            StateOfGame.chessboard.setFigure(
                     new Pawn(Color.BLACK, new Position(i,6)));
         }
-        StateOfGame.chessboard.setFigure(new Position(0,7),
+        StateOfGame.chessboard.setFigure(
                 new Rook(Color.BLACK, new Position(0,7)));
 
-        StateOfGame.chessboard.setFigure(new Position(7,7),
+        StateOfGame.chessboard.setFigure(
                 new Rook(Color.BLACK, new Position(7,7)));
 
-        StateOfGame.chessboard.setFigure(new Position(0,0),
+        StateOfGame.chessboard.setFigure(
                 new Rook(Color.WHITE, new Position(0,0)));
 
-        StateOfGame.chessboard.setFigure(new Position(7,0),
+        StateOfGame.chessboard.setFigure(
                 new Rook(Color.WHITE, new Position(7,0)));
 
-        StateOfGame.chessboard.setFigure(new Position(1,7),
+        StateOfGame.chessboard.setFigure(
                 new Knight(Color.BLACK, new Position(1,7)));
 
-        StateOfGame.chessboard.setFigure(new Position(6,7),
+        StateOfGame.chessboard.setFigure(
                 new Knight(Color.BLACK, new Position(6,7)));
 
-        StateOfGame.chessboard.setFigure(new Position(1,0),
+        StateOfGame.chessboard.setFigure(
                 new Knight(Color.WHITE, new Position(1,0)));
 
-        StateOfGame.chessboard.setFigure(new Position(6,0),
+        StateOfGame.chessboard.setFigure(
                 new Knight(Color.WHITE, new Position(6,0)));
 
 
-        StateOfGame.chessboard.setFigure(new Position(2,7),
+        StateOfGame.chessboard.setFigure(
                 new Bishop(Color.BLACK, new Position(2,7)));
 
-        StateOfGame.chessboard.setFigure(new Position(5,7),
+        StateOfGame.chessboard.setFigure(
                 new Bishop(Color.BLACK, new Position(5,7)));
 
-        StateOfGame.chessboard.setFigure(new Position(2,0),
+        StateOfGame.chessboard.setFigure(
                 new Bishop(Color.WHITE, new Position(2,0)));
 
-        StateOfGame.chessboard.setFigure(new Position(5,0),
+        StateOfGame.chessboard.setFigure(
                 new Bishop(Color.WHITE, new Position(5,0)));
 
 
-        StateOfGame.chessboard.setFigure(new Position(4,7),
+        StateOfGame.chessboard.setFigure(
                 new King(Color.BLACK, new Position(4,7)));
 
-        StateOfGame.chessboard.setFigure(new Position(4,0),
+        StateOfGame.chessboard.setFigure(
                 new King(Color.WHITE, new Position(4,0)));
 
 
-        StateOfGame.chessboard.setFigure(new Position(3,7),
+        StateOfGame.chessboard.setFigure(
                 new Queen(Color.BLACK, new Position(3,7)));
 
-        StateOfGame.chessboard.setFigure(new Position(3,0),
+        StateOfGame.chessboard.setFigure(
                 new Queen(Color.WHITE, new Position(3,0)));
 
     }

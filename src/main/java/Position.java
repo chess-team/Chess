@@ -16,4 +16,9 @@ public class Position {
     Position translateByVector(int a, int b){
         return new Position(x+a, y+b);
     }
+
+    @Override
+    public String toString() {
+        return "(" + x + "," + y + ")";
+    }
 }

@@ -8,16 +8,19 @@ public class EmptySquare extends ChessPiece{
     {label = '.';}
 
     EmptySquare(Position b){
+
         super(null, b);
     }
 
     EmptySquare(Color a, Position b){
+
         super(a,b);
     }
 
     @Override
     public ArrayList<Move> listOfPossibleMoves() {
-        return null;
+
+        return new ArrayList<Move>();
     }
 
 }

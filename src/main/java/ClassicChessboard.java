@@ -48,7 +48,8 @@ public class ClassicChessboard implements Chessboard {
         board[v.to.x][v.to.y].setPosition(new Position(v.to.x, v.to.y));
     }
 
-    public void setFigure(Position place, ChessPiece figure) {
+    public void setFigure(ChessPiece figure) {
+        Position place = figure.getPosition();
         board[place.x][place.y] = figure;
     }
 }

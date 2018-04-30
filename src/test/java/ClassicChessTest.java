@@ -10,8 +10,14 @@ class ClassicChessTest {
         StateOfGame.variant.initializeStateOfGame();
         System.out.println(StateOfGame.chessboard);
         assertTrue(StateOfGame.chessboard.toString().equals(
-                        "rkbqwbkr\npppppppp\n........\n........" +
-                                "\n........\n........\nPPPPPPPP\nRKBQWBKR\n"));
+                                "rkbqwbkr\n" +
+                                "pppppppp\n" +
+                                "........\n" +
+                                "........\n" +
+                                "........\n" +
+                                "........\n" +
+                                "PPPPPPPP\n" +
+                                "RKBQWBKR\n"));
 
     }
 }

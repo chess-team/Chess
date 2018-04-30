@@ -25,4 +25,9 @@ public class Move {
         this.promoteTo = chosenChessPiece;
         isPromotion = promotion;
     }
+
+    @Override
+    public String toString() {
+        return "from " + from.toString() + " to " + to.toString();
+    }
 }

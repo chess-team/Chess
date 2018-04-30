@@ -1,8 +1,9 @@
 import java.util.ArrayList;
 
 /*
-Class that holds information about chess piece. Chessboard have 64 squares.
+Class holds information about chess pieces.
  */
+
 public abstract class ChessPiece {
 
     protected Color color;
