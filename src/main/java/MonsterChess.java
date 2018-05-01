@@ -5,14 +5,14 @@ public class MonsterChess extends KillKingChess {
     public void initializeStateOfGame() {
         StateOfGame.chessboard = new ClassicChessboard();
         StateOfGame.chessboard.setFigure(
-                new King(Color.WHITE, new Position(
+                new King(ChessColour.WHITE, new Position(
                         4,0)));
         for(int i = 2; i < 6; ++i){
             StateOfGame.chessboard.setFigure(
-                    new Pawn(Color.WHITE, new Position(i,1)));
+                    new Pawn(ChessColour.WHITE, new Position(i,1)));
         }
-        setLineOfPawns(6,Color.BLACK);
-        setLineOfFigures(7, Color.BLACK);
+        setLineOfPawns(6, ChessColour.BLACK);
+        setLineOfFigures(7, ChessColour.BLACK);
     }
 
     @Override

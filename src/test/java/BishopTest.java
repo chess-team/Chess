@@ -10,7 +10,7 @@ class BishopTest {
 
 
         StateOfGame.chessboard.setFigure(
-                new Bishop(Color.WHITE, new Position(7,7)));
+                new Bishop(ChessColour.WHITE, new Position(7,7)));
 
         TestUtil.testMoveValidatorForClassicChess(new Position(0,0));
         TestUtil.testMoveValidatorForClassicChess(new Position(7,7));
@@ -28,29 +28,29 @@ class BishopTest {
                         "p.......\n"));
 
         StateOfGame.chessboard.setFigure(
-                new Bishop(Color.WHITE, new Position(6,1)));
+                new Bishop(ChessColour.WHITE, new Position(6,1)));
 
         StateOfGame.chessboard.setFigure(
-                new Bishop(Color.WHITE, new Position(5,2)));
+                new Bishop(ChessColour.WHITE, new Position(5,2)));
 
         StateOfGame.chessboard.setFigure(
-                new Bishop(Color.BLACK, new Position(0,7)));
+                new Bishop(ChessColour.BLACK, new Position(0,7)));
 
         StateOfGame.chessboard.setFigure(
-                new Bishop(Color.BLACK, new Position(1,6)));
+                new Bishop(ChessColour.BLACK, new Position(1,6)));
 
 
         StateOfGame.chessboard.setFigure(
-                new Bishop(Color.BLACK, new Position(6,3)));
+                new Bishop(ChessColour.BLACK, new Position(6,3)));
 
         StateOfGame.chessboard.setFigure(
-                new Bishop(Color.BLACK, new Position(7,4)));
+                new Bishop(ChessColour.BLACK, new Position(7,4)));
 
         StateOfGame.chessboard.setFigure(
-                new Bishop(Color.BLACK, new Position(4,1)));
+                new Bishop(ChessColour.BLACK, new Position(4,1)));
 
         StateOfGame.chessboard.setFigure(
-                new Bishop(Color.BLACK, new Position(3,0)));
+                new Bishop(ChessColour.BLACK, new Position(3,0)));
 
         System.out.println(StateOfGame.chessboard);
         assertTrue(StateOfGame.chessboard.toString().equals(

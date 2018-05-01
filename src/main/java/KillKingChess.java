@@ -16,8 +16,8 @@ public class KillKingChess extends ClassicChess {
             return false;
         }
 
-        Color colorOfPlayer = StateOfGame.chessboard.
-                getChessPieceOnPosition(move.from).getColor();
+        ChessColour colorOfPlayer = StateOfGame.chessboard.
+                getChessPieceOnPosition(move.from).getChessColour();
 
         //noinspection RedundantIfStatement
         if(colorOfPlayer == colorOfLastMovedPiece){
@@ -33,11 +33,11 @@ public class KillKingChess extends ClassicChess {
     }
 
     boolean checkIfGameEnded(){
-        if(ChessUtil.getKingPosition(Color.BLACK) == null){
+        if(ChessUtil.getKingPosition(ChessColour.BLACK) == null){
             StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_WON;
             return true;
         }
-        if(ChessUtil.getKingPosition(Color.WHITE) == null){
+        if(ChessUtil.getKingPosition(ChessColour.WHITE) == null){
             StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_WON;
             return true;
         }

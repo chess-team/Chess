@@ -11,17 +11,17 @@ class KnightTest {
         TestUtil.makeEmptyClassicChessboard();
 
         StateOfGame.chessboard.setFigure(
-                new Knight(Color.WHITE, new Position(0,0)));
+                new Knight(ChessColour.WHITE, new Position(0,0)));
 
 
         StateOfGame.chessboard.setFigure(
-                new Knight(Color.WHITE, new Position(4,4)));
+                new Knight(ChessColour.WHITE, new Position(4,4)));
 
         StateOfGame.chessboard.setFigure(
-                new Knight(Color.WHITE, new Position(5,6)));
+                new Knight(ChessColour.WHITE, new Position(5,6)));
 
         StateOfGame.chessboard.setFigure(
-                new Knight(Color.BLACK, new Position(3,6)));
+                new Knight(ChessColour.BLACK, new Position(3,6)));
 
         assertTrue(StateOfGame.chessboard.getChessPieceOnPosition(
                 new Position(4,4)).listOfPossibleMoves().size() == 7);

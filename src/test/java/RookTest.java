@@ -11,7 +11,7 @@ class RookTest {
 
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.WHITE, new Position(0,0)));
+                new Rook(ChessColour.WHITE, new Position(0,0)));
 
         TestUtil.testMoveValidatorForClassicChess(new Position(0,0));
         TestUtil.setPawnsWhereChessPieceCanMove(new Position(0,0));
@@ -28,36 +28,36 @@ class RookTest {
                         "Rppppppp\n"));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.WHITE, new Position(7,7)));
+                new Rook(ChessColour.WHITE, new Position(7,7)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.WHITE, new Position(3,3)));
+                new Rook(ChessColour.WHITE, new Position(3,3)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.WHITE, new Position(6,3)));
+                new Rook(ChessColour.WHITE, new Position(6,3)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.WHITE, new Position(3,6)));
+                new Rook(ChessColour.WHITE, new Position(3,6)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.WHITE, new Position(3,6)));
+                new Rook(ChessColour.WHITE, new Position(3,6)));
 
         System.out.println(StateOfGame.chessboard);
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.BLACK, new Position(3,2)));
+                new Rook(ChessColour.BLACK, new Position(3,2)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.BLACK, new Position(3,1)));
+                new Rook(ChessColour.BLACK, new Position(3,1)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.BLACK, new Position(3,0)));
+                new Rook(ChessColour.BLACK, new Position(3,0)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.BLACK, new Position(0,3)));
+                new Rook(ChessColour.BLACK, new Position(0,3)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.BLACK, new Position(1,3)));
+                new Rook(ChessColour.BLACK, new Position(1,3)));
 
         System.out.println(StateOfGame.chessboard);
         TestUtil.testMoveValidatorForClassicChess(new Position(3,3));

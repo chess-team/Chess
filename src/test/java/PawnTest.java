@@ -9,61 +9,61 @@ class PawnTest {
     void testPawnMovement(){
         TestUtil.makeEmptyClassicChessboard();
         StateOfGame.chessboard.setFigure(
-                new Pawn(Color.WHITE, new Position(0,1)));
+                new Pawn(ChessColour.WHITE, new Position(0,1)));
 
         StateOfGame.chessboard.setFigure(
-                new Pawn(Color.WHITE, new Position(2,1)));
+                new Pawn(ChessColour.WHITE, new Position(2,1)));
 
         StateOfGame.chessboard.setFigure(
-                new Pawn(Color.WHITE, new Position(6,1)));
+                new Pawn(ChessColour.WHITE, new Position(6,1)));
 
         StateOfGame.chessboard.setFigure(
-                new Pawn(Color.WHITE, new Position(7,1)));
+                new Pawn(ChessColour.WHITE, new Position(7,1)));
 
         StateOfGame.chessboard.setFigure(
-                new Pawn(Color.WHITE, new Position(5,2)));
+                new Pawn(ChessColour.WHITE, new Position(5,2)));
 
         StateOfGame.chessboard.setFigure(
-                new Pawn(Color.WHITE, new Position(7,4)));
+                new Pawn(ChessColour.WHITE, new Position(7,4)));
 
         StateOfGame.chessboard.setFigure(
-                new Pawn(Color.WHITE, new Position(1,4)));
+                new Pawn(ChessColour.WHITE, new Position(1,4)));
 
         StateOfGame.chessboard.setFigure(
-                new Pawn(Color.WHITE, new Position(0,6)));
+                new Pawn(ChessColour.WHITE, new Position(0,6)));
 
         StateOfGame.chessboard.setFigure(
-                new Pawn(Color.WHITE, new Position(4,6)));
+                new Pawn(ChessColour.WHITE, new Position(4,6)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.BLACK, new Position(0,5)));
+                new Rook(ChessColour.BLACK, new Position(0,5)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.BLACK, new Position(1,5)));
+                new Rook(ChessColour.BLACK, new Position(1,5)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.BLACK, new Position(2,5)));
+                new Rook(ChessColour.BLACK, new Position(2,5)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.BLACK, new Position(6,5)));
+                new Rook(ChessColour.BLACK, new Position(6,5)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.BLACK, new Position(7,5)));
+                new Rook(ChessColour.BLACK, new Position(7,5)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.BLACK, new Position(3,7)));
+                new Rook(ChessColour.BLACK, new Position(3,7)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.BLACK, new Position(4,7)));
+                new Rook(ChessColour.BLACK, new Position(4,7)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.BLACK, new Position(7,2)));
+                new Rook(ChessColour.BLACK, new Position(7,2)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.BLACK, new Position(7,3)));
+                new Rook(ChessColour.BLACK, new Position(7,3)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.BLACK, new Position(6,2)));
+                new Rook(ChessColour.BLACK, new Position(6,2)));
 
         System.out.println(StateOfGame.chessboard);
         assertTrue(StateOfGame.chessboard.toString().equals(
@@ -102,10 +102,10 @@ class PawnTest {
         TestUtil.makeEmptyClassicChessboard();
 
         StateOfGame.chessboard.setFigure(
-                new Pawn(Color.WHITE, new Position(2,1)));
+                new Pawn(ChessColour.WHITE, new Position(2,1)));
 
         StateOfGame.chessboard.setFigure(
-                new Pawn(Color.BLACK, new Position(3,3)));
+                new Pawn(ChessColour.BLACK, new Position(3,3)));
 
         System.out.println(StateOfGame.chessboard);
         assertTrue(StateOfGame.chessboard.toString().equals(
@@ -148,10 +148,10 @@ class PawnTest {
         TestUtil.makeEmptyClassicChessboard();
 
         StateOfGame.chessboard.setFigure(
-                new Pawn(Color.WHITE, new Position(0,6)));
+                new Pawn(ChessColour.WHITE, new Position(0,6)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.BLACK, new Position(1,7)));
+                new Rook(ChessColour.BLACK, new Position(1,7)));
 
             System.out.println(StateOfGame.chessboard);
             assertTrue(StateOfGame.chessboard.toString().equals(
@@ -165,28 +165,28 @@ class PawnTest {
                             "........\n"));
             assertTrue(StateOfGame.variant.validateMove(new Move (
                 new Position(0,6), new Position(1 ,7),
-                new Queen(Color.WHITE, new Position(1,7)))));
+                new Queen(ChessColour.WHITE, new Position(1,7)))));
 
             assertTrue(StateOfGame.variant.validateMove(new Move (
                 new Position(0,6), new Position(0 ,7),
-                new Queen(Color.WHITE, new Position(0,7)))));
+                new Queen(ChessColour.WHITE, new Position(0,7)))));
 
             assertTrue(StateOfGame.variant.validateMove(new Move (
                 new Position(0,6), new Position(0 ,7),
-                new Bishop(Color.WHITE, new Position(0,7)))));
+                new Bishop(ChessColour.WHITE, new Position(0,7)))));
 
             assertTrue(StateOfGame.variant.validateMove(new Move (
                 new Position(0,6), new Position(0 ,7),
-                new Knight(Color.WHITE, new Position(0,7)))));
+                new Knight(ChessColour.WHITE, new Position(0,7)))));
 
 
             assertTrue(StateOfGame.variant.validateMove(new Move (
                 new Position(0,6), new Position(0 ,7),
-                new Rook(Color.WHITE, new Position(0,7)))));
+                new Rook(ChessColour.WHITE, new Position(0,7)))));
 
             StateOfGame.variant.changeState(new Move (
                     new Position(0,6), new Position(1 ,7),
-                    new Rook(Color.WHITE, new Position(1,7))));
+                    new Rook(ChessColour.WHITE, new Position(1,7))));
 
             System.out.println(StateOfGame.chessboard);
 

@@ -4,7 +4,7 @@ public class Knight extends ChessPiece {
 
     {label = 'K';}
 
-    Knight(Color a, Position b){
+    Knight(ChessColour a, Position b){
         super(a,b);
     }
 

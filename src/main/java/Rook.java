@@ -4,7 +4,7 @@ public class Rook extends ChessPiece {
 
     {label = 'R';}
 
-    Rook(Color a, Position b){
+    Rook(ChessColour a, Position b){
         super(a,b);
     }
 

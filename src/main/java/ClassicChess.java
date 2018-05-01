@@ -6,7 +6,7 @@ Class that implements rules of Classic chess.
  */
 public class ClassicChess extends VariantSimilarToClassicChess {
 
-    Color colorOfLastMovedPiece = Color.BLACK;
+    ChessColour colorOfLastMovedPiece = ChessColour.BLACK;
 
     private final ArrayList <String> listOfCapturedPieces =
             new ArrayList<String>();
@@ -22,8 +22,8 @@ public class ClassicChess extends VariantSimilarToClassicChess {
             return false;
         }
 
-        Color colorOfPlayer = StateOfGame.chessboard.
-                getChessPieceOnPosition(move.from).getColor();
+        ChessColour colorOfPlayer = StateOfGame.chessboard.
+                getChessPieceOnPosition(move.from).getChessColour();
 
         if(colorOfPlayer == colorOfLastMovedPiece){
             return false;
@@ -53,7 +53,7 @@ public class ClassicChess extends VariantSimilarToClassicChess {
         if(!(tower instanceof Rook)){
             return false;
         }
-        Color colorOfPlayer = tower.getColor();
+        ChessColour colorOfPlayer = tower.getChessColour();
 
         Position kingPosition = ChessUtil.getKingPosition(colorOfPlayer);
         if(kingPosition == null) {
@@ -89,20 +89,20 @@ public class ClassicChess extends VariantSimilarToClassicChess {
 
     public void initializeStateOfGame() {
         StateOfGame.chessboard = new ClassicChessboard();
-        setLineOfPawns(1,Color.WHITE);
-        setLineOfPawns(6,Color.BLACK);
-        setLineOfFigures(0, Color.WHITE);
-        setLineOfFigures(7, Color.BLACK);
+        setLineOfPawns(1, ChessColour.WHITE);
+        setLineOfPawns(6, ChessColour.BLACK);
+        setLineOfFigures(0, ChessColour.WHITE);
+        setLineOfFigures(7, ChessColour.BLACK);
     }
 
 
     void swapColor(){
         switch (colorOfLastMovedPiece){
             case BLACK:
-                colorOfLastMovedPiece = Color.WHITE;
+                colorOfLastMovedPiece = ChessColour.WHITE;
                 break;
             case WHITE:
-                colorOfLastMovedPiece = Color.BLACK;
+                colorOfLastMovedPiece = ChessColour.BLACK;
                 break;
         }
     }
@@ -155,8 +155,8 @@ public class ClassicChess extends VariantSimilarToClassicChess {
     private void changeState(Castling change) {
         swapColor();
         Position towerPosition = change.getTowerPosition();
-        Color colorOfPlayer = StateOfGame.chessboard.
-                getChessPieceOnPosition(towerPosition).getColor();
+        ChessColour colorOfPlayer = StateOfGame.chessboard.
+                getChessPieceOnPosition(towerPosition).getChessColour();
 
         Position kingPosition = ChessUtil.getKingPosition(colorOfPlayer);
         if(kingPosition == null) {
@@ -177,7 +177,7 @@ public class ClassicChess extends VariantSimilarToClassicChess {
     }
 
     private void inCaseOfEndOfGame(){
-        Color colorOfPossibleLoser = ChessUtil.
+        ChessColour colorOfPossibleLoser = ChessUtil.
                 getOtherColor(colorOfLastMovedPiece);
         if(ChessUtil.listOfAllMoves(colorOfPossibleLoser).isEmpty()) {
             if (isKingUnderAttack(colorOfPossibleLoser)) {
@@ -225,7 +225,7 @@ public class ClassicChess extends VariantSimilarToClassicChess {
     @Override
     public SpecialMoves getSpecialMoves() {
         return new SpecialMoves() {
-            public ArrayList<Move> listOfPossibleMoves(Color playerColor) {
+            public ArrayList<Move> listOfPossibleMoves(ChessColour playerColor){
                 ArrayList <Move> resultList = new ArrayList<Move>();
                 for(int i = 0; i <= 7; i += 7){
                     for(int j = 0; j <= 7; j += 7){

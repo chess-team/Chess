@@ -17,7 +17,7 @@ class TestUtil {
         for(Move v : StateOfGame.chessboard.getChessPieceOnPosition(
                 positionOfChessPiece).listOfPossibleMoves()){
             StateOfGame.chessboard.setFigure(
-                    new Pawn(Color.BLACK, v.to));
+                    new Pawn(ChessColour.BLACK, v.to));
 
         }
     }

@@ -6,7 +6,7 @@ Class holds information about chess pieces.
 
 public abstract class ChessPiece {
 
-    private final Color color;
+    private final ChessColour chessColour;
 
     private Position positionOnChessboard;
 
@@ -19,9 +19,9 @@ public abstract class ChessPiece {
         return positionOnChessboard;
     }
 
-    public Color getColor(){
+    public ChessColour getChessColour(){
 
-        return this.color;
+        return this.chessColour;
     }
 
     public void setPosition(Position a){
@@ -33,13 +33,13 @@ public abstract class ChessPiece {
     @Override
     public String toString() {
         String ret = Character.toString(label);
-        if(this.color == Color.BLACK)
+        if(this.chessColour == ChessColour.BLACK)
             ret = Character.toString(Character.toLowerCase(label));
         return ret;
     }
 
-    ChessPiece(Color a, Position b){
-        this.color = a;
+    ChessPiece(ChessColour a, Position b){
+        this.chessColour = a;
         this.positionOnChessboard = b;
     }
 }

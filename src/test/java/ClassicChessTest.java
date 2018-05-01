@@ -25,16 +25,16 @@ class ClassicChessTest {
     private void setEndgameState(){
         TestUtil.makeEmptyClassicChessboard();
         StateOfGame.chessboard.setFigure(
-                new King(Color.WHITE, new Position(7,7)));
+                new King(ChessColour.WHITE, new Position(7,7)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.WHITE, new Position(1,7)));
+                new Rook(ChessColour.WHITE, new Position(1,7)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.WHITE, new Position(7,6)));
+                new Rook(ChessColour.WHITE, new Position(7,6)));
 
         StateOfGame.chessboard.setFigure(
-                new King(Color.BLACK, new Position(0,0)));
+                new King(ChessColour.BLACK, new Position(0,0)));
 
         System.out.println(StateOfGame.chessboard);
         assertTrue(StateOfGame.chessboard.toString().equals(
@@ -91,13 +91,13 @@ class ClassicChessTest {
         TestUtil.makeEmptyClassicChessboard();
 
         StateOfGame.chessboard.setFigure(
-                new King(Color.WHITE, new Position(4,0)));
+                new King(ChessColour.WHITE, new Position(4,0)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.WHITE, new Position(7,0)));
+                new Rook(ChessColour.WHITE, new Position(7,0)));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.WHITE, new Position(0,0)));
+                new Rook(ChessColour.WHITE, new Position(0,0)));
 
         System.out.println(StateOfGame.chessboard);
         assertTrue(StateOfGame.chessboard.toString().equals(
@@ -117,7 +117,7 @@ class ClassicChessTest {
                 new Castling(new Position(0,0))));
 
         StateOfGame.chessboard.setFigure(
-                new Rook(Color.BLACK, new Position(6,7)));
+                new Rook(ChessColour.BLACK, new Position(6,7)));
 
         assertFalse(StateOfGame.variant.validateMove(
                 new Castling(new Position(7,0))));

@@ -15,9 +15,9 @@ public class Chess960 extends ClassicChess{
         }
         Collections.shuffle(temp);
         StateOfGame.chessboard = new ClassicChessboard();
-        setLineOfPawns(1,Color.WHITE);
-        setLineOfPawns(6,Color.BLACK);
-        setLineOfFigures(0, Color.WHITE,temp);
-        setLineOfFigures(7, Color.BLACK,temp);
+        setLineOfPawns(1, ChessColour.WHITE);
+        setLineOfPawns(6, ChessColour.BLACK);
+        setLineOfFigures(0, ChessColour.WHITE,temp);
+        setLineOfFigures(7, ChessColour.BLACK,temp);
     }
 }

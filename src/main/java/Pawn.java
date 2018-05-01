@@ -4,7 +4,7 @@ public class Pawn extends ChessPiece {
 
     {label = 'P';}
 
-    Pawn(Color a, Position b){
+    Pawn(ChessColour a, Position b){
         super(a,b);
     }
 
@@ -13,7 +13,7 @@ public class Pawn extends ChessPiece {
         ArrayList <Move> resultList = new ArrayList<Move>();
 
         int j = 0;
-        switch (this.getColor()) {
+        switch (this.getChessColour()) {
             case BLACK:
                 j = -1;
                 break;
@@ -33,10 +33,10 @@ public class Pawn extends ChessPiece {
                 getPosition().translateByVector(0, 2*j));
         if(v.to.y == 0 || v.to.y == 7){
             ArrayList <ChessPiece> temp = new ArrayList<ChessPiece>();
-            temp.add(new Rook(getColor(),v.to));
-            temp.add(new Knight(getColor(),v.to));
-            temp.add(new Queen(getColor(),v.to));
-            temp.add(new Bishop(getColor(),v.to));
+            temp.add(new Rook(getChessColour(),v.to));
+            temp.add(new Knight(getChessColour(),v.to));
+            temp.add(new Queen(getChessColour(),v.to));
+            temp.add(new Bishop(getChessColour(),v.to));
             for(ChessPiece chessPiece : temp){
                 Move u = new Move(v.from, v.to, chessPiece);
                 if (StateOfGame.variant.validateMove(u)) {

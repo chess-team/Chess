@@ -15,14 +15,14 @@ class ChessUtil {
         return 1;
     }
 
-    public static Color getOtherColor(Color oneColor){
+    public static ChessColour getOtherColor(ChessColour oneColor){
         switch (oneColor){
             case BLACK:
-                return Color.WHITE;
+                return ChessColour.WHITE;
             case WHITE:
-                return Color.BLACK;
+                return ChessColour.BLACK;
         }
-        return Color.BLACK;
+        return ChessColour.BLACK;
     }
 
     // check for moves of Rook, Bishop, Queen if
@@ -45,13 +45,13 @@ class ChessUtil {
     }
 
     // list of all moves for Player with given color.
-    public static ArrayList<Move> listOfAllMoves(Color playerColor) {
+    public static ArrayList<Move> listOfAllMoves(ChessColour playerColor) {
         ArrayList <Move> resultList = new ArrayList<Move>();
         for(int i = 0; i < StateOfGame.chessboard.getXWidth(); ++i){
             for (int j = 0; j < StateOfGame.chessboard.getYWidth(); ++j){
                 ChessPiece figure = StateOfGame.chessboard.
                         getChessPieceOnPosition(new Position(i,j));
-                if(figure.getColor() == playerColor){
+                if(figure.getChessColour() == playerColor){
                     resultList.addAll(figure.listOfPossibleMoves());
                 }
             }
@@ -63,12 +63,12 @@ class ChessUtil {
     }
 
 
-    public static Position getKingPosition(Color kingColor) {
+    public static Position getKingPosition(ChessColour kingColor) {
         for(int i = 0; i < StateOfGame.chessboard.getXWidth(); ++i){
             for (int j = 0; j < StateOfGame.chessboard.getYWidth(); ++j){
                 ChessPiece figure = StateOfGame.chessboard.
                         getChessPieceOnPosition(new Position(i,j));
-                if(figure.getColor() == kingColor && figure instanceof King){
+                if(figure.getChessColour() == kingColor && figure instanceof King){
                     return figure.getPosition();
                 }
             }
@@ -76,13 +76,13 @@ class ChessUtil {
         return null;
     }
 
-    public static int getNumberOfPiecesGivenColor(Color colorOfPieces){
+    public static int getNumberOfPiecesGivenColor(ChessColour colorOfPieces){
         int count = 0;
         for(int i = 0; i < StateOfGame.chessboard.getXWidth(); ++i){
             for (int j = 0; j < StateOfGame.chessboard.getYWidth(); ++j){
                 ChessPiece figure = StateOfGame.chessboard.
                         getChessPieceOnPosition(new Position(i,j));
-                if(figure.getColor() == colorOfPieces &&
+                if(figure.getChessColour() == colorOfPieces &&
                         !(figure instanceof EmptySquare)){
                     ++count;
                 }

@@ -4,7 +4,7 @@ public class Queen extends ChessPiece {
 
     {label = 'Q';}
 
-    Queen(Color a, Position b){
+    Queen(ChessColour a, Position b){
         super(a,b);
     }
 

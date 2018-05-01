@@ -13,7 +13,7 @@ public class EmptySquare extends ChessPiece{
         super(null, b);
     }
 
-    EmptySquare(Color a, Position b){
+    EmptySquare(ChessColour a, Position b){
 
         super(null,b);
     }

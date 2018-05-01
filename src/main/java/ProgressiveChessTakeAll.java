@@ -10,11 +10,11 @@ public class ProgressiveChessTakeAll extends KillKingChess{
 
     @Override
     boolean checkIfGameEnded() {
-        if(ChessUtil.getNumberOfPiecesGivenColor(Color.WHITE) == 0){
+        if(ChessUtil.getNumberOfPiecesGivenColor(ChessColour.WHITE) == 0){
             StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_WON;
             return true;
         }
-        if(ChessUtil.getNumberOfPiecesGivenColor(Color.BLACK) == 0){
+        if(ChessUtil.getNumberOfPiecesGivenColor(ChessColour.BLACK) == 0){
             StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_WON;
             return true;
         }

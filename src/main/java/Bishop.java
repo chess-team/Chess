@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Bishop extends ChessPiece{
     {label = 'B';}
 
-    Bishop(Color a, Position b){
+    Bishop(ChessColour a, Position b){
         super(a,b);
     }
 
