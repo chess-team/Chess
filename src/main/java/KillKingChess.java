@@ -34,11 +34,11 @@ public class KillKingChess extends ClassicChess {
 
     boolean checkIfGameEnded(){
         if(ChessUtil.getKingPosition(Color.BLACK) == null){
-            StateOfGame.whichPlayerHaveMove = State.WHITE_WON;
+            StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_WON;
             return true;
         }
         if(ChessUtil.getKingPosition(Color.WHITE) == null){
-            StateOfGame.whichPlayerHaveMove = State.BLACK_WON;
+            StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_WON;
             return true;
         }
         return false;
@@ -53,10 +53,10 @@ public class KillKingChess extends ClassicChess {
         swapColor();
         switch(colorOfLastMovedPiece){
             case BLACK:
-                StateOfGame.whichPlayerHaveMove = State.WHITE_MOVE;
+                StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;
                 break;
             case WHITE:
-                StateOfGame.whichPlayerHaveMove = State.BLACK_MOVE;
+                StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_MOVE;
                 break;
         }
     }

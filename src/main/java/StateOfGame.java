@@ -29,7 +29,7 @@ public class StateOfGame implements Serializable{
         variant.initializeStateOfGame();
     }
     @SuppressWarnings("unused")
-    public static State whichPlayerHaveMove;
+    public static StateOfGameplay stateOfGameplay;
 
     // Method that parse string in format of toString() method and initialize
     // fields of class. This method is used to load saved game from hard drive.

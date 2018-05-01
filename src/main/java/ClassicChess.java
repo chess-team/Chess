@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /*
 Class that implements rules of Classic chess.
@@ -8,6 +9,10 @@ public class ClassicChess extends VariantSimilarToClassicChess {
 
     // return true if move is correct.
     public boolean validateMove(Move move) {
+
+        if(move instanceof Castling){
+            return validateMove((Castling) move);
+        }
 
         if(!isMovePossibleWithoutKingProtection(move)) {
             return false;
@@ -26,6 +31,56 @@ public class ClassicChess extends VariantSimilarToClassicChess {
         }
 
         return true;
+    }
+
+    // return true if castling move is correct.
+    public boolean validateMove(Castling move) {
+
+        Position towerPosition = move.getTowerPosition();
+        if(towerPosition == null) {
+            return false;
+        }
+        if(towerPosition.x < 0 || towerPosition.x >= 8){
+            return false;
+        }
+
+        ChessPiece tower = StateOfGame.chessboard.
+                getChessPieceOnPosition(towerPosition);
+        if(!(tower instanceof Rook)){
+            return false;
+        }
+        Color colorOfPlayer = tower.getColor();
+
+        Position kingPosition = ChessUtil.getKingPosition(colorOfPlayer);
+        if(kingPosition == null) {
+            return false;
+        }
+        for(Move v : StateOfGame.historyOfMoves.listOfPreviousMoves()){
+            if(v instanceof SpecialMove){
+                if(v instanceof Castling){
+                    if(((Castling) v).getTowerPosition().y ==
+                            towerPosition.y)
+                        return false;
+                }
+                continue;
+            }
+            if(v.from.equals(kingPosition)){
+                return false;
+            }
+            if(v.from.equals(towerPosition)){
+                return false;
+            }
+        }
+        int sign = ChessUtil.signum(towerPosition.x - kingPosition.x);
+        int dist = Math.abs(towerPosition.x - kingPosition.x);
+        for (int i = 1; i < dist; ++i){
+            if(isPlaceUnderAttack(kingPosition.
+                    translateByVector(i*sign, 0), colorOfLastMovedPiece)){
+                return false;
+            }
+        }
+
+        return colorOfPlayer != colorOfLastMovedPiece;
     }
 
     public void initializeStateOfGame() {
@@ -69,13 +124,85 @@ public class ClassicChess extends VariantSimilarToClassicChess {
     }
 
     public void changeState(Move change) {
+        if(change instanceof Castling){
+            changeState((Castling) change);
+            return;
+        }
         swapColor();
         if(validateEnPassantMove(change)){
             Position previousMoveTo = StateOfGame.historyOfMoves.lastMove().to;
             StateOfGame.chessboard.setFigure(new EmptySquare(previousMoveTo));
         }
         StateOfGame.chessboard.moveFigure(change);
+        if(change.promoteTo != null){
+            StateOfGame.chessboard.setFigure(change.promoteTo);
+        }
         StateOfGame.historyOfMoves.addMove(change);
+        inCaseOfEndOfGame();
+    }
 
+    public void changeState(Castling change) {
+        swapColor();
+        Position towerPosition = change.getTowerPosition();
+        Color colorOfPlayer = StateOfGame.chessboard.
+                getChessPieceOnPosition(towerPosition).getColor();
+
+        Position kingPosition = ChessUtil.getKingPosition(colorOfPlayer);
+        if(kingPosition == null) {
+            throw new NullPointerException();
+        }
+        int sign = ChessUtil.signum(towerPosition.x - kingPosition.x);
+        int dist = Math.abs(towerPosition.x - kingPosition.x);
+        Position newKingPosition = towerPosition.translateByVector(-sign,0);
+        Position newTowerPosition = newKingPosition.translateByVector(-sign,0);
+        StateOfGame.chessboard.moveFigure(
+                new Move(kingPosition, newKingPosition));
+
+        StateOfGame.chessboard.moveFigure(
+                new Move(towerPosition, newTowerPosition));
+
+        StateOfGame.historyOfMoves.addMove(change);
+        inCaseOfEndOfGame();
+    }
+
+    private void inCaseOfEndOfGame(){
+        Color colorOfPossibleLoser = ChessUtil.
+                getOtherColor(colorOfLastMovedPiece);
+        if(ChessUtil.listOfAllMoves(colorOfPossibleLoser).isEmpty()) {
+            if (isKingUnderAttack(colorOfPossibleLoser)) {
+                switch (colorOfPossibleLoser){
+                    case WHITE:
+                        StateOfGame.stateOfGameplay =
+                                StateOfGameplay.BLACK_WON;
+                        break;
+                    case BLACK:
+                        StateOfGame.stateOfGameplay =
+                                StateOfGameplay.WHITE_WON;
+                        break;
+                }
+            }
+            else {
+                StateOfGame.stateOfGameplay =
+                        StateOfGameplay.DRAW;
+            }
+        }
+    }
+
+    @Override
+    public SpecialMoves getSpecialMoves() {
+        return new SpecialMoves() {
+            public ArrayList<Move> listOfPossibleMoves(Color playerColor) {
+                ArrayList <Move> resultList = new ArrayList<Move>();
+                for(int i = 0; i <= 7; i += 7){
+                    for(int j = 0; j <= 7; j += 7){
+                        Castling move = new Castling(new Position(i, j));
+                        if(StateOfGame.variant.validateMove(move)){
+                            resultList.add(move);
+                        }
+                    }
+                }
+                return resultList;
+            }
+        };
     }
 }

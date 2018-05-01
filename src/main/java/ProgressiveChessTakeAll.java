@@ -11,11 +11,11 @@ public class ProgressiveChessTakeAll extends KillKingChess{
     @Override
     boolean checkIfGameEnded() {
         if(ChessUtil.getNumberOfPiecesGivenColor(Color.WHITE) == 0){
-            StateOfGame.whichPlayerHaveMove = State.BLACK_WON;
+            StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_WON;
             return true;
         }
         if(ChessUtil.getNumberOfPiecesGivenColor(Color.BLACK) == 0){
-            StateOfGame.whichPlayerHaveMove = State.WHITE_WON;
+            StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_WON;
             return true;
         }
         return false;
@@ -29,9 +29,9 @@ public class ProgressiveChessTakeAll extends KillKingChess{
         }
         switch(colorOfLastMovedPiece){
             case BLACK:
-                StateOfGame.whichPlayerHaveMove = State.WHITE_MOVE;
+                StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;
                 if(numberOfConsecutiveSameColorMoves == 1){
-                    StateOfGame.whichPlayerHaveMove = State.BLACK_MOVE;
+                    StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_MOVE;
                     swapColor();
                     numberOfConsecutiveSameColorMoves = 0;
                 }
@@ -40,7 +40,7 @@ public class ProgressiveChessTakeAll extends KillKingChess{
                 break;
             case WHITE:
                 if(numberOfConsecutiveSameColorMoves == 1){
-                    StateOfGame.whichPlayerHaveMove = State.BLACK_MOVE;
+                    StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_MOVE;
                     swapColor();
                     numberOfConsecutiveSameColorMoves = 0;
                 }

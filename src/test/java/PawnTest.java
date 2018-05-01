@@ -142,4 +142,62 @@ class PawnTest {
                         "........\n" +
                         "........\n"));
     }
+    @Test
+    void testPromotion(){
+        // Test of en passant
+        TestUtil.makeEmptyClassicChessboard();
+
+        StateOfGame.chessboard.setFigure(
+                new Pawn(Color.WHITE, new Position(0,6)));
+
+        StateOfGame.chessboard.setFigure(
+                new Rook(Color.BLACK, new Position(1,7)));
+
+            System.out.println(StateOfGame.chessboard);
+            assertTrue(StateOfGame.chessboard.toString().equals(
+                            ".r......\n" +
+                            "P.......\n" +
+                            "........\n" +
+                            "........\n" +
+                            "........\n" +
+                            "........\n" +
+                            "........\n" +
+                            "........\n"));
+            assertTrue(StateOfGame.variant.validateMove(new Move (
+                new Position(0,6), new Position(1 ,7),
+                new Queen(Color.WHITE, new Position(1,7)))));
+
+            assertTrue(StateOfGame.variant.validateMove(new Move (
+                new Position(0,6), new Position(0 ,7),
+                new Queen(Color.WHITE, new Position(0,7)))));
+
+            assertTrue(StateOfGame.variant.validateMove(new Move (
+                new Position(0,6), new Position(0 ,7),
+                new Bishop(Color.WHITE, new Position(0,7)))));
+
+            assertTrue(StateOfGame.variant.validateMove(new Move (
+                new Position(0,6), new Position(0 ,7),
+                new Knight(Color.WHITE, new Position(0,7)))));
+
+
+            assertTrue(StateOfGame.variant.validateMove(new Move (
+                new Position(0,6), new Position(0 ,7),
+                new Rook(Color.WHITE, new Position(0,7)))));
+
+            StateOfGame.variant.changeState(new Move (
+                    new Position(0,6), new Position(1 ,7),
+                    new Rook(Color.WHITE, new Position(1,7))));
+
+            System.out.println(StateOfGame.chessboard);
+
+            assertTrue(StateOfGame.chessboard.toString().equals(
+                        ".R......\n" +
+                        "........\n" +
+                        "........\n" +
+                        "........\n" +
+                        "........\n" +
+                        "........\n" +
+                        "........\n" +
+                        "........\n"));
+        }
 }

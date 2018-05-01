@@ -1,19 +1,25 @@
 import org.junit.jupiter.api.Test;
-
+//TODO refactor this using some framework
 class AllTests {
     @Test
     void allTests(){
-        new ClassicChessTest().testInitializeState();
         new BishopTest().testBishopMovement();
+        new Chess960Test().test();
+        new ClassicChessTest().testInitializeState();
+
+        new DunsanysChessTest().testInitializeState();
+        new KingTest().testKingProtection();
         new KnightTest().testKnightMovement();
+        new MonsterChessTest().testInitializeState();
         new PawnTest().testPawnMovement();
-        new QueenTest().testQueenMovement1();
+        new PawnTest().testEnPassant();
+        new PawnTest().testPromotion();
         new QueenTest().testQueenMovement2();
         new RookTest().testRookMovement();
-        new KingTest().testKingProtection();
-        new DunsanysChessTest().testInitializeState();
         new UpsideDownChessTest().testInitializeState();
-        new MonsterChessTest().testInitializeState();
 
+        new ClassicChessTest().testCastling();
+        new ClassicChessTest().testDraw();
+        new ClassicChessTest().testWin();
     }
 }

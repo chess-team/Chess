@@ -20,7 +20,7 @@ public class DoublemoveChess extends KillKingChess {
                     swapColor();
                 }
                 if(numberOfConsecutiveSameColorMoves == 2){
-                    StateOfGame.whichPlayerHaveMove = State.WHITE_MOVE;
+                    StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;
                     numberOfConsecutiveSameColorMoves = 0;
                 }
                 break;
@@ -30,7 +30,7 @@ public class DoublemoveChess extends KillKingChess {
                     swapColor();
                 }
                 if(numberOfConsecutiveSameColorMoves == 2){
-                    StateOfGame.whichPlayerHaveMove = State.BLACK_MOVE;
+                    StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_MOVE;
                     numberOfConsecutiveSameColorMoves = 0;
                 }
 

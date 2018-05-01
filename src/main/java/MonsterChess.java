@@ -23,13 +23,13 @@ public class MonsterChess extends KillKingChess {
         }
         switch(colorOfLastMovedPiece){
             case BLACK:
-                StateOfGame.whichPlayerHaveMove = State.WHITE_MOVE;
+                StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;
                 swapColor();
                 numberOfConsecutiveSameColorMoves = 0;
                 break;
             case WHITE:
                 if(numberOfConsecutiveSameColorMoves == 1){
-                    StateOfGame.whichPlayerHaveMove = State.BLACK_MOVE;
+                    StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_MOVE;
                     swapColor();
                     numberOfConsecutiveSameColorMoves = 0;
                 }

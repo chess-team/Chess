@@ -162,7 +162,7 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame{
     }
 
     // check if King is under attack after move
-    private boolean isKingUnderAttack(Color kingColor){
+    protected boolean isKingUnderAttack(Color kingColor){
         Position positionOfKing = ChessUtil.getKingPosition(kingColor);
         if(positionOfKing == null) {
             return false;
@@ -173,7 +173,7 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame{
 
     // checks if enemy can attack some position
     // without constraint of protecting King
-    private boolean isPlaceUnderAttack(
+    protected boolean isPlaceUnderAttack(
             Position place, Color enemyColor) {
 
         for(int i = 0; i < 8; ++i){
