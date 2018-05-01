@@ -4,7 +4,7 @@ Class that implements rules of Classic chess.
  */
 public class ClassicChess extends VariantSimilarToClassicChess {
 
-    protected Color colorOfLastMovedPiece = Color.BLACK;
+    Color colorOfLastMovedPiece = Color.BLACK;
 
     // return true if move is correct.
     public boolean validateMove(Move move) {
@@ -20,6 +20,7 @@ public class ClassicChess extends VariantSimilarToClassicChess {
             return false;
         }
 
+        //noinspection RedundantIfStatement
         if(isKingUnderAttackAfterMove(colorOfPlayer, move)){
             return false;
         }
@@ -36,7 +37,7 @@ public class ClassicChess extends VariantSimilarToClassicChess {
     }
 
 
-    protected void swapColor(){
+    void swapColor(){
         switch (colorOfLastMovedPiece){
             case BLACK:
                 colorOfLastMovedPiece = Color.WHITE;

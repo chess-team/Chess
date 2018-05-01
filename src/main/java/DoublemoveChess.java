@@ -1,6 +1,7 @@
 /*
 Chess with two moves in each turn.
  */
+@SuppressWarnings("SpellCheckingInspection")
 public class DoublemoveChess extends KillKingChess {
 
     private int numberOfConsecutiveSameColorMoves = 1;

@@ -5,7 +5,8 @@ public class Position {
 
     // Uses standard x,y coordinates with coordinate system in left, bottom
     // corner.
-    public int x, y;
+    public final int x;
+    public final int y;
 
     Position(int a, int b){
         this.x = a;

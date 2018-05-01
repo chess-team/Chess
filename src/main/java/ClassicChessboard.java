@@ -15,7 +15,7 @@ public class ClassicChessboard implements Chessboard {
 
     // Uses standard x,y coordinates with coordinate system in left, bottom
     // corner.
-    private ChessPiece[][] board = new ChessPiece[8][8];
+    private final ChessPiece[][] board = new ChessPiece[8][8];
     {
         for(int i = 0; i < 8; ++i){
             for (int j = 0; j < 8; ++j){

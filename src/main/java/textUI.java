@@ -4,11 +4,13 @@ import java.util.Scanner;
 /*
 Class that represent simple text interface in console.
  */
-public class textUI {
+@SuppressWarnings("SpellCheckingInspection")
+class textUI {
     public static void main(String... args){
         System.out.println("Aby wykonać ruch należy podać współrzędne" +
                 " dwóch pol najpierw pola z którego ruszmy figurę, potem" +
                 " gdzie ruszmy");
+        //noinspection InfiniteLoopStatement
         while(true){
             Scanner in = new Scanner(System.in);
             System.out.println(StateOfGame.chessboard);
@@ -28,7 +30,7 @@ public class textUI {
                     System.out.println("invalid move\n");
                 }
 
-            } catch (Exception e){}
+            } catch (Exception ignored){}
         }
     }
 

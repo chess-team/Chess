@@ -10,5 +10,10 @@ class AllTests {
         new QueenTest().testQueenMovement1();
         new QueenTest().testQueenMovement2();
         new RookTest().testRookMovement();
+        new KingTest().testKingProtection();
+        new DunsanysChessTest().testInitializeState();
+        new UpsideDownChessTest().testInitializeState();
+        new MonsterChessTest().testInitializeState();
+
     }
 }

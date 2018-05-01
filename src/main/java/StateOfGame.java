@@ -6,18 +6,20 @@ Singleton class that have information about state of game, variant of game and
 history of moves.
 */
 
+@SuppressWarnings("EmptyMethod")
 public class StateOfGame implements Serializable{
 
-    private static StateOfGame realStateOfGame = new StateOfGame();
+    private static final StateOfGame realStateOfGame = new StateOfGame();
 
     private StateOfGame(){}
 
     // return only instance of singleton class
+    @SuppressWarnings("unused")
     public static StateOfGame getInstance(){
         return realStateOfGame;
     }
 
-    public static HistoryOfMoves historyOfMoves = new HistoryOfMoves();
+    public static final HistoryOfMoves historyOfMoves = new HistoryOfMoves();
 
     public static Chessboard chessboard = new ClassicChessboard();
 
@@ -26,12 +28,13 @@ public class StateOfGame implements Serializable{
     static {
         variant.initializeStateOfGame();
     }
+    @SuppressWarnings("unused")
     public static State whichPlayerHaveMove;
 
     // Method that parse string in format of toString() method and initialize
     // fields of class. This method is used to load saved game from hard drive.
+    @SuppressWarnings("unused")
     void loadStateOfGame(String savedState){
-        ;
     }
 
     // Method that save all information about state of game to string.

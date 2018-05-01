@@ -6,8 +6,8 @@ import java.util.List;
 Class holds information about moves made in game.
  */
 public class HistoryOfMoves {
-    private ArrayList <Move> lastMoves = new ArrayList<Move>();
-    private ArrayList <Chessboard> chessboardsStates =
+    private final ArrayList <Move> lastMoves = new ArrayList<Move>();
+    private final ArrayList <Chessboard> chessboardsStates =
             new ArrayList<Chessboard>();
 
     public List listOfPreviousMoves(){
@@ -18,7 +18,7 @@ public class HistoryOfMoves {
         lastMoves.add(v);
     }
 
-    public Move lastMove(Move v){
+    public Move lastMove(){
         return lastMoves.get(lastMoves.size() - 1);
     }
 

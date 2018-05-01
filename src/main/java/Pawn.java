@@ -38,7 +38,7 @@ public class Pawn extends ChessPiece {
             temp.add(new Queen(getColor(),v.to));
             temp.add(new Bishop(getColor(),v.to));
             for(ChessPiece chessPiece : temp){
-                Move u = new Move(v.from, v.to, true, chessPiece);
+                Move u = new Move(v.from, v.to, chessPiece);
                 if (StateOfGame.variant.validateMove(u)) {
                     resultList.add(u);
                 }

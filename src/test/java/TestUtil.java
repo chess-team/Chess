@@ -1,11 +1,9 @@
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /*
 Class hold set of function that is used in multiple tests.
  */
-public class TestUtil {
+class TestUtil {
     public static void makeEmptyClassicChessboard(){
         //initialize new state of game
         StateOfGame.variant = new ClassicChess();

@@ -4,10 +4,16 @@ import java.util.ArrayList;
 Class with methods used in variant of Chess with movement of pieces the same
 or similar to standard chess with different objectives, special moves,
     */
+@SuppressWarnings({"RedundantIfStatement", "SimplifiableIfStatement"})
 public abstract class VariantSimilarToClassicChess implements VariantOfGame{
 
+    public SpecialMoves getSpecialMoves() {
+        return new NoSpecialMoves();
+    }
+
     // checks if move is inside board.
-    public boolean isInsideBoard(Move move){
+    @SuppressWarnings({"RedundantIfStatement", "BooleanMethodIsAlwaysInverted"})
+    boolean isInsideBoard(Move move){
         if(move.to.x < 0 || move.to.x >= 8){
             return false;
         }
@@ -18,9 +24,28 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame{
         return true;
     }
 
+    @SuppressWarnings("SpellCheckingInspection")
+    private boolean validateEnPassantMove(Move move){
+        int differenceOnXCoordinate = move.to.x - move.from.x;
+        int differenceOnYCoordinate = move.to.y - move.from.y;
+        Position wantedPreviousMoveTo = move.from.translateByVector(
+                0,differenceOnXCoordinate);
+        if(!(StateOfGame.chessboard.
+                getChessPieceOnPosition(wantedPreviousMoveTo)
+                instanceof Pawn)){
+            return false;
+        }
+        Position wantedPreviousMoveFrom = move.from.translateByVector(
+                -2*differenceOnYCoordinate,differenceOnXCoordinate);
+        Move wantedPreviousMove =
+                new Move(wantedPreviousMoveFrom,wantedPreviousMoveTo);
+        Move previousMove = StateOfGame.historyOfMoves.lastMove();
+        return wantedPreviousMove.equals(previousMove);
+    }
+
     // checks if move doesn't violate any rules about moving figures
     // without constraints about King protection.
-    protected boolean isMovePossibleWithoutKingProtection(Move move){
+    boolean isMovePossibleWithoutKingProtection(Move move){
         if(!isInsideBoard(move)){
             return false;
         }
@@ -108,7 +133,9 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame{
             if(differenceOnXCoordinate != 0){
                 if(StateOfGame.chessboard.getChessPieceOnPosition(move.to)
                         instanceof EmptySquare ){
-                    return false;
+                    if(!validateEnPassantMove(move)){
+                        return false;
+                    }
                 }
                 else if(StateOfGame.chessboard.
                         getChessPieceOnPosition(move.to).getColor() ==
@@ -121,6 +148,7 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame{
                     instanceof EmptySquare)){
                 return false;
             }
+
             if (!((move.to.y != 7 && move.to.y != 0) ||
                     ((move.promoteTo instanceof Queen ||
                             move.promoteTo instanceof Knight ||
@@ -129,6 +157,8 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame{
                             move.isPromotion))){
                 return false;
             }
+
+
         }
         else if(movedChessPiece instanceof King){
             if (!(differenceOnXCoordinate <= 1 &&
@@ -146,7 +176,7 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame{
     }
 
     // check if King is under attack after move
-    public boolean isKingUnderAttack(Color kingColor){
+    private boolean isKingUnderAttack(Color kingColor){
         Position positionOfKing = ChessUtil.getKingPosition(kingColor);
         if(positionOfKing == null) {
             return false;
@@ -157,7 +187,7 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame{
 
     // checks if enemy can attack some position
     // without constraint of protecting King
-    protected boolean isPlaceUnderAttack(
+    private boolean isPlaceUnderAttack(
             Position place, Color enemyColor) {
 
         for(int i = 0; i < 8; ++i){
@@ -179,7 +209,7 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame{
     }
 
     // check if King is under attack after move
-    protected boolean isKingUnderAttackAfterMove(
+    boolean isKingUnderAttackAfterMove(
             Color kingColor, Move v){
         Position positionOfKing = ChessUtil.getKingPosition(kingColor);
         if(positionOfKing == null) {
@@ -203,7 +233,7 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame{
     }
 
     // set on chessboard line of pawns.
-    public void setLineOfPawns(int YCoordinate, Color pawnsColor){
+    void setLineOfPawns(int YCoordinate, Color pawnsColor){
         for(int i = 0; i < 8; ++i){
             StateOfGame.chessboard.setFigure(
                     new Pawn(pawnsColor, new Position(i,YCoordinate)));
@@ -213,8 +243,8 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame{
     // initialize chessboard with line of figures
     // permutation 1,2,3,4,5,6,7,8 - gives position like in standard
     // standard chess
-    public void setLineOfFigures(int YCoordinate, Color figuresColor,
-                                 ArrayList<Integer> permutation){
+    void setLineOfFigures(int YCoordinate, Color figuresColor,
+                          ArrayList<Integer> permutation){
 
         StateOfGame.chessboard.setFigure(
                 new Rook(figuresColor, new Position(
@@ -250,7 +280,7 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame{
 
     }
 
-    public void setLineOfFigures(int YCoordinate, Color figuresColor){
+    void setLineOfFigures(int YCoordinate, Color figuresColor){
         ArrayList <Integer> temp = new ArrayList<Integer>();
         for(int i = 1; i <= 8; ++i){
             temp.add(i);

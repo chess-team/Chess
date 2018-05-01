@@ -2,6 +2,7 @@
 Chess without en passant, castling, check. Objective of game is to capture
 enemy King.
    */
+@SuppressWarnings("SpellCheckingInspection")
 public class KillKingChess extends ClassicChess {
 
     // return true if move is correct.
@@ -18,6 +19,7 @@ public class KillKingChess extends ClassicChess {
         Color colorOfPlayer = StateOfGame.chessboard.
                 getChessPieceOnPosition(move.from).getColor();
 
+        //noinspection RedundantIfStatement
         if(colorOfPlayer == colorOfLastMovedPiece){
             return false;
         }

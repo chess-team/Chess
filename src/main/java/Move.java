@@ -13,17 +13,19 @@ public class Move {
     // should be one of {queen, knight, rook, bishop}
     ChessPiece promoteTo;
 
+    Move(){}
+
     Move (Position from, Position to){
         this.from = from;
         this.to = to;
     }
 
-    Move (Position from, Position to, boolean promotion,
-          ChessPiece chosenChessPiece){
+    Move(Position from, Position to,
+         ChessPiece chosenChessPiece){
         this.from = from;
         this.to = to;
         this.promoteTo = chosenChessPiece;
-        isPromotion = promotion;
+        isPromotion = true;
     }
 
     @Override

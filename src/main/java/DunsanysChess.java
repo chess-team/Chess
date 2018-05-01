@@ -1,3 +1,4 @@
+@SuppressWarnings("ALL")
 public class DunsanysChess extends KillKingChess{
 
     public void initializeStateOfGame() {
