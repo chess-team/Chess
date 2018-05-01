@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 /*
 Class that implements rules of Classic chess.
@@ -192,8 +193,7 @@ public class ClassicChess extends VariantSimilarToClassicChess {
                 }
             }
             else {
-                StateOfGame.stateOfGameplay =
-                        StateOfGameplay.DRAW;
+                StateOfGame.stateOfGameplay = StateOfGameplay.DRAW;
             }
         }
         int n = listOfCapturedPieces.size();
@@ -205,11 +205,21 @@ public class ClassicChess extends VariantSimilarToClassicChess {
                 }
             }
             if(isDraw){
-                StateOfGame.stateOfGameplay =
-                        StateOfGameplay.DRAW;
+                StateOfGame.stateOfGameplay = StateOfGameplay.DRAW;
             }
         }
 
+        String stateOfChessboard = StateOfGame.chessboard.toString();
+        List<String> previousStates = StateOfGame.historyOfMoves.
+                listOfChessboardStates();
+
+        int count = 0;
+        for(String temp : previousStates){
+            if(temp.equals(stateOfChessboard))++count;
+        }
+        if(count >= 3){
+            StateOfGame.stateOfGameplay = StateOfGameplay.DRAW;
+        }
     }
 
     @Override
