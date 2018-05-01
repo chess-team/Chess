@@ -6,7 +6,7 @@ class BishopTest {
 
     @Test
     void testBishopMovement(){
-        TestUtil.makeEmptyChessboard();
+        TestUtil.makeEmptyClassicChessboard();
 
 
         StateOfGame.chessboard.setFigure(

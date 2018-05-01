@@ -12,8 +12,6 @@ public class StateOfGame implements Serializable{
 
     private StateOfGame(){}
 
-    public static Color colorOfLastMovedPiece = Color.BLACK;
-
     // return only instance of singleton class
     public static StateOfGame getInstance(){
         return realStateOfGame;
@@ -28,6 +26,7 @@ public class StateOfGame implements Serializable{
     static {
         variant.initializeStateOfGame();
     }
+    public static State whichPlayerHaveMove;
 
     // Method that parse string in format of toString() method and initialize
     // fields of class. This method is used to load saved game from hard drive.

@@ -6,7 +6,7 @@ class PawnTest {
     // Test of Pawn movement in classic chess
     @Test
     void testPawnMovement(){
-        TestUtil.makeEmptyChessboard();
+        TestUtil.makeEmptyClassicChessboard();
         StateOfGame.chessboard.setFigure(
                 new Pawn(Color.WHITE, new Position(0,1)));
 

@@ -6,7 +6,7 @@ class RookTest {
 
     @Test
     void testRookMovement(){
-        TestUtil.makeEmptyChessboard();
+        TestUtil.makeEmptyClassicChessboard();
 
 
         StateOfGame.chessboard.setFigure(

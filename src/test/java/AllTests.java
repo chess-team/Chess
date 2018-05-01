@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 class AllTests {
     @Test
     void allTests(){
+        new ClassicChessTest().testInitializeState();
         new BishopTest().testBishopMovement();
         new KnightTest().testKnightMovement();
         new PawnTest().testPawnMovement();

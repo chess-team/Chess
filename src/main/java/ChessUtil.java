@@ -72,4 +72,18 @@ public class ChessUtil {
         return null;
     }
 
+    public static int getNumberOfPiecesGivenColor(Color colorOfPieces){
+        int count = 0;
+        for(int i = 0; i < StateOfGame.chessboard.getXWidth(); ++i){
+            for (int j = 0; j < StateOfGame.chessboard.getYWidth(); ++j){
+                ChessPiece figure = StateOfGame.chessboard.
+                        getChessPieceOnPosition(new Position(i,j));
+                if(figure.getColor() == colorOfPieces &&
+                        !(figure instanceof EmptySquare)){
+                    ++count;
+                }
+            }
+        }
+        return count;
+    }
 }

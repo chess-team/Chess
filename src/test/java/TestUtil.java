@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 Class hold set of function that is used in multiple tests.
  */
 public class TestUtil {
-    public static void makeEmptyChessboard(){
+    public static void makeEmptyClassicChessboard(){
         //initialize new state of game
         StateOfGame.variant = new ClassicChess();
 
@@ -39,7 +39,7 @@ public class TestUtil {
             }
         }
         System.out.println(numberOfMovesFromPosition);
-            System.out.println(StateOfGame.chessboard.getChessPieceOnPosition(
+        System.out.println(StateOfGame.chessboard.getChessPieceOnPosition(
                     positionOfChessPiece).listOfPossibleMoves().size());
         assertTrue(numberOfMovesFromPosition ==
                 StateOfGame.chessboard.getChessPieceOnPosition(

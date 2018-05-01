@@ -6,7 +6,7 @@ class QueenTest {
 
     @Test
     void testQueenMovement1(){
-        TestUtil.makeEmptyChessboard();
+        TestUtil.makeEmptyClassicChessboard();
 
 
         StateOfGame.chessboard.setFigure(
@@ -79,7 +79,7 @@ class QueenTest {
 
     @Test
     void testQueenMovement2(){
-        TestUtil.makeEmptyChessboard();
+        TestUtil.makeEmptyClassicChessboard();
 
 
         StateOfGame.chessboard.setFigure(

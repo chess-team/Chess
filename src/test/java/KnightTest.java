@@ -8,7 +8,7 @@ class KnightTest {
     // Test of Knight movement in classic chess
     @Test
     void testKnightMovement(){
-        TestUtil.makeEmptyChessboard();
+        TestUtil.makeEmptyClassicChessboard();
 
         StateOfGame.chessboard.setFigure(
                 new Knight(Color.WHITE, new Position(0,0)));
