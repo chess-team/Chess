@@ -25,22 +25,8 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame{
     }
 
     @SuppressWarnings("SpellCheckingInspection")
-    private boolean validateEnPassantMove(Move move){
-        int differenceOnXCoordinate = move.to.x - move.from.x;
-        int differenceOnYCoordinate = move.to.y - move.from.y;
-        Position wantedPreviousMoveTo = move.from.translateByVector(
-                0,differenceOnXCoordinate);
-        if(!(StateOfGame.chessboard.
-                getChessPieceOnPosition(wantedPreviousMoveTo)
-                instanceof Pawn)){
-            return false;
-        }
-        Position wantedPreviousMoveFrom = move.from.translateByVector(
-                -2*differenceOnYCoordinate,differenceOnXCoordinate);
-        Move wantedPreviousMove =
-                new Move(wantedPreviousMoveFrom,wantedPreviousMoveTo);
-        Move previousMove = StateOfGame.historyOfMoves.lastMove();
-        return wantedPreviousMove.equals(previousMove);
+    boolean validateEnPassantMove(Move move){
+        return false;
     }
 
     // checks if move doesn't violate any rules about moving figures

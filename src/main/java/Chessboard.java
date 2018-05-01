@@ -3,7 +3,7 @@
 Class holds information about position of all chess pieces.
  */
 
-@SuppressWarnings("SameReturnValue")
+@SuppressWarnings({"SameReturnValue", "unused"})
 public interface Chessboard {
     Position getPositionOfChessPiece(ChessPiece figure);
     ChessPiece getChessPieceOnPosition(Position a);

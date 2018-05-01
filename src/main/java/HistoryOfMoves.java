@@ -19,6 +19,9 @@ public class HistoryOfMoves {
     }
 
     public Move lastMove(){
+        if(lastMoves.isEmpty()){
+            return null;
+        }
         return lastMoves.get(lastMoves.size() - 1);
     }
 

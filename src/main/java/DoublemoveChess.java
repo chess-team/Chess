@@ -1,11 +1,12 @@
 /*
 Chess with two moves in each turn.
  */
-@SuppressWarnings("SpellCheckingInspection")
+@SuppressWarnings({"SpellCheckingInspection", "unused"})
 public class DoublemoveChess extends KillKingChess {
 
     private int numberOfConsecutiveSameColorMoves = 1;
 
+    @SuppressWarnings("unused")
     @Override
     public void changeState(Move change) {
         changeStateOfOtherClasses(change);

@@ -48,9 +48,32 @@ public class ClassicChess extends VariantSimilarToClassicChess {
         }
     }
 
+    @SuppressWarnings("SpellCheckingInspection")
+    public boolean validateEnPassantMove(Move move){
+        int differenceOnXCoordinate = move.to.x - move.from.x;
+        int differenceOnYCoordinate = move.to.y - move.from.y;
+        Position wantedPreviousMoveTo = move.from.translateByVector(
+                differenceOnXCoordinate,0);
+        if(!(StateOfGame.chessboard.
+                getChessPieceOnPosition(wantedPreviousMoveTo)
+                instanceof Pawn)){
+            return false;
+        }
+        Position wantedPreviousMoveFrom = move.from.translateByVector(
+                differenceOnXCoordinate,2*differenceOnYCoordinate);
+
+        Move wantedPreviousMove =
+                new Move(wantedPreviousMoveFrom,wantedPreviousMoveTo);
+        Move previousMove = StateOfGame.historyOfMoves.lastMove();
+        return wantedPreviousMove.equals(previousMove);
+    }
 
     public void changeState(Move change) {
         swapColor();
+        if(validateEnPassantMove(change)){
+            Position previousMoveTo = StateOfGame.historyOfMoves.lastMove().to;
+            StateOfGame.chessboard.setFigure(new EmptySquare(previousMoveTo));
+        }
         StateOfGame.chessboard.moveFigure(change);
         StateOfGame.historyOfMoves.addMove(change);
 

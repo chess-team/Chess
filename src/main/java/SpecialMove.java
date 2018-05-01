@@ -1,6 +1,6 @@
 /*
 For classes
  */
-class SpecialMove extends Move{
+abstract class SpecialMove extends Move{
 
 }

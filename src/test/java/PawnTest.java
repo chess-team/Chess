@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SuppressWarnings("SpellCheckingInspection")
 class PawnTest {
     // Test of Pawn movement in classic chess
     @Test
@@ -92,6 +93,53 @@ class PawnTest {
                         "p.p..p.r\n" +
                         "p.p..Ppp\n" +
                         "P.P...PP\n" +
+                        "........\n"));
+    }
+
+    // Test of en passant
+    @Test
+    void testEnPassant(){
+        TestUtil.makeEmptyClassicChessboard();
+
+        StateOfGame.chessboard.setFigure(
+                new Pawn(Color.WHITE, new Position(2,1)));
+
+        StateOfGame.chessboard.setFigure(
+                new Pawn(Color.BLACK, new Position(3,3)));
+
+        System.out.println(StateOfGame.chessboard);
+        assertTrue(StateOfGame.chessboard.toString().equals(
+                        "........\n" +
+                        "........\n" +
+                        "........\n" +
+                        "........\n" +
+                        "...p....\n" +
+                        "........\n" +
+                        "..P.....\n" +
+                        "........\n"));
+        assertTrue(StateOfGame.variant.validateMove(new Move (
+                new Position(2,1), new Position(2 ,3))));
+
+        StateOfGame.variant.changeState(new Move (
+                new Position(2,1), new Position(2 ,3)));
+
+        System.out.println(StateOfGame.chessboard);
+        System.out.println(StateOfGame.historyOfMoves.lastMove());
+        assertTrue(StateOfGame.variant.validateMove(new Move (
+                new Position(3,3), new Position(2 ,2))));
+
+        StateOfGame.variant.changeState(new Move (
+                new Position(3,3), new Position(2 ,2)));
+
+        System.out.println(StateOfGame.chessboard);
+        assertTrue(StateOfGame.chessboard.toString().equals(
+                        "........\n" +
+                        "........\n" +
+                        "........\n" +
+                        "........\n" +
+                        "........\n" +
+                        "..p.....\n" +
+                        "........\n" +
                         "........\n"));
     }
 }
