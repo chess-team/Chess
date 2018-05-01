@@ -14,6 +14,10 @@ public class HistoryOfMoves {
         return Collections.unmodifiableList(lastMoves);
     }
 
+    public List <String> listOfChessboardStates(){
+        return Collections.unmodifiableList(chessboardsStates);
+    }
+
     public void addMove(Move v){
         lastMoves.add(v);
         chessboardsStates.add(StateOfGame.chessboard.toString());

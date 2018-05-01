@@ -22,7 +22,7 @@ class ClassicChessTest {
 
     }
 
-    void setEndgameState(){
+    private void setEndgameState(){
         TestUtil.makeEmptyClassicChessboard();
         StateOfGame.chessboard.setFigure(
                 new King(Color.WHITE, new Position(7,7)));
