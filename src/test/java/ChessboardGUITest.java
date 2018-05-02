@@ -10,9 +10,9 @@ public class ChessboardGUITest extends JFrame{
     private void initUI() {
 
         ChessboardGUI chess= new ChessboardGUI(new GridLayout(10,10));
-        chess.setColorType2();
-        chess.setIconsType1();
-        chess.initChessboard();
+        chess.setColor(9);
+        chess.setIcons(0);
+        chess.initChessboardFrame();
         createLayout(chess);
         JPanel chesscontainer=new JPanel();
         chesscontainer.add(chess);
@@ -20,6 +20,9 @@ public class ChessboardGUITest extends JFrame{
         this.add(chesscontainer);
         setTitle("Chessboard");
         setSize(800, 800);
+        StateOfGame.chessboard.moveFigure(new Move(new Position(0, 1), new Position(0, 3)));
+        chess.updateIcon(new Position(0, 3));
+        chess.updateIcon(new Position(0, 1));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
