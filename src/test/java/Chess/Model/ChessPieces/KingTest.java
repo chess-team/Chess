@@ -1,14 +1,17 @@
+package Chess.Model.ChessPieces;
+
 import Chess.Model.*;
 import Chess.Model.ChessPieces.Bishop;
 import Chess.Model.ChessPieces.King;
 import Chess.Model.ChessPieces.Rook;
+import Chess.TestUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class KingTest {
+public class KingTest {
     @Test
-    void testKingProtection(){
+    public void testKingProtection(){
         TestUtil.makeEmptyClassicChessboard();
         StateOfGame.chessboard.setFigure(
                 new Bishop(ChessColour.WHITE, new Position(6,2)));

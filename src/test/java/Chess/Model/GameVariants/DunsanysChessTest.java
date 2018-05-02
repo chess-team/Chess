@@ -1,14 +1,17 @@
-import Chess.Model.GameVariants.MonsterChess;
+package Chess.Model.GameVariants;
+
+import Chess.Model.GameVariants.DunsanysChess;
 import Chess.Model.StateOfGame;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("SpellCheckingInspection")
-class MonsterChessTest {
+public class DunsanysChessTest {
+    @SuppressWarnings("SpellCheckingInspection")
     @Test
-    void testInitializeState(){
-        StateOfGame.variant = new MonsterChess();
+    public void testInitializeState(){
+        StateOfGame.variant = new DunsanysChess();
         StateOfGame.variant.initializeStateOfGame();
         System.out.println(StateOfGame.chessboard);
         assertTrue(StateOfGame.chessboard.toString().equals(
@@ -16,10 +19,10 @@ class MonsterChessTest {
                         "pppppppp\n" +
                         "........\n" +
                         "........\n" +
-                        "........\n" +
-                        "........\n" +
-                        "..PPPP..\n" +
-                        "....W...\n"));
+                        "PPPPPPPP\n" +
+                        "PPPPPPPP\n" +
+                        "PPPPPPPP\n" +
+                        "PPPPPPPP\n"));
 
     }
 }

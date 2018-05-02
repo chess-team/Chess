@@ -1,16 +1,19 @@
+package Chess.Model.ChessPieces;
+
 import Chess.Model.ChessColour;
 import Chess.Model.Position;
 import Chess.Model.ChessPieces.Rook;
 import Chess.Model.StateOfGame;
+import Chess.TestUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("SpellCheckingInspection")
-class RookTest {
+public class RookTest {
 
     @Test
-    void testRookMovement(){
+    public void testRookMovement(){
         TestUtil.makeEmptyClassicChessboard();
 
 

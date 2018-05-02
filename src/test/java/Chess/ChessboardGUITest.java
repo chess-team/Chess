@@ -1,4 +1,5 @@
-import Chess.ChessboardGUI;
+package Chess;
+
 import Chess.Model.Moves.Move;
 import Chess.Model.Position;
 import Chess.Model.StateOfGame;

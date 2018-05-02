@@ -1,15 +1,18 @@
+package Chess.Model.ChessPieces;
+
 import Chess.Model.ChessPieces.Bishop;
 import Chess.Model.ChessColour;
 import Chess.Model.Position;
 import Chess.Model.StateOfGame;
+import Chess.TestUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BishopTest {
+public class BishopTest {
 
     @Test
-    void testBishopMovement(){
+    public void testBishopMovement(){
         TestUtil.makeEmptyClassicChessboard();
 
 

@@ -1,3 +1,5 @@
+package Chess.Model.GameVariants;
+
 import Chess.Model.StateOfGame;
 import Chess.Model.GameVariants.UpsideDownChess;
 import org.junit.jupiter.api.Test;
@@ -5,9 +7,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("SpellCheckingInspection")
-class UpsideDownChessTest {
+public class UpsideDownChessTest {
     @Test
-    void testInitializeState(){
+    public void testInitializeState(){
         StateOfGame.variant = new UpsideDownChess();
         StateOfGame.variant.initializeStateOfGame();
         System.out.println(StateOfGame.chessboard);

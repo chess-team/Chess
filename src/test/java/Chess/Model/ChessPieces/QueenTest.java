@@ -1,16 +1,19 @@
+package Chess.Model.ChessPieces;
+
 import Chess.Model.*;
 import Chess.Model.ChessPieces.Bishop;
 import Chess.Model.ChessPieces.Queen;
 import Chess.Model.ChessPieces.Rook;
+import Chess.TestUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("SpellCheckingInspection")
-class QueenTest {
+public class QueenTest {
 
     @Test
-    void testQueenMovement1(){
+    public void testQueenMovement1(){
         TestUtil.makeEmptyClassicChessboard();
 
 
@@ -83,7 +86,7 @@ class QueenTest {
 
 
     @Test
-    void testQueenMovement2(){
+    public void testQueenMovement2(){
         TestUtil.makeEmptyClassicChessboard();
 
 

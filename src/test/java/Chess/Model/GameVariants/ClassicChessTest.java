@@ -1,18 +1,21 @@
+package Chess.Model.GameVariants;
+
 import Chess.Model.*;
 import Chess.Model.ChessPieces.King;
 import Chess.Model.ChessPieces.Rook;
 import Chess.Model.GameVariants.ClassicChess;
 import Chess.Model.Moves.Castling;
 import Chess.Model.Moves.Move;
+import Chess.TestUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
 @SuppressWarnings("SpellCheckingInspection")
-class ClassicChessTest {
+public class ClassicChessTest {
     @Test
-    void testInitializeState(){
+    public void testInitializeState(){
         StateOfGame.variant = new ClassicChess();
         StateOfGame.variant.initializeStateOfGame();
         System.out.println(StateOfGame.chessboard);
@@ -55,7 +58,7 @@ class ClassicChessTest {
     }
 
     @Test
-    void testWin(){
+    public void testWin(){
         setEndgameState();
         StateOfGame.variant.changeState(
                 new Move(new Position(7,6), new Position(0, 6)));
@@ -74,7 +77,7 @@ class ClassicChessTest {
     }
 
     @Test
-    void testDraw(){
+    public void testDraw(){
         setEndgameState();
         StateOfGame.variant.changeState(
                 new Move(new Position(7,6), new Position(7, 1)));
@@ -93,7 +96,7 @@ class ClassicChessTest {
     }
 
     @Test
-    void testCastling(){
+    public void testCastling(){
         TestUtil.makeEmptyClassicChessboard();
 
         StateOfGame.chessboard.setFigure(

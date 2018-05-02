@@ -1,15 +1,18 @@
+package Chess.Model.ChessPieces;
+
 import Chess.Model.*;
 import Chess.Model.ChessPieces.*;
 import Chess.Model.Moves.Move;
+import Chess.TestUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("SpellCheckingInspection")
-class PawnTest {
+public class PawnTest {
     // Test of Chess.Model.ChessPieces.Pawn movement in classic chess
     @Test
-    void testPawnMovement(){
+    public void testPawnMovement(){
         TestUtil.makeEmptyClassicChessboard();
         StateOfGame.chessboard.setFigure(
                 new Pawn(ChessColour.WHITE, new Position(0,1)));
@@ -101,7 +104,7 @@ class PawnTest {
 
     // Test of en passant
     @Test
-    void testEnPassant(){
+    public void testEnPassant(){
         TestUtil.makeEmptyClassicChessboard();
 
         StateOfGame.chessboard.setFigure(
@@ -146,7 +149,7 @@ class PawnTest {
                         "........\n"));
     }
     @Test
-    void testPromotion(){
+    public void testPromotion(){
         // Test of en passant
         TestUtil.makeEmptyClassicChessboard();
 

@@ -1,3 +1,5 @@
+package Chess;
+
 import Chess.Model.*;
 import Chess.Model.ChessPieces.Pawn;
 import Chess.Model.GameVariants.ClassicChess;
@@ -8,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /*
 Class hold set of function that is used in multiple tests.
  */
-class TestUtil {
+public class TestUtil {
     public static void makeEmptyClassicChessboard(){
         //initialize new state of game
         StateOfGame.variant = new ClassicChess();
