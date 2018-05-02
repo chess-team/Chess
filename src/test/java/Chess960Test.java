@@ -1,3 +1,5 @@
+import Chess.Model.GameVariants.Chess960;
+import Chess.Model.StateOfGame;
 import org.junit.jupiter.api.Test;
 
 class Chess960Test {

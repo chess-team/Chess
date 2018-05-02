@@ -1,3 +1,5 @@
+import Chess.Model.StateOfGame;
+import Chess.Model.GameVariants.UpsideDownChess;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

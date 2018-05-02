@@ -1,3 +1,8 @@
+import Chess.Model.*;
+import Chess.Model.ChessPieces.Pawn;
+import Chess.Model.GameVariants.ClassicChess;
+import Chess.Model.Moves.Move;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /*

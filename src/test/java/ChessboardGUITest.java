@@ -1,3 +1,8 @@
+import Chess.ChessboardGUI;
+import Chess.Model.Moves.Move;
+import Chess.Model.Position;
+import Chess.Model.StateOfGame;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -18,7 +23,7 @@ public class ChessboardGUITest extends JFrame{
         chesscontainer.add(chess);
         createLayout(chesscontainer);
         this.add(chesscontainer);
-        setTitle("Chessboard");
+        setTitle("Chess.Model.Chessboard");
         setSize(800, 800);
         StateOfGame.chessboard.moveFigure(new Move(new Position(0, 1), new Position(0, 3)));
         chess.updateIcon(new Position(0, 3));

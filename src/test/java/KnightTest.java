@@ -1,11 +1,15 @@
 
+import Chess.Model.ChessColour;
+import Chess.Model.ChessPieces.Knight;
+import Chess.Model.Position;
+import Chess.Model.StateOfGame;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class KnightTest {
 
-    // Test of Knight movement in classic chess
+    // Test of Chess.Model.ChessPieces.Knight movement in classic chess
     @Test
     void testKnightMovement(){
         TestUtil.makeEmptyClassicChessboard();

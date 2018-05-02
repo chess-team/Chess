@@ -1,3 +1,5 @@
+import Chess.Model.GameVariants.DunsanysChess;
+import Chess.Model.StateOfGame;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

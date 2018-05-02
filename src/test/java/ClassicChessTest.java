@@ -1,3 +1,9 @@
+import Chess.Model.*;
+import Chess.Model.ChessPieces.King;
+import Chess.Model.ChessPieces.Rook;
+import Chess.Model.GameVariants.ClassicChess;
+import Chess.Model.Moves.Castling;
+import Chess.Model.Moves.Move;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

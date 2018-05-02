@@ -1,3 +1,7 @@
+import Chess.Model.*;
+import Chess.Model.ChessPieces.Bishop;
+import Chess.Model.ChessPieces.King;
+import Chess.Model.ChessPieces.Rook;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

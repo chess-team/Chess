@@ -1,10 +1,13 @@
+import Chess.Model.*;
+import Chess.Model.ChessPieces.*;
+import Chess.Model.Moves.Move;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("SpellCheckingInspection")
 class PawnTest {
-    // Test of Pawn movement in classic chess
+    // Test of Chess.Model.ChessPieces.Pawn movement in classic chess
     @Test
     void testPawnMovement(){
         TestUtil.makeEmptyClassicChessboard();
@@ -128,7 +131,7 @@ class PawnTest {
         assertTrue(StateOfGame.variant.validateMove(new Move (
                 new Position(3,3), new Position(2 ,2))));
 
-        StateOfGame.variant.changeState(new Move (
+        StateOfGame.variant.changeState(new Move(
                 new Position(3,3), new Position(2 ,2)));
 
         System.out.println(StateOfGame.chessboard);
@@ -167,7 +170,7 @@ class PawnTest {
                 new Position(0,6), new Position(1 ,7),
                 new Queen(ChessColour.WHITE, new Position(1,7)))));
 
-            assertTrue(StateOfGame.variant.validateMove(new Move (
+            assertTrue(StateOfGame.variant.validateMove(new Move(
                 new Position(0,6), new Position(0 ,7),
                 new Queen(ChessColour.WHITE, new Position(0,7)))));
 

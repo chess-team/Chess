@@ -1,3 +1,7 @@
+import Chess.Model.ChessPieces.Bishop;
+import Chess.Model.ChessColour;
+import Chess.Model.Position;
+import Chess.Model.StateOfGame;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
