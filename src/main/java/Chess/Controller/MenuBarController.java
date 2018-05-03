@@ -1,5 +1,6 @@
 package Chess.Controller;
 
+import Chess.Model.StateOfGame;
 import Chess.View.MainFrameView;
 import Chess.View.MainPanelView;
 import Chess.View.MenuBarView;
@@ -17,7 +18,9 @@ class MenuBarController {
         this.mainFrameView = mainFrameView;
         this.menuBarView = mainFrameView.getMenuBarView();
         this.mainPanelView = mainFrameView.getMainPanelView();
-
+        addListeners();
+    }
+    void addListeners(){
         ActionListener colorMenuListener = actionEvent -> {
             System.out.println(actionEvent.getActionCommand() + " color");
             int colorType = Integer.valueOf(actionEvent.getActionCommand());
@@ -27,12 +30,14 @@ class MenuBarController {
         };
         menuBarView.addColorListeners(colorMenuListener);
 
-        ActionListener variantOfGameMenuListener = actionEvent -> {
-            //TODO
+        ActionListener newGameListener = actionEvent -> {
+            System.out.println("New Game");
+            StateOfGame.variant.initializeStateOfGame();
+            mainPanelView.getChessboardView().updateChessboard();
+            mainFrameView.updateView();
         };
-        ActionListener optionsMenuListener = actionEvent -> {
-            //TODO
-        };
+
+        menuBarView.addNewGameListener(newGameListener);
 
     }
 

@@ -210,6 +210,13 @@ public class ChessboardView extends JPanel {
             }
         }
     }
+    public void updateChessboard() {
+        for (int i = 0; i < width - 2; i++) {
+            for (int j = 0; j < height - 2; j++) {
+                updateIcon(new Position(i,j));
+            }
+        }
+    }
 
 
     private void loadIconsType0() {

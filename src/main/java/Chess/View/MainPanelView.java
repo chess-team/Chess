@@ -8,6 +8,8 @@ import java.awt.*;
 
 public class MainPanelView extends JPanel {
 
+
+
     private ChessboardView chessboardView;
 
     MainPanelView(){
@@ -16,20 +18,11 @@ public class MainPanelView extends JPanel {
         this.add(chessboardView);
     }
     public void changeChessboarColour(int type){
-        chessboardView = new ChessboardView(StateOfGame.chessboard.getXWidth(), StateOfGame.chessboard.getYWidth(), type, 1);
-        this.removeAll();
-        this.add(chessboardView);
+        chessboardView.setColor(type);
     }
 
 
-    public void updateChessboardView(){
-//        chessboardView = new ChessboardView(new GridLayout(10,10));
-//        System.out.println("DUPA");
-//        chessboardView.setColor(1);
-//        chessboardView.setIcons(0);
-//        chessboardView.initChessboardFrame();
-//        this.removeAll();
-//        this.add(chessboardView);
-//        //this.revalidate();
+    public ChessboardView getChessboardView() {
+        return chessboardView;
     }
 }
