@@ -36,19 +36,21 @@ public class ProgressiveChessTakeAll extends KillKingChess {
         switch(colorOfLastMovedPiece){
             case BLACK:
                 StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;
-                if(numberOfConsecutiveSameColorMoves == 1){
+                if(numberOfConsecutiveSameColorMoves == numberOfMovesInTurn){
                     StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_MOVE;
                     swapColor();
                     numberOfConsecutiveSameColorMoves = 0;
+                    ++numberOfMovesInTurn;
                 }
                 swapColor();
                 ++numberOfConsecutiveSameColorMoves;
                 break;
             case WHITE:
-                if(numberOfConsecutiveSameColorMoves == 1){
+                if(numberOfConsecutiveSameColorMoves == numberOfMovesInTurn){
                     StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_MOVE;
                     swapColor();
                     numberOfConsecutiveSameColorMoves = 0;
+                    ++numberOfMovesInTurn;
                 }
                 ++numberOfConsecutiveSameColorMoves;
                 break;

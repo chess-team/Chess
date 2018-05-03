@@ -3,8 +3,6 @@ package Chess.Model.GameVariants;
 import Chess.Model.*;
 import Chess.Model.Moves.Move;
 
-import java.util.List;
-
 /*
 Chess without check. Objective of game is to capture
 enemy Chess.Model.ChessPieces.King.

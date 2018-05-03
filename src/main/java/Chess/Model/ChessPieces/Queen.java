@@ -17,8 +17,10 @@ public class Queen extends ChessPiece {
 
     @Override
     public ArrayList<Move> listOfPossibleMoves() {
-        ArrayList <Move> resultList = new ArrayList<Move>();
-        for(int distance = 1; distance <= 7; ++distance) {
+        ArrayList <Move> resultList = new ArrayList<>();
+        int maxDistance = Math.max(StateOfGame.chessboard.getXWidth(),
+                StateOfGame.chessboard.getYWidth());
+        for(int distance = 1; distance <= maxDistance; ++distance) {
             for(int x = -1; x <= 1; ++x) {
                 for (int y = -1; y <= 1; ++y) {
                     if (x == 0 && y == 0) continue;

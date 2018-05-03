@@ -7,13 +7,11 @@ import Chess.Model.StateOfGameplay;
 /*
 Chess with two moves in each turn.
  */
-@SuppressWarnings({"SpellCheckingInspection", "unused"})
-public class DoublemoveChess extends KillKingChess {
+@SuppressWarnings({"SpellCheckingInspection"})
+public class DoubleMoveChess extends KillKingChess {
 
     private int numberOfConsecutiveSameColorMoves = 1;
 
-    //TODO tests
-    @SuppressWarnings("unused")
     @Override
     public void changeState(Move change) {
         switch(colorOfLastMovedPiece){

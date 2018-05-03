@@ -17,7 +17,7 @@ public class Knight extends ChessPiece {
 
     @Override
     public ArrayList<Move> listOfPossibleMoves() {
-        ArrayList <Move> resultList = new ArrayList<Move>();
+        ArrayList <Move> resultList = new ArrayList<>();
         for(int i = -2; i <= 2; i += 4) {
             for(int j = -1; j <= 1; j += 2) {
                 Move v = new Move(getPosition(),

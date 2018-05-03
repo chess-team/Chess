@@ -15,6 +15,8 @@ or similar to standard chess with different objectives, special moves,
 @SuppressWarnings({"RedundantIfStatement", "SimplifiableIfStatement"})
 public abstract class VariantSimilarToClassicChess implements VariantOfGame {
 
+    static {StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;}
+
     public SpecialMoves getSpecialMoves() {
         return new NoSpecialMoves();
     }
@@ -22,6 +24,11 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame {
     // checks if move is inside board.
     @SuppressWarnings({"RedundantIfStatement", "BooleanMethodIsAlwaysInverted"})
     public boolean isInsideBoard(Move move){
+        if(move == null ||
+                move.to == null ||
+                move.from == null) {
+            return false;
+        }
         if(move.to.x < 0 || move.to.x >= 8){
             return false;
         }
@@ -198,6 +205,8 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame {
         return false;
     }
 
+
+    @SuppressWarnings("unused")
     public void undoMove(){
         StateOfGame.historyOfMoves.undoMove();
     }
@@ -275,7 +284,7 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame {
     }
 
     public void setLineOfFigures(int YCoordinate, ChessColour figuresColor){
-        ArrayList <Integer> temp = new ArrayList<Integer>();
+        ArrayList <Integer> temp = new ArrayList<>();
         for(int i = 1; i <= 8; ++i){
             temp.add(i);
         }

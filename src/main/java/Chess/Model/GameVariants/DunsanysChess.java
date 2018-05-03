@@ -3,9 +3,7 @@ package Chess.Model.GameVariants;
 import Chess.Model.*;
 import Chess.Model.ChessPieces.Pawn;
 
-import java.util.List;
 
-@SuppressWarnings("ALL")
 public class DunsanysChess extends ClassicChess{
 
     public void initializeStateOfGame() {

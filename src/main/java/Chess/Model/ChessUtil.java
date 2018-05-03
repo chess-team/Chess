@@ -6,7 +6,6 @@ Class having additional functions.
 import Chess.Model.ChessPieces.ChessPiece;
 import Chess.Model.ChessPieces.EmptySquare;
 import Chess.Model.ChessPieces.King;
-import Chess.Model.ChessPieces.Pawn;
 import Chess.Model.Moves.Move;
 
 import java.util.ArrayList;
@@ -52,7 +51,7 @@ public class ChessUtil {
 
     // list of all moves for Player with given color.
     public static ArrayList<Move> listOfAllMoves(ChessColour playerColor) {
-        ArrayList <Move> resultList = new ArrayList<Move>();
+        ArrayList <Move> resultList = new ArrayList<>();
         for(int i = 0; i < StateOfGame.chessboard.getXWidth(); ++i){
             for (int j = 0; j < StateOfGame.chessboard.getYWidth(); ++j){
                 ChessPiece figure = StateOfGame.chessboard.

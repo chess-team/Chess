@@ -17,8 +17,8 @@ public class Bishop extends ChessPiece{
 
     @Override
     public ArrayList<Move> listOfPossibleMoves() {
-        ArrayList <Move> resultList = new ArrayList<Move>();
-        for(int i = 1; i < 8; ++i) {
+        ArrayList <Move> resultList = new ArrayList<>();
+        for(int i = 1; i < StateOfGame.chessboard.getXWidth(); ++i) {
             for(int j = -1; j <= 1; j += 2) {
                 for(int k = -1; k <= 1; k += 2) {
                     Move v = new Move(getPosition(),

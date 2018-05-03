@@ -17,7 +17,7 @@ public class Pawn extends ChessPiece {
 
     @Override
     public ArrayList<Move> listOfPossibleMoves() {
-        ArrayList <Move> resultList = new ArrayList<Move>();
+        ArrayList <Move> resultList = new ArrayList<>();
 
         int j = 0;
         switch (this.getChessColour()) {
@@ -38,8 +38,8 @@ public class Pawn extends ChessPiece {
         }
         Move v = new Move(getPosition(),
                 getPosition().translateByVector(0, 2*j));
-        if(v.to.y == 0 || v.to.y == 7){
-            ArrayList <ChessPiece> temp = new ArrayList<ChessPiece>();
+        if(v.to.y == 0 || v.to.y == StateOfGame.chessboard.getYWidth() - 1){
+            ArrayList <ChessPiece> temp = new ArrayList<>();
             temp.add(new Rook(getChessColour(),v.to));
             temp.add(new Knight(getChessColour(),v.to));
             temp.add(new Queen(getChessColour(),v.to));

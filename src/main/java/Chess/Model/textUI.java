@@ -19,7 +19,7 @@ class textUI {
             Scanner in = new Scanner(System.in);
             System.out.println(StateOfGame.chessboard);
             try {
-                ArrayList <Integer> inputInts = new ArrayList<Integer>();
+                ArrayList <Integer> inputInts = new ArrayList<>();
                 for(int i = 0; i < 4; ++i) {
                     inputInts.add(in.nextInt());
                 }

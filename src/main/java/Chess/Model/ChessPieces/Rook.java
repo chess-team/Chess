@@ -17,8 +17,10 @@ public class Rook extends ChessPiece {
 
     @Override
     public ArrayList<Move> listOfPossibleMoves() {
-        ArrayList <Move> resultList = new ArrayList<Move>();
-        for(int i = -8; i <= 8; ++i) {
+        ArrayList <Move> resultList = new ArrayList<>();
+        int maxDistance = Math.max(StateOfGame.chessboard.getXWidth(),
+                StateOfGame.chessboard.getYWidth());
+        for(int i = -maxDistance; i <= maxDistance; ++i) {
             if(i == 0) continue;
             Move v = new Move(getPosition(),
                     getPosition().translateByVector(i,0));

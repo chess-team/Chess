@@ -21,7 +21,7 @@ public class ClassicChess extends VariantSimilarToClassicChess {
     public ChessColour colorOfLastMovedPiece = ChessColour.BLACK;
 
     private final ArrayList <String> listOfCapturedPieces =
-            new ArrayList<String>();
+            new ArrayList<>();
 
     // return true if move is correct.
     public boolean validateMove(Move move) {
@@ -89,6 +89,9 @@ public class ClassicChess extends VariantSimilarToClassicChess {
         }
         int sign = ChessUtil.signum(towerPosition.x - kingPosition.x);
         int dist = Math.abs(towerPosition.x - kingPosition.x);
+        if(dist < 3){
+            return false;
+        }
         for (int i = 1; i < dist; ++i){
             if(isPlaceUnderAttack(kingPosition.
                     translateByVector(i*sign, 0), colorOfLastMovedPiece)){
@@ -175,7 +178,6 @@ public class ClassicChess extends VariantSimilarToClassicChess {
             throw new NullPointerException();
         }
         int sign = ChessUtil.signum(towerPosition.x - kingPosition.x);
-        int dist = Math.abs(towerPosition.x - kingPosition.x);
         Position newKingPosition = towerPosition.translateByVector(-sign,0);
         Position newTowerPosition = newKingPosition.translateByVector(-sign,0);
         StateOfGame.chessboard.moveFigure(
@@ -246,19 +248,17 @@ public class ClassicChess extends VariantSimilarToClassicChess {
 
     @Override
     public SpecialMoves getSpecialMoves() {
-        return new SpecialMoves() {
-            public ArrayList<Move> listOfPossibleMoves(ChessColour playerColor){
-                ArrayList <Move> resultList = new ArrayList<Move>();
-                for(int i = 0; i <= 7; i += 7){
-                    for(int j = 0; j <= 7; j += 7){
-                        Castling move = new Castling(new Position(i, j));
-                        if(StateOfGame.variant.validateMove(move)){
-                            resultList.add(move);
-                        }
+        return playerColor -> {
+            ArrayList <Move> resultList = new ArrayList<>();
+            for(int i = 0; i <= 7; i += 7){
+                for(int j = 0; j <= 7; j += 7){
+                    Castling move = new Castling(new Position(i, j));
+                    if(StateOfGame.variant.validateMove(move)){
+                        resultList.add(move);
                     }
                 }
-                return resultList;
             }
+            return resultList;
         };
     }
 }

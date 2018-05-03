@@ -10,9 +10,9 @@ import java.util.List;
 Class holds information about moves made in game.
  */
 public class HistoryOfMoves {
-    private final ArrayList <Move> lastMoves = new ArrayList<Move>();
+    private final ArrayList <Move> lastMoves = new ArrayList<>();
     private final ArrayList <String> chessboardsStates =
-            new ArrayList<String>();
+            new ArrayList<>();
 
     public List <Move> listOfPreviousMoves(){
         return Collections.unmodifiableList(lastMoves);

@@ -2,7 +2,6 @@ package Chess.Model.GameVariants;
 
 import Chess.Model.ChessColour;
 import Chess.Model.ClassicChessboard;
-import Chess.Model.Moves.Castling;
 import Chess.Model.StateOfGame;
 
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ public class Chess960 extends ClassicChess{
 
     @Override
     public void initializeStateOfGame() {
-        ArrayList<Integer> temp = new ArrayList<Integer>();
+        ArrayList<Integer> temp = new ArrayList<>();
         for(int i = 1; i <= 8; ++i){
             temp.add(i);
         }
