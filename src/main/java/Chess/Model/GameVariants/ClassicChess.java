@@ -23,6 +23,16 @@ public class ClassicChess extends VariantSimilarToClassicChess {
     private final ArrayList <String> listOfCapturedPieces =
             new ArrayList<>();
 
+    public boolean isColorOfMovedPieceCorrect (ChessColour colorOfMovedPiece){
+        switch (StateOfGame.stateOfGameplay){
+            case WHITE_MOVE:
+                return colorOfMovedPiece == ChessColour.WHITE;
+            case BLACK_MOVE:
+                return colorOfMovedPiece == ChessColour.BLACK;
+        }
+        return false;
+    }
+
     // return true if move is correct.
     public boolean validateMove(Move move) {
 
@@ -40,6 +50,9 @@ public class ClassicChess extends VariantSimilarToClassicChess {
         if(colorOfPlayer == colorOfLastMovedPiece){
             return false;
         }
+        //if(!isColorOfMovedPieceCorrect(colorOfPlayer)){
+        //    return false;
+        //}
 
         //noinspection RedundantIfStatement
         if(isKingUnderAttackAfterMove(colorOfPlayer, move)){
@@ -115,9 +128,11 @@ public class ClassicChess extends VariantSimilarToClassicChess {
         switch (colorOfLastMovedPiece){
             case BLACK:
                 colorOfLastMovedPiece = ChessColour.WHITE;
+                //StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_MOVE;
                 break;
             case WHITE:
                 colorOfLastMovedPiece = ChessColour.BLACK;
+                //StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;
                 break;
         }
     }

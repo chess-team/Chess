@@ -34,10 +34,4 @@ public class HistoryOfMoves {
         return lastMoves.get(lastMoves.size() - 1);
     }
 
-    //TODO
-    public void undoMove(){
-        chessboardsStates.remove(chessboardsStates.size() - 1);
-        //Chess.Model.StateOfGame.chessboard =
-        //        chessboardsStates.get(chessboardsStates.size() - 1);
-    }
 }

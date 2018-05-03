@@ -4,7 +4,6 @@ import Chess.Model.ChessPieces.*;
 import Chess.Model.GameVariants.*;
 import org.junit.jupiter.api.Test;
 
-//TODO refactor this using some framework
 class AllTests {
     @Test
     void allTests(){

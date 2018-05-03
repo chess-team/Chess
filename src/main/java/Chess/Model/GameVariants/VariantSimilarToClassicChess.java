@@ -12,7 +12,7 @@ import java.util.ArrayList;
 Class with methods used in variant of Chess with movement of pieces the same
 or similar to standard chess with different objectives, special moves,
     */
-@SuppressWarnings({"RedundantIfStatement", "SimplifiableIfStatement"})
+
 public abstract class VariantSimilarToClassicChess implements VariantOfGame {
 
     static {StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;}
@@ -21,22 +21,21 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame {
         return new NoSpecialMoves();
     }
 
-    // checks if move is inside board.
-    @SuppressWarnings({"RedundantIfStatement", "BooleanMethodIsAlwaysInverted"})
-    public boolean isInsideBoard(Move move){
+    // checks if move is inside board
+    public boolean isOutsideBoard(Move move){
         if(move == null ||
                 move.to == null ||
                 move.from == null) {
-            return false;
+            return true;
         }
         if(move.to.x < 0 || move.to.x >= 8){
-            return false;
+            return true;
         }
 
         if(move.to.y < 0 || move.to.y >= 8){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     @SuppressWarnings("SpellCheckingInspection")
@@ -47,7 +46,7 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame {
     // checks if move doesn't violate any rules about moving figures
     // without constraints about Chess.Model.ChessPieces.King protection.
     public boolean isMovePossibleWithoutKingProtection(Move move){
-        if(!isInsideBoard(move)){
+        if(isOutsideBoard(move)){
             return false;
         }
 
@@ -177,13 +176,10 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame {
     }
 
     // check if Chess.Model.ChessPieces.King is under attack after move
-    protected boolean isKingUnderAttack(ChessColour kingColor){
+    protected boolean isKingUnderAttack(ChessColour kingColor) {
         Position positionOfKing = ChessUtil.getKingPosition(kingColor);
-        if(positionOfKing == null) {
-            return false;
-        }
-        return isPlaceUnderAttack(positionOfKing,
-                ChessUtil.getOtherColor(kingColor));
+        return positionOfKing != null &&
+                isPlaceUnderAttack(positionOfKing, ChessUtil.getOtherColor(kingColor));
     }
 
     // checks if enemy can attack some position
@@ -203,12 +199,6 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame {
             }
         }
         return false;
-    }
-
-
-    @SuppressWarnings("unused")
-    public void undoMove(){
-        StateOfGame.historyOfMoves.undoMove();
     }
 
     // check if Chess.Model.ChessPieces.King is under attack after move
