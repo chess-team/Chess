@@ -30,12 +30,12 @@ public class ChessboardGUI extends JPanel {
     private Color frameColor, whiteColor, blackColor;
     private Color highlightColor = new Color(0, 255, 255);
 
-    public ChessboardGUI(int width, int height, ActionListener actionListener, int colorType, int iconsType) {
+    public ChessboardGUI(int width, int height, int colorType, int iconsType) {
         super(new GridLayout(width + 2, height + 2));
         this.height = height + 2;
         this.width = width + 2;
         chessboardSquares = new JButton[width][height];
-        initChessboardFrame(actionListener, colorType, iconsType);
+        initChessboardFrame(colorType, iconsType);
     }
 
     public int getChessboardHeight() {
@@ -89,7 +89,7 @@ public class ChessboardGUI extends JPanel {
     }
 
     //simple chessboard
-    public void initChessboard(ActionListener actionListener, int colorType, int iconsType) {
+    public void initChessboard(int colorType, int iconsType) {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 if (!isFrame(i, j)) {
@@ -97,8 +97,6 @@ public class ChessboardGUI extends JPanel {
                     newButton.revalidate();
                     newButton.setIcon(transparentIcon);
                     newButton.setMargin(buttonMargin);
-                    newButton.addActionListener(actionListener);
-                    newButton.setActionCommand("" + i + j);
                     chessboardSquares[i - 1][j - 1] = newButton;
                     add(chessboardSquares[i - 1][j - 1]);
                 } else
@@ -110,7 +108,7 @@ public class ChessboardGUI extends JPanel {
     }
 
     //chessboard with frame and labels
-    public void initChessboardFrame(ActionListener actionListener, int colorType, int iconsType) {
+    public void initChessboardFrame(int colorType, int iconsType) {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (isFrame(i, j)) {
@@ -134,8 +132,6 @@ public class ChessboardGUI extends JPanel {
                     newButton.revalidate();
                     newButton.setIcon(transparentIcon);
                     newButton.setMargin(buttonMargin);
-                    newButton.addActionListener(actionListener);
-                    newButton.setActionCommand("" + (i - 1) + " " + (j - 1));
                     chessboardSquares[i - 1][j - 1] = newButton;
                     add(chessboardSquares[i - 1][j - 1]);
                 }
@@ -202,6 +198,15 @@ public class ChessboardGUI extends JPanel {
             for (int j = 0; j < height - 2; j++) {
                 Position position = new Position(i, j);
                 updateIcon(position);
+            }
+        }
+    }
+
+    public void setActionListener(ActionListener actionListener) {
+        for (int i = 0; i < width - 2; i++) {
+            for (int j = 0; j < height - 2; j++) {
+                chessboardSquares[i][j].addActionListener(actionListener);
+                chessboardSquares[i][j].setActionCommand("" + i + " " + j);
             }
         }
     }
@@ -347,5 +352,7 @@ public class ChessboardGUI extends JPanel {
             highlightPositionUndo(to);
         }
     }
+
+
 }
 
