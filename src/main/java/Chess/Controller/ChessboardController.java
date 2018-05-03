@@ -21,6 +21,11 @@ public class ChessboardController {
         this.mainFrameView = mainFrameView;
         this.mainPanelView = mainFrameView.getMainPanelView();
         this.chessboardView = this.mainPanelView.getChessboardView();
+        addButtonListener();
+
+    }
+    private void addButtonListener(){
+
         ActionListener buttonListener = actionEvent -> {
             //System.out.println(actionEvent.getActionCommand());
             String [] s = actionEvent.getActionCommand().split(" ",2);
@@ -30,13 +35,22 @@ public class ChessboardController {
                 chessboardView.highlightPosition(position);
                 from = position;
             }else {
-                System.out.println("Moving piece");
-                StateOfGame.chessboard.moveFigure(new Move(from,position));
-                chessboardView.updateIcon(from);
-                chessboardView.updateIcon(position);
-                mainFrameView.updateView();
-                chessboardView.highlightPositionUndo(from);
-                from = null;
+                Move move = new Move(from,position);
+                if( StateOfGame.variant.validateMove(move) ){
+                    System.out.println("Moving piece");
+                    //StateOfGame.chessboard.moveFigure(new Move(from,position));
+                    StateOfGame.variant.changeState(move);;
+                    chessboardView.updateIcon(from);
+                    chessboardView.updateIcon(position);
+                    mainFrameView.updateView();
+                    chessboardView.highlightPositionUndo(from);
+                    from = null;
+                }else{
+                    System.out.println("INVALID MOVE");
+                    chessboardView.highlightPositionUndo(from);
+                    from = null;
+                }
+
             }
         };
         chessboardView.setActionListener(buttonListener);

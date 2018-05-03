@@ -117,6 +117,7 @@ public class ClassicChess extends VariantSimilarToClassicChess {
 
     public void initializeStateOfGame() {
         StateOfGame.chessboard = new ClassicChessboard();
+        colorOfLastMovedPiece = ChessColour.BLACK;
         setLineOfPawns(1, ChessColour.WHITE);
         setLineOfPawns(6, ChessColour.BLACK);
         setLineOfFigures(0, ChessColour.WHITE);

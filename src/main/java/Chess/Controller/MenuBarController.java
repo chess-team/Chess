@@ -28,7 +28,7 @@ class MenuBarController {
             mainFrameView.updateView();
 
         };
-        menuBarView.addColorListeners(colorMenuListener);
+        menuBarView.addColorListener(colorMenuListener);
 
         ActionListener newGameListener = actionEvent -> {
             System.out.println("New Game");
@@ -38,6 +38,11 @@ class MenuBarController {
         };
 
         menuBarView.addNewGameListener(newGameListener);
+
+        ActionListener undoLastMoveListener = actionEvent -> {
+            System.out.println("IMPLEMENT ME");
+        };
+        menuBarView.addUndoLastMoveListener(undoLastMoveListener);
 
     }
 

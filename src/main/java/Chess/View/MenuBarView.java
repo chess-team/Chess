@@ -12,7 +12,7 @@ public class MenuBarView extends JMenuBar {
     private JMenu colorMenu;
     private JRadioButtonMenuItem [] colorButtons;
     private JMenu optionsMenu;
-    private JMenuItem newGame;
+    private JMenuItem newGame, undoLastMove;
 
     MenuBarView(){
         super();
@@ -20,10 +20,14 @@ public class MenuBarView extends JMenuBar {
         initColorMenu();
     }
 
+
+
     void initOptionsMenu(){
         optionsMenu = new JMenu("Options");
         newGame = new JMenuItem("New Game");
         optionsMenu.add(newGame);
+        undoLastMove = new JMenuItem("Undo Last Move");
+        optionsMenu.add(undoLastMove);
         this.add(optionsMenu);
     }
 
@@ -46,7 +50,7 @@ public class MenuBarView extends JMenuBar {
         this.add(colorMenu);
     }
 
-    public void addColorListeners(ActionListener actionListener){
+    public void addColorListener(ActionListener actionListener){
         for( int i = 0 ; i < 3; i++ ){
             colorButtons[i].addActionListener(actionListener);
         }
@@ -54,6 +58,8 @@ public class MenuBarView extends JMenuBar {
     public void addNewGameListener(ActionListener actionListener){
         newGame.addActionListener(actionListener);
     }
+    public void addUndoLastMoveListener(ActionListener actionListener){ undoLastMove.addActionListener(actionListener);}
+
     private void setColorButtonsIcons(){
         try {
             BufferedImage buf;
