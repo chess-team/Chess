@@ -12,13 +12,10 @@ public class DoublemoveChess extends KillKingChess {
 
     private int numberOfConsecutiveSameColorMoves = 1;
 
+    //TODO tests
     @SuppressWarnings("unused")
     @Override
     public void changeState(Move change) {
-        changeStateOfOtherClasses(change);
-        if(checkIfGameEnded()){
-            return;
-        }
         switch(colorOfLastMovedPiece){
             case BLACK:
                 ++numberOfConsecutiveSameColorMoves;
@@ -39,8 +36,11 @@ public class DoublemoveChess extends KillKingChess {
                     StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_MOVE;
                     numberOfConsecutiveSameColorMoves = 0;
                 }
-
                 break;
         }
+        StateOfGame.chessboard.moveFigure(change);
+        StateOfGame.historyOfMoves.addMove(change);
+        inCaseOfEndOfGame();
     }
+
 }

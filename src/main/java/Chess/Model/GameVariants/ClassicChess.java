@@ -188,7 +188,7 @@ public class ClassicChess extends VariantSimilarToClassicChess {
         inCaseOfEndOfGame();
     }
 
-    private void inCaseOfEndOfGame(){
+    protected void inCaseOfEndOfGame(){
         ChessColour colorOfPossibleLoser = ChessUtil.
                 getOtherColor(colorOfLastMovedPiece);
         if(ChessUtil.listOfAllMoves(colorOfPossibleLoser).isEmpty()) {
@@ -197,17 +197,20 @@ public class ClassicChess extends VariantSimilarToClassicChess {
                     case WHITE:
                         StateOfGame.stateOfGameplay =
                                 StateOfGameplay.BLACK_WON;
-                        break;
+                        return;
                     case BLACK:
                         StateOfGame.stateOfGameplay =
                                 StateOfGameplay.WHITE_WON;
-                        break;
+                        return;
                 }
             }
-            else {
-                StateOfGame.stateOfGameplay = StateOfGameplay.DRAW;
-            }
         }
+        drawRuleNoPossibleMove(colorOfPossibleLoser);
+        drawRule50MovesWithoutCapture();
+        drawRule3TimesSamePosition();
+    }
+
+    protected void drawRule50MovesWithoutCapture(){
         int n = listOfCapturedPieces.size();
         if(n > 50){
             boolean isDraw = true;
@@ -220,11 +223,18 @@ public class ClassicChess extends VariantSimilarToClassicChess {
                 StateOfGame.stateOfGameplay = StateOfGameplay.DRAW;
             }
         }
+    }
 
+    protected void drawRuleNoPossibleMove(ChessColour colorOfPossibleLoser){
+        if(ChessUtil.listOfAllMoves(colorOfPossibleLoser).isEmpty()) {
+            StateOfGame.stateOfGameplay = StateOfGameplay.DRAW;
+        }
+    }
+
+    protected void drawRule3TimesSamePosition(){
         String stateOfChessboard = StateOfGame.chessboard.toString();
         List<String> previousStates = StateOfGame.historyOfMoves.
                 listOfChessboardStates();
-
         int count = 0;
         for(String temp : previousStates){
             if(temp.equals(stateOfChessboard))++count;

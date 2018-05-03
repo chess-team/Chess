@@ -24,10 +24,7 @@ public class MonsterChess extends KillKingChess {
 
     @Override
     public void changeState(Move change) {
-        changeStateOfOtherClasses(change);
-        if(checkIfGameEnded()){
-            return;
-        }
+
         switch(colorOfLastMovedPiece){
             case BLACK:
                 StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;
@@ -43,5 +40,8 @@ public class MonsterChess extends KillKingChess {
                 ++numberOfConsecutiveSameColorMoves;
                 break;
         }
+        StateOfGame.chessboard.moveFigure(change);
+        StateOfGame.historyOfMoves.addMove(change);
+        inCaseOfEndOfGame();
     }
 }

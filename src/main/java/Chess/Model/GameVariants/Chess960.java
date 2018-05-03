@@ -2,14 +2,16 @@ package Chess.Model.GameVariants;
 
 import Chess.Model.ChessColour;
 import Chess.Model.ClassicChessboard;
+import Chess.Model.Moves.Castling;
 import Chess.Model.StateOfGame;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 /*
-Version of chess without Chess.Model.Moves.Castling, additionally the placement of the pieces on
+Version of chess - the placement of the pieces on
 the first rank is randomised, with the opponent's pieces mirroring it.
+
  */
 public class Chess960 extends ClassicChess{
 

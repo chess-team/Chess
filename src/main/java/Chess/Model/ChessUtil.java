@@ -6,6 +6,7 @@ Class having additional functions.
 import Chess.Model.ChessPieces.ChessPiece;
 import Chess.Model.ChessPieces.EmptySquare;
 import Chess.Model.ChessPieces.King;
+import Chess.Model.ChessPieces.Pawn;
 import Chess.Model.Moves.Move;
 
 import java.util.ArrayList;
@@ -69,16 +70,8 @@ public class ChessUtil {
 
 
     public static Position getKingPosition(ChessColour kingColor) {
-        for(int i = 0; i < StateOfGame.chessboard.getXWidth(); ++i){
-            for (int j = 0; j < StateOfGame.chessboard.getYWidth(); ++j){
-                ChessPiece figure = StateOfGame.chessboard.
-                        getChessPieceOnPosition(new Position(i,j));
-                if(figure.getChessColour() == kingColor && figure instanceof King){
-                    return figure.getPosition();
-                }
-            }
-        }
-        return null;
+        return StateOfGame.chessboard.
+                getPositionOfChessPiece(King.class, kingColor);
     }
 
     public static int getNumberOfPiecesGivenColor(ChessColour colorOfPieces){

@@ -1,35 +1,38 @@
-package Chess.Model.GameVariants;/*
-Player make number of consecutive moves. In each turn longer by 1.
-Objective of game is to capture all enemy figures.
- */
+package Chess.Model.GameVariants;
+
 
 import Chess.Model.*;
 import Chess.Model.Moves.Move;
-
+/*
+Player make number of consecutive moves. In each turn longer by 1.
+Objective of game is to capture all enemy figures.
+ */
 public class ProgressiveChessTakeAll extends KillKingChess {
 
     private int numberOfConsecutiveSameColorMoves = 0;
     private int numberOfMovesInTurn = 1;
 
     @Override
-    public boolean checkIfGameEnded() {
+    public void inCaseOfEndOfGame() {
+        super.inCaseOfEndOfGame();
         if(ChessUtil.getNumberOfPiecesGivenColor(ChessColour.WHITE) == 0){
             StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_WON;
-            return true;
+            return;
         }
         if(ChessUtil.getNumberOfPiecesGivenColor(ChessColour.BLACK) == 0){
             StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_WON;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void changeState(Move change) {
-        changeStateOfOtherClasses(change);
-        if(checkIfGameEnded()){
             return;
         }
+        drawRule3TimesSamePosition();
+        ChessColour colorOfPossibleLoser = ChessUtil.
+                getOtherColor(colorOfLastMovedPiece);
+
+        drawRuleNoPossibleMove(colorOfPossibleLoser);
+    }
+
+    //TODO tests
+    @Override
+    public void changeState(Move change) {
         switch(colorOfLastMovedPiece){
             case BLACK:
                 StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;
@@ -50,5 +53,8 @@ public class ProgressiveChessTakeAll extends KillKingChess {
                 ++numberOfConsecutiveSameColorMoves;
                 break;
         }
+        StateOfGame.chessboard.moveFigure(change);
+        StateOfGame.historyOfMoves.addMove(change);
+        inCaseOfEndOfGame();
     }
 }

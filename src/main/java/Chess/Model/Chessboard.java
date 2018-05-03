@@ -8,7 +8,8 @@ import Chess.Model.Moves.Move;
 
 @SuppressWarnings({"SameReturnValue", "unused"})
 public interface Chessboard {
-    Position getPositionOfChessPiece(ChessPiece figure);
+    Position getPositionOfChessPiece(Class classOfFigure,
+                                     ChessColour colorOfFigure);
     ChessPiece getChessPieceOnPosition(Position a);
     void moveFigure(Move v);
     void setFigure(ChessPiece figure);

@@ -28,10 +28,11 @@ public class ClassicChessboard implements Chessboard {
         }
     }
 
-    public Position getPositionOfChessPiece(ChessPiece figure) {
+    public Position getPositionOfChessPiece(Class classOfFigure, ChessColour colorOfFigure) {
         for(int i = 0; i < 8; ++i){
             for (int j = 0; j < 8; ++j){
-                if(board[i][j].equals(figure))
+                if(board[i][j].getClass() == classOfFigure
+                        && board[i][j].getChessColour() == colorOfFigure)
                     return new Position(i,j);
             }
         }
