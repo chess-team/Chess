@@ -3,20 +3,21 @@ package Chess;
 import Chess.Model.Moves.Move;
 import Chess.Model.Position;
 import Chess.Model.StateOfGame;
+import Chess.View.ChessboardView;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ChessboardGUITest extends JFrame implements ActionListener {
-    public ChessboardGUITest() {
+public class ChessboardViewTest extends JFrame implements ActionListener {
+    public ChessboardViewTest() {
 
         initUI();
     }
 
     private void initUI() {
-        ChessboardGUI chess = new ChessboardGUI(StateOfGame.chessboard.getXWidth(), StateOfGame.chessboard.getYWidth(), this, 1, 1);
+        ChessboardView chess = new ChessboardView(StateOfGame.chessboard.getXWidth(), StateOfGame.chessboard.getYWidth(), 1, 1);
         createLayout(chess);
         JPanel chesscontainer=new JPanel();
         chesscontainer.add(chess);
@@ -52,7 +53,7 @@ public class ChessboardGUITest extends JFrame implements ActionListener {
     public static void main(String[] args) {
 
         EventQueue.invokeLater(() -> {
-            ChessboardGUITest ex = new ChessboardGUITest();
+            ChessboardViewTest ex = new ChessboardViewTest();
             ex.setVisible(true);
         });
     }

@@ -1,4 +1,4 @@
-package Chess;
+package Chess.View;
 
 import Chess.Model.*;
 import Chess.Model.ChessPieces.ChessPiece;
@@ -17,7 +17,7 @@ import java.util.*;
 
 import static javax.imageio.ImageIO.read;
 
-public class ChessboardGUI extends JPanel {
+public class ChessboardView extends JPanel {
     private JButton[][] chessboardSquares;
     private Insets buttonMargin = new Insets(0, 0, 0, 0);
     private Map<Character, ImageIcon> lightChessboardIcons = new HashMap();
@@ -30,7 +30,7 @@ public class ChessboardGUI extends JPanel {
     private Color frameColor, whiteColor, blackColor;
     private Color highlightColor = new Color(0, 255, 255);
 
-    public ChessboardGUI(int width, int height, int colorType, int iconsType) {
+    public ChessboardView(int width, int height, int colorType, int iconsType) {
         super(new GridLayout(width + 2, height + 2));
         this.height = height + 2;
         this.width = width + 2;
