@@ -1,8 +1,11 @@
 package Chess.View;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 public class MenuBarView extends JMenuBar {
 
@@ -29,8 +32,10 @@ public class MenuBarView extends JMenuBar {
     void initColorMenu(){
         colorButtons = new JRadioButtonMenuItem[3];
         for( int i = 0 ; i < 3; i++ ){
-            colorButtons[i] = new JRadioButtonMenuItem(String.valueOf(i));
+            colorButtons[i] = new JRadioButtonMenuItem();
+            colorButtons[i].setActionCommand(String.valueOf(i));
         }
+        setColorButtonsIcons();
         colorButtons[0].setSelected(true);
         ButtonGroup buttonGroup = new ButtonGroup();
         colorMenu = new JMenu("Color");
@@ -48,5 +53,18 @@ public class MenuBarView extends JMenuBar {
     }
     public void addNewGameListener(ActionListener actionListener){
         newGame.addActionListener(actionListener);
+    }
+    private void setColorButtonsIcons(){
+        try {
+            BufferedImage buf;
+            buf= ImageIO.read(new File("src/main/resources/colorType0.png"));
+            colorButtons[0].setIcon(new ImageIcon(buf));
+            buf= ImageIO.read(new File("src/main/resources/colorType1.png"));
+            colorButtons[1].setIcon(new ImageIcon(buf));
+            buf= ImageIO.read(new File("src/main/resources/colorType2.png"));
+            colorButtons[2].setIcon(new ImageIcon(buf));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }
