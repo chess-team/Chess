@@ -6,19 +6,17 @@ import Chess.Model.StateOfGame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class ChessboardGUITest extends JFrame{
+public class ChessboardGUITest extends JFrame implements ActionListener {
     public ChessboardGUITest() {
 
         initUI();
     }
 
     private void initUI() {
-
-        ChessboardGUI chess= new ChessboardGUI(new GridLayout(10,10));
-        chess.setColor(9);
-        chess.setIcons(0);
-        chess.initChessboardFrame();
+        ChessboardGUI chess = new ChessboardGUI(StateOfGame.chessboard.getXWidth(), StateOfGame.chessboard.getYWidth(), this, 1, 1);
         createLayout(chess);
         JPanel chesscontainer=new JPanel();
         chesscontainer.add(chess);
@@ -57,5 +55,10 @@ public class ChessboardGUITest extends JFrame{
             ChessboardGUITest ex = new ChessboardGUITest();
             ex.setVisible(true);
         });
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        System.out.println(actionEvent.getActionCommand());
     }
 }
