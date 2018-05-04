@@ -1,10 +1,13 @@
 package Chess.Controller;
 
+import Chess.Model.GameVariants.Chess960;
+import Chess.Model.GameVariants.ClassicChess;
 import Chess.Model.StateOfGame;
 import Chess.View.MainFrameView;
 import Chess.View.MainPanelView;
 import Chess.View.MenuBarView;
 
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 class MenuBarController {
@@ -20,6 +23,8 @@ class MenuBarController {
         this.mainPanelView = mainFrameView.getMainPanelView();
         addListeners();
     }
+
+
     void addListeners(){
         ActionListener colorMenuListener = actionEvent -> {
             System.out.println(actionEvent.getActionCommand() + " color");
@@ -43,6 +48,22 @@ class MenuBarController {
             System.out.println("IMPLEMENT ME");
         };
         menuBarView.addUndoLastMoveListener(undoLastMoveListener);
+
+        ActionListener variantOfGameListener = actionEvent -> {
+            System.out.println(actionEvent.getActionCommand());
+            switch (actionEvent.getActionCommand() ){
+                case "Classic Chess":
+                    StateOfGame.variant = new ClassicChess();
+                        break;
+                case "Chess 960":
+                    StateOfGame.variant = new Chess960();
+                    break;
+            }
+            StateOfGame.variant.initializeStateOfGame();
+            mainPanelView.getChessboardView().updateChessboard();
+            mainFrameView.updateView();
+        };
+        menuBarView.addVariantOfGameListener(variantOfGameListener);
 
     }
 
