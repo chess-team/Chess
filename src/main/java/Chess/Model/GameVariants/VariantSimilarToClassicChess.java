@@ -188,4 +188,9 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame {
         }
         setLineOfFigures(YCoordinate, figuresColor, temp);
     }
+    void setClassicState(){
+        StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;
+        StateOfGame.historyOfMoves.clear();
+        StateOfGame.chessboard = new ClassicChessboard();
+    }
 }

@@ -13,6 +13,7 @@ public class UpsideDownChess extends ClassicChess{
 
     @Override
     public void initializeStateOfGame() {
+        setClassicState();
         StateOfGame.chessboard = new ClassicChessboard();
         setLineOfPawns(6, ChessColour.WHITE);
         setLineOfPawns(1, ChessColour.BLACK);

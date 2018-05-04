@@ -34,4 +34,9 @@ public class HistoryOfMoves {
         return lastMoves.get(lastMoves.size() - 1);
     }
 
+    public void clear(){
+        lastMoves.clear();
+        chessboardsStates.clear();
+    }
+
 }

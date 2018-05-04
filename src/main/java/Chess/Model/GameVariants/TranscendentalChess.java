@@ -10,6 +10,7 @@ import java.util.Collections;
 public class TranscendentalChess extends ClassicChess {
     @Override
     public void initializeStateOfGame() {
+        setClassicState();
         ArrayList<Integer> temp = new ArrayList<>();
         for(int i = 1; i <= 8; ++i){
             temp.add(i);

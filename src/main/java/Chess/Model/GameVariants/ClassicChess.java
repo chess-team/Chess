@@ -2,10 +2,7 @@ package Chess.Model.GameVariants;
 
 import Chess.Model.*;
 import Chess.Model.ChessPieces.*;
-import Chess.Model.Moves.Castling;
-import Chess.Model.Moves.Move;
-import Chess.Model.Moves.SpecialMove;
-import Chess.Model.Moves.SpecialMoves;
+import Chess.Model.Moves.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,7 +118,7 @@ public class ClassicChess extends VariantSimilarToClassicChess {
     }
 
     public void initializeStateOfGame() {
-        StateOfGame.chessboard = new ClassicChessboard();
+        setClassicState();
         colorOfLastMovedPiece = ChessColour.BLACK;
         setLineOfPawns(1, ChessColour.WHITE);
         setLineOfPawns(6, ChessColour.BLACK);
