@@ -21,6 +21,9 @@ public class MainPanelView extends JPanel {
         chessboardView.setColor(type);
     }
 
+    public void updateMainPanelView(){
+        chessboardView.updateChessboard();
+    }
 
     public ChessboardView getChessboardView() {
         return chessboardView;

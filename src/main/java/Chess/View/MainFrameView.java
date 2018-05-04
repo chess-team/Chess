@@ -17,16 +17,12 @@ public class MainFrameView extends JFrame {
         this.setSize(800, 800);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        //this.setVisible(true);
     }
-
-
 
     public void updateView(){
-        //mainPanelView.updateChessboardView();
+        mainPanelView.updateMainPanelView();;
         this.revalidate();
     }
-
 
 
     public MainPanelView getMainPanelView() {

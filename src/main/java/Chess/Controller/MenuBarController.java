@@ -38,7 +38,6 @@ class MenuBarController {
         ActionListener newGameListener = actionEvent -> {
             System.out.println("New Game");
             StateOfGame.variant.initializeStateOfGame();
-            mainPanelView.getChessboardView().updateChessboard();
             mainFrameView.updateView();
         };
 
@@ -60,7 +59,6 @@ class MenuBarController {
                     break;
             }
             StateOfGame.variant.initializeStateOfGame();
-            mainPanelView.getChessboardView().updateChessboard();
             mainFrameView.updateView();
         };
         menuBarView.addVariantOfGameListener(variantOfGameListener);

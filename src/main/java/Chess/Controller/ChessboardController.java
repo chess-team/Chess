@@ -71,7 +71,6 @@ public class ChessboardController {
 
     private void restartGame(){
         StateOfGame.variant.initializeStateOfGame();
-        chessboardView.updateChessboard();
         mainFrameView.updateView();
     }
     private void checkState(){
@@ -94,7 +93,6 @@ public class ChessboardController {
         chessboardView.highlightPositionUndo(from);
         chessboardView.highlightPossiblePositionsUndo(from);
         StateOfGame.variant.changeState(move);
-        chessboardView.updateChessboard();
         mainFrameView.updateView();
         from = null;
     }
