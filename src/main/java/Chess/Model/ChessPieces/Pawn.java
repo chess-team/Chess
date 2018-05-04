@@ -115,12 +115,17 @@ public class Pawn extends ChessPiece {
             return true;
         }
 
-        if (!((move.to.y != 7 && move.to.y != 0) ||
+        if (!((move.to.y != StateOfGame.chessboard.getYWidth() - 1 &&
+                move.to.y != 0) ||
                 ((move.promoteTo instanceof Queen ||
                         move.promoteTo instanceof Knight ||
                         move.promoteTo instanceof Bishop ||
                         move.promoteTo instanceof Rook) &&
                         move.isPromotion))){
+            return true;
+        }
+        if(move.to.y != StateOfGame.chessboard.getYWidth() - 1 &&
+                move.to.y != 0 && move.promoteTo != null){
             return true;
         }
         return false;
