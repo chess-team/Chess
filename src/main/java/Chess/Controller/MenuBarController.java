@@ -67,6 +67,7 @@ class MenuBarController {
 
         ActionListener promoteListener = actionEvent -> {
             System.out.println("Promote to " + actionEvent.getActionCommand());
+            chessboardController.takePieceUndo();
             chessboardController.setPromote(actionEvent.getActionCommand());
 
         };

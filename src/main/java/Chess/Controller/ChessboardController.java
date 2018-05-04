@@ -87,7 +87,7 @@ public class ChessboardController {
                         movePieceWithPromotion(move);
                         checkState();
                     }else{
-                        takePieceForPromotionUndo();
+                        takePieceUndo();
                     }
 
                 }
@@ -136,10 +136,10 @@ public class ChessboardController {
         mainFrameView.updateView();
         from = null;
     }
-    private void takePieceForPromotionUndo(){
-        chessboardView.highlightPositionUndo(from);
-        from = null;
-    }
+//    private void takePieceForPromotionUndo(){
+//        chessboardView.highlightPositionUndo(from);
+//        from = null;
+//    }
 
     private void takePiece(Position position){
         chessboardView.highlightPosition(position);
@@ -153,10 +153,17 @@ public class ChessboardController {
         mainFrameView.updateView();
         from = null;
     }
-    private void takePieceUndo(){
-        chessboardView.highlightPositionUndo(from);
-        chessboardView.highlightPossiblePositionsUndo(from);
-        from = null;
+    public void takePieceUndo(){
+        if( from != null ){
+            if( promote == "D"){
+                chessboardView.highlightPositionUndo(from);
+                chessboardView.highlightPossiblePositionsUndo(from);
+                from = null;
+            }else {// piece for promotion
+                chessboardView.highlightPositionUndo(from);
+                from = null;
+            }
+        }
     }
 
 
