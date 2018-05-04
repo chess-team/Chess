@@ -1,6 +1,5 @@
 package Chess.Controller;
 
-import Chess.Model.Chessboard;
 import Chess.Model.GameVariants.Chess960;
 import Chess.Model.GameVariants.ClassicChess;
 import Chess.Model.StateOfGame;
@@ -8,7 +7,6 @@ import Chess.View.MainFrameView;
 import Chess.View.MainPanelView;
 import Chess.View.MenuBarView;
 
-import java.awt.*;
 import java.awt.event.ActionListener;
 
 class MenuBarController {
@@ -31,7 +29,7 @@ class MenuBarController {
         ActionListener colorMenuListener = actionEvent -> {
             System.out.println(actionEvent.getActionCommand() + " color");
             int colorType = Integer.valueOf(actionEvent.getActionCommand());
-            mainPanelView.changeChessboarColour(colorType);
+            mainPanelView.changeChessboardColour(colorType);
             mainFrameView.updateView();
 
         };

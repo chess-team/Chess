@@ -1,9 +1,8 @@
-package Chess;
+package Chess.View;
 
 import Chess.Model.Moves.Move;
 import Chess.Model.Position;
 import Chess.Model.StateOfGame;
-import Chess.View.ChessboardView;
 
 import javax.swing.*;
 import java.awt.*;

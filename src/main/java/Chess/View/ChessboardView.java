@@ -21,8 +21,8 @@ import static javax.imageio.ImageIO.read;
 public class ChessboardView extends JPanel {
     private JButton[][] chessboardSquares;
     private Insets buttonMargin = new Insets(0, 0, 0, 0);
-    private Map<Character, ImageIcon> lightChessboardIcons = new HashMap();
-    private Map<Character, ImageIcon> darkChessboardIcons = new HashMap<>();
+    private Map<Character, ImageIcon> whitePiecesIcons = new HashMap();
+    private Map<Character, ImageIcon> blackPiecesIcons = new HashMap<>();
     private ImageIcon transparentIcon = new ImageIcon(
             new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB));
     private int height;
@@ -31,13 +31,20 @@ public class ChessboardView extends JPanel {
     private Color frameColor, whiteColor, blackColor;
     private Color highlightColor = new Color(0, 255, 255);
     private ArrayList<Move> possibleMoves;
-
     public ChessboardView(int width, int height, int colorType, int iconsType) {
         super(new GridLayout(width + 2, height + 2));
         this.height = height + 2;
         this.width = width + 2;
         chessboardSquares = new JButton[width][height];
         initChessboardFrame(colorType, iconsType);
+    }
+
+    public Map<Character, ImageIcon> getWhitePiecesIcons() {
+        return whitePiecesIcons;
+    }
+
+    public Map<Character, ImageIcon> getBlackPiecesIcons() {
+        return blackPiecesIcons;
     }
 
     public int getChessboardHeight() {
@@ -226,41 +233,41 @@ public class ChessboardView extends JPanel {
         try {
             BufferedImage buf;
             File pic = new File("src/main/resources/blackPawn1.png");
-            buf=read(pic);
-            darkChessboardIcons.put('P', new ImageIcon(buf));
+            buf = read(pic);
+            blackPiecesIcons.put('P', new ImageIcon(buf));
             pic = new File("src/main/resources/blackRook1.png");
             buf = read(pic);
-            darkChessboardIcons.put('R', new ImageIcon(buf));
+            blackPiecesIcons.put('R', new ImageIcon(buf));
             pic = new File("src/main/resources/blackKing1.png");
             buf = read(pic);
-            darkChessboardIcons.put('W', new ImageIcon(buf));
+            blackPiecesIcons.put('W', new ImageIcon(buf));
             pic = new File("src/main/resources/blackQueen1.png");
             buf = read(pic);
-            darkChessboardIcons.put('Q', new ImageIcon(buf));
+            blackPiecesIcons.put('Q', new ImageIcon(buf));
             pic = new File("src/main/resources/blackBishop1.png");
             buf = read(pic);
-            darkChessboardIcons.put('B', new ImageIcon(buf));
+            blackPiecesIcons.put('B', new ImageIcon(buf));
             pic = new File("src/main/resources/blackKnight1.png");
             buf = read(pic);
-            darkChessboardIcons.put('K', new ImageIcon(buf));
+            blackPiecesIcons.put('K', new ImageIcon(buf));
             pic = new File("src/main/resources/whiteRook1.png");
             buf = read(pic);
-            lightChessboardIcons.put('R', new ImageIcon(buf));
+            whitePiecesIcons.put('R', new ImageIcon(buf));
             pic = new File("src/main/resources/whitePawn1.png");
             buf = read(pic);
-            lightChessboardIcons.put('P', new ImageIcon(buf));
+            whitePiecesIcons.put('P', new ImageIcon(buf));
             pic = new File("src/main/resources/whiteBishop1.png");
             buf = read(pic);
-            lightChessboardIcons.put('B', new ImageIcon(buf));
+            whitePiecesIcons.put('B', new ImageIcon(buf));
             pic = new File("src/main/resources/whiteQueen1.png");
             buf = read(pic);
-            lightChessboardIcons.put('Q', new ImageIcon(buf));
+            whitePiecesIcons.put('Q', new ImageIcon(buf));
             pic = new File("src/main/resources/whiteKing1.png");
             buf = read(pic);
-            lightChessboardIcons.put('W', new ImageIcon(buf));
+            whitePiecesIcons.put('W', new ImageIcon(buf));
             pic = new File("src/main/resources/whiteKnight1.png");
             buf = read(pic);
-            lightChessboardIcons.put('K', new ImageIcon(buf));
+            whitePiecesIcons.put('K', new ImageIcon(buf));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -273,40 +280,40 @@ public class ChessboardView extends JPanel {
             File pic = new File("src/main/resources/blackPawn2.png");
             buf = read(pic);
             Files.setPosixFilePermissions(pic.toPath(), perms);
-            darkChessboardIcons.put('P', new ImageIcon(buf));
+            blackPiecesIcons.put('P', new ImageIcon(buf));
             pic = new File("src/main/resources/blackRook2.png");
             buf = read(pic);
-            darkChessboardIcons.put('R', new ImageIcon(buf));
+            blackPiecesIcons.put('R', new ImageIcon(buf));
             pic = new File("src/main/resources/blackKing2.png");
             buf = read(pic);
-            darkChessboardIcons.put('W', new ImageIcon(buf));
+            blackPiecesIcons.put('W', new ImageIcon(buf));
             pic = new File("src/main/resources/blackQueen2.png");
             buf = read(pic);
-            darkChessboardIcons.put('Q', new ImageIcon(buf));
+            blackPiecesIcons.put('Q', new ImageIcon(buf));
             pic = new File("src/main/resources/blackBishop2.png");
             buf = read(pic);
-            darkChessboardIcons.put('B', new ImageIcon(buf));
+            blackPiecesIcons.put('B', new ImageIcon(buf));
             pic = new File("src/main/resources/blackKnight2.png");
             buf = read(pic);
-            darkChessboardIcons.put('K', new ImageIcon(buf));
+            blackPiecesIcons.put('K', new ImageIcon(buf));
             pic = new File("src/main/resources/goldenRook2.png");
             buf = read(pic);
-            lightChessboardIcons.put('R', new ImageIcon(buf));
+            whitePiecesIcons.put('R', new ImageIcon(buf));
             pic = new File("src/main/resources/goldenPawn2.png");
             buf = read(pic);
-            lightChessboardIcons.put('P', new ImageIcon(buf));
+            whitePiecesIcons.put('P', new ImageIcon(buf));
             pic = new File("src/main/resources/goldenBishop2.png");
             buf = read(pic);
-            lightChessboardIcons.put('B', new ImageIcon(buf));
+            whitePiecesIcons.put('B', new ImageIcon(buf));
             pic = new File("src/main/resources/goldenQueen2.png");
             buf = read(pic);
-            lightChessboardIcons.put('Q', new ImageIcon(buf));
+            whitePiecesIcons.put('Q', new ImageIcon(buf));
             pic = new File("src/main/resources/goldenKing2.png");
             buf = read(pic);
-            lightChessboardIcons.put('W', new ImageIcon(buf));
+            whitePiecesIcons.put('W', new ImageIcon(buf));
             pic = new File("src/main/resources/goldenKnight2.png");
             buf = read(pic);
-            lightChessboardIcons.put('K', new ImageIcon(buf));
+            whitePiecesIcons.put('K', new ImageIcon(buf));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -320,9 +327,9 @@ public class ChessboardView extends JPanel {
         ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(position);
         if (figure.getClass() != EmptySquare.class) {
             if (figure.getChessColour() == ChessColour.WHITE) {
-                chessboardSquares[position.x][position.y].setIcon(lightChessboardIcons.get(figure.label));
+                chessboardSquares[position.x][position.y].setIcon(whitePiecesIcons.get(figure.label));
             } else {
-                chessboardSquares[position.x][position.y].setIcon(darkChessboardIcons.get(figure.label));
+                chessboardSquares[position.x][position.y].setIcon(blackPiecesIcons.get(figure.label));
             }
         } else {
             chessboardSquares[position.x][position.y].setIcon(transparentIcon);

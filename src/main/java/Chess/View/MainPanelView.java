@@ -1,5 +1,6 @@
 package Chess.View;
 
+import Chess.Model.ChessColour;
 import Chess.Model.StateOfGame;
 import Chess.View.ChessboardView;
 
@@ -11,13 +12,30 @@ public class MainPanelView extends JPanel {
 
 
     private ChessboardView chessboardView;
+    private CapturedPiecesView capturedPiecesViewWhite,capturedPiecesViewBlack;
 
     MainPanelView(){
-        super();
+        super(new GridBagLayout());
+        GridBagConstraints c= new GridBagConstraints();
         chessboardView = new ChessboardView(StateOfGame.chessboard.getXWidth(), StateOfGame.chessboard.getYWidth(), 0, 1);
-        this.add(chessboardView);
+        capturedPiecesViewWhite= new CapturedPiecesView(ChessColour.WHITE);
+        capturedPiecesViewWhite.setPiecesIcons(chessboardView.getWhitePiecesIcons());
+        capturedPiecesViewBlack= new CapturedPiecesView(ChessColour.BLACK);
+        capturedPiecesViewBlack.setPiecesIcons(chessboardView.getBlackPiecesIcons());
+        this.add(capturedPiecesViewWhite,c);
+        this.add(chessboardView,c);
+        this.add(capturedPiecesViewBlack,c);
     }
-    public void changeChessboarColour(int type){
+
+    public CapturedPiecesView getCapturedPiecesViewWhite() {
+        return capturedPiecesViewWhite;
+    }
+
+    public CapturedPiecesView getCapturedPiecesViewBlack() {
+        return capturedPiecesViewBlack;
+    }
+
+    public void changeChessboardColour(int type){
         chessboardView.setColor(type);
     }
 
