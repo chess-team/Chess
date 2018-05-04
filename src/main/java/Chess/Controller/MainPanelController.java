@@ -12,6 +12,5 @@ public class MainPanelController {
     public MainPanelController(MainFrameView mainFrameView){
         this.mainFrameView = mainFrameView;
         this.chessboardController = new ChessboardController(mainFrameView);
-
     }
 }
