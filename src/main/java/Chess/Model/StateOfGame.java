@@ -35,9 +35,9 @@ public class StateOfGame implements Serializable{
         }
         switch (((ClassicChess) variant).colorOfLastMovedPiece){
             case BLACK:
-                return StateOfGameplay.BLACK_MOVE;
-            case WHITE:
                 return StateOfGameplay.WHITE_MOVE;
+            case WHITE:
+                return StateOfGameplay.BLACK_MOVE;
         }
         return StateOfGameplay.WHITE_MOVE;
     }
