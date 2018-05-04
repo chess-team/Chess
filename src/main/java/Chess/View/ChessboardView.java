@@ -226,12 +226,7 @@ public class ChessboardView extends JPanel {
         try {
             BufferedImage buf;
             File pic = new File("src/main/resources/blackPawn1.png");
-            pic.createNewFile();
-            Set<PosixFilePermission> perms = new HashSet<>();
-            perms.add(PosixFilePermission.OWNER_READ);
-            perms.add(PosixFilePermission.OWNER_WRITE);
-            buf = read(pic);
-            Files.setPosixFilePermissions(pic.toPath(), perms);
+            buf=read(pic);
             darkChessboardIcons.put('P', new ImageIcon(buf));
             pic = new File("src/main/resources/blackRook1.png");
             buf = read(pic);
@@ -276,10 +271,6 @@ public class ChessboardView extends JPanel {
         try {
             BufferedImage buf;
             File pic = new File("src/main/resources/blackPawn2.png");
-            pic.createNewFile();
-            Set<PosixFilePermission> perms = new HashSet<>();
-            perms.add(PosixFilePermission.OWNER_READ);
-            perms.add(PosixFilePermission.OWNER_WRITE);
             buf = read(pic);
             Files.setPosixFilePermissions(pic.toPath(), perms);
             darkChessboardIcons.put('P', new ImageIcon(buf));
