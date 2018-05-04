@@ -10,7 +10,8 @@ public class MainFrameController {
 
     public MainFrameController(MainFrameView mainFrameView ){
         this.mainFrameView = mainFrameView;
-        menuBarController = new MenuBarController(mainFrameView);
         mainPanelController = new MainPanelController(mainFrameView);
+        menuBarController = new MenuBarController(mainFrameView, mainPanelController);
+
     }
 }

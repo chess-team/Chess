@@ -1,5 +1,6 @@
 package Chess.Controller;
 
+import Chess.Model.Chessboard;
 import Chess.Model.GameVariants.Chess960;
 import Chess.Model.GameVariants.ClassicChess;
 import Chess.Model.StateOfGame;
@@ -15,12 +16,13 @@ class MenuBarController {
     private MainFrameView mainFrameView;
     private MainPanelView mainPanelView;
     private MenuBarView menuBarView;
+    private ChessboardController chessboardController;
 
-
-    MenuBarController( MainFrameView mainFrameView ){
+    MenuBarController( MainFrameView mainFrameView, MainPanelController mainPanelController ){
         this.mainFrameView = mainFrameView;
         this.menuBarView = mainFrameView.getMenuBarView();
         this.mainPanelView = mainFrameView.getMainPanelView();
+        this.chessboardController = mainPanelController.getChessboardController();
         addListeners();
     }
 
@@ -62,6 +64,13 @@ class MenuBarController {
             mainFrameView.updateView();
         };
         menuBarView.addVariantOfGameListener(variantOfGameListener);
+
+        ActionListener promoteListener = actionEvent -> {
+            System.out.println("Promote to " + actionEvent.getActionCommand());
+            chessboardController.setPromote(actionEvent.getActionCommand());
+
+        };
+        menuBarView.addPromoteListener(promoteListener);
 
     }
 

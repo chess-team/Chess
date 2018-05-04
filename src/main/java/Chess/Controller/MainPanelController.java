@@ -6,6 +6,7 @@ import Chess.View.MainFrameView;
 public class MainPanelController {
 
     private MainFrameView mainFrameView;
+
     private ChessboardController chessboardController;
 
 
@@ -13,4 +14,10 @@ public class MainPanelController {
         this.mainFrameView = mainFrameView;
         this.chessboardController = new ChessboardController(mainFrameView);
     }
+
+
+    public ChessboardController getChessboardController() {
+        return chessboardController;
+    }
+
 }

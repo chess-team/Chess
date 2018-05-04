@@ -14,12 +14,42 @@ public class MenuBarView extends JMenuBar {
     private JMenuItem newGame, undoLastMove;
     private JMenu variantOfGameMenu;
     private JRadioButtonMenuItem classicChess, chess960;
+    private JMenu promoteMenu;
+    private JRadioButtonMenuItem promoteToBishop, promoteToKnight, promoteToQueen, promoteToRook, dontPromote;
+
 
     MenuBarView(){
         super();
         initOptionsMenu();
         initVariantOfGameMenu();
         initColorMenu();
+        initPromoteMenu();
+    }
+    private void initPromoteMenu(){
+        promoteMenu = new JMenu("Promote pawn");
+        dontPromote = new JRadioButtonMenuItem("Don't promote");
+        dontPromote.setActionCommand("D");
+        dontPromote.setSelected(true);
+        promoteToBishop = new JRadioButtonMenuItem("Promote to Bishop");
+        promoteToBishop.setActionCommand("B");
+        promoteToKnight = new JRadioButtonMenuItem("Promote to Knight");
+        promoteToKnight.setActionCommand("K");
+        promoteToQueen = new JRadioButtonMenuItem("Promote to Queen");
+        promoteToQueen.setActionCommand("Q");
+        promoteToRook = new JRadioButtonMenuItem("Promote to Rook");
+        promoteToRook.setActionCommand("R");
+        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(dontPromote);
+        promoteMenu.add(dontPromote);
+        buttonGroup.add(promoteToQueen);
+        promoteMenu.add(promoteToQueen);
+        buttonGroup.add(promoteToBishop);
+        promoteMenu.add(promoteToBishop);
+        buttonGroup.add(promoteToKnight);
+        promoteMenu.add(promoteToKnight);
+        buttonGroup.add(promoteToRook);
+        promoteMenu.add(promoteToRook);
+        this.add(promoteMenu);
     }
 
 
@@ -77,6 +107,13 @@ public class MenuBarView extends JMenuBar {
     public void addVariantOfGameListener(ActionListener actionListener){
         classicChess.addActionListener(actionListener);
         chess960.addActionListener(actionListener);
+    }
+    public void addPromoteListener( ActionListener actionListener ){
+        dontPromote.addActionListener(actionListener);
+        promoteToRook.addActionListener(actionListener);
+        promoteToQueen.addActionListener(actionListener);
+        promoteToKnight.addActionListener(actionListener);
+        promoteToBishop.addActionListener(actionListener);
     }
 
     private void setColorButtonsIcons(){
