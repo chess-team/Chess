@@ -13,10 +13,6 @@ public class KillKingChess extends ClassicChess {
     // return true if move is correct.
     public boolean validateMove(Move move) {
 
-        if(isOutsideBoard(move)) {
-            return false;
-        }
-
         if(!isMovePossibleWithoutKingProtection(move)) {
             return false;
         }

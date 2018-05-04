@@ -5,7 +5,11 @@ can make.
  */
 
 import Chess.Model.ChessPieces.ChessPiece;
+import Chess.Model.ChessPieces.EmptySquare;
+import Chess.Model.ChessPieces.Knight;
+import Chess.Model.ChessUtil;
 import Chess.Model.Position;
+import Chess.Model.StateOfGame;
 
 public class Move {
     public Position from, to;
@@ -52,5 +56,57 @@ public class Move {
 
     public int differenceOnYCoordinate() {
         return Math.abs(from.y - to.y);
+    }
+
+    // checks if move is outside board
+    private boolean isOutsideBoard(){
+        if(to == null ||
+           from == null) {
+            return true;
+        }
+        if(to.x < 0 || to.x >= StateOfGame.chessboard.getXWidth()){
+            return true;
+        }
+
+        if(to.y < 0 || to.y >= StateOfGame.chessboard.getYWidth()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isBreakingRules(){
+        if(isOutsideBoard()){
+            return true;
+        }
+
+        if(StateOfGame.chessboard.getChessPieceOnPosition(
+                from).getChessColour() ==
+                StateOfGame.chessboard.
+                        getChessPieceOnPosition(to).getChessColour()){
+            return true;
+        }
+
+        // checks if there is figure moved.
+        if(StateOfGame.chessboard.getChessPieceOnPosition(from)
+                instanceof EmptySquare){
+            return true;
+        }
+
+        ChessPiece movedChessPiece = StateOfGame.chessboard.
+                getChessPieceOnPosition(from);
+
+        if(differenceOnXCoordinate() + differenceOnYCoordinate() == 0){
+            return true;
+        }
+        if(movedChessPiece.isBreakingRules(this)){
+            return true;
+        }
+
+        // checks if move is not blocked by some chess piece
+        if(!(StateOfGame.chessboard.getChessPieceOnPosition(from)
+                instanceof Knight) && ChessUtil.isMovePassingThroughFigure(this)){
+            return true;
+        }
+        return false;
     }
 }

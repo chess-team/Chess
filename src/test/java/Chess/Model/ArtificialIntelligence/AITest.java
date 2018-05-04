@@ -12,7 +12,7 @@ import Chess.TestUtil;
 import static org.junit.jupiter.api.Assertions.*;
 
 //TODO remove bug
-public class AITest {
+class AITest {
     public void testAI(AI player){
         TestUtil.makeEmptyClassicChessboard();
         StateOfGame.chessboard.setFigure(

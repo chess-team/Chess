@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class QueenTest {
 
     @Test
-    public void testQueenMovement1(){
+    void testQueenMovement1(){
         TestUtil.makeEmptyClassicChessboard();
 
 
