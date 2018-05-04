@@ -75,69 +75,6 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame {
             return false;
         }
 
-        if(movedChessPiece instanceof Pawn){
-            boolean whiteColor = false;
-            if(differenceOnYCoordinate > 2){
-                return false;
-            }
-            switch (movedChessPiece.getChessColour()){
-                case WHITE:
-                    if(move.to.y - move.from.y < 0){
-                        return false;
-                    }
-                    whiteColor = true;
-                    break;
-                case BLACK:
-                    if(move.to.y - move.from.y > 0){
-                        return false;
-                    }
-                    break;
-            }
-            if(differenceOnYCoordinate == 2){
-                if(differenceOnXCoordinate != 0) {
-                    return false;
-                }
-                if(whiteColor){
-                    if(move.from.y != 1){
-                        return false;
-                    }
-                }
-                else if(move.from.y != 6){
-                    return false;
-                }
-            }
-            if(differenceOnXCoordinate != 0){
-                if(StateOfGame.chessboard.getChessPieceOnPosition(move.to)
-                        instanceof EmptySquare ){
-                    if(!validateEnPassantMove(move)){
-                        return false;
-                    }
-                }
-                else if(StateOfGame.chessboard.
-                        getChessPieceOnPosition(move.to).getChessColour() ==
-                        StateOfGame.chessboard.
-                                getChessPieceOnPosition(move.from).getChessColour()){
-                    return false;
-                }
-            }
-            else if(!(StateOfGame.chessboard.getChessPieceOnPosition(move.to)
-                    instanceof EmptySquare)){
-                return false;
-            }
-
-            if (!((move.to.y != 7 && move.to.y != 0) ||
-                    ((move.promoteTo instanceof Queen ||
-                            move.promoteTo instanceof Knight ||
-                            move.promoteTo instanceof Bishop ||
-                            move.promoteTo instanceof Rook) &&
-                            move.isPromotion))){
-                return false;
-            }
-
-
-        }
-
-
         // checks if move is not blocked by some chess piece
         if(!(StateOfGame.chessboard.getChessPieceOnPosition(move.from)
                 instanceof Knight) && ChessUtil.isMovePassingThroughFigure(move)){

@@ -1,10 +1,7 @@
 package Chess.Model.GameVariants;
 
 import Chess.Model.*;
-import Chess.Model.ChessPieces.ChessPiece;
-import Chess.Model.ChessPieces.EmptySquare;
-import Chess.Model.ChessPieces.Pawn;
-import Chess.Model.ChessPieces.Rook;
+import Chess.Model.ChessPieces.*;
 import Chess.Model.Moves.Castling;
 import Chess.Model.Moves.Move;
 import Chess.Model.Moves.SpecialMove;
@@ -40,6 +37,14 @@ public class ClassicChess extends VariantSimilarToClassicChess {
             return validateMove((Castling) move);
         }
 
+        ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(move.from);
+
+        if(figure instanceof King &&
+                move.differenceOnXCoordinate() > 1){
+            int sign = ChessUtil.signum(move.to.x - move.from.x);
+            return validateMove(new Castling(move.to.translateByVector(sign,0)));
+        }
+
         if(!isMovePossibleWithoutKingProtection(move)) {
             return false;
         }
@@ -50,9 +55,6 @@ public class ClassicChess extends VariantSimilarToClassicChess {
         if(colorOfPlayer == colorOfLastMovedPiece){
             return false;
         }
-        //if(!isColorOfMovedPieceCorrect(colorOfPlayer)){
-        //    return false;
-        //}
 
         //noinspection RedundantIfStatement
         if(isKingUnderAttackAfterMove(colorOfPlayer, move)){
@@ -106,8 +108,11 @@ public class ClassicChess extends VariantSimilarToClassicChess {
             return false;
         }
         for (int i = 1; i < dist; ++i){
-            if(isPlaceUnderAttack(kingPosition.
-                    translateByVector(i*sign, 0), colorOfLastMovedPiece)){
+            Position temp = kingPosition.
+                    translateByVector(i*sign, 0);
+            if(isPlaceUnderAttack(temp, colorOfLastMovedPiece) ||
+                    !(StateOfGame.chessboard.getChessPieceOnPosition(temp)
+                    instanceof EmptySquare)){
                 return false;
             }
         }

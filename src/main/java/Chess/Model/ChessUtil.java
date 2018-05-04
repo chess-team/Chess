@@ -30,7 +30,7 @@ public class ChessUtil {
         return ChessColour.BLACK;
     }
 
-    // check for moves of Chess.Model.ChessPieces.Rook, Chess.Model.ChessPieces.Bishop, Chess.Model.ChessPieces.Queen if
+    // check for moves of Rook, Bishop, Queen, Pawn if
     // moves would pass through some figure
     public static boolean isMovePassingThroughFigure(Move v){
         int differenceOnXCoordinate = v.from.x - v.to.x;

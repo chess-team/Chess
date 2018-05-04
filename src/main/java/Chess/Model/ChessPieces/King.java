@@ -28,7 +28,13 @@ public class King extends ChessPiece{
                 }
             }
         }
-
+        for(int i = -3; i <= 3; ++i) {
+            Move v = new Move(getPosition(),
+                    getPosition().translateByVector(i, 0));
+            if (StateOfGame.variant.validateMove(v)) {
+                resultList.add(v);
+            }
+        }
         return resultList;
     }
 

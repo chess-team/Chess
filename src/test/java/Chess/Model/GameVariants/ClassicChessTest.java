@@ -107,7 +107,8 @@ public class ClassicChessTest {
 
         StateOfGame.chessboard.setFigure(
                 new Rook(ChessColour.WHITE, new Position(0,0)));
-
+        System.out.println(StateOfGame.chessboard.
+                getChessPieceOnPosition(new Position(4,0)).listOfPossibleMoves());
         System.out.println(StateOfGame.chessboard);
         assertTrue(StateOfGame.chessboard.toString().equals(
                         "........\n" +

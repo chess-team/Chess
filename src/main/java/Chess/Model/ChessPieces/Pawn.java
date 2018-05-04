@@ -1,6 +1,7 @@
 package Chess.Model.ChessPieces;
 
 import Chess.Model.ChessColour;
+import Chess.Model.GameVariants.ClassicChess;
 import Chess.Model.Moves.Move;
 import Chess.Model.Position;
 import Chess.Model.StateOfGame;
@@ -62,7 +63,87 @@ public class Pawn extends ChessPiece {
 
     @Override
     public boolean isBreakingRules(Move move) {
+        boolean whiteColor = false;
+        int differenceOnYCoordinate = move.differenceOnYCoordinate();
+        int differenceOnXCoordinate = move.differenceOnXCoordinate();
+
+        if(differenceOnYCoordinate > 2){
+            return true;
+        }
+        switch (getChessColour()){
+            case WHITE:
+                if(move.to.y - move.from.y < 0){
+                    return true;
+                }
+                whiteColor = true;
+                break;
+            case BLACK:
+                if(move.to.y - move.from.y > 0){
+                    return true;
+                }
+                break;
+        }
+        if(differenceOnYCoordinate == 2){
+            if(differenceOnXCoordinate != 0) {
+                return true;
+            }
+            if(whiteColor){
+                if(move.from.y != 1){
+                    return true;
+                }
+            }
+            else if(move.from.y != 6){
+                return true;
+            }
+        }
+        if(differenceOnXCoordinate != 0){
+            if(StateOfGame.chessboard.getChessPieceOnPosition(move.to)
+                    instanceof EmptySquare ){
+                if(!validateEnPassantMove(move)){
+                        return true;
+                }
+            }
+            else if(StateOfGame.chessboard.
+                    getChessPieceOnPosition(move.to).getChessColour() ==
+                    StateOfGame.chessboard.
+                            getChessPieceOnPosition(move.from).getChessColour()){
+                return true;
+            }
+        }
+        else if(!(StateOfGame.chessboard.getChessPieceOnPosition(move.to)
+                instanceof EmptySquare)){
+            return true;
+        }
+
+        if (!((move.to.y != 7 && move.to.y != 0) ||
+                ((move.promoteTo instanceof Queen ||
+                        move.promoteTo instanceof Knight ||
+                        move.promoteTo instanceof Bishop ||
+                        move.promoteTo instanceof Rook) &&
+                        move.isPromotion))){
+            return true;
+        }
         return false;
+    }
+
+    @SuppressWarnings("SpellCheckingInspection")
+    private boolean validateEnPassantMove(Move move){
+        int differenceOnXCoordinate = move.to.x - move.from.x;
+        int differenceOnYCoordinate = move.to.y - move.from.y;
+        Position wantedPreviousMoveTo = move.from.translateByVector(
+                differenceOnXCoordinate,0);
+        if(!(StateOfGame.chessboard.
+                getChessPieceOnPosition(wantedPreviousMoveTo)
+                instanceof Pawn)){
+            return false;
+        }
+        Position wantedPreviousMoveFrom = move.from.translateByVector(
+                differenceOnXCoordinate,2*differenceOnYCoordinate);
+
+        Move wantedPreviousMove =
+                new Move(wantedPreviousMoveFrom,wantedPreviousMoveTo);
+        Move previousMove = StateOfGame.historyOfMoves.lastMove();
+        return wantedPreviousMove.equals(previousMove);
     }
 
 }
