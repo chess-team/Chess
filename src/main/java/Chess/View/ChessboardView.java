@@ -4,6 +4,7 @@ import Chess.Model.*;
 import Chess.Model.ChessPieces.ChessPiece;
 import Chess.Model.ChessPieces.EmptySquare;
 import Chess.Model.Moves.Move;
+import sun.net.ProgressSource;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,6 +30,7 @@ public class ChessboardView extends JPanel {
     private String labels = "ABCDEFGH";
     private Color frameColor, whiteColor, blackColor;
     private Color highlightColor = new Color(0, 255, 255);
+    private ArrayList<Move> possibleMoves;
 
     public ChessboardView(int width, int height, int colorType, int iconsType) {
         super(new GridLayout(width + 2, height + 2));
@@ -210,10 +212,11 @@ public class ChessboardView extends JPanel {
             }
         }
     }
+
     public void updateChessboard() {
         for (int i = 0; i < width - 2; i++) {
             for (int j = 0; j < height - 2; j++) {
-                updateIcon(new Position(i,j));
+                updateIcon(new Position(i, j));
             }
         }
     }
@@ -346,6 +349,12 @@ public class ChessboardView extends JPanel {
         }
     }
 
+    public void highlightPossiblePositions(Position a) {
+        ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(a);
+        possibleMoves = new ArrayList(figure.listOfPossibleMoves());
+        highlightPossiblePositions(figure.listOfPossibleMoves());
+    }
+
     public void highlightPositionUndo(Position a) {
         if (a.x % 2 == a.y % 2)
             chessboardSquares[a.x][a.y].setBackground(whiteColor);
@@ -357,6 +366,18 @@ public class ChessboardView extends JPanel {
         for (Move move : list) {
             Position to = move.to;
             highlightPositionUndo(to);
+        }
+    }
+
+    public void highlightPossiblePositionsUndo(Position a) {
+        ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(a);
+        highlightPossiblePositionsUndo(figure.listOfPossibleMoves());
+    }
+
+    public void highlightPossiblePositionsUndo() {
+        if (possibleMoves != null) {
+            highlightPossiblePositionsUndo(possibleMoves);
+            possibleMoves = null;
         }
     }
 
