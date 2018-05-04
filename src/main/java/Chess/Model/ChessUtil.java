@@ -87,4 +87,22 @@ public class ChessUtil {
         }
         return count;
     }
+
+    static public ArrayList<Position>
+    getPositionsThatAttacksTheKing(Position place){
+        ChessColour kingColor = StateOfGame.chessboard.
+                getChessPieceOnPosition(place).getChessColour();
+        ArrayList<Position> resultList = new ArrayList<>();
+        for(int i = 0; i < StateOfGame.chessboard.getXWidth(); ++i){
+            for(int j = 0; j < StateOfGame.chessboard.getYWidth(); ++j){
+                ChessColour colorOfChessPiece = StateOfGame.chessboard.
+                        getChessPieceOnPosition(new Position(i,j)).getChessColour();
+                if(colorOfChessPiece == kingColor)continue;
+                if(!(new Move(new Position(i,j), place)).isBreakingRules()){
+                    resultList.add(new Position(i,j));
+                }
+            }
+        }
+        return resultList;
+    }
 }
