@@ -26,5 +26,19 @@ public class StateOfGame implements Serializable{
 
     public static StateOfGameplay stateOfGameplay;
 
-
+    public static StateOfGameplay getStateOfGameplay() {
+        switch (stateOfGameplay){
+            case DRAW:
+            case WHITE_WON:
+            case BLACK_WON:
+                return stateOfGameplay;
+        }
+        switch (((ClassicChess) variant).colorOfLastMovedPiece){
+            case BLACK:
+                return StateOfGameplay.BLACK_MOVE;
+            case WHITE:
+                return StateOfGameplay.WHITE_MOVE;
+        }
+        return StateOfGameplay.WHITE_MOVE;
+    }
 }
