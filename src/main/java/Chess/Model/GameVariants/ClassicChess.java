@@ -161,6 +161,14 @@ public class ClassicChess extends VariantSimilarToClassicChess {
     }
 
     public void changeState(Move change) {
+        ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(change.from);
+
+        if(figure instanceof King &&
+                change.differenceOnXCoordinate() > 1){
+            int sign = ChessUtil.signum(change.to.x - change.from.x);
+            changeState(new Castling(change.to.translateByVector(sign,0)));
+            return;
+        }
         if(change instanceof Castling){
             changeState((Castling) change);
             return;

@@ -83,8 +83,8 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame {
         return true;
     }
 
-    // check if Chess.Model.ChessPieces.King is under attack after move
-    protected boolean isKingUnderAttack(ChessColour kingColor) {
+    // check if king is under attack
+    public boolean isKingUnderAttack(ChessColour kingColor) {
         Position positionOfKing = ChessUtil.getKingPosition(kingColor);
         return positionOfKing != null &&
                 isPlaceUnderAttack(positionOfKing, ChessUtil.getOtherColor(kingColor));
@@ -117,7 +117,7 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame {
             return false;
         }
 
-        // function make move check if Chess.Model.ChessPieces.King is under attack and return figures
+        // function make move check if king is under attack and return figures
         // to previous state.
         ChessPiece tempTo = StateOfGame.chessboard.
                 getChessPieceOnPosition(v.to);

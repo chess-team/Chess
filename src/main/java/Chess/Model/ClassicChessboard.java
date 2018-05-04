@@ -58,6 +58,10 @@ public class ClassicChessboard implements Chessboard {
     }
 
     public ChessPiece getChessPieceOnPosition(Position a) {
+        if(a.x >= getXWidth() || a.x < 0 ||
+                a.y >= getYWidth() || a.y < 0) {
+            return null;
+        }
         return board[a.x][a.y];
     }
 
