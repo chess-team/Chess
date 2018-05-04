@@ -59,4 +59,10 @@ public class Pawn extends ChessPiece {
 
         return resultList;
     }
+
+    @Override
+    public boolean isBreakingRules(Move move) {
+        return false;
+    }
+
 }

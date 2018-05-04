@@ -48,4 +48,10 @@ public abstract class ChessPiece {
         this.chessColour = a;
         this.positionOnChessboard = b;
     }
+
+    // method that check if move is breaking rules connected with this
+    // chess piece (it doesn't check other rules)
+    // so for most chess pieces it will only check if difference in coordinates
+    // could be correct
+    abstract public boolean isBreakingRules(Move move);
 }

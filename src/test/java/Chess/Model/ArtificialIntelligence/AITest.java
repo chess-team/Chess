@@ -34,7 +34,7 @@ public class AITest {
 
         System.out.println(StateOfGame.chessboard);
         assertTrue(StateOfGame.chessboard.toString().equals(
-                "........\n" +
+                        "........\n" +
                         "........\n" +
                         "........\n" +
                         "........\n" +

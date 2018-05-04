@@ -38,4 +38,12 @@ public class Knight extends ChessPiece {
 
         return resultList;
     }
+
+    @Override
+    public boolean isBreakingRules(Move move) {
+        return (!(Math.min(move.differenceOnXCoordinate(),
+                move.differenceOnYCoordinate()) == 1
+                && Math.max(move.differenceOnXCoordinate(),
+                move.differenceOnYCoordinate()) == 2));
+    }
 }

@@ -35,4 +35,12 @@ public class Queen extends ChessPiece {
 
         return resultList;
     }
+
+    @Override
+    public boolean isBreakingRules(Move move) {
+        return (!(move.differenceOnXCoordinate() ==
+                move.differenceOnYCoordinate() ||
+                move.differenceOnXCoordinate() == 0 ||
+                move.differenceOnYCoordinate() == 0));
+    }
 }

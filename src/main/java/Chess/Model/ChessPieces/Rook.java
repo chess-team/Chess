@@ -37,4 +37,10 @@ public class Rook extends ChessPiece {
 
         return resultList;
     }
+
+    @Override
+    public boolean isBreakingRules(Move move) {
+        return (!(move.differenceOnXCoordinate() == 0 ||
+                move.differenceOnYCoordinate() == 0));
+    }
 }

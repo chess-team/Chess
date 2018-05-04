@@ -31,4 +31,10 @@ public class King extends ChessPiece{
 
         return resultList;
     }
+
+    @Override
+    public boolean isBreakingRules(Move move) {
+        return (!(move.differenceOnXCoordinate() <= 1 &&
+                move.differenceOnYCoordinate() <= 1));
+    }
 }

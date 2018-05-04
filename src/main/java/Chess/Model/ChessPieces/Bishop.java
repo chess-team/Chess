@@ -32,4 +32,10 @@ public class Bishop extends ChessPiece{
 
         return resultList;
     }
+
+    @Override
+    public boolean isBreakingRules(Move move) {
+        return (!(move.differenceOnXCoordinate() ==
+                move.differenceOnYCoordinate()));
+    }
 }

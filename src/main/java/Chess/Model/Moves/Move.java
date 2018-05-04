@@ -45,4 +45,12 @@ public class Move {
         return  (obj instanceof Move)&&
                 obj.toString().equals(toString());
     }
+
+    public int differenceOnXCoordinate() {
+        return Math.abs(from.x - to.x);
+    }
+
+    public int differenceOnYCoordinate() {
+        return Math.abs(from.y - to.y);
+    }
 }

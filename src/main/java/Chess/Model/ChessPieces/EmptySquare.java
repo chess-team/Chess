@@ -22,4 +22,8 @@ public class EmptySquare extends ChessPiece{
         return new ArrayList<>();
     }
 
+    @Override
+    public boolean isBreakingRules(Move move) {
+        return true;
+    }
 }

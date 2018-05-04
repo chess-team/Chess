@@ -71,35 +71,11 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame {
         if(differenceOnXCoordinate + differenceOnYCoordinate == 0){
             return false;
         }
-        if(movedChessPiece instanceof Knight){
-            if (!(Math.min(differenceOnXCoordinate,
-                    differenceOnYCoordinate) == 1
-                    && Math.max(differenceOnXCoordinate,
-                    differenceOnYCoordinate) == 2)){
-                return false;
-            }
+        if(movedChessPiece.isBreakingRules(move)){
+            return false;
         }
-        else if(movedChessPiece instanceof Rook){
-            if (!(differenceOnXCoordinate == 0 ||
-                    differenceOnYCoordinate == 0)){
-                return false;
-            }
-        }
-        else if(movedChessPiece instanceof Bishop){
-            if(!(differenceOnXCoordinate ==
-                    differenceOnYCoordinate)){
-                return false;
-            }
-        }
-        else if(movedChessPiece instanceof Queen){
-            if (!(differenceOnXCoordinate ==
-                    differenceOnYCoordinate ||
-                    differenceOnXCoordinate == 0 ||
-                    differenceOnYCoordinate == 0)){
-                return false;
-            }
-        }
-        else if(movedChessPiece instanceof Pawn){
+
+        if(movedChessPiece instanceof Pawn){
             boolean whiteColor = false;
             if(differenceOnYCoordinate > 2){
                 return false;
@@ -160,12 +136,7 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame {
 
 
         }
-        else if(movedChessPiece instanceof King){
-            if (!(differenceOnXCoordinate <= 1 &&
-                    differenceOnYCoordinate <= 1)){
-                return false;
-            }
-        }
+
 
         // checks if move is not blocked by some chess piece
         if(!(StateOfGame.chessboard.getChessPieceOnPosition(move.from)
