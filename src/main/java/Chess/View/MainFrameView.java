@@ -20,7 +20,7 @@ public class MainFrameView extends JFrame {
     }
 
     public void updateView(){
-        mainPanelView.updateMainPanelView();;
+        mainPanelView.updateMainPanelView();
         this.revalidate();
     }
 

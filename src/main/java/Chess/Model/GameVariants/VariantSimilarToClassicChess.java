@@ -21,28 +21,6 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame {
         return new NoSpecialMoves();
     }
 
-    // checks if move is inside board
-    boolean isOutsideBoard(Move move){
-        if(move == null ||
-                move.to == null ||
-                move.from == null) {
-            return true;
-        }
-        if(move.to.x < 0 || move.to.x >= 8){
-            return true;
-        }
-
-        if(move.to.y < 0 || move.to.y >= 8){
-            return true;
-        }
-        return false;
-    }
-
-    @SuppressWarnings("SpellCheckingInspection")
-    public boolean validateEnPassantMove(Move move){
-        return false;
-    }
-
     // checks if move doesn't violate any rules about moving figures
     // without constraints about Chess.Model.ChessPieces.King protection.
     boolean isMovePossibleWithoutKingProtection(Move move){

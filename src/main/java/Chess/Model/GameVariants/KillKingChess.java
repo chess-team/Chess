@@ -29,7 +29,7 @@ public class KillKingChess extends ClassicChess {
     }
 
     @Override
-    public void inCaseOfEndOfGame(){
+    void inCaseOfEndOfGame(){
         if(ChessUtil.getKingPosition(ChessColour.BLACK) == null){
             StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_WON;
             return;

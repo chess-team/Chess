@@ -44,7 +44,7 @@ public abstract class ChessPiece {
         return ret;
     }
 
-    public ChessPiece(ChessColour a, Position b){
+    ChessPiece(ChessColour a, Position b){
         this.chessColour = a;
         this.positionOnChessboard = b;
     }

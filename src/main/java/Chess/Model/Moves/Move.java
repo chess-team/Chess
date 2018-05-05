@@ -20,7 +20,7 @@ public class Move {
     // should be one of {queen, knight, rook, bishop}
     public ChessPiece promoteTo;
 
-    public Move(){}
+    Move(){}
 
     public Move (Position from, Position to){
         this.from = from;
@@ -59,19 +59,11 @@ public class Move {
     }
 
     // checks if move is outside board
-    private boolean isOutsideBoard(){
-        if(to == null ||
-           from == null) {
-            return true;
-        }
-        if(to.x < 0 || to.x >= StateOfGame.chessboard.getXWidth()){
-            return true;
-        }
+    private boolean isOutsideBoard() {
+        return to == null || from == null || to.x < 0 ||
+                to.x >= StateOfGame.chessboard.getXWidth() || to.y < 0
+                || to.y >= StateOfGame.chessboard.getYWidth();
 
-        if(to.y < 0 || to.y >= StateOfGame.chessboard.getYWidth()){
-            return true;
-        }
-        return false;
     }
 
     public boolean isBreakingRules(){
@@ -79,21 +71,20 @@ public class Move {
             return true;
         }
 
-        if(StateOfGame.chessboard.getChessPieceOnPosition(
-                from).getChessColour() ==
+        ChessPiece movedChessPiece = StateOfGame.chessboard.
+                getChessPieceOnPosition(from);
+
+        if(movedChessPiece.getChessColour() ==
                 StateOfGame.chessboard.
                         getChessPieceOnPosition(to).getChessColour()){
             return true;
         }
 
         // checks if there is figure moved.
-        if(StateOfGame.chessboard.getChessPieceOnPosition(from)
-                instanceof EmptySquare){
+        if(movedChessPiece instanceof EmptySquare){
             return true;
         }
 
-        ChessPiece movedChessPiece = StateOfGame.chessboard.
-                getChessPieceOnPosition(from);
 
         if(differenceOnXCoordinate() + differenceOnYCoordinate() == 0){
             return true;
@@ -103,10 +94,7 @@ public class Move {
         }
 
         // checks if move is not blocked by some chess piece
-        if(!(StateOfGame.chessboard.getChessPieceOnPosition(from)
-                instanceof Knight) && ChessUtil.isMovePassingThroughFigure(this)){
-            return true;
-        }
-        return false;
+        return !(StateOfGame.chessboard.getChessPieceOnPosition(from)
+                instanceof Knight) && ChessUtil.isMovePassingThroughFigure(this);
     }
 }

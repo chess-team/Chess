@@ -1,7 +1,6 @@
 package Chess.Model.ChessPieces;
 
 import Chess.Model.ChessColour;
-import Chess.Model.GameVariants.ClassicChess;
 import Chess.Model.Moves.Move;
 import Chess.Model.Position;
 import Chess.Model.StateOfGame;
@@ -124,11 +123,8 @@ public class Pawn extends ChessPiece {
                         move.isPromotion))){
             return true;
         }
-        if(move.to.y != StateOfGame.chessboard.getYWidth() - 1 &&
-                move.to.y != 0 && move.promoteTo != null){
-            return true;
-        }
-        return false;
+        return move.to.y != StateOfGame.chessboard.getYWidth() - 1 &&
+                move.to.y != 0 && move.promoteTo != null;
     }
 
     @SuppressWarnings("SpellCheckingInspection")

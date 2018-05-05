@@ -13,8 +13,11 @@ import java.util.ArrayList;
 public class ChessUtil {
 
     // simple signum function for integers
+    // in contary to Integer.compare
+    // always return 1, 0, -1
     @SuppressWarnings("SpellCheckingInspection")
     public static int signum(int a){
+
         if(a < 0)return -1;
         if(a == 0)return 0;
         return 1;
