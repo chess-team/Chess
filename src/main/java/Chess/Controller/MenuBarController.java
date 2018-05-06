@@ -2,6 +2,7 @@ package Chess.Controller;
 
 import Chess.Model.GameVariants.Chess960;
 import Chess.Model.GameVariants.ClassicChess;
+import Chess.Model.GameVariants.listOfGameVariants;
 import Chess.Model.StateOfGame;
 import Chess.View.MainFrameView;
 import Chess.View.MainPanelView;
@@ -15,6 +16,7 @@ class MenuBarController {
     private MainPanelView mainPanelView;
     private MenuBarView menuBarView;
     private ChessboardController chessboardController;
+    private listOfGameVariants variants = new listOfGameVariants();
 
     MenuBarController( MainFrameView mainFrameView, MainPanelController mainPanelController ){
         this.mainFrameView = mainFrameView;
@@ -24,8 +26,7 @@ class MenuBarController {
         addListeners();
     }
 
-
-    void addListeners(){
+    private void addListeners(){
         ActionListener colorMenuListener = actionEvent -> {
             System.out.println(actionEvent.getActionCommand() + " color");
             int colorType = Integer.valueOf(actionEvent.getActionCommand());
@@ -43,21 +44,12 @@ class MenuBarController {
 
         menuBarView.addNewGameListener(newGameListener);
 
-        ActionListener undoLastMoveListener = actionEvent -> {
-            System.out.println("IMPLEMENT ME");
-        };
+        ActionListener undoLastMoveListener = actionEvent -> System.out.println("IMPLEMENT ME");
         menuBarView.addUndoLastMoveListener(undoLastMoveListener);
 
         ActionListener variantOfGameListener = actionEvent -> {
             System.out.println(actionEvent.getActionCommand());
-            switch (actionEvent.getActionCommand() ){
-                case "Classic Chess":
-                    StateOfGame.variant = new ClassicChess();
-                        break;
-                case "Chess 960":
-                    StateOfGame.variant = new Chess960();
-                    break;
-            }
+            StateOfGame.variant = variants.getInstance( actionEvent.getActionCommand() );
             StateOfGame.variant.initializeStateOfGame();
             mainFrameView.updateView();
         };
@@ -70,9 +62,5 @@ class MenuBarController {
 
         };
         menuBarView.addPromoteListener(promoteListener);
-
     }
-
-
-
 }

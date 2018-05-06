@@ -1,5 +1,7 @@
 package Chess.View;
 
+import Chess.Model.GameVariants.listOfGameVariants;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -13,9 +15,10 @@ public class MenuBarView extends JMenuBar {
     private JMenu optionsMenu;
     private JMenuItem newGame, undoLastMove;
     private JMenu variantOfGameMenu;
-    private JRadioButtonMenuItem classicChess, chess960;
+    private JRadioButtonMenuItem [] variantButtons;
     private JMenu promoteMenu;
     private JRadioButtonMenuItem promoteToBishop, promoteToKnight, promoteToQueen, promoteToRook, dontPromote;
+    private listOfGameVariants variants = new listOfGameVariants();
 
 
     MenuBarView(){
@@ -64,16 +67,17 @@ public class MenuBarView extends JMenuBar {
 
     private void initVariantOfGameMenu(){
         variantOfGameMenu = new JMenu("Game Variants");
-        classicChess = new JRadioButtonMenuItem("Classic Chess");
-        //classicChess.setActionCommand("1");
-        classicChess.setSelected(true);
+        variantButtons = new JRadioButtonMenuItem[ variants.getNamesOfVariants().size() ];
+        for( int i = 0; i < variants.getNamesOfVariants().size(); i++ ){
+            variantButtons[i] = new JRadioButtonMenuItem(variants.getNamesOfVariants().get(i));
+        }
+        variantButtons[0].setSelected(true);
         ButtonGroup buttonGroup = new ButtonGroup();
-        chess960 = new JRadioButtonMenuItem("Chess 960");
-        //chess960.setActionCommand("2");
-        buttonGroup.add(classicChess);
-        variantOfGameMenu.add(classicChess);
-        buttonGroup.add(chess960);
-        variantOfGameMenu.add(chess960);
+        for( int i = 0; i < variants.getNamesOfVariants().size(); i++ ){
+            buttonGroup.add(variantButtons[i]);
+            variantOfGameMenu.add(variantButtons[i]);
+        }
+
         this.add(variantOfGameMenu);
 
     }
@@ -105,8 +109,9 @@ public class MenuBarView extends JMenuBar {
     }
     public void addUndoLastMoveListener(ActionListener actionListener){ undoLastMove.addActionListener(actionListener);}
     public void addVariantOfGameListener(ActionListener actionListener){
-        classicChess.addActionListener(actionListener);
-        chess960.addActionListener(actionListener);
+        for( int i = 0; i < variants.getNamesOfVariants().size(); i++ ){
+            variantButtons[i].addActionListener(actionListener);
+        }
     }
     public void addPromoteListener( ActionListener actionListener ){
         dontPromote.addActionListener(actionListener);
