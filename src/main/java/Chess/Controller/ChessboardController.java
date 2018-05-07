@@ -40,61 +40,18 @@ class ChessboardController {
         ActionListener buttonListener = actionEvent -> {
             String [] s = actionEvent.getActionCommand().split(" ",2);
             Position position = new Position(Integer.valueOf(s[0]),Integer.valueOf(s[1]));
-            ChessPiece figure;
-
-            if( promote.equals("D") ){  //no promotion
-                if( from == null ){ // TAKING PIECE
-                    figure = StateOfGame.chessboard.getChessPieceOnPosition(position);
-                    if( figure.getClass() != EmptySquare.class && isColorOfMovedPieceCorrect(figure.getChessColour()) ){
-                        takePiece(position);
-                    }
-                }else {
-                    Move move = new Move(from,position);
-                    if( StateOfGame.variant.validateMove(move) ){
-                        movePiece(move);
-                        checkState();
-                    }else{
-                        takePieceUndo();
-                    }
-                }
+            if( from == null ){
+                takePiece(position);
             }else {
-                if( from == null ){
-                    figure = StateOfGame.chessboard.getChessPieceOnPosition(position);
-                    if( figure.getClass() == Pawn.class && isColorOfMovedPieceCorrect(figure.getChessColour())){
-                        takePieceForPromotion(position);
-                    }
-                }else {
-                    ChessPiece newChessPiece;
-                    figure = StateOfGame.chessboard.getChessPieceOnPosition(from);
-                    switch( promote ){
-                        case "Q":
-                            newChessPiece = new Queen(figure.getChessColour(),position);
-                            break;
-                        case "R":
-                            newChessPiece = new Rook(figure.getChessColour(),position);
-                            break;
-                        case "K":
-                            newChessPiece = new Knight(figure.getChessColour(),position);
-                            break;
-                        case "B":
-                            newChessPiece = new Bishop(figure.getChessColour(),position);
-                            break;
-                        default:
-                            newChessPiece = new Pawn(figure.getChessColour(),position);
-                    }
-                    Move move = new Move(from,position,newChessPiece);
-                    if( StateOfGame.variant.validateMove(move) ){
-                        movePieceWithPromotion(move);
-                        checkState();
-                    }else{
-                        takePieceUndo();
-                    }
-
+                ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(from);
+                Move move = getMove(figure,from,position);
+                if( StateOfGame.variant.validateMove(move) ){
+                    movePiece(move);
+                    checkState();
+                }else{
+                    takePieceUndo();
                 }
             }
-
-
-
         };
         chessboardView.setActionListener(buttonListener);
 
@@ -141,43 +98,50 @@ class ChessboardController {
                 break;
         }
     }
-    private void takePieceForPromotion(Position position) {
-        chessboardView.highlightPosition(position);
-        from = position;
+    private Move getMove(ChessPiece figure, Position from, Position position ){
+        Move move = new Move(from,position);
+        if( !promote.equals("D") ){
+            ChessPiece newChessPiece;
+            switch( promote ){
+                case "Q":
+                    newChessPiece = new Queen(figure.getChessColour(),position);
+                    break;
+                case "R":
+                    newChessPiece = new Rook(figure.getChessColour(),position);
+                    break;
+                case "K":
+                    newChessPiece = new Knight(figure.getChessColour(),position);
+                    break;
+                case "B":
+                    newChessPiece = new Bishop(figure.getChessColour(),position);
+                    break;
+                default:
+                    newChessPiece = new Pawn(figure.getChessColour(),position);
+            }
+            move = new Move(from,position,newChessPiece);
+        }
+        return move;
     }
-    private void movePieceWithPromotion(Move move){
-        chessboardView.updateChessboard();
-        StateOfGame.variant.changeState(move);
-        mainFrameView.updateView();
-        from = null;
-    }
-//    private void takePieceForPromotionUndo(){
-//        chessboardView.highlightPositionUndo(from);
-//        from = null;
-//    }
-
     private void takePiece(Position position){
-        chessboardView.highlightPosition(position);
-        chessboardView.highlightPossiblePositions(position);
-        from = position;
+        ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(position);
+        if( figure.getClass() != EmptySquare.class && isColorOfMovedPieceCorrect(figure.getChessColour()) ){
+            boolean highlightPromotionMoves = true;
+            if( promote.equals("D") )
+                highlightPromotionMoves = false;
+            chessboardView.highlightPosition(position);
+            chessboardView.highlightPossiblePositions(position, highlightPromotionMoves);
+            from = position;
+        }
     }
     private void movePiece( Move move ){
-        chessboardView.updateChessboard();
-        chessboardView.updateChessboard();
         StateOfGame.variant.changeState(move);
-        mainFrameView.updateView();
+        chessboardView.updateChessboard();
         from = null;
     }
     void takePieceUndo(){
         if( from != null ){
-            if( promote.equals("D")){
-                chessboardView.updateChessboard();
-                chessboardView.updateChessboard();
-                from = null;
-            }else {// piece for promotion
-                chessboardView.updateChessboard();
-                from = null;
-            }
+            chessboardView.updateChessboard();
+            from = null;
         }
     }
 

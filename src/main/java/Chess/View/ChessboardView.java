@@ -290,16 +290,18 @@ public class ChessboardView extends JPanel {
         chessboardSquares[a.x][a.y].setBackground(highlightColor);
     }
 
-    private void highlightPossiblePositions(ArrayList<Move> list) {
+    private void highlightPossiblePositions(ArrayList<Move> list, boolean highlightPromotionMoves) {
         for (Move move : list) {
-            Position to = move.to;
-            highlightPosition(to);
+            if( highlightPromotionMoves == move.isPromotion ){
+                Position to = move.to;
+                highlightPosition(to);
+            }
         }
     }
 
-    public void highlightPossiblePositions(Position a) {
+    public void highlightPossiblePositions(Position a, boolean highlightPromotionMoves) {
         ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(a);
-        highlightPossiblePositions(figure.listOfPossibleMoves());
+        highlightPossiblePositions(figure.listOfPossibleMoves(), highlightPromotionMoves);
     }
 
     private void highlightRedPosition(Position a){
