@@ -2,7 +2,6 @@ package Chess.Controller;
 
 import Chess.Model.ChessColour;
 import Chess.Model.ChessPieces.*;
-import Chess.Model.Chessboard;
 import Chess.Model.Moves.Move;
 import Chess.Model.Position;
 import Chess.Model.StateOfGame;
@@ -10,22 +9,23 @@ import Chess.View.ChessboardView;
 import Chess.View.MainFrameView;
 import Chess.View.MainPanelView;
 
+import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class ChessboardController {
+class ChessboardController {
 
-    private MainFrameView mainFrameView;
-    private MainPanelView mainPanelView;
-    private ChessboardView chessboardView;
+    private final MainFrameView mainFrameView;
+    private final MainPanelView mainPanelView;
+    private final ChessboardView chessboardView;
     private Position from;
     private String promote;
 
-    public void setPromote(String promote) {
+    void setPromote(String promote) {
         this.promote = promote;
     }
 
 
-    public ChessboardController(MainFrameView mainFrameView){
+    ChessboardController(MainFrameView mainFrameView){
         promote = "D";
         this.mainFrameView = mainFrameView;
         this.mainPanelView = mainFrameView.getMainPanelView();
@@ -42,7 +42,7 @@ public class ChessboardController {
             Position position = new Position(Integer.valueOf(s[0]),Integer.valueOf(s[1]));
             ChessPiece figure;
 
-            if( promote == "D"){  //no promotion
+            if( promote.equals("D") ){  //no promotion
                 if( from == null ){ // TAKING PIECE
                     figure = StateOfGame.chessboard.getChessPieceOnPosition(position);
                     if( figure.getClass() != EmptySquare.class && isColorOfMovedPieceCorrect(figure.getChessColour()) ){
@@ -116,12 +116,27 @@ public class ChessboardController {
         StateOfGame.variant.initializeStateOfGame();
         mainFrameView.updateView();
     }
+
+    private void showEndGameDialog(){
+        switch (StateOfGame.getStateOfGameplay() ){
+            case DRAW:
+                JOptionPane.showMessageDialog(mainFrameView, "Game over: draw");
+                break;
+            case WHITE_WON:
+                JOptionPane.showMessageDialog(mainFrameView, "Game over: white player won");
+                break;
+            case BLACK_WON:
+                JOptionPane.showMessageDialog(mainFrameView, "Game over: black player won");
+                break;
+        }
+    }
     private void checkState(){
         System.out.println(StateOfGame.getStateOfGameplay());
         switch (StateOfGame.getStateOfGameplay() ){
             case DRAW:
             case WHITE_WON:
             case BLACK_WON:
+                showEndGameDialog();
                 restartGame();
                 break;
         }
@@ -153,9 +168,9 @@ public class ChessboardController {
         mainFrameView.updateView();
         from = null;
     }
-    public void takePieceUndo(){
+    void takePieceUndo(){
         if( from != null ){
-            if( promote == "D"){
+            if( promote.equals("D")){
                 chessboardView.highlightPositionUndo(from);
                 chessboardView.highlightPossiblePositionsUndo(from);
                 from = null;
@@ -165,8 +180,5 @@ public class ChessboardController {
             }
         }
     }
-
-
-
 
 }
