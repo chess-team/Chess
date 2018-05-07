@@ -23,6 +23,7 @@ class ChessboardController {
     void setPromote(String promote) {
         this.promote = promote;
     }
+    void setFromToNull(){ this.from = null; }
 
 
     ChessboardController(MainFrameView mainFrameView){

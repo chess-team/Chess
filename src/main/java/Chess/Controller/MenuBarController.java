@@ -3,6 +3,7 @@ package Chess.Controller;
 import Chess.Model.GameVariants.Chess960;
 import Chess.Model.GameVariants.ClassicChess;
 import Chess.Model.GameVariants.listOfGameVariants;
+import Chess.Model.Position;
 import Chess.Model.StateOfGame;
 import Chess.View.MainFrameView;
 import Chess.View.MainPanelView;
@@ -39,9 +40,9 @@ class MenuBarController {
         ActionListener newGameListener = actionEvent -> {
             System.out.println("New Game");
             StateOfGame.variant.initializeStateOfGame();
+            chessboardController.setFromToNull();
             mainFrameView.updateView();
         };
-
         menuBarView.addNewGameListener(newGameListener);
 
         ActionListener undoLastMoveListener = actionEvent -> System.out.println("IMPLEMENT ME");
@@ -51,6 +52,7 @@ class MenuBarController {
             System.out.println(actionEvent.getActionCommand());
             StateOfGame.variant = variants.getInstance( actionEvent.getActionCommand() );
             StateOfGame.variant.initializeStateOfGame();
+            chessboardController.setFromToNull();
             mainFrameView.updateView();
         };
         menuBarView.addVariantOfGameListener(variantOfGameListener);
