@@ -4,7 +4,6 @@ import Chess.Model.*;
 import Chess.Model.ChessPieces.ChessPiece;
 import Chess.Model.ChessPieces.EmptySquare;
 import Chess.Model.Moves.Move;
-import sun.net.ProgressSource;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,8 +11,6 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.attribute.PosixFilePermission;
 import java.util.*;
 
 import static javax.imageio.ImageIO.read;
@@ -21,16 +18,15 @@ import static javax.imageio.ImageIO.read;
 public class ChessboardView extends JPanel {
     private JButton[][] chessboardSquares;
     private Insets buttonMargin = new Insets(0, 0, 0, 0);
-    private Map<Character, ImageIcon> whitePiecesIcons = new HashMap();
+    private Map<Character, ImageIcon> whitePiecesIcons = new HashMap<>();
     private Map<Character, ImageIcon> blackPiecesIcons = new HashMap<>();
     private ImageIcon transparentIcon = new ImageIcon(
             new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB));
     private int height;
     private int width;
-    private String labels = "ABCDEFGH";
     private Color frameColor, whiteColor, blackColor;
     private Color highlightColor = new Color(0, 255, 255);
-    private ArrayList<Move> possibleMoves;
+    private Color highlightRedColor= new Color( 220, 20, 60 );
     public ChessboardView(int width, int height, int colorType, int iconsType) {
         super(new GridLayout(width + 2, height + 2));
         this.height = height + 2;
@@ -45,36 +41,6 @@ public class ChessboardView extends JPanel {
 
     public Map<Character, ImageIcon> getBlackPiecesIcons() {
         return blackPiecesIcons;
-    }
-
-    public int getChessboardHeight() {
-        return height - 2;
-    }
-
-    public int getChessboardWidth() {
-        return width - 2;
-    }
-
-    public Color getFrameColor() {
-        return frameColor;
-    }
-
-    public Color getWhiteColor() {
-        return whiteColor;
-    }
-
-    public Color getBlackColor() {
-        return blackColor;
-    }
-
-    public JButton[][] getChessboardSquares() {
-        return chessboardSquares;
-    }
-
-    public JButton getChessboardSquare(int i, int j) {
-        if (i < 0 || j < 0 || i > StateOfGame.chessboard.getXWidth() - 1 || j > StateOfGame.chessboard.getYWidth() - 1)
-            return null;
-        return chessboardSquares[i][j];
     }
 
     public final Dimension getPreferredSize() {
@@ -97,27 +63,9 @@ public class ChessboardView extends JPanel {
         return new Dimension(s, s);
     }
 
-    //simple chessboard
-    public void initChessboard(int colorType, int iconsType) {
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                if (!isFrame(i, j)) {
-                    JButton newButton = new JButton();
-                    newButton.revalidate();
-                    newButton.setIcon(transparentIcon);
-                    newButton.setMargin(buttonMargin);
-                    chessboardSquares[i - 1][j - 1] = newButton;
-                    add(chessboardSquares[i - 1][j - 1]);
-                } else
-                    add(new JPanel());
-            }
-        }
-        setColor(colorType);
-        setIcons(iconsType);
-    }
 
     //chessboard with frame and labels
-    public void initChessboardFrame(int colorType, int iconsType) {
+    private void initChessboardFrame(int colorType, int iconsType) {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (isFrame(i, j)) {
@@ -130,6 +78,7 @@ public class ChessboardView extends JPanel {
                         frame.add(label);
                     }
                     if (j == 0 && i > 0 && i < height - 1) {
+                        String labels = "ABCDEFGH";
                         JLabel label = new JLabel(labels.substring(i - 1, i));
                         label.setFont(new Font("Dialog", Font.BOLD, 18));
                         frame.setLayout(new GridBagLayout());
@@ -181,7 +130,7 @@ public class ChessboardView extends JPanel {
 
     }
 
-    public void setColor() {
+    private void setColor() {
         setBackground(frameColor);
         for (int i = 0; i < StateOfGame.chessboard.getXWidth(); i++) {
             for (int j = 0; j < StateOfGame.chessboard.getYWidth(); j++) {
@@ -194,7 +143,7 @@ public class ChessboardView extends JPanel {
     }
 
 
-    public void setIcons(int type) {
+    private void setIcons(int type) {
         switch (type) {
             case 0:
                 loadIconsType0();
@@ -220,13 +169,7 @@ public class ChessboardView extends JPanel {
         }
     }
 
-    public void updateChessboard() {
-        for (int i = 0; i < width - 2; i++) {
-            for (int j = 0; j < height - 2; j++) {
-                updateIcon(new Position(i, j));
-            }
-        }
-    }
+
 
 
     private void loadIconsType0() {
@@ -336,11 +279,18 @@ public class ChessboardView extends JPanel {
         }
     }
 
+    private void updateColor(Position a){
+        if (a.x % 2 == a.y % 2)
+            chessboardSquares[a.x][a.y].setBackground(whiteColor);
+        else
+            chessboardSquares[a.x][a.y].setBackground(blackColor);
+    }
+
     public void highlightPosition(Position a) {
         chessboardSquares[a.x][a.y].setBackground(highlightColor);
     }
 
-    public void highlightPossiblePositions(ArrayList<Move> list) {
+    private void highlightPossiblePositions(ArrayList<Move> list) {
         for (Move move : list) {
             Position to = move.to;
             highlightPosition(to);
@@ -349,36 +299,42 @@ public class ChessboardView extends JPanel {
 
     public void highlightPossiblePositions(Position a) {
         ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(a);
-        possibleMoves = new ArrayList(figure.listOfPossibleMoves());
         highlightPossiblePositions(figure.listOfPossibleMoves());
     }
 
-    public void highlightPositionUndo(Position a) {
-        if (a.x % 2 == a.y % 2)
-            chessboardSquares[a.x][a.y].setBackground(whiteColor);
-        else
-            chessboardSquares[a.x][a.y].setBackground(blackColor);
+    private void highlightRedPosition(Position a){
+        chessboardSquares[a.x][a.y].setBackground(highlightRedColor);
     }
 
-    public void highlightPossiblePositionsUndo(ArrayList<Move> list) {
-        for (Move move : list) {
-            Position to = move.to;
-            highlightPositionUndo(to);
+    private void highlightIfKingUnderAttack(){
+        Position kingPosition=ChessUtil.getKingPosition(ChessColour.WHITE);
+        ArrayList<Position> positionsThatAttacksTheKing=ChessUtil.getPositionsThatAttacksTheKing(kingPosition);
+        if(!positionsThatAttacksTheKing.isEmpty()){
+            highlightRedPosition(kingPosition);
+            for(Position a: positionsThatAttacksTheKing){
+                highlightRedPosition(a);
+            }
+            return;
+        }kingPosition=ChessUtil.getKingPosition(ChessColour.BLACK);
+        positionsThatAttacksTheKing=ChessUtil.getPositionsThatAttacksTheKing(kingPosition);
+        if(!positionsThatAttacksTheKing.isEmpty()){
+            highlightRedPosition(kingPosition);
+            for(Position a: positionsThatAttacksTheKing){
+                highlightRedPosition(a);
+            }
         }
     }
 
-    public void highlightPossiblePositionsUndo(Position a) {
-        ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(a);
-        highlightPossiblePositionsUndo(figure.listOfPossibleMoves());
-    }
+    public void updateChessboard() {
 
-    public void highlightPossiblePositionsUndo() {
-        if (possibleMoves != null) {
-            highlightPossiblePositionsUndo(possibleMoves);
-            possibleMoves = null;
+        for (int i = 0; i < width - 2; i++) {
+            for (int j = 0; j < height - 2; j++) {
+                updateIcon(new Position(i, j));
+                updateColor(new Position(i,j));
+            }
         }
+        highlightIfKingUnderAttack();
     }
-
 
 }
 

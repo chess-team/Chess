@@ -146,7 +146,7 @@ class ChessboardController {
         from = position;
     }
     private void movePieceWithPromotion(Move move){
-        chessboardView.highlightPositionUndo(from);
+        chessboardView.updateChessboard();
         StateOfGame.variant.changeState(move);
         mainFrameView.updateView();
         from = null;
@@ -162,8 +162,8 @@ class ChessboardController {
         from = position;
     }
     private void movePiece( Move move ){
-        chessboardView.highlightPositionUndo(from);
-        chessboardView.highlightPossiblePositionsUndo(from);
+        chessboardView.updateChessboard();
+        chessboardView.updateChessboard();
         StateOfGame.variant.changeState(move);
         mainFrameView.updateView();
         from = null;
@@ -171,11 +171,11 @@ class ChessboardController {
     void takePieceUndo(){
         if( from != null ){
             if( promote.equals("D")){
-                chessboardView.highlightPositionUndo(from);
-                chessboardView.highlightPossiblePositionsUndo(from);
+                chessboardView.updateChessboard();
+                chessboardView.updateChessboard();
                 from = null;
             }else {// piece for promotion
-                chessboardView.highlightPositionUndo(from);
+                chessboardView.updateChessboard();
                 from = null;
             }
         }
