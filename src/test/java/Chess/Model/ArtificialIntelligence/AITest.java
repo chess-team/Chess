@@ -56,8 +56,6 @@ class AITest {
                         "......wr\n"));
         System.out.println(StateOfGame.stateOfGameplay);
 
-        assertTrue(StateOfGame.variant.validateMove(
-                new Move(new Position(6,2), new Position(7, 1))));
         StateOfGame.variant.changeState(player.getAIMove());
         System.out.println(StateOfGame.chessboard);
         assertTrue(StateOfGame.chessboard.toString().equals(

@@ -9,7 +9,7 @@ public class anyMoveAI implements AI{
 
     @Override
     public Move getAIMove() {
-        switch (StateOfGame.stateOfGameplay){
+        switch (StateOfGame.getStateOfGameplay()){
             case WHITE_MOVE:
                 return ChessUtil.listOfAllMoves(ChessColour.WHITE).get(0);
             case BLACK_MOVE:
