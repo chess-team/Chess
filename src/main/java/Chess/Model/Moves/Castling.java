@@ -11,4 +11,9 @@ public class Castling extends SpecialMove{
     public Position getTowerPosition() {
         return towerPosition;
     }
+
+    @Override
+    public String toString() {
+        return "castling - tower position:"  + towerPosition.toString();
+    }
 }

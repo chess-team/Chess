@@ -66,9 +66,14 @@ public class Pawn extends ChessPiece {
         int differenceOnYCoordinate = move.differenceOnYCoordinate();
         int differenceOnXCoordinate = move.differenceOnXCoordinate();
 
-        if(differenceOnYCoordinate > 2){
+        if(differenceOnYCoordinate > 2 || differenceOnYCoordinate == 0){
             return true;
         }
+
+        if(differenceOnXCoordinate > 1){
+            return true;
+        }
+
         switch (getChessColour()){
             case WHITE:
                 if(move.to.y - move.from.y < 0){
@@ -96,6 +101,9 @@ public class Pawn extends ChessPiece {
             }
         }
         if(differenceOnXCoordinate != 0){
+            if(differenceOnYCoordinate != 1){
+                return true;
+            }
             if(StateOfGame.chessboard.getChessPieceOnPosition(move.to)
                     instanceof EmptySquare ){
                 if(!validateEnPassantMove(move)){
@@ -114,6 +122,7 @@ public class Pawn extends ChessPiece {
             return true;
         }
 
+        //noinspection SimplifiableIfStatement
         if (!((move.to.y != StateOfGame.chessboard.getYWidth() - 1 &&
                 move.to.y != 0) ||
                 ((move.promoteTo instanceof Queen ||
