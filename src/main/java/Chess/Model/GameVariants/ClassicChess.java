@@ -45,7 +45,9 @@ public class ClassicChess extends VariantSimilarToClassicChess {
         if(!isMovePossibleWithoutKingProtection(move)) {
             return false;
         }
-
+        if(move.promoteTo != null && !(figure instanceof Pawn)){
+            return false;
+        }
         ChessColour colorOfPlayer = StateOfGame.chessboard.
                 getChessPieceOnPosition(move.from).getChessColour();
 
@@ -141,7 +143,7 @@ public class ClassicChess extends VariantSimilarToClassicChess {
     }
 
     @SuppressWarnings("SpellCheckingInspection")
-    public boolean validateEnPassantMove(Move move){
+    private boolean validateEnPassantMove(Move move){
         int differenceOnXCoordinate = move.to.x - move.from.x;
         int differenceOnYCoordinate = move.to.y - move.from.y;
         Position wantedPreviousMoveTo = move.from.translateByVector(
