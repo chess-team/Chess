@@ -15,6 +15,8 @@ public class Pawn extends ChessPiece {
         super(a,b);
     }
 
+    static public boolean enPassantDisabled = false;
+
     @Override
     public ArrayList<Move> listOfPossibleMoves() {
         ArrayList <Move> resultList = new ArrayList<>();
@@ -139,6 +141,7 @@ public class Pawn extends ChessPiece {
 
     @SuppressWarnings("SpellCheckingInspection")
     private boolean validateEnPassantMove(Move move){
+        if(enPassantDisabled)return false;
         int differenceOnXCoordinate = move.to.x - move.from.x;
         int differenceOnYCoordinate = move.to.y - move.from.y;
         Position wantedPreviousMoveTo = move.from.translateByVector(

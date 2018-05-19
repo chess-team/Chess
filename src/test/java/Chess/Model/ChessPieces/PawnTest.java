@@ -92,7 +92,7 @@ public class PawnTest {
         TestUtil.setPawnsWhereChessPieceCanMove(new Position(0,6));
         System.out.println(StateOfGame.chessboard);
         assertTrue(StateOfGame.chessboard.toString().equals(
-                        "...rr...\n" +
+                        "p..rr...\n" +
                         "P...P...\n" +
                         "prp...pr\n" +
                         ".P.....P\n" +
@@ -169,6 +169,7 @@ public class PawnTest {
                             "........\n" +
                             "........\n" +
                             "........\n"));
+            StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;
             assertTrue(StateOfGame.variant.validateMove(new Move (
                 new Position(0,6), new Position(1 ,7),
                 new Queen(ChessColour.WHITE, new Position(1,7)))));

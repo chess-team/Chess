@@ -132,10 +132,23 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame {
         }
         setLineOfFigures(YCoordinate, figuresColor, temp);
     }
+
     void setClassicState(){
         StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;
         StateOfGame.historyOfMoves.clear();
         StateOfGame.chessboard = new ClassicChessboard();
     }
 
+    protected abstract void changeStateOfGameplay();
+
+    void swapPlayerColor() {
+        switch (StateOfGame.stateOfGameplay) {
+            case BLACK_MOVE:
+                StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;
+                break;
+            case WHITE_MOVE:
+                StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_MOVE;
+                break;
+        }
+    }
 }

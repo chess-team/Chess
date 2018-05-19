@@ -1,9 +1,6 @@
 package Chess.Controller;
 
-import Chess.Model.GameVariants.Chess960;
-import Chess.Model.GameVariants.ClassicChess;
-import Chess.Model.GameVariants.listOfGameVariants;
-import Chess.Model.Position;
+import Chess.Model.GameVariants.ListOfGameVariants;
 import Chess.Model.StateOfGame;
 import Chess.View.MainFrameView;
 import Chess.View.MainPanelView;
@@ -17,7 +14,7 @@ class MenuBarController {
     private MainPanelView mainPanelView;
     private MenuBarView menuBarView;
     private ChessboardController chessboardController;
-    private listOfGameVariants variants = new listOfGameVariants();
+    private ListOfGameVariants variants = new ListOfGameVariants();
 
     MenuBarController( MainFrameView mainFrameView, MainPanelController mainPanelController ){
         this.mainFrameView = mainFrameView;

@@ -89,7 +89,6 @@ public class QueenTest {
     public void testQueenMovement2(){
         TestUtil.makeEmptyClassicChessboard();
 
-
         StateOfGame.chessboard.setFigure(
                 new Queen(ChessColour.WHITE, new Position(0,0)));
 

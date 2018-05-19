@@ -93,6 +93,7 @@ public class ChessUtil {
 
     static public ArrayList<Position>
     getPositionsThatAttacksTheKing(Position place){
+        if(place == null) return new ArrayList<>();
         ChessColour kingColor = StateOfGame.chessboard.
                 getChessPieceOnPosition(place).getChessColour();
         ArrayList<Position> resultList = new ArrayList<>();

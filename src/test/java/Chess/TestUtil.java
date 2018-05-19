@@ -17,6 +17,7 @@ public class TestUtil {
 
         //used to make chessboard empty
         StateOfGame.chessboard = new ClassicChessboard();
+        StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;
     }
 
     public static void setPawnsWhereChessPieceCanMove(

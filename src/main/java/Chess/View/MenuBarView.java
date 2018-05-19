@@ -1,6 +1,6 @@
 package Chess.View;
 
-import Chess.Model.GameVariants.listOfGameVariants;
+import Chess.Model.GameVariants.ListOfGameVariants;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -18,7 +18,7 @@ public class MenuBarView extends JMenuBar {
     private JRadioButtonMenuItem [] variantButtons;
     private JMenu promoteMenu;
     private JRadioButtonMenuItem promoteToBishop, promoteToKnight, promoteToQueen, promoteToRook, dontPromote;
-    private listOfGameVariants variants = new listOfGameVariants();
+    private ListOfGameVariants variants = new ListOfGameVariants();
 
 
     MenuBarView(){

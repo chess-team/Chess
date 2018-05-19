@@ -27,7 +27,8 @@ public class StateOfGame implements Serializable{
     public static StateOfGameplay stateOfGameplay;
 
     public static StateOfGameplay getStateOfGameplay() {
-        switch (stateOfGameplay){
+        return stateOfGameplay;
+        /*switch (stateOfGameplay){
             case DRAW:
             case WHITE_WON:
             case BLACK_WON:
@@ -39,6 +40,6 @@ public class StateOfGame implements Serializable{
             case WHITE:
                 return StateOfGameplay.BLACK_MOVE;
         }
-        return StateOfGameplay.WHITE_MOVE;
+        return StateOfGameplay.WHITE_MOVE;*/
     }
 }

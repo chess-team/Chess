@@ -6,13 +6,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class listOfGameVariants {
+public class ListOfGameVariants {
     public List<String> getNamesOfVariants(){
         ArrayList <String> resultList = new ArrayList<>();
         resultList.add("classic chess");
         resultList.add("upside down chess");
         resultList.add("chess 960");
         resultList.add("transcendental chess");
+        resultList.add("double move chess");
         return resultList;
     }
     public VariantOfGame getInstance(String name){
@@ -25,6 +26,8 @@ public class listOfGameVariants {
                 return new Chess960();
             case "transcendental chess":
                 return new TranscendentalChess();
+            case "double move chess":
+                return new DoubleMoveChess();
         }
         return null;
     }
