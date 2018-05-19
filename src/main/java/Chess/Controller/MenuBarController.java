@@ -61,5 +61,13 @@ class MenuBarController {
 
         };
         menuBarView.addPromoteListener(promoteListener);
+
+        ActionListener modeOfGameListener = actionEvent -> {
+            System.out.println("Mode : " + actionEvent.getActionCommand());
+            chessboardController.takePieceUndo();
+            chessboardController.setModeOfGame(actionEvent.getActionCommand());
+        };
+
+        menuBarView.addModeOfGameListerer(modeOfGameListener);
     }
 }
