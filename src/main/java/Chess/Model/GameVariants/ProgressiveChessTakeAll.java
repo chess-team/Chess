@@ -13,8 +13,15 @@ public class ProgressiveChessTakeAll extends KillKingChess {
     private int numberOfMovesInTurn = 1;
 
     @Override
+    public void initializeStateOfGame() {
+        numberOfConsecutiveSameColorMoves = 0;
+        numberOfMovesInTurn = 1;
+        super.initializeStateOfGame();
+        StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;
+    }
+
+    @Override
     public void inCaseOfEndOfGame() {
-        super.inCaseOfEndOfGame();
         if(ChessUtil.getNumberOfPiecesGivenColor(ChessColour.WHITE) == 0){
             StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_WON;
             return;
@@ -23,40 +30,25 @@ public class ProgressiveChessTakeAll extends KillKingChess {
             StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_WON;
             return;
         }
-        drawRule3TimesSamePosition();
-        ChessColour colorOfPossibleLoser = ChessUtil.
-                getOtherColor(colorOfLastMovedPiece);
+
+        ChessColour colorOfPossibleLoser = ChessColour.WHITE;
+        if(StateOfGame.stateOfGameplay == StateOfGameplay.BLACK_MOVE){
+            colorOfPossibleLoser = ChessColour.BLACK;
+        }
 
         drawRuleNoPossibleMove(colorOfPossibleLoser);
+        drawRule3TimesSamePosition();
     }
 
-    //TODO tests
     @Override
-    public void changeState(Move change) {
-        switch(colorOfLastMovedPiece){
-            case BLACK:
-                StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;
-                if(numberOfConsecutiveSameColorMoves == numberOfMovesInTurn){
-                    StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_MOVE;
-                    swapColor();
-                    numberOfConsecutiveSameColorMoves = 0;
-                    ++numberOfMovesInTurn;
-                }
-                swapColor();
-                ++numberOfConsecutiveSameColorMoves;
-                break;
-            case WHITE:
-                if(numberOfConsecutiveSameColorMoves == numberOfMovesInTurn){
-                    StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_MOVE;
-                    swapColor();
-                    numberOfConsecutiveSameColorMoves = 0;
-                    ++numberOfMovesInTurn;
-                }
-                ++numberOfConsecutiveSameColorMoves;
-                break;
+    protected void changeStateOfGameplay() {
+        ++numberOfConsecutiveSameColorMoves;
+        if(numberOfConsecutiveSameColorMoves == numberOfMovesInTurn) {
+            numberOfConsecutiveSameColorMoves = 0;
+            swapColor();
+            swapPlayerColor();
+            ++numberOfMovesInTurn;
         }
-        StateOfGame.chessboard.moveFigure(change);
-        StateOfGame.historyOfMoves.addMove(change);
         inCaseOfEndOfGame();
     }
 }
