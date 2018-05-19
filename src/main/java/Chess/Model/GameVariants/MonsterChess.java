@@ -5,11 +5,18 @@ import Chess.Model.ChessPieces.King;
 import Chess.Model.ChessPieces.Pawn;
 import Chess.Model.Moves.Move;
 
+/* Black player have normal figures and one move per turn.
+White player, have king and four pawns, but 2 moves per turn.
+    */
 public class MonsterChess extends KillKingChess {
 
     private int numberOfConsecutiveSameColorMoves = 0;
 
     public void initializeStateOfGame() {
+        numberOfConsecutiveSameColorMoves = 0;
+        super.initializeStateOfGame();
+        StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;
+        StateOfGame.historyOfMoves.clear();
         StateOfGame.chessboard = new ClassicChessboard();
         StateOfGame.chessboard.setFigure(
                 new King(ChessColour.WHITE, new Position(
@@ -20,28 +27,21 @@ public class MonsterChess extends KillKingChess {
         }
         setLineOfPawns(6, ChessColour.BLACK);
         setLineOfFigures(7, ChessColour.BLACK);
+        StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;
     }
 
     @Override
-    public void changeState(Move change) {
-
-        switch(colorOfLastMovedPiece){
-            case BLACK:
-                StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;
-                swapColor();
-                numberOfConsecutiveSameColorMoves = 0;
-                break;
-            case WHITE:
-                if(numberOfConsecutiveSameColorMoves == 1){
-                    StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_MOVE;
-                    swapColor();
-                    numberOfConsecutiveSameColorMoves = 0;
-                }
-                ++numberOfConsecutiveSameColorMoves;
-                break;
+    protected void changeStateOfGameplay() {
+        ++numberOfConsecutiveSameColorMoves;
+        int numberOfAllowedPlayerMoves = 2;
+        if(StateOfGame.stateOfGameplay == StateOfGameplay.BLACK_MOVE){
+            numberOfAllowedPlayerMoves = 1;
         }
-        StateOfGame.chessboard.moveFigure(change);
-        StateOfGame.historyOfMoves.addMove(change);
+        if(numberOfConsecutiveSameColorMoves == numberOfAllowedPlayerMoves) {
+            numberOfConsecutiveSameColorMoves = 0;
+            swapColor();
+            swapPlayerColor();
+        }
         inCaseOfEndOfGame();
     }
 }

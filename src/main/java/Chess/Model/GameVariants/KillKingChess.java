@@ -1,31 +1,25 @@
 package Chess.Model.GameVariants;
 
 import Chess.Model.*;
+import Chess.Model.Moves.Castling;
 import Chess.Model.Moves.Move;
 
 /*
-Chess without check. Objective of game is to capture
-enemy Chess.Model.ChessPieces.King.
+Chess without check, checkmate, castling. Objective of game is to capture
+enemy king.
    */
 @SuppressWarnings("SpellCheckingInspection")
 public class KillKingChess extends ClassicChess {
 
-    // return true if move is correct.
-    public boolean validateMove(Move move) {
+    @Override
+    public void initializeStateOfGame() {
+        super.initializeStateOfGame();
+        Castling.castlingDisabled = true;
+    }
 
-        if(!isMovePossibleWithoutKingProtection(move)) {
-            return false;
-        }
-
-        ChessColour colorOfPlayer = StateOfGame.chessboard.
-                getChessPieceOnPosition(move.from).getChessColour();
-
-        //noinspection RedundantIfStatement
-        if(colorOfPlayer == colorOfLastMovedPiece){
-            return false;
-        }
-
-        return true;
+    @Override
+    boolean isKingUnderAttackAfterMove(ChessColour kingColor, Move v) {
+        return false;
     }
 
     @Override
@@ -39,8 +33,10 @@ public class KillKingChess extends ClassicChess {
             return;
         }
 
-        ChessColour colorOfPossibleLoser = ChessUtil.
-                getOtherColor(colorOfLastMovedPiece);
+        ChessColour colorOfPossibleLoser = ChessColour.WHITE;
+        if(StateOfGame.stateOfGameplay == StateOfGameplay.BLACK_MOVE){
+            colorOfPossibleLoser = ChessColour.BLACK;
+        }
 
         drawRuleNoPossibleMove(colorOfPossibleLoser);
         drawRule3TimesSamePosition();

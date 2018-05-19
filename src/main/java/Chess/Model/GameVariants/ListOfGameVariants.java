@@ -14,6 +14,8 @@ public class ListOfGameVariants {
         resultList.add("chess 960");
         resultList.add("transcendental chess");
         resultList.add("double move chess");
+        resultList.add("monster chess");
+        resultList.add("progressive chess take all");
         return resultList;
     }
     public VariantOfGame getInstance(String name){
@@ -28,6 +30,10 @@ public class ListOfGameVariants {
                 return new TranscendentalChess();
             case "double move chess":
                 return new DoubleMoveChess();
+            case "monster chess":
+                return new MonsterChess();
+            case "progressive chess take all":
+                return new ProgressiveChessTakeAll();
         }
         return null;
     }

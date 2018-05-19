@@ -83,6 +83,7 @@ public class ClassicChessTest {
     @Test
     public void testDraw(){
         setEndgameState();
+        StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;
         StateOfGame.variant.changeState(
                 new Move(new Position(7,6), new Position(7, 1)));
         System.out.println(StateOfGame.chessboard);

@@ -1,9 +1,15 @@
 package Chess.Model.Moves;
 
-import Chess.Model.Position;
+import Chess.Model.*;
+import Chess.Model.ChessPieces.ChessPiece;
+import Chess.Model.ChessPieces.EmptySquare;
+import Chess.Model.ChessPieces.Rook;
 
 public class Castling extends SpecialMove{
     private final Position towerPosition;
+
+    static public boolean castlingDisabled = false;
+
     public Castling(Position positionOfTower){
         towerPosition = positionOfTower;
     }
@@ -15,5 +21,22 @@ public class Castling extends SpecialMove{
     @Override
     public String toString() {
         return "castling - tower position:"  + towerPosition.toString();
+    }
+
+    @Override
+    public StateOfGameplay getMoveColor() {
+        switch (StateOfGame.chessboard.
+                getChessPieceOnPosition(towerPosition).getChessColour()){
+            case BLACK:
+                return StateOfGameplay.BLACK_MOVE;
+            case WHITE:
+                return StateOfGameplay.WHITE_MOVE;
+        }
+        return null;
+    }
+
+    @Override
+    public boolean isBreakingRules() {
+        return castlingDisabled;
     }
 }

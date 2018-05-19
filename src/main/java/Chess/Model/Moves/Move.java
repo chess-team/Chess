@@ -10,6 +10,7 @@ import Chess.Model.ChessPieces.Knight;
 import Chess.Model.ChessUtil;
 import Chess.Model.Position;
 import Chess.Model.StateOfGame;
+import Chess.Model.StateOfGameplay;
 
 public class Move {
     public Position from, to;
@@ -96,5 +97,17 @@ public class Move {
         // checks if move is not blocked by some chess piece
         return !(StateOfGame.chessboard.getChessPieceOnPosition(from)
                 instanceof Knight) && ChessUtil.isMovePassingThroughFigure(this);
+    }
+
+    public StateOfGameplay getMoveColor(){
+        ChessPiece movedChessPiece = StateOfGame.chessboard.
+                getChessPieceOnPosition(from);
+        switch (movedChessPiece.getChessColour()){
+            case WHITE:
+                return StateOfGameplay.WHITE_MOVE;
+            case BLACK:
+                return StateOfGameplay.BLACK_MOVE;
+        }
+        return null;
     }
 }

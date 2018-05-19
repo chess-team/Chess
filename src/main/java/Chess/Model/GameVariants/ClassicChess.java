@@ -51,20 +51,9 @@ public class ClassicChess extends VariantSimilarToClassicChess {
         ChessColour colorOfPlayer = StateOfGame.chessboard.
                 getChessPieceOnPosition(move.from).getChessColour();
 
-        switch (colorOfPlayer){
-            case WHITE:
-                if(StateOfGame.stateOfGameplay != StateOfGameplay.WHITE_MOVE) {
-                    return false;
-                }
-                break;
-            case BLACK:
-                if(StateOfGame.stateOfGameplay != StateOfGameplay.BLACK_MOVE) {
-                    return false;
-                }
-                break;
+        if(move.getMoveColor() != StateOfGame.stateOfGameplay){
+            return false;
         }
-
-
 
         //noinspection RedundantIfStatement
         if (isKingUnderAttackAfterMove(colorOfPlayer, move)) {
@@ -76,6 +65,9 @@ public class ClassicChess extends VariantSimilarToClassicChess {
 
     // return true if castling move is correct.
     private boolean validateMove(Castling move) {
+        if(move.isBreakingRules()){
+            return false;
+        }
 
         Position towerPosition = move.getTowerPosition();
         if (towerPosition == null) {
@@ -127,24 +119,12 @@ public class ClassicChess extends VariantSimilarToClassicChess {
             }
         }
 
-        switch (colorOfPlayer){
-            case WHITE:
-                if(StateOfGame.stateOfGameplay != StateOfGameplay.WHITE_MOVE) {
-                    return false;
-                }
-                break;
-            case BLACK:
-                if(StateOfGame.stateOfGameplay != StateOfGameplay.BLACK_MOVE) {
-                    return false;
-                }
-                break;
-        }
-
-        return true;
+        return move.getMoveColor() == StateOfGame.stateOfGameplay;
     }
 
     public void initializeStateOfGame() {
         setClassicState();
+        Castling.castlingDisabled = false;
         colorOfLastMovedPiece = ChessColour.BLACK;
         setLineOfPawns(1, ChessColour.WHITE);
         setLineOfPawns(6, ChessColour.BLACK);
@@ -250,8 +230,10 @@ public class ClassicChess extends VariantSimilarToClassicChess {
     }
 
     void inCaseOfEndOfGame(){
-        ChessColour colorOfPossibleLoser = ChessUtil.
-                getOtherColor(colorOfLastMovedPiece);
+        ChessColour colorOfPossibleLoser = ChessColour.WHITE;
+        if(StateOfGame.stateOfGameplay == StateOfGameplay.BLACK_MOVE){
+            colorOfPossibleLoser = ChessColour.BLACK;
+        }
         if(ChessUtil.listOfAllMoves(colorOfPossibleLoser).isEmpty()) {
             if (isKingUnderAttack(colorOfPossibleLoser)) {
                 switch (colorOfPossibleLoser){

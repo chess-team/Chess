@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /*
 Class with methods used in variant of Chess with movement of pieces the same
 or similar to standard chess with different objectives, special moves,
-    */
+   */
 
 public abstract class VariantSimilarToClassicChess implements VariantOfGame {
 
@@ -35,7 +35,7 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame {
     }
 
     // checks if enemy can attack some position
-    // without constraint of protecting Chess.Model.ChessPieces.King
+    // without constraint of protecting king
     boolean isPlaceUnderAttack(
             Position place, ChessColour enemyColor) {
 
