@@ -17,7 +17,6 @@ public class CapturedPiecesView extends JPanel{
 
     private JLabel [][]capturedPieces;
     private ChessColour color;
-    private Color frameColor;
     private ImageIcon transparentIcon = new ImageIcon(
             new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB));
     private int width=2;
@@ -27,7 +26,6 @@ public class CapturedPiecesView extends JPanel{
     public CapturedPiecesView(ChessColour color){
         super();
         this.color=color;
-        this.frameColor=frameColor;
         initCapturedPiecesView();
     }
 
@@ -72,7 +70,7 @@ public class CapturedPiecesView extends JPanel{
 
     //TODO
     public void updateCapturedPiecesView(){
-        height=StateOfGame.chessboard.getYWidth();
+        height=StateOfGame.chessboard.getYWidth()+2;
     }
 
 }

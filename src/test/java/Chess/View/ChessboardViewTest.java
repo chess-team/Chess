@@ -16,7 +16,7 @@ public class ChessboardViewTest extends JFrame implements ActionListener {
     }
 
     private void initUI() {
-        ChessboardView chess = new ChessboardView(StateOfGame.chessboard.getXWidth(), StateOfGame.chessboard.getYWidth(), 1, 1);
+        ChessboardView chess = new ChessboardView();
         createLayout(chess);
         JPanel chesscontainer=new JPanel();
         chesscontainer.add(chess);

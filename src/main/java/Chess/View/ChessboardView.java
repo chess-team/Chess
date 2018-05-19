@@ -27,12 +27,13 @@ public class ChessboardView extends JPanel {
     private Color frameColor, whiteColor, blackColor;
     private Color highlightColor = new Color(0, 255, 255);
     private Color highlightRedColor= new Color( 220, 20, 60 );
-    public ChessboardView(int width, int height, int colorType, int iconsType) {
-        super(new GridLayout(width + 2, height + 2));
-        this.height = height + 2;
-        this.width = width + 2;
-        chessboardSquares = new JButton[width][height];
-        initChessboardFrame(colorType, iconsType);
+    public ChessboardView() {
+        super();
+        height = StateOfGame.chessboard.getXWidth()+2;
+        width = StateOfGame.chessboard.getYWidth()+2;
+        setLayout(new GridLayout(width, height));
+        chessboardSquares = new JButton[width-2][height-2];
+        initChessboardFrame(0, 0);
     }
 
     public Map<Character, ImageIcon> getWhitePiecesIcons() {
@@ -215,52 +216,6 @@ public class ChessboardView extends JPanel {
             e.printStackTrace();
         }
     }
-
-    //these icons don't look nice, need to change
-    /*private void loadIconsType1() {
-        try {
-            BufferedImage buf;
-            File pic = new File("src/main/resources/blackPawn2.png");
-            buf = read(pic);
-            Files.setPosixFilePermissions(pic.toPath(), perms);
-            blackPiecesIcons.put('P', new ImageIcon(buf));
-            pic = new File("src/main/resources/blackRook2.png");
-            buf = read(pic);
-            blackPiecesIcons.put('R', new ImageIcon(buf));
-            pic = new File("src/main/resources/blackKing2.png");
-            buf = read(pic);
-            blackPiecesIcons.put('W', new ImageIcon(buf));
-            pic = new File("src/main/resources/blackQueen2.png");
-            buf = read(pic);
-            blackPiecesIcons.put('Q', new ImageIcon(buf));
-            pic = new File("src/main/resources/blackBishop2.png");
-            buf = read(pic);
-            blackPiecesIcons.put('B', new ImageIcon(buf));
-            pic = new File("src/main/resources/blackKnight2.png");
-            buf = read(pic);
-            blackPiecesIcons.put('K', new ImageIcon(buf));
-            pic = new File("src/main/resources/goldenRook2.png");
-            buf = read(pic);
-            whitePiecesIcons.put('R', new ImageIcon(buf));
-            pic = new File("src/main/resources/goldenPawn2.png");
-            buf = read(pic);
-            whitePiecesIcons.put('P', new ImageIcon(buf));
-            pic = new File("src/main/resources/goldenBishop2.png");
-            buf = read(pic);
-            whitePiecesIcons.put('B', new ImageIcon(buf));
-            pic = new File("src/main/resources/goldenQueen2.png");
-            buf = read(pic);
-            whitePiecesIcons.put('Q', new ImageIcon(buf));
-            pic = new File("src/main/resources/goldenKing2.png");
-            buf = read(pic);
-            whitePiecesIcons.put('W', new ImageIcon(buf));
-            pic = new File("src/main/resources/goldenKnight2.png");
-            buf = read(pic);
-            whitePiecesIcons.put('K', new ImageIcon(buf));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
 
     private boolean isFrame(int i, int j) {
         return i == 0 || i == width - 1 || j == 0 || j == height - 1;

@@ -136,7 +136,7 @@ class ChessboardController {
     }
     private void movePiece( Move move ){
         StateOfGame.variant.changeState(move);
-        chessboardView.updateChessboard();
+        mainPanelView.updateMainPanelView();
         from = null;
     }
     void takePieceUndo(){
