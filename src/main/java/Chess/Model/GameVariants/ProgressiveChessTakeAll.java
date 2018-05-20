@@ -2,7 +2,7 @@ package Chess.Model.GameVariants;
 
 
 import Chess.Model.*;
-import Chess.Model.Moves.Move;
+
 /*
 Player make number of consecutive moves. In each turn longer by 1.
 Objective of game is to capture all enemy figures.
@@ -21,7 +21,7 @@ public class ProgressiveChessTakeAll extends KillKingChess {
     }
 
     @Override
-    public void inCaseOfEndOfGame() {
+    void inCaseOfEndOfGame() {
         if(ChessUtil.getNumberOfPiecesGivenColor(ChessColour.WHITE) == 0){
             StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_WON;
             return;

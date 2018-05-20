@@ -69,74 +69,72 @@ public class Pawn extends ChessPiece {
         int differenceOnYCoordinate = move.differenceOnYCoordinate();
         int differenceOnXCoordinate = move.differenceOnXCoordinate();
 
-        if(differenceOnYCoordinate > 2 || differenceOnYCoordinate == 0){
+        if (differenceOnYCoordinate > 2 || differenceOnYCoordinate == 0) {
             return true;
         }
 
-        if(differenceOnXCoordinate > 1){
+        if (differenceOnXCoordinate > 1) {
             return true;
         }
 
-        switch (getChessColour()){
+        switch (getChessColour()) {
             case WHITE:
-                if(move.to.y - move.from.y < 0){
+                if (move.to.y - move.from.y < 0) {
                     return true;
                 }
                 whiteColor = true;
                 break;
             case BLACK:
-                if(move.to.y - move.from.y > 0){
+                if (move.to.y - move.from.y > 0) {
                     return true;
                 }
                 break;
         }
-        if(differenceOnYCoordinate == 2){
-            if(differenceOnXCoordinate != 0) {
+        if (differenceOnYCoordinate == 2) {
+            if (differenceOnXCoordinate != 0) {
                 return true;
             }
-            if(whiteColor){
-                if(move.from.y != 1){
+            if (whiteColor) {
+                if (move.from.y != 1) {
                     return true;
                 }
-            }
-            else if(move.from.y != 6){
+            } else if (move.from.y != 6) {
                 return true;
             }
         }
-        if(differenceOnXCoordinate != 0){
-            if(differenceOnYCoordinate != 1){
+        if (differenceOnXCoordinate != 0) {
+            if (differenceOnYCoordinate != 1) {
                 return true;
             }
-            if(StateOfGame.chessboard.getChessPieceOnPosition(move.to)
-                    instanceof EmptySquare ){
-                if(!validateEnPassantMove(move)){
-                        return true;
+            if (StateOfGame.chessboard.getChessPieceOnPosition(move.to)
+                    instanceof EmptySquare) {
+                if (!validateEnPassantMove(move)) {
+                    return true;
                 }
-            }
-            else if(StateOfGame.chessboard.
+            } else if (StateOfGame.chessboard.
                     getChessPieceOnPosition(move.to).getChessColour() ==
                     StateOfGame.chessboard.
-                            getChessPieceOnPosition(move.from).getChessColour()){
+                            getChessPieceOnPosition(move.from).getChessColour()) {
                 return true;
             }
-        }
-        else if(!(StateOfGame.chessboard.getChessPieceOnPosition(move.to)
-                instanceof EmptySquare)){
+        } else if (!(StateOfGame.chessboard.getChessPieceOnPosition(move.to)
+                instanceof EmptySquare)) {
             return true;
         }
 
-        //noinspection SimplifiableIfStatement
-        if (!((move.to.y != StateOfGame.chessboard.getYWidth() - 1 &&
+        boolean badPromotion;
+        badPromotion = (!((move.to.y != StateOfGame.chessboard.getYWidth() - 1 &&
                 move.to.y != 0) ||
                 ((move.promoteTo instanceof Queen ||
                         move.promoteTo instanceof Knight ||
                         move.promoteTo instanceof Bishop ||
                         move.promoteTo instanceof Rook) &&
-                        move.isPromotion))){
-            return true;
-        }
-        return move.to.y != StateOfGame.chessboard.getYWidth() - 1 &&
-                move.to.y != 0 && move.promoteTo != null;
+                        move.isPromotion)));
+
+        return badPromotion ||
+                move.to.y != StateOfGame.chessboard.getYWidth() - 1 &&
+                        move.to.y != 0 && move.promoteTo != null;
+
     }
 
     @SuppressWarnings("SpellCheckingInspection")

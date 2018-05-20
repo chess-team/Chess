@@ -2,7 +2,6 @@ package Chess.Model.GameVariants;
 
 import Chess.Model.ChessPieces.Pawn;
 import Chess.Model.Moves.Castling;
-import Chess.Model.Moves.Move;
 import Chess.Model.StateOfGame;
 import Chess.Model.StateOfGameplay;
 

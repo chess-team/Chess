@@ -7,7 +7,6 @@ move(change of game state) is correct.
 import Chess.Model.Moves.Move;
 import Chess.Model.Moves.SpecialMoves;
 
-@SuppressWarnings("unused")
 public interface VariantOfGame {
     boolean validateMove(Move move);
     void initializeStateOfGame();

@@ -3,10 +3,8 @@ package Chess.Model.GameVariants;
 import Chess.Model.ChessColour;
 import Chess.Model.ChessPieces.Knight;
 import Chess.Model.ChessPieces.Pawn;
-import Chess.Model.Moves.Castling;
 import Chess.Model.Position;
 import Chess.Model.StateOfGame;
-import Chess.Model.StateOfGameplay;
 
 /*
 Game variant have name Weak!

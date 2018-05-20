@@ -3,7 +3,6 @@ package Chess.Model.GameVariants;
 import Chess.Model.VariantOfGame;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class ListOfGameVariants {

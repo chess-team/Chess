@@ -1,9 +1,6 @@
 package Chess.Model.Moves;
 
 import Chess.Model.*;
-import Chess.Model.ChessPieces.ChessPiece;
-import Chess.Model.ChessPieces.EmptySquare;
-import Chess.Model.ChessPieces.Rook;
 
 public class Castling extends SpecialMove{
     private final Position towerPosition;

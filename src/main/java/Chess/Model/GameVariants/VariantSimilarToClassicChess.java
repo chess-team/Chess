@@ -11,15 +11,13 @@ import java.util.ArrayList;
 /*
 Class with methods used in variant of Chess with movement of pieces the same
 or similar to standard chess with different objectives, special moves,
-   */
+    */
 
-public abstract class VariantSimilarToClassicChess implements VariantOfGame {
+abstract class VariantSimilarToClassicChess implements VariantOfGame {
 
     static {StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;}
 
-    public SpecialMoves getSpecialMoves() {
-        return new NoSpecialMoves();
-    }
+    abstract public SpecialMoves getSpecialMoves();
 
     // checks if move doesn't violate any rules about moving figures
     // without constraints about Chess.Model.ChessPieces.King protection.
@@ -138,8 +136,6 @@ public abstract class VariantSimilarToClassicChess implements VariantOfGame {
         StateOfGame.historyOfMoves.clear();
         StateOfGame.chessboard = new ClassicChessboard();
     }
-
-    protected abstract void changeStateOfGameplay();
 
     void swapPlayerColor() {
         switch (StateOfGame.stateOfGameplay) {

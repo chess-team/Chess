@@ -4,7 +4,6 @@ import Chess.Model.ChessColour;
 import Chess.Model.ChessPieces.Bishop;
 import Chess.Model.ChessPieces.King;
 import Chess.Model.ChessPieces.Rook;
-import Chess.Model.Moves.Move;
 import Chess.Model.Position;
 import Chess.Model.StateOfGame;
 import Chess.TestUtil;

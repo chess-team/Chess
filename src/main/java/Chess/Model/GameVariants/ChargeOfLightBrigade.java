@@ -3,7 +3,6 @@ package Chess.Model.GameVariants;
 import Chess.Model.ChessColour;
 import Chess.Model.ChessPieces.EmptySquare;
 import Chess.Model.ChessPieces.Knight;
-import Chess.Model.ChessPieces.Pawn;
 import Chess.Model.ChessPieces.Queen;
 import Chess.Model.Position;
 import Chess.Model.StateOfGame;

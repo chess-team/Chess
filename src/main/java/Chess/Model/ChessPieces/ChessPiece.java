@@ -7,7 +7,8 @@ import Chess.Model.Position;
 import java.util.ArrayList;
 
 /*
-Class holds information about chess pieces.
+Class holds information about chess pieces
+(about rules of chess piece movement).
  */
 
 public abstract class ChessPiece {

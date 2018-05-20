@@ -3,7 +3,6 @@ package Chess.Model.GameVariants;
 import Chess.Model.*;
 import Chess.Model.ChessPieces.King;
 import Chess.Model.ChessPieces.Pawn;
-import Chess.Model.Moves.Move;
 
 /* Black player have normal figures and one move per turn.
 White player, have king and four pawns, but 2 moves per turn.

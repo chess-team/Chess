@@ -5,6 +5,10 @@ import Chess.Model.ChessUtil;
 import Chess.Model.Moves.Move;
 import Chess.Model.StateOfGame;
 
+/*
+AI making first move from the list.
+It is very simple - mainly for testing purposes.
+ */
 public class anyMoveAI implements AI{
 
     @Override

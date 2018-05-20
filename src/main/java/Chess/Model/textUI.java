@@ -8,21 +8,26 @@ import java.util.Scanner;
 /*
 Class that represent simple text interface in console.
  */
-@SuppressWarnings("SpellCheckingInspection")
+
 class textUI {
     public static void main(String... args){
-        System.out.println("Aby wykonać ruch należy podać współrzędne" +
-                " dwóch pol najpierw pola z którego ruszmy figurę, potem" +
-                " gdzie ruszmy");
-        //noinspection InfiniteLoopStatement
-        while(true){
+        System.out.println("To make a move type coordinates of " +
+                "moved chess pieces and target square. (numbers from 0 to 7)");
+
+        boolean running = true;
+        while(running){
             Scanner in = new Scanner(System.in);
             System.out.println(StateOfGame.chessboard);
             try {
                 ArrayList <Integer> inputInts = new ArrayList<>();
                 for(int i = 0; i < 4; ++i) {
                     inputInts.add(in.nextInt());
+                    if(inputInts.get(inputInts.size() - 1) == -2){
+                        running = false;
+                        break;
+                    }
                 }
+
                 Move v = new Move(new Position(inputInts.get(0),
                         inputInts.get(1)),
                         new Position(inputInts.get(2),inputInts.get(3)));
