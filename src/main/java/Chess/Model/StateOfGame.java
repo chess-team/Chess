@@ -35,6 +35,16 @@ public class StateOfGame implements Serializable{
 
     public static ArrayList<Character> capturedPieces;
 
+    //return list of all pieces also captured
+    public static List <Character> getListOfLabelsOfAllPieces(){
+        List <Character> resultList = new ArrayList<>(capturedPieces);
+        String stringChessboard = chessboard.toString();
+        for(int i = 0; i < stringChessboard.length(); ++i){
+            resultList.add(stringChessboard.charAt(i));
+        }
+        return resultList;
+    }
+
     public static List <Character> getListOfLabelsOfCapturedPieces(){
         return capturedPieces;
     }
