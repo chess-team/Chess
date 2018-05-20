@@ -5,6 +5,7 @@ import Chess.Model.Moves.HistoryOfMoves;
 import Chess.Model.Moves.Move;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -30,6 +31,12 @@ public class StateOfGame implements Serializable{
 
     public static StateOfGameplay getStateOfGameplay() {
         return stateOfGameplay;
+    }
+
+    public static ArrayList<Character> capturedPieces;
+
+    public static List <Character> getListOfLabelsOfCapturedPieces(){
+        return capturedPieces;
     }
 
     // function initialize state of game and run moves saved in history of

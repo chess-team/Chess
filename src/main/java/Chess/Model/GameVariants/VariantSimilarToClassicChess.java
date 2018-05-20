@@ -134,6 +134,7 @@ abstract class VariantSimilarToClassicChess implements VariantOfGame {
         StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;
         StateOfGame.historyOfMoves.clear();
         StateOfGame.chessboard = new ClassicChessboard();
+        StateOfGame.capturedPieces = new ArrayList<>();
     }
 
     void swapPlayerColor() {

@@ -192,4 +192,41 @@ public class ClassicChessTest {
                 new Position(0,1), new Position(0 ,2))));
 
     }
+
+    @Test
+    void testListOfCapturedPieces(){
+        StateOfGame.variant = new ClassicChess();
+        StateOfGame.variant.initializeStateOfGame();
+        System.out.println(StateOfGame.chessboard);
+
+        StateOfGame.chessboard.setFigure(
+                new Rook(ChessColour.WHITE, new Position(0,2)));
+
+        assertTrue(StateOfGame.chessboard.toString().equals(
+                        "rkbqwbkr\n" +
+                        "pppppppp\n" +
+                        "........\n" +
+                        "........\n" +
+                        "........\n" +
+                        "R.......\n" +
+                        "PPPPPPPP\n" +
+                        "RKBQWBKR\n"));
+        StateOfGame.variant.changeState(new Move (
+                new Position(0,2), new Position(0 ,6)));
+
+        assertTrue(StateOfGame.chessboard.toString().equals(
+                        "rkbqwbkr\n" +
+                        "Rppppppp\n" +
+                        "........\n" +
+                        "........\n" +
+                        "........\n" +
+                        "........\n" +
+                        "PPPPPPPP\n" +
+                        "RKBQWBKR\n"));
+
+        System.out.println(StateOfGame.capturedPieces);
+        assertTrue(StateOfGame.capturedPieces.contains('p'));
+        assertTrue(StateOfGame.capturedPieces.size() == 1);
+
+    }
 }

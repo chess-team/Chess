@@ -178,11 +178,12 @@ public class ClassicChess extends VariantSimilarToClassicChess {
         if (change.promoteTo != null) {
             StateOfGame.chessboard.setFigure(change.promoteTo);
         }
+        addToGlobalListOfCapturedPieces();
         StateOfGame.historyOfMoves.addMove(change);
         changeStateOfGameplay();
     }
 
-    void changeStateOfGameplay() {
+    protected void changeStateOfGameplay() {
         swapPlayerColor();
         inCaseOfEndOfGame();
     }
@@ -233,6 +234,15 @@ public class ClassicChess extends VariantSimilarToClassicChess {
         drawRuleNoPossibleMove(colorOfPossibleLoser);
         drawRule50MovesWithoutCapture();
         drawRule3TimesSamePosition();
+    }
+
+    private void addToGlobalListOfCapturedPieces(){
+        for (String s : listOfCapturedPieces){
+            Character c = s.charAt(0);
+            if (!c.equals('.')) {
+                StateOfGame.capturedPieces.add(c);
+            }
+        }
     }
 
     private void drawRule50MovesWithoutCapture(){
