@@ -3,7 +3,7 @@ package Chess.Model.GameVariants;
 import Chess.Model.*;
 import Chess.Model.ChessPieces.Pawn;
 
-
+// modified version of Dunsany's Chess
 public class DunsanysChess extends ClassicChess{
 
     public void initializeStateOfGame() {
@@ -16,6 +16,7 @@ public class DunsanysChess extends ClassicChess{
 
         setLineOfPawns(6, ChessColour.BLACK);
         setLineOfFigures(7, ChessColour.BLACK);
+        StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_MOVE;
     }
 
     @Override

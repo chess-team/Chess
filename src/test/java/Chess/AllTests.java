@@ -24,6 +24,7 @@ class AllTests {
         new QueenTest().testQueenMovement2();
         new RookTest().testRookMovement();
         new UpsideDownChessTest().testInitializeState();
+        new WeakTest().testInitializeState();
 
         new ClassicChessTest().testCastling();
         new ClassicChessTest().testDraw();

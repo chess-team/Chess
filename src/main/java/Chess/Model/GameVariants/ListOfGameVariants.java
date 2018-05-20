@@ -18,6 +18,7 @@ public class ListOfGameVariants {
         resultList.add("progressive chess take all");
         resultList.add("kill king chess");
         resultList.add("Dunsany's Chess");
+        resultList.add("Weak!");
         return resultList;
     }
     public VariantOfGame getInstance(String name){
@@ -40,6 +41,8 @@ public class ListOfGameVariants {
                 return new KillKingChess();
             case "Dunsany's Chess":
                 return new DunsanysChess();
+            case "Weak!":
+                return new Weak();
         }
         return null;
     }
