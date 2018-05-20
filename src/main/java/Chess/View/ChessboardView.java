@@ -271,8 +271,8 @@ public class ChessboardView extends JPanel {
             for(Position a: positionsThatAttacksTheKing){
                 highlightRedPosition(a);
             }
-            return;
-        }kingPosition=ChessUtil.getKingPosition(ChessColour.BLACK);
+        }
+        kingPosition=ChessUtil.getKingPosition(ChessColour.BLACK);
         positionsThatAttacksTheKing=ChessUtil.getPositionsThatAttacksTheKing(kingPosition);
         if(!positionsThatAttacksTheKing.isEmpty()){
             highlightRedPosition(kingPosition);

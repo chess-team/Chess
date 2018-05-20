@@ -1,16 +1,12 @@
 package Chess.View;
 
 import Chess.Model.ChessColour;
-import Chess.Model.ChessPieces.ChessPiece;
 import Chess.Model.StateOfGame;
-import Chess.View.ChessboardView;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class CapturedPiecesView extends JPanel{
@@ -19,7 +15,7 @@ public class CapturedPiecesView extends JPanel{
     private ChessColour color;
     private ImageIcon transparentIcon = new ImageIcon(
             new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB));
-    private int width=2;
+    private int width;
     private int height;
     private Map<Character, ImageIcon> piecesIcons;
 
@@ -31,10 +27,12 @@ public class CapturedPiecesView extends JPanel{
 
     private void initCapturedPiecesView(){
         height=StateOfGame.chessboard.getYWidth()+2;
-        setLayout(new GridLayout(height,2));
-        capturedPieces= new JLabel[height][2];
+        width=4;
+        System.out.println(width+" "+height);
+        setLayout(new GridLayout(height,width));
+        capturedPieces= new JLabel[height][width];
         for(int i=0; i<height; i++){
-            for(int j=0; j<2; j++){
+            for(int j=0; j<width; j++){
                     capturedPieces[i][j] = new JLabel();
                     capturedPieces[i][j].setIcon(transparentIcon);
                     add(capturedPieces[i][j]);
@@ -68,9 +66,36 @@ public class CapturedPiecesView extends JPanel{
         this.piecesIcons=piecesIcons;
     }
 
-    //TODO
+
     public void updateCapturedPiecesView(){
-        height=StateOfGame.chessboard.getYWidth()+2;
+        List<Character> listOfLabelsOfCapturedPieces= new ArrayList<>(StateOfGame.getListOfLabelsOfCapturedPieces());
+        System.out.println(StateOfGame.getListOfLabelsOfCapturedPieces().size());
+        if(color==ChessColour.WHITE){
+            int x=0, y=width-1;
+            for(Character c: listOfLabelsOfCapturedPieces){
+                if(c=='P' || c=='R' || c=='W' || c=='Q' || c=='B' || c=='K') {
+                    capturedPieces[x][y].setIcon(piecesIcons.get(c));
+                    x++;
+                    if(x==height){
+                        x=0;
+                        y--;
+                        if(y<0) y=0;
+                    }
+                }
+            }
+        }else{
+            int x=0, y=0;
+            for(Character c: listOfLabelsOfCapturedPieces){
+                if(c=='p' || c=='r' || c=='w' || c=='q' || c=='b' || c=='k') {
+                    capturedPieces[x][y].setIcon(piecesIcons.get(Character.toUpperCase(c)));
+                    x++;
+                    if(x==height){
+                        x=0;
+                        y=(y+1)%width;
+                    }
+                }
+            }
+        }
     }
 
 }

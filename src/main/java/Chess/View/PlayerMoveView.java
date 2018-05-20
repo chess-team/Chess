@@ -19,6 +19,8 @@ public class PlayerMoveView extends JLabel{
             setText("BLACK PLAYER MOVE");
         }else if(StateOfGame.getStateOfGameplay()==StateOfGameplay.BLACK_WON){
             setText("BLACK PLAYER WON");
+        }else if(StateOfGame.getStateOfGameplay()==StateOfGameplay.DRAW){
+            setText("DRAW");
         }else{
             setText("WHITE PLAYER WON");
         }

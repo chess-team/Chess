@@ -14,7 +14,7 @@ public class MainFrameView extends JFrame {
         this.setJMenuBar(menuBarView);
         this.setContentPane(mainPanelView);
         this.setTitle("Chess.Model.Chessboard");
-        this.setSize(1200, 800);
+        this.setSize(1600, 800);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }

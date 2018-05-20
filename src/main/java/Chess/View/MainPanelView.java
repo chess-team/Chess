@@ -32,14 +32,6 @@ public class MainPanelView extends JPanel {
         this.add(playerMoveView,c);
     }
 
-    public CapturedPiecesView getCapturedPiecesViewWhite() {
-        return capturedPiecesViewWhite;
-    }
-
-    public CapturedPiecesView getCapturedPiecesViewBlack() {
-        return capturedPiecesViewBlack;
-    }
-
     public void changeChessboardColour(int type){
         chessboardView.setColor(type);
     }
@@ -47,6 +39,8 @@ public class MainPanelView extends JPanel {
     public void updateMainPanelView(){
         chessboardView.updateChessboard();
         playerMoveView.updatePlayerMoveView();
+        capturedPiecesViewBlack.updateCapturedPiecesView();
+        capturedPiecesViewWhite.updateCapturedPiecesView();
     }
 
     public ChessboardView getChessboardView() {
