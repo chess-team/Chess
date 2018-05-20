@@ -40,7 +40,8 @@ public class StateOfGame implements Serializable{
         List <Character> resultList = new ArrayList<>(capturedPieces);
         String stringChessboard = chessboard.toString();
         for(int i = 0; i < stringChessboard.length(); ++i){
-            resultList.add(stringChessboard.charAt(i));
+            Character c = stringChessboard.charAt(i);
+            if(c != '.' && c != '\n')resultList.add(c);
         }
         return resultList;
     }

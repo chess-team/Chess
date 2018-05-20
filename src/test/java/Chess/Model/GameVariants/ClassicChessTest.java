@@ -227,6 +227,6 @@ public class ClassicChessTest {
         System.out.println(StateOfGame.capturedPieces);
         assertTrue(StateOfGame.capturedPieces.contains('p'));
         assertTrue(StateOfGame.capturedPieces.size() == 1);
-
+        System.out.println(StateOfGame.getListOfLabelsOfAllPieces());
     }
 }
