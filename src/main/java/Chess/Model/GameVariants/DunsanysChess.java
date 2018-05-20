@@ -7,6 +7,7 @@ import Chess.Model.ChessPieces.Pawn;
 public class DunsanysChess extends ClassicChess{
 
     public void initializeStateOfGame() {
+        super.initializeStateOfGame();
         StateOfGame.chessboard = new ClassicChessboard();
         setLineOfPawns(0, ChessColour.WHITE);
         setLineOfPawns(1, ChessColour.WHITE);

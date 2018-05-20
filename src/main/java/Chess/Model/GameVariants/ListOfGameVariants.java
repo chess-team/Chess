@@ -16,6 +16,8 @@ public class ListOfGameVariants {
         resultList.add("double move chess");
         resultList.add("monster chess");
         resultList.add("progressive chess take all");
+        resultList.add("kill king chess");
+        resultList.add("Dunsany's Chess");
         return resultList;
     }
     public VariantOfGame getInstance(String name){
@@ -34,6 +36,10 @@ public class ListOfGameVariants {
                 return new MonsterChess();
             case "progressive chess take all":
                 return new ProgressiveChessTakeAll();
+            case "kill king chess":
+                return new KillKingChess();
+            case "Dunsany's Chess":
+                return new DunsanysChess();
         }
         return null;
     }
