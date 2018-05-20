@@ -1,16 +1,17 @@
 package Chess.Controller;
 
-import Chess.Model.ChessColour;
+import Chess.Model.*;
+import Chess.Model.ArtificialIntelligence.AI;
+import Chess.Model.ArtificialIntelligence.anyMoveAI;
 import Chess.Model.ChessPieces.*;
 import Chess.Model.Moves.Move;
-import Chess.Model.Position;
-import Chess.Model.StateOfGame;
 import Chess.View.ChessboardView;
 import Chess.View.MainFrameView;
 import Chess.View.MainPanelView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.util.concurrent.TimeUnit;
 
 class ChessboardController {
 
@@ -19,18 +20,23 @@ class ChessboardController {
     private final ChessboardView chessboardView;
     private Position from;
     private String promote;
+    private AI player;
+    private String modeOfGame;
 
     void setPromote(String promote) {
         this.promote = promote;
     }
     void setFromToNull(){ this.from = null; }
+    void setModeOfGame( String modeOfGame ){ this.modeOfGame = modeOfGame; }
 
 
     ChessboardController(MainFrameView mainFrameView){
         promote = "D";
+        modeOfGame = "PvP";
         this.mainFrameView = mainFrameView;
         this.mainPanelView = mainFrameView.getMainPanelView();
         this.chessboardView = this.mainPanelView.getChessboardView();
+        player = new anyMoveAI();
         addButtonListener();
 
     }
@@ -48,6 +54,10 @@ class ChessboardController {
                 Move move = getMove(figure,from,position);
                 if( StateOfGame.variant.validateMove(move) ){
                     movePiece(move);
+                    if( modeOfGame.equals("PvC") && !gameOver() ){
+                        StateOfGame.variant.changeState(player.getAIMove());
+                        mainPanelView.updateMainPanelView();
+                    }
                     checkState();
                 }else{
                     takePieceUndo();
@@ -90,14 +100,19 @@ class ChessboardController {
     }
     private void checkState(){
         System.out.println(StateOfGame.getStateOfGameplay());
+        if( gameOver() ){
+            showEndGameDialog();
+            restartGame();
+        }
+    }
+    private boolean gameOver(){
         switch (StateOfGame.getStateOfGameplay() ){
             case DRAW:
             case WHITE_WON:
             case BLACK_WON:
-                showEndGameDialog();
-                restartGame();
-                break;
+                return true;
         }
+        return false;
     }
     private Move getMove(ChessPiece figure, Position from, Position position ){
         Move move = new Move(from,position);
@@ -134,7 +149,7 @@ class ChessboardController {
             from = position;
         }
     }
-    private void movePiece( Move move ){
+    private void movePiece( Move move ) {
         StateOfGame.variant.changeState(move);
         mainPanelView.updateMainPanelView();
         from = null;

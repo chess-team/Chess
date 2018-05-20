@@ -1,7 +1,6 @@
 package Chess.View;
 
 import Chess.Model.GameVariants.ListOfGameVariants;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -16,6 +15,8 @@ public class MenuBarView extends JMenuBar {
     private JMenuItem newGame, undoLastMove;
     private JMenu variantOfGameMenu;
     private JRadioButtonMenuItem [] variantButtons;
+    private JMenu modeOfGameMenu;
+    private JRadioButtonMenuItem PvP, PvC;
     private JMenu promoteMenu;
     private JRadioButtonMenuItem promoteToBishop, promoteToKnight, promoteToQueen, promoteToRook, dontPromote;
     private ListOfGameVariants variants = new ListOfGameVariants();
@@ -25,9 +26,27 @@ public class MenuBarView extends JMenuBar {
         super();
         initOptionsMenu();
         initVariantOfGameMenu();
+        initModeOfGameMenu();
         initColorMenu();
         initPromoteMenu();
     }
+
+    private void initModeOfGameMenu(){
+        PvP = new JRadioButtonMenuItem("Player vs Player");
+        PvP.setActionCommand("PvP");
+        PvC = new JRadioButtonMenuItem("Player vs Computer");
+        PvC.setActionCommand("PvC");
+        PvP.setSelected(true);
+
+        ButtonGroup buttonGroup = new ButtonGroup();
+        modeOfGameMenu = new JMenu("Mode of Game");
+        buttonGroup.add(PvP);
+        modeOfGameMenu.add(PvP);
+        buttonGroup.add(PvC);
+        modeOfGameMenu.add(PvC);
+        this.add(modeOfGameMenu);
+    }
+
     private void initPromoteMenu(){
         promoteMenu = new JMenu("Promote pawn");
         dontPromote = new JRadioButtonMenuItem("Don't promote");
@@ -113,6 +132,12 @@ public class MenuBarView extends JMenuBar {
             variantButtons[i].addActionListener(actionListener);
         }
     }
+
+    public void addModeOfGameListerer( ActionListener actionListener ){
+        PvP.addActionListener(actionListener);
+        PvC.addActionListener(actionListener);
+    }
+
     public void addPromoteListener( ActionListener actionListener ){
         dontPromote.addActionListener(actionListener);
         promoteToRook.addActionListener(actionListener);
