@@ -39,4 +39,13 @@ public class HistoryOfMoves {
         chessboardsStates.clear();
     }
 
+    // delete last saved move in instance of class
+    public void undoMove(){
+        int n = lastMoves.size();
+        if(n == 0){
+            return;
+        }
+        lastMoves.remove(n-1);
+        chessboardsStates.remove(n-1);
+    }
 }

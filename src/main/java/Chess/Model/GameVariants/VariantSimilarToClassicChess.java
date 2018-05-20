@@ -3,7 +3,6 @@ package Chess.Model.GameVariants;
 import Chess.Model.*;
 import Chess.Model.ChessPieces.*;
 import Chess.Model.Moves.Move;
-import Chess.Model.Moves.NoSpecialMoves;
 import Chess.Model.Moves.SpecialMoves;
 
 import java.util.ArrayList;

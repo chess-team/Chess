@@ -182,7 +182,7 @@ public class ClassicChess extends VariantSimilarToClassicChess {
         changeStateOfGameplay();
     }
 
-    protected void changeStateOfGameplay() {
+    void changeStateOfGameplay() {
         swapPlayerColor();
         inCaseOfEndOfGame();
     }

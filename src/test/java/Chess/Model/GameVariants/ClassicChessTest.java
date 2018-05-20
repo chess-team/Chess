@@ -150,4 +150,46 @@ public class ClassicChessTest {
                         "........\n" +
                         ".WR....R\n"));
     }
+
+    @Test
+    void testUndoMove(){
+        StateOfGame.variant = new ClassicChess();
+        StateOfGame.variant.initializeStateOfGame();
+        System.out.println(StateOfGame.chessboard);
+        assertTrue(StateOfGame.chessboard.toString().equals(
+                        "rkbqwbkr\n" +
+                        "pppppppp\n" +
+                        "........\n" +
+                        "........\n" +
+                        "........\n" +
+                        "........\n" +
+                        "PPPPPPPP\n" +
+                        "RKBQWBKR\n"));
+        StateOfGame.variant.changeState(new Move (
+                new Position(0,1), new Position(0 ,2)));
+
+        assertTrue(StateOfGame.chessboard.toString().equals(
+                        "rkbqwbkr\n" +
+                        "pppppppp\n" +
+                        "........\n" +
+                        "........\n" +
+                        "........\n" +
+                        "P.......\n" +
+                        ".PPPPPPP\n" +
+                        "RKBQWBKR\n"));
+        StateOfGame.undoMove();
+        System.out.println(StateOfGame.chessboard);
+        assertTrue(StateOfGame.chessboard.toString().equals(
+                        "rkbqwbkr\n" +
+                        "pppppppp\n" +
+                        "........\n" +
+                        "........\n" +
+                        "........\n" +
+                        "........\n" +
+                        "PPPPPPPP\n" +
+                        "RKBQWBKR\n"));
+        assertTrue(StateOfGame.variant.validateMove(new Move (
+                new Position(0,1), new Position(0 ,2))));
+
+    }
 }
