@@ -237,6 +237,7 @@ public class ClassicChess extends VariantSimilarToClassicChess {
     }
 
     private void addToGlobalListOfCapturedPieces(){
+        StateOfGame.capturedPieces.clear();
         for (String s : listOfCapturedPieces){
             Character c = s.charAt(0);
             if (!c.equals('.')) {

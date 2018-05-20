@@ -2,6 +2,7 @@ package Chess.Model.Moves;
 
 import Chess.Model.StateOfGame;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 /*
 Class holds information about moves made in game.
  */
-public class HistoryOfMoves {
+public class HistoryOfMoves implements Serializable{
     private final ArrayList <Move> lastMoves = new ArrayList<>();
     private final ArrayList <String> chessboardsStates =
             new ArrayList<>();
