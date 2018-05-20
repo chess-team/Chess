@@ -19,6 +19,7 @@ public class ListOfGameVariants {
         resultList.add("kill king chess");
         resultList.add("Dunsany's Chess");
         resultList.add("Weak!");
+        resultList.add("Charge of the Light Brigade");
         return resultList;
     }
     public VariantOfGame getInstance(String name){
@@ -43,6 +44,8 @@ public class ListOfGameVariants {
                 return new DunsanysChess();
             case "Weak!":
                 return new Weak();
+            case "Charge of the Light Brigade":
+                return new ChargeOfLightBrigade();
         }
         return null;
     }
