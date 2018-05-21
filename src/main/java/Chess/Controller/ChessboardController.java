@@ -11,7 +11,6 @@ import Chess.View.MainPanelView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.util.concurrent.TimeUnit;
 
 class ChessboardController {
 
@@ -152,6 +151,7 @@ class ChessboardController {
     private void movePiece( Move move ) {
         StateOfGame.variant.changeState(move);
         mainPanelView.updateMainPanelView();
+
         from = null;
     }
     void takePieceUndo(){
@@ -159,6 +159,11 @@ class ChessboardController {
             chessboardView.updateChessboard();
             from = null;
         }
+    }
+
+    void switchRotation(){
+        chessboardView.switchRotation();
+        mainPanelView.updateMainPanelView();
     }
 
 }

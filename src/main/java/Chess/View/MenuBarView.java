@@ -12,7 +12,7 @@ public class MenuBarView extends JMenuBar {
     private JMenu colorMenu;
     private JRadioButtonMenuItem [] colorButtons;
     private JMenu optionsMenu;
-    private JMenuItem newGame, undoLastMove;
+    private JMenuItem newGame, undoLastMove, switchRotation;
     private JMenu variantOfGameMenu;
     private JRadioButtonMenuItem [] variantButtons;
     private JMenu modeOfGameMenu;
@@ -81,6 +81,8 @@ public class MenuBarView extends JMenuBar {
         optionsMenu.add(newGame);
         undoLastMove = new JMenuItem("Undo Last Move");
         optionsMenu.add(undoLastMove);
+        switchRotation= new JMenuItem("Rotation");
+        optionsMenu.add(switchRotation);
         this.add(optionsMenu);
     }
 
@@ -131,6 +133,9 @@ public class MenuBarView extends JMenuBar {
         for( int i = 0; i < variants.getNamesOfVariants().size(); i++ ){
             variantButtons[i].addActionListener(actionListener);
         }
+    }
+    public void addSwitchRotationListener(ActionListener actionListener){
+        switchRotation.addActionListener(actionListener);
     }
 
     public void addModeOfGameListerer( ActionListener actionListener ){

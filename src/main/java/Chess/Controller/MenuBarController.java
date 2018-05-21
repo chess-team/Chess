@@ -16,7 +16,7 @@ class MenuBarController {
     private ChessboardController chessboardController;
     private ListOfGameVariants variants = new ListOfGameVariants();
 
-    MenuBarController( MainFrameView mainFrameView, MainPanelController mainPanelController ){
+    MenuBarController(MainFrameView mainFrameView, MainPanelController mainPanelController) {
         this.mainFrameView = mainFrameView;
         this.menuBarView = mainFrameView.getMenuBarView();
         this.mainPanelView = mainFrameView.getMainPanelView();
@@ -24,7 +24,7 @@ class MenuBarController {
         addListeners();
     }
 
-    private void addListeners(){
+    private void addListeners() {
         ActionListener colorMenuListener = actionEvent -> {
             System.out.println(actionEvent.getActionCommand() + " color");
             int colorType = Integer.valueOf(actionEvent.getActionCommand());
@@ -45,9 +45,15 @@ class MenuBarController {
         ActionListener undoLastMoveListener = actionEvent -> System.out.println("IMPLEMENT ME");
         menuBarView.addUndoLastMoveListener(undoLastMoveListener);
 
+        ActionListener switchRotationListener = actionEvent -> {
+            System.out.println("SWITCH ROTATION");
+            chessboardController.switchRotation();
+        };
+        menuBarView.addSwitchRotationListener(switchRotationListener);
+
         ActionListener variantOfGameListener = actionEvent -> {
             System.out.println(actionEvent.getActionCommand());
-            StateOfGame.variant = variants.getInstance( actionEvent.getActionCommand() );
+            StateOfGame.variant = variants.getInstance(actionEvent.getActionCommand());
             StateOfGame.variant.initializeStateOfGame();
             chessboardController.setFromToNull();
             mainFrameView.updateView();

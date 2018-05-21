@@ -19,7 +19,7 @@ public class CapturedPiecesView extends JPanel{
     private int height;
     private Map<Character, ImageIcon> piecesIcons;
 
-    public CapturedPiecesView(ChessColour color){
+    CapturedPiecesView(ChessColour color){
         super();
         this.color=color;
         initCapturedPiecesView();
@@ -28,7 +28,6 @@ public class CapturedPiecesView extends JPanel{
     private void initCapturedPiecesView(){
         height=StateOfGame.chessboard.getYWidth()+2;
         width=4;
-        System.out.println(width+" "+height);
         setLayout(new GridLayout(height,width));
         capturedPieces= new JLabel[height][width];
         for(int i=0; i<height; i++){
@@ -69,7 +68,6 @@ public class CapturedPiecesView extends JPanel{
 
     public void updateCapturedPiecesView(){
         List<Character> listOfLabelsOfCapturedPieces= new ArrayList<>(StateOfGame.getListOfLabelsOfCapturedPieces());
-        System.out.println(StateOfGame.getListOfLabelsOfCapturedPieces().size());
         if(color==ChessColour.WHITE){
             int x=0, y=width-1;
             for(Character c: listOfLabelsOfCapturedPieces){
