@@ -67,6 +67,9 @@ public class CapturedPiecesView extends JPanel{
 
 
     public void updateCapturedPiecesView(){
+        for(int i=0; i<height; i++){
+            for(int j=0; j<width; j++) capturedPieces[i][j].setIcon(transparentIcon);
+        }
         List<Character> listOfLabelsOfCapturedPieces= new ArrayList<>(StateOfGame.getListOfLabelsOfCapturedPieces());
         if(color==ChessColour.WHITE){
             int x=0, y=width-1;
