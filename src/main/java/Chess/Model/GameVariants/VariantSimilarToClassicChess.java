@@ -45,12 +45,20 @@ abstract class VariantSimilarToClassicChess implements VariantOfGame {
                         new Move(new Position(i,j), place))){
                     return true;
                 }
+                if(isMovePossibleWithoutKingProtection(
+                        new Move(new Position(i,j), place, new Queen(ChessColour.WHITE, new Position(i,j))))){
+                    return true;
+                }
+                if(isMovePossibleWithoutKingProtection(
+                        new Move(new Position(i,j), place, new Queen(ChessColour.BLACK, new Position(i,j))))){
+                    return true;
+                }
             }
         }
         return false;
     }
 
-    // check if Chess.Model.ChessPieces.King is under attack after move
+    // check if king is under attack after move
     boolean isKingUnderAttackAfterMove(
             ChessColour kingColor, Move v){
         Position positionOfKing = ChessUtil.getKingPosition(kingColor);
