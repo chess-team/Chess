@@ -73,7 +73,6 @@ public class ClassicChessTest {
                         "........\n" +
                         "w.......\n"));
         System.out.println(StateOfGame.stateOfGameplay);
-
         assertTrue(ChessUtil.getPositionsThatAttacksTheKing(
                 new Position(0,0)).size() == 1);
         assertTrue(StateOfGame.stateOfGameplay == StateOfGameplay.WHITE_WON);
