@@ -16,7 +16,7 @@ public class HistoryOfMoves implements Serializable{
             new ArrayList<>();
 
     public List <Move> listOfPreviousMoves(){
-        return Collections.unmodifiableList(lastMoves);
+        return new ArrayList<>(lastMoves);
     }
 
     public List <String> listOfChessboardStates(){

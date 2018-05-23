@@ -12,6 +12,5 @@ public class MainFrameController {
         this.mainFrameView = mainFrameView;
         mainPanelController = new MainPanelController(mainFrameView);
         menuBarController = new MenuBarController(mainFrameView, mainPanelController);
-
     }
 }

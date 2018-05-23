@@ -93,6 +93,7 @@ public class ChessboardView extends JPanel {
                     add(frame);
                 } else {
                     JButton newButton = new JButton();
+                    newButton.setFocusable(false);
                     newButton.revalidate();
                     newButton.setIcon(transparentIcon);
                     newButton.setMargin(buttonMargin);

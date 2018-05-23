@@ -79,7 +79,7 @@ class ChessboardController {
         return false;
     }
 
-    private void restartGame(){
+    public void restartGame() {
         StateOfGame.variant.initializeStateOfGame();
         mainFrameView.updateView();
     }
@@ -163,6 +163,15 @@ class ChessboardController {
 
     void switchRotation(){
         chessboardView.switchRotation();
+        mainPanelView.updateMainPanelView();
+    }
+
+    void undoMove() {
+        if (modeOfGame.equals("PvP")) StateOfGame.undoMove();
+        else {
+            StateOfGame.undoMove();
+            StateOfGame.undoMove();
+        }
         mainPanelView.updateMainPanelView();
     }
 

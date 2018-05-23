@@ -6,6 +6,9 @@ import Chess.View.ChessboardView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 
 public class MainPanelView extends JPanel {
 
@@ -30,7 +33,9 @@ public class MainPanelView extends JPanel {
         c.gridx=4;
         c.anchor=GridBagConstraints.PAGE_END;
         this.add(playerMoveView,c);
+
     }
+
 
     public void changeChessboardColour(int type){
         chessboardView.setColor(type);

@@ -54,8 +54,8 @@ public class StateOfGame implements Serializable{
     // moves - can be used to load state of game from saved game and
     // is used to undo move
     private static void reload(){
+        List<Move> moves = historyOfMoves.listOfPreviousMoves();
         StateOfGame.variant.initializeStateOfGame();
-        List <Move> moves = historyOfMoves.listOfPreviousMoves();
         for(Move v : moves){
             StateOfGame.variant.changeState(v);
         }

@@ -42,7 +42,10 @@ class MenuBarController {
         };
         menuBarView.addNewGameListener(newGameListener);
 
-        ActionListener undoLastMoveListener = actionEvent -> System.out.println("IMPLEMENT ME");
+        ActionListener undoLastMoveListener = actionEvent -> {
+            System.out.println("UNDO MOVE");
+            chessboardController.undoMove();
+        };
         menuBarView.addUndoLastMoveListener(undoLastMoveListener);
 
         ActionListener switchRotationListener = actionEvent -> {
