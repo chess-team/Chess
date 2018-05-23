@@ -26,12 +26,20 @@ class ChessboardController {
         this.promote = promote;
     }
     void setFromToNull(){ this.from = null; }
-    void setModeOfGame( String modeOfGame ){ this.modeOfGame = modeOfGame; }
 
+    void setModeOfGame( String modeOfGame ){
+        this.modeOfGame = modeOfGame;
+        while( isComputerTurn() && !gameOver() ){
+            System.out.println("AI made a move");
+            StateOfGame.variant.changeState(player.getAIMove());
+            mainPanelView.updateMainPanelView();
+        }
+        checkState();
+    }
 
     ChessboardController(MainFrameView mainFrameView){
         promote = "D";
-        modeOfGame = "PvP";
+        modeOfGame = "Both";
         this.mainFrameView = mainFrameView;
         this.mainPanelView = mainFrameView.getMainPanelView();
         this.chessboardView = this.mainPanelView.getChessboardView();
@@ -53,7 +61,8 @@ class ChessboardController {
                 Move move = getMove(figure,from,position);
                 if( StateOfGame.variant.validateMove(move) ){
                     movePiece(move);
-                    if( modeOfGame.equals("PvC") && !gameOver() ){
+                    while( isComputerTurn() && !gameOver() ){
+                        System.out.println("AI made a move");
                         StateOfGame.variant.changeState(player.getAIMove());
                         mainPanelView.updateMainPanelView();
                     }
@@ -79,7 +88,7 @@ class ChessboardController {
         return false;
     }
 
-    public void restartGame() {
+    void restartGame() {
         StateOfGame.variant.initializeStateOfGame();
         mainFrameView.updateView();
     }
@@ -97,6 +106,8 @@ class ChessboardController {
                 break;
         }
     }
+
+
     private void checkState(){
         System.out.println(StateOfGame.getStateOfGameplay());
         if( gameOver() ){
@@ -104,6 +115,8 @@ class ChessboardController {
             restartGame();
         }
     }
+
+
     private boolean gameOver(){
         switch (StateOfGame.getStateOfGameplay() ){
             case DRAW:
@@ -113,6 +126,19 @@ class ChessboardController {
         }
         return false;
     }
+
+    private boolean isComputerTurn(){
+        if( modeOfGame.equals("White") ){
+            return StateOfGame.getStateOfGameplay().equals( StateOfGameplay.BLACK_MOVE );
+        }
+        if( modeOfGame.equals("Black") ){
+            return StateOfGame.getStateOfGameplay().equals( StateOfGameplay.WHITE_MOVE );
+
+        }
+        return false;
+    }
+
+
     private Move getMove(ChessPiece figure, Position from, Position position ){
         Move move = new Move(from,position);
         if( !promote.equals("D") ){
@@ -167,9 +193,18 @@ class ChessboardController {
     }
 
     void undoMove() {
-        if (modeOfGame.equals("PvP")) StateOfGame.undoMove();
+        if (modeOfGame.equals("Both")) StateOfGame.undoMove();
         else {
-            StateOfGame.undoMove();
+            if( modeOfGame.equals("White") ){
+                while( StateOfGame.colorOfLastMove().equals(StateOfGameplay.BLACK_MOVE ) ){
+                    StateOfGame.undoMove();
+                }
+            }
+            if( modeOfGame.equals("Black") ){
+                while( StateOfGame.colorOfLastMove().equals(StateOfGameplay.WHITE_MOVE ) ){
+                    StateOfGame.undoMove();
+                }
+            }
             StateOfGame.undoMove();
         }
         mainPanelView.updateMainPanelView();

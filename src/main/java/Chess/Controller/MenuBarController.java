@@ -5,7 +5,6 @@ import Chess.Model.StateOfGame;
 import Chess.View.MainFrameView;
 import Chess.View.MainPanelView;
 import Chess.View.MenuBarView;
-
 import java.awt.event.ActionListener;
 
 class MenuBarController {
@@ -25,15 +24,15 @@ class MenuBarController {
     }
 
     private void addListeners() {
-        ActionListener colorMenuListener = actionEvent -> {
-            System.out.println(actionEvent.getActionCommand() + " color");
-            int colorType = Integer.valueOf(actionEvent.getActionCommand());
-            mainPanelView.changeChessboardColour(colorType);
-            mainFrameView.updateView();
+        addOptionsListeners();
+        addChoosePlayerListener();
+        addVariantOfGameListener();
+        addColorListener();
+        addPromoteListener();
 
-        };
-        menuBarView.addColorListener(colorMenuListener);
+    }
 
+    private void addOptionsListeners(){
         ActionListener newGameListener = actionEvent -> {
             System.out.println("New Game");
             StateOfGame.variant.initializeStateOfGame();
@@ -53,7 +52,19 @@ class MenuBarController {
             chessboardController.switchRotation();
         };
         menuBarView.addSwitchRotationListener(switchRotationListener);
+    }
 
+    private void addChoosePlayerListener(){
+        ActionListener choosePlayerListener = actionEvent -> {
+            System.out.println("Mode : " + actionEvent.getActionCommand());
+            chessboardController.takePieceUndo();
+            chessboardController.setModeOfGame(actionEvent.getActionCommand());
+        };
+
+        menuBarView.addChoosePlayerListerer(choosePlayerListener);
+    }
+
+    private void addVariantOfGameListener(){
         ActionListener variantOfGameListener = actionEvent -> {
             System.out.println(actionEvent.getActionCommand());
             StateOfGame.variant = variants.getInstance(actionEvent.getActionCommand());
@@ -62,7 +73,20 @@ class MenuBarController {
             mainFrameView.updateView();
         };
         menuBarView.addVariantOfGameListener(variantOfGameListener);
+    }
 
+    private void addColorListener(){
+        ActionListener colorMenuListener = actionEvent -> {
+            System.out.println(actionEvent.getActionCommand() + " color");
+            int colorType = Integer.valueOf(actionEvent.getActionCommand());
+            mainPanelView.changeChessboardColour(colorType);
+            mainFrameView.updateView();
+
+        };
+        menuBarView.addColorListener(colorMenuListener);
+    }
+
+    private void addPromoteListener(){
         ActionListener promoteListener = actionEvent -> {
             System.out.println("Promote to " + actionEvent.getActionCommand());
             chessboardController.takePieceUndo();
@@ -70,13 +94,9 @@ class MenuBarController {
 
         };
         menuBarView.addPromoteListener(promoteListener);
-
-        ActionListener modeOfGameListener = actionEvent -> {
-            System.out.println("Mode : " + actionEvent.getActionCommand());
-            chessboardController.takePieceUndo();
-            chessboardController.setModeOfGame(actionEvent.getActionCommand());
-        };
-
-        menuBarView.addModeOfGameListerer(modeOfGameListener);
     }
+
+
+
+
 }
