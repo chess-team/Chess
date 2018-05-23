@@ -12,10 +12,8 @@ Class that implements rules of Classic chess.
  */
 public class ClassicChess extends VariantSimilarToClassicChess {
 
-    ChessColour colorOfLastMovedPiece = ChessColour.BLACK;
+    private ChessColour colorOfLastMovedPiece = ChessColour.BLACK;
 
-    private final ArrayList<String> listOfCapturedPieces =
-            new ArrayList<>();
 
     // return true if move is correct.
     public boolean validateMove(Move move) {
@@ -173,12 +171,14 @@ public class ClassicChess extends VariantSimilarToClassicChess {
 
             StateOfGame.chessboard.setFigure(new EmptySquare(previousMoveTo));
         }
-        listOfCapturedPieces.add(targetPiece.toString());
+        Character c = targetPiece.toString().charAt(0);
+        if (!c.equals('.')) {
+            StateOfGame.capturedPieces.add(c);
+        }
         StateOfGame.chessboard.moveFigure(change);
         if (change.promoteTo != null) {
             StateOfGame.chessboard.setFigure(change.promoteTo);
         }
-        addToGlobalListOfCapturedPieces();
         StateOfGame.historyOfMoves.addMove(change);
         changeStateOfGameplay();
     }
@@ -209,7 +209,7 @@ public class ClassicChess extends VariantSimilarToClassicChess {
                 new Move(towerPosition, newTowerPosition));
 
         StateOfGame.historyOfMoves.addMove(change);
-        inCaseOfEndOfGame();
+        changeStateOfGameplay();
     }
 
     void inCaseOfEndOfGame(){
@@ -236,25 +236,30 @@ public class ClassicChess extends VariantSimilarToClassicChess {
         drawRule3TimesSamePosition();
     }
 
-    private void addToGlobalListOfCapturedPieces(){
-        StateOfGame.capturedPieces.clear();
-        for (String s : listOfCapturedPieces){
-            Character c = s.charAt(0);
-            if (!c.equals('.')) {
-                StateOfGame.capturedPieces.add(c);
-            }
-        }
-    }
 
     private void drawRule50MovesWithoutCapture(){
-        int n = listOfCapturedPieces.size();
+        List <String> states = StateOfGame.historyOfMoves
+                .listOfChessboardStates();
+        int n = states.size();
         if(n > 50){
-            boolean isDraw = true;
-            for(int i = n - 50; i < n; ++i){
-                if(!listOfCapturedPieces.get(i).equals(".")){
-                    isDraw = false;
+            boolean isDraw;
+            String state = states.get(n-50);
+            int m = state.length();
+            int emptySquareCountBefore = 0;
+            for(int i = 0; i < m; ++i){
+                if(state.charAt(i) == '.'){
+                    emptySquareCountBefore++;
                 }
             }
+            state = StateOfGame.chessboard.toString();
+            m = state.length();
+            int emptySquareCountNow = 0;
+            for(int i = 0; i < m; ++i){
+                if(state.charAt(i) == '.'){
+                    emptySquareCountNow++;
+                }
+            }
+            isDraw = (emptySquareCountBefore == emptySquareCountNow);
             if(isDraw){
                 StateOfGame.stateOfGameplay = StateOfGameplay.DRAW;
             }
