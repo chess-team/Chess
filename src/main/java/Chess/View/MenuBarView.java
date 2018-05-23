@@ -15,8 +15,8 @@ public class MenuBarView extends JMenuBar {
     private JMenuItem newGame, undoLastMove, switchRotation;
     private JMenu variantOfGameMenu;
     private JRadioButtonMenuItem [] variantButtons;
-    private JMenu modeOfGameMenu;
-    private JRadioButtonMenuItem PvP, PvC;
+    private JMenu choosePlayerMenu;
+    private JRadioButtonMenuItem Black, White, Both;
     private JMenu promoteMenu;
     private JRadioButtonMenuItem promoteToBishop, promoteToKnight, promoteToQueen, promoteToRook, dontPromote;
     private ListOfGameVariants variants = new ListOfGameVariants();
@@ -25,55 +25,11 @@ public class MenuBarView extends JMenuBar {
     MenuBarView(){
         super();
         initOptionsMenu();
+        initChoosePlayerMenu();
         initVariantOfGameMenu();
-        initModeOfGameMenu();
         initColorMenu();
         initPromoteMenu();
     }
-
-    private void initModeOfGameMenu(){
-        PvP = new JRadioButtonMenuItem("Player vs Player");
-        PvP.setActionCommand("PvP");
-        PvC = new JRadioButtonMenuItem("Player vs Computer");
-        PvC.setActionCommand("PvC");
-        PvP.setSelected(true);
-
-        ButtonGroup buttonGroup = new ButtonGroup();
-        modeOfGameMenu = new JMenu("Mode of Game");
-        buttonGroup.add(PvP);
-        modeOfGameMenu.add(PvP);
-        buttonGroup.add(PvC);
-        modeOfGameMenu.add(PvC);
-        this.add(modeOfGameMenu);
-    }
-
-    private void initPromoteMenu(){
-        promoteMenu = new JMenu("Promote pawn");
-        dontPromote = new JRadioButtonMenuItem("Don't promote");
-        dontPromote.setActionCommand("D");
-        dontPromote.setSelected(true);
-        promoteToBishop = new JRadioButtonMenuItem("Promote to Bishop");
-        promoteToBishop.setActionCommand("B");
-        promoteToKnight = new JRadioButtonMenuItem("Promote to Knight");
-        promoteToKnight.setActionCommand("K");
-        promoteToQueen = new JRadioButtonMenuItem("Promote to Queen");
-        promoteToQueen.setActionCommand("Q");
-        promoteToRook = new JRadioButtonMenuItem("Promote to Rook");
-        promoteToRook.setActionCommand("R");
-        ButtonGroup buttonGroup = new ButtonGroup();
-        buttonGroup.add(dontPromote);
-        promoteMenu.add(dontPromote);
-        buttonGroup.add(promoteToQueen);
-        promoteMenu.add(promoteToQueen);
-        buttonGroup.add(promoteToBishop);
-        promoteMenu.add(promoteToBishop);
-        buttonGroup.add(promoteToKnight);
-        promoteMenu.add(promoteToKnight);
-        buttonGroup.add(promoteToRook);
-        promoteMenu.add(promoteToRook);
-        this.add(promoteMenu);
-    }
-
 
     private void initOptionsMenu(){
         optionsMenu = new JMenu("Options");
@@ -84,6 +40,28 @@ public class MenuBarView extends JMenuBar {
         switchRotation= new JMenuItem("Rotation");
         optionsMenu.add(switchRotation);
         this.add(optionsMenu);
+    }
+
+    private void initChoosePlayerMenu(){
+
+        Both = new JRadioButtonMenuItem("Both players");
+        Both.setActionCommand("Both");
+        Both.setSelected(true);
+        White = new JRadioButtonMenuItem("White player");
+        White.setActionCommand("White");
+        Black = new JRadioButtonMenuItem("Black player");
+        Black.setActionCommand("Black");
+
+        ButtonGroup buttonGroup = new ButtonGroup();
+        choosePlayerMenu = new JMenu("Choose player");
+        buttonGroup.add(Both);
+        choosePlayerMenu.add(Both);
+        buttonGroup.add(White);
+        choosePlayerMenu.add(White);
+        buttonGroup.add(Black);
+        choosePlayerMenu.add(Black);
+
+        this.add(choosePlayerMenu);
     }
 
     private void initVariantOfGameMenu(){
@@ -120,27 +98,62 @@ public class MenuBarView extends JMenuBar {
         this.add(colorMenu);
     }
 
-    public void addColorListener(ActionListener actionListener){
-        for( int i = 0 ; i < 3; i++ ){
-            colorButtons[i].addActionListener(actionListener);
-        }
+    private void initPromoteMenu(){
+        promoteMenu = new JMenu("Promote pawn");
+        dontPromote = new JRadioButtonMenuItem("Don't promote");
+        dontPromote.setActionCommand("D");
+        dontPromote.setSelected(true);
+        promoteToBishop = new JRadioButtonMenuItem("Promote to Bishop");
+        promoteToBishop.setActionCommand("B");
+        promoteToKnight = new JRadioButtonMenuItem("Promote to Knight");
+        promoteToKnight.setActionCommand("K");
+        promoteToQueen = new JRadioButtonMenuItem("Promote to Queen");
+        promoteToQueen.setActionCommand("Q");
+        promoteToRook = new JRadioButtonMenuItem("Promote to Rook");
+        promoteToRook.setActionCommand("R");
+        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(dontPromote);
+        promoteMenu.add(dontPromote);
+        buttonGroup.add(promoteToQueen);
+        promoteMenu.add(promoteToQueen);
+        buttonGroup.add(promoteToBishop);
+        promoteMenu.add(promoteToBishop);
+        buttonGroup.add(promoteToKnight);
+        promoteMenu.add(promoteToKnight);
+        buttonGroup.add(promoteToRook);
+        promoteMenu.add(promoteToRook);
+        this.add(promoteMenu);
     }
+
+
     public void addNewGameListener(ActionListener actionListener){
         newGame.addActionListener(actionListener);
     }
-    public void addUndoLastMoveListener(ActionListener actionListener){ undoLastMove.addActionListener(actionListener);}
+
+    public void addUndoLastMoveListener(ActionListener actionListener){
+        undoLastMove.addActionListener(actionListener);
+    }
+
+    public void addSwitchRotationListener(ActionListener actionListener){
+        switchRotation.addActionListener(actionListener);
+    }
+
+    public void addChoosePlayerListerer( ActionListener actionListener ){
+        Both.addActionListener(actionListener);
+        White.addActionListener(actionListener);
+        Black.addActionListener(actionListener);
+    }
+
     public void addVariantOfGameListener(ActionListener actionListener){
         for( int i = 0; i < variants.getNamesOfVariants().size(); i++ ){
             variantButtons[i].addActionListener(actionListener);
         }
     }
-    public void addSwitchRotationListener(ActionListener actionListener){
-        switchRotation.addActionListener(actionListener);
-    }
 
-    public void addModeOfGameListerer( ActionListener actionListener ){
-        PvP.addActionListener(actionListener);
-        PvC.addActionListener(actionListener);
+    public void addColorListener(ActionListener actionListener){
+        for( int i = 0 ; i < 3; i++ ){
+            colorButtons[i].addActionListener(actionListener);
+        }
     }
 
     public void addPromoteListener( ActionListener actionListener ){
@@ -150,6 +163,7 @@ public class MenuBarView extends JMenuBar {
         promoteToKnight.addActionListener(actionListener);
         promoteToBishop.addActionListener(actionListener);
     }
+
 
     private void setColorButtonsIcons(){
         try {
