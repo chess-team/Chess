@@ -1,6 +1,7 @@
 package Chess.View;
 
 import Chess.Model.GameVariants.ListOfGameVariants;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -9,40 +10,32 @@ import java.io.File;
 
 public class MenuBarView extends JMenuBar {
 
-    private JMenu colorMenu;
-    private JRadioButtonMenuItem [] colorButtons;
-    private JMenu optionsMenu;
+    private JRadioButtonMenuItem[] colorButtons;
     private JMenuItem newGame, undoLastMove, switchRotation;
-    private JMenu variantOfGameMenu;
-    private JRadioButtonMenuItem [] variantButtons;
-    private JMenu choosePlayerMenu;
+    private JRadioButtonMenuItem[] variantButtons;
     private JRadioButtonMenuItem Black, White, Both;
-    private JMenu promoteMenu;
-    private JRadioButtonMenuItem promoteToBishop, promoteToKnight, promoteToQueen, promoteToRook, dontPromote;
     private ListOfGameVariants variants = new ListOfGameVariants();
 
-
-    MenuBarView(){
+    MenuBarView() {
         super();
         initOptionsMenu();
         initChoosePlayerMenu();
         initVariantOfGameMenu();
         initColorMenu();
-        initPromoteMenu();
     }
 
-    private void initOptionsMenu(){
-        optionsMenu = new JMenu("Options");
+    private void initOptionsMenu() {
+        JMenu optionsMenu = new JMenu("Options");
         newGame = new JMenuItem("New Game");
         optionsMenu.add(newGame);
         undoLastMove = new JMenuItem("Undo Last Move");
         optionsMenu.add(undoLastMove);
-        switchRotation= new JMenuItem("Rotation");
+        switchRotation = new JMenuItem("Rotation");
         optionsMenu.add(switchRotation);
         this.add(optionsMenu);
     }
 
-    private void initChoosePlayerMenu(){
+    private void initChoosePlayerMenu() {
 
         Both = new JRadioButtonMenuItem("Both players");
         Both.setActionCommand("Both");
@@ -53,7 +46,7 @@ public class MenuBarView extends JMenuBar {
         Black.setActionCommand("Black");
 
         ButtonGroup buttonGroup = new ButtonGroup();
-        choosePlayerMenu = new JMenu("Choose player");
+        JMenu choosePlayerMenu = new JMenu("Choose player");
         buttonGroup.add(Both);
         choosePlayerMenu.add(Both);
         buttonGroup.add(White);
@@ -64,15 +57,15 @@ public class MenuBarView extends JMenuBar {
         this.add(choosePlayerMenu);
     }
 
-    private void initVariantOfGameMenu(){
-        variantOfGameMenu = new JMenu("Game Variants");
-        variantButtons = new JRadioButtonMenuItem[ variants.getNamesOfVariants().size() ];
-        for( int i = 0; i < variants.getNamesOfVariants().size(); i++ ){
+    private void initVariantOfGameMenu() {
+        JMenu variantOfGameMenu = new JMenu("Game Variants");
+        variantButtons = new JRadioButtonMenuItem[variants.getNamesOfVariants().size()];
+        for (int i = 0; i < variants.getNamesOfVariants().size(); i++) {
             variantButtons[i] = new JRadioButtonMenuItem(variants.getNamesOfVariants().get(i));
         }
         variantButtons[0].setSelected(true);
         ButtonGroup buttonGroup = new ButtonGroup();
-        for( int i = 0; i < variants.getNamesOfVariants().size(); i++ ){
+        for (int i = 0; i < variants.getNamesOfVariants().size(); i++) {
             buttonGroup.add(variantButtons[i]);
             variantOfGameMenu.add(variantButtons[i]);
         }
@@ -81,100 +74,63 @@ public class MenuBarView extends JMenuBar {
 
     }
 
-    private void initColorMenu(){
+    private void initColorMenu() {
         colorButtons = new JRadioButtonMenuItem[3];
-        for( int i = 0 ; i < 3; i++ ){
+        for (int i = 0; i < 3; i++) {
             colorButtons[i] = new JRadioButtonMenuItem();
             colorButtons[i].setActionCommand(String.valueOf(i));
         }
         setColorButtonsIcons();
         colorButtons[0].setSelected(true);
         ButtonGroup buttonGroup = new ButtonGroup();
-        colorMenu = new JMenu("Color");
-        for( int i = 0 ; i < 3; i++ ){
+        JMenu colorMenu = new JMenu("Color");
+        for (int i = 0; i < 3; i++) {
             buttonGroup.add(colorButtons[i]);
             colorMenu.add(colorButtons[i]);
         }
         this.add(colorMenu);
     }
 
-    private void initPromoteMenu(){
-        promoteMenu = new JMenu("Promote pawn");
-        dontPromote = new JRadioButtonMenuItem("Don't promote");
-        dontPromote.setActionCommand("D");
-        dontPromote.setSelected(true);
-        promoteToBishop = new JRadioButtonMenuItem("Promote to Bishop");
-        promoteToBishop.setActionCommand("B");
-        promoteToKnight = new JRadioButtonMenuItem("Promote to Knight");
-        promoteToKnight.setActionCommand("K");
-        promoteToQueen = new JRadioButtonMenuItem("Promote to Queen");
-        promoteToQueen.setActionCommand("Q");
-        promoteToRook = new JRadioButtonMenuItem("Promote to Rook");
-        promoteToRook.setActionCommand("R");
-        ButtonGroup buttonGroup = new ButtonGroup();
-        buttonGroup.add(dontPromote);
-        promoteMenu.add(dontPromote);
-        buttonGroup.add(promoteToQueen);
-        promoteMenu.add(promoteToQueen);
-        buttonGroup.add(promoteToBishop);
-        promoteMenu.add(promoteToBishop);
-        buttonGroup.add(promoteToKnight);
-        promoteMenu.add(promoteToKnight);
-        buttonGroup.add(promoteToRook);
-        promoteMenu.add(promoteToRook);
-        this.add(promoteMenu);
-    }
-
-
-    public void addNewGameListener(ActionListener actionListener){
+    public void addNewGameListener(ActionListener actionListener) {
         newGame.addActionListener(actionListener);
     }
 
-    public void addUndoLastMoveListener(ActionListener actionListener){
+    public void addUndoLastMoveListener(ActionListener actionListener) {
         undoLastMove.addActionListener(actionListener);
     }
 
-    public void addSwitchRotationListener(ActionListener actionListener){
+    public void addSwitchRotationListener(ActionListener actionListener) {
         switchRotation.addActionListener(actionListener);
     }
 
-    public void addChoosePlayerListerer( ActionListener actionListener ){
+    public void addChoosePlayerListener(ActionListener actionListener) {
         Both.addActionListener(actionListener);
         White.addActionListener(actionListener);
         Black.addActionListener(actionListener);
     }
 
-    public void addVariantOfGameListener(ActionListener actionListener){
-        for( int i = 0; i < variants.getNamesOfVariants().size(); i++ ){
+    public void addVariantOfGameListener(ActionListener actionListener) {
+        for (int i = 0; i < variants.getNamesOfVariants().size(); i++) {
             variantButtons[i].addActionListener(actionListener);
         }
     }
 
-    public void addColorListener(ActionListener actionListener){
-        for( int i = 0 ; i < 3; i++ ){
+    public void addColorListener(ActionListener actionListener) {
+        for (int i = 0; i < 3; i++) {
             colorButtons[i].addActionListener(actionListener);
         }
     }
 
-    public void addPromoteListener( ActionListener actionListener ){
-        dontPromote.addActionListener(actionListener);
-        promoteToRook.addActionListener(actionListener);
-        promoteToQueen.addActionListener(actionListener);
-        promoteToKnight.addActionListener(actionListener);
-        promoteToBishop.addActionListener(actionListener);
-    }
-
-
-    private void setColorButtonsIcons(){
+    private void setColorButtonsIcons() {
         try {
             BufferedImage buf;
-            buf= ImageIO.read(new File("src/main/resources/colorType0.png"));
+            buf = ImageIO.read(new File("src/main/resources/colorType0.png"));
             colorButtons[0].setIcon(new ImageIcon(buf));
-            buf= ImageIO.read(new File("src/main/resources/colorType1.png"));
+            buf = ImageIO.read(new File("src/main/resources/colorType1.png"));
             colorButtons[1].setIcon(new ImageIcon(buf));
-            buf= ImageIO.read(new File("src/main/resources/colorType2.png"));
+            buf = ImageIO.read(new File("src/main/resources/colorType2.png"));
             colorButtons[2].setIcon(new ImageIcon(buf));
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

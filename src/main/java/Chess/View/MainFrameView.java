@@ -13,7 +13,7 @@ public class MainFrameView extends JFrame {
         menuBarView = new MenuBarView();
         this.setJMenuBar(menuBarView);
         this.setContentPane(mainPanelView);
-        this.setTitle("Chess.Model.Chessboard");
+        this.setTitle("Chess");
         this.setSize(1600, 800);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

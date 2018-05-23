@@ -7,7 +7,6 @@ import Chess.Model.Moves.Move;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -262,18 +261,16 @@ public class ChessboardView extends JPanel {
         else chessboardSquares[7 - a.y][a.x].setBackground(highlightColor);
     }
 
-    private void highlightPossiblePositions(ArrayList<Move> list, boolean highlightPromotionMoves) {
+    private void highlightPossiblePositions(ArrayList<Move> list) {
         for (Move move : list) {
-            if (highlightPromotionMoves == move.isPromotion) {
-                Position to = move.to;
-                highlightPosition(to);
-            }
+            Position to = move.to;
+            highlightPosition(to);
         }
     }
 
-    public void highlightPossiblePositions(Position a, boolean highlightPromotionMoves) {
+    public void highlightPossiblePositions(Position a) {
         ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(a);
-        highlightPossiblePositions(figure.listOfPossibleMoves(), highlightPromotionMoves);
+        highlightPossiblePositions(figure.listOfPossibleMoves());
     }
 
     private void highlightRedPosition(Position a) {
