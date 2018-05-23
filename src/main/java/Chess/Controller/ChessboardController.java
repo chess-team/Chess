@@ -95,7 +95,7 @@ class ChessboardController {
         StateOfGame.variant.changeState(move);
         mainPanelView.updateMainPanelView();
         from = null;
-        checkState();
+        //checkState();
     }
 
     private void makePromotionMove(ChessPiece figure, Position from, Position to) {
@@ -142,6 +142,7 @@ class ChessboardController {
     void restartGame() {
         StateOfGame.variant.initializeStateOfGame();
         mainFrameView.updateView();
+        makeComputerMoves();
     }
 
     private void showEndGameDialog() {
@@ -158,7 +159,7 @@ class ChessboardController {
         }
     }
 
-    private void makeComputerMoves() {
+    void makeComputerMoves() {
         while (!gameOver() && isComputerTurn()) {
             System.out.println("AI made a move");
             StateOfGame.variant.changeState(player.getAIMove());

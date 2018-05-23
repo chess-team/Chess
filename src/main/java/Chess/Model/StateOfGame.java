@@ -71,7 +71,8 @@ public class StateOfGame implements Serializable{
         Move v = historyOfMoves.lastMove();
         undoMove();
         StateOfGameplay ret = stateOfGameplay;
-        StateOfGame.variant.changeState(v);
+        if( v != null )
+            StateOfGame.variant.changeState(v);
         return ret;
     }
 }

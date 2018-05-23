@@ -37,6 +37,7 @@ class MenuBarController {
             StateOfGame.variant.initializeStateOfGame();
             chessboardController.setFromToNull();
             mainFrameView.updateView();
+            chessboardController.makeComputerMoves();
         };
         menuBarView.addNewGameListener(newGameListener);
 
@@ -70,6 +71,7 @@ class MenuBarController {
             StateOfGame.variant.initializeStateOfGame();
             chessboardController.setFromToNull();
             mainFrameView.updateView();
+            chessboardController.makeComputerMoves();
         };
         menuBarView.addVariantOfGameListener(variantOfGameListener);
     }
