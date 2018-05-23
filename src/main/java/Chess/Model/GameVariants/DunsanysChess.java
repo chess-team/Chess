@@ -21,9 +21,10 @@ public class DunsanysChess extends ClassicChess{
 
     @Override
     protected void inCaseOfEndOfGame(){
-        ChessColour colorOfPossibleLoser = ChessUtil.
-                getOtherColor(colorOfLastMovedPiece);
-
+        ChessColour colorOfPossibleLoser = ChessColour.WHITE;
+        if(StateOfGame.stateOfGameplay == StateOfGameplay.BLACK_MOVE){
+            colorOfPossibleLoser = ChessColour.BLACK;
+        }
         if(StateOfGame.chessboard.
                 getPositionOfChessPiece(Pawn.class, colorOfPossibleLoser) == null){
             StateOfGame.stateOfGameplay =
