@@ -28,7 +28,8 @@ public class ChessboardView extends JPanel {
     private Color highlightColor = new Color(0, 255, 255);
     private Color highlightRedColor = new Color(220, 20, 60);
     private boolean rotated = false, rotation=false;
-    private JPanel[] frameLabels;
+    private JPanel[] digitLabels;
+    private JPanel[] letterLabels;
 
     ChessboardView() {
         super();
@@ -36,7 +37,8 @@ public class ChessboardView extends JPanel {
         width = StateOfGame.chessboard.getYWidth() + 2;
         setLayout(new GridLayout(width, height));
         chessboardSquares = new JButton[width - 2][height - 2];
-        frameLabels=new JPanel[height-2];
+        digitLabels = new JPanel[height - 2];
+        letterLabels = new JPanel[width - 2];
         initChessboardFrame(0, 0);
     }
 
@@ -81,7 +83,7 @@ public class ChessboardView extends JPanel {
                         label.setFont(new Font("Dialog", Font.BOLD, 18));
                         frame.setLayout(new GridBagLayout());
                         frame.add(label);
-                        frameLabels[i-1]=frame;
+                        digitLabels[i - 1] = frame;
                     }
                     if (i == height-1 && j > 0 && j < width - 1) {
                         String labels = "ABCDEFGH";
@@ -89,6 +91,7 @@ public class ChessboardView extends JPanel {
                         label.setFont(new Font("Dialog", Font.BOLD, 18));
                         frame.setLayout(new GridBagLayout());
                         frame.add(label);
+                        letterLabels[j - 1] = frame;
                     }
                     add(frame);
                 } else {
@@ -171,7 +174,7 @@ public class ChessboardView extends JPanel {
         for (int i = 0; i < width - 2; i++) {
             for (int j = 0; j < height - 2; j++) {
                 chessboardSquares[i][j].addActionListener(actionListener);
-                chessboardSquares[i][j].setActionCommand("" + (7 - j) + " " + (7 - i));
+                chessboardSquares[i][j].setActionCommand("" + j + " " + (7 - i));
             }
         }
     }
@@ -230,19 +233,19 @@ public class ChessboardView extends JPanel {
         if (figure.getClass() != EmptySquare.class) {
             if (figure.getChessColour() == ChessColour.WHITE) {
                 if (rotated)
-                    chessboardSquares[position.y][position.x].setIcon(whitePiecesIcons.get(figure.label));
+                    chessboardSquares[position.y][7 - position.x].setIcon(whitePiecesIcons.get(figure.label));
                 else
-                    chessboardSquares[7 - position.y][7 - position.x].setIcon(whitePiecesIcons.get(figure.label));
+                    chessboardSquares[7 - position.y][position.x].setIcon(whitePiecesIcons.get(figure.label));
             } else {
                 if (rotated)
-                    chessboardSquares[position.y][position.x].setIcon(blackPiecesIcons.get(figure.label));
+                    chessboardSquares[position.y][7 - position.x].setIcon(blackPiecesIcons.get(figure.label));
                 else
-                    chessboardSquares[7 - position.y][7 - position.x].setIcon(blackPiecesIcons.get(figure.label));
+                    chessboardSquares[7 - position.y][position.x].setIcon(blackPiecesIcons.get(figure.label));
             }
         } else {
-            if (rotated) chessboardSquares[position.y][position.x].setIcon(transparentIcon);
+            if (rotated) chessboardSquares[position.y][7 - position.x].setIcon(transparentIcon);
             else
-                chessboardSquares[7 - position.y][7 - position.x].setIcon(transparentIcon);
+                chessboardSquares[7 - position.y][position.x].setIcon(transparentIcon);
         }
     }
 
@@ -255,8 +258,8 @@ public class ChessboardView extends JPanel {
 
     public void highlightPosition(Position a) {
 
-        if (rotated) chessboardSquares[a.y][a.x].setBackground(highlightColor);
-        else chessboardSquares[7 - a.y][7 - a.x].setBackground(highlightColor);
+        if (rotated) chessboardSquares[a.y][7 - a.x].setBackground(highlightColor);
+        else chessboardSquares[7 - a.y][a.x].setBackground(highlightColor);
     }
 
     private void highlightPossiblePositions(ArrayList<Move> list, boolean highlightPromotionMoves) {
@@ -274,8 +277,8 @@ public class ChessboardView extends JPanel {
     }
 
     private void highlightRedPosition(Position a) {
-        if (rotated) chessboardSquares[a.y][a.x].setBackground(highlightRedColor);
-        else chessboardSquares[7 - a.y][7 - a.x].setBackground(highlightRedColor);
+        if (rotated) chessboardSquares[a.y][7 - a.x].setBackground(highlightRedColor);
+        else chessboardSquares[7 - a.y][a.x].setBackground(highlightRedColor);
     }
 
     private void highlightIfKingUnderAttack() {
@@ -314,8 +317,8 @@ public class ChessboardView extends JPanel {
     private void rotate(){
         for (int i = 0; i < height - 2; i++) {
             for (int j = 0; j < width - 2; j++) {
-                if(rotated) chessboardSquares[i][j].setActionCommand((7-j) + " " +  (7-i));
-                else chessboardSquares[i][j].setActionCommand( j + " " +  i);
+                if (rotated) chessboardSquares[i][j].setActionCommand(j + " " + (7 - i));
+                else chessboardSquares[i][j].setActionCommand((7 - j) + " " + i);
             }
         }
         for(int i=0; i<height-2; i++){
@@ -326,8 +329,20 @@ public class ChessboardView extends JPanel {
                 frameLabel=new JLabel(""+(8-i));
             }
             frameLabel.setFont(new Font("Dialog", Font.BOLD, 18));
-            frameLabels[i].removeAll();
-            frameLabels[i].add(frameLabel);
+            digitLabels[i].removeAll();
+            digitLabels[i].add(frameLabel);
+        }
+        String rotatedLabels = "HGFEDCBA", labels = "ABCDEFGH";
+        for (int i = 1; i < width - 1; i++) {
+            JLabel label;
+            if (rotated) {
+                label = new JLabel(labels.substring(i - 1, i));
+            } else {
+                label = new JLabel(rotatedLabels.substring(i - 1, i));
+            }
+            label.setFont(new Font("Dialog", Font.BOLD, 18));
+            letterLabels[i - 1].removeAll();
+            letterLabels[i - 1].add(label);
         }
         rotated=!rotated;
 
