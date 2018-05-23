@@ -28,8 +28,7 @@ public class Move {
         this.to = to;
     }
 
-    public Move(Position from, Position to,
-         ChessPiece chosenChessPiece){
+    public Move(Position from, Position to, ChessPiece chosenChessPiece){
         this.from = from;
         this.to = to;
         this.promoteTo = chosenChessPiece;

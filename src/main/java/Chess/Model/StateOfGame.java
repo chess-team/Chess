@@ -66,4 +66,12 @@ public class StateOfGame implements Serializable{
         historyOfMoves.undoMove();
         reload();
     }
+
+    public StateOfGameplay colorOfLastMove(){
+        Move v = historyOfMoves.lastMove();
+        undoMove();
+        StateOfGameplay ret = stateOfGameplay;
+        StateOfGame.variant.changeState(v);
+        return ret;
+    }
 }
