@@ -49,7 +49,7 @@ public class ChessboardView extends JPanel {
         return blackPiecesIcons;
     }
 
-    public final Dimension getPreferredSize() {
+    /*public final Dimension getPreferredSize() {
         Dimension d = super.getPreferredSize();
         Dimension prefSize;
         Component c = getParent();
@@ -67,7 +67,7 @@ public class ChessboardView extends JPanel {
         // the smaller of the two sizes
         int s = (w > h ? h : w);
         return new Dimension(s, s);
-    }
+    }*/
 
 
     //chessboard with frame and labels

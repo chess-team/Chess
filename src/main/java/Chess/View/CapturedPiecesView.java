@@ -26,7 +26,7 @@ public class CapturedPiecesView extends JPanel{
     }
 
     private void initCapturedPiecesView(){
-        height=StateOfGame.chessboard.getYWidth()+2;
+        height = StateOfGame.chessboard.getYWidth();
         width=4;
         setLayout(new GridLayout(height,width));
         capturedPieces= new JLabel[height][width];
