@@ -12,6 +12,8 @@ Class that implements rules of Classic chess.
  */
 public class ClassicChess extends VariantSimilarToClassicChess {
 
+    public static boolean isCheck = true;
+
     private ChessColour colorOfLastMovedPiece = ChessColour.BLACK;
 
 
@@ -104,6 +106,7 @@ public class ClassicChess extends VariantSimilarToClassicChess {
     }
 
     public void initializeStateOfGame() {
+        isCheck = true;
         setClassicState();
         Castling.castlingDisabled = false;
         colorOfLastMovedPiece = ChessColour.BLACK;

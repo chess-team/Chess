@@ -7,6 +7,7 @@ import Chess.Model.ChessPieces.ChessPiece;
 import Chess.Model.ChessPieces.EmptySquare;
 import Chess.Model.ChessPieces.King;
 import Chess.Model.ChessPieces.Queen;
+import Chess.Model.GameVariants.ClassicChess;
 import Chess.Model.Moves.Move;
 
 import java.util.ArrayList;
@@ -94,7 +95,7 @@ public class ChessUtil {
 
     static public ArrayList<Position>
     getPositionsThatAttacksTheKing(Position place){
-        if(place == null) return new ArrayList<>();
+        if(place == null || !ClassicChess.isCheck) return new ArrayList<>();
         ChessColour kingColor = StateOfGame.chessboard.
                 getChessPieceOnPosition(place).getChessColour();
         ArrayList<Position> resultList = new ArrayList<>();

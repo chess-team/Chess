@@ -14,6 +14,7 @@ public class KillKingChess extends ClassicChess {
     @Override
     public void initializeStateOfGame() {
         super.initializeStateOfGame();
+        ClassicChess.isCheck = false;
         Castling.castlingDisabled = true;
     }
 
