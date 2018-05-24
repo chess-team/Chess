@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PlayerMoveView extends JLabel{
-    public PlayerMoveView(){
+    PlayerMoveView() {
         super();
         setText("WHITE PLAYER MOVE");
         setFont(new Font("Dialog", Font.BOLD, 20));
@@ -23,6 +23,16 @@ public class PlayerMoveView extends JLabel{
             setText("DRAW");
         }else{
             setText("WHITE PLAYER WON");
+        }
+    }
+
+    public void scale(int type) {
+        if (type == 0) {
+            setFont(new Font("Dialog", Font.BOLD, 20));
+        } else if (type == 1) {
+            setFont(new Font("Dialog", Font.BOLD, 16));
+        } else {
+            setFont(new Font("Dialog", Font.BOLD, 10));
         }
     }
 }

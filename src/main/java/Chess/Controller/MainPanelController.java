@@ -1,13 +1,11 @@
 package Chess.Controller;
 
-import Chess.Model.Chessboard;
+
 import Chess.View.MainFrameView;
 import Chess.View.MainPanelView;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 
 public class MainPanelController {
 
@@ -22,6 +20,7 @@ public class MainPanelController {
         this.chessboardController = new ChessboardController(mainFrameView);
         this.mainPanelView = mainFrameView.getMainPanelView();
         setKeyStrokes();
+        addComponentResized();
     }
 
     private void setKeyStrokes() {
@@ -44,6 +43,22 @@ public class MainPanelController {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 chessboardController.switchRotation();
+            }
+        });
+    }
+
+    private void addComponentResized() {
+        mainFrameView.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent componentEvent) {
+                super.componentResized(componentEvent);
+                if (mainFrameView.getWidth() <= 850 || mainFrameView.getHeight() <= 350) {
+                    mainPanelView.scale(2);
+                } else if (mainFrameView.getWidth() <= 1000 || mainFrameView.getHeight() <= 570) {
+                    mainPanelView.scale(1);
+                } else {
+                    mainPanelView.scale(0);
+                }
             }
         });
     }

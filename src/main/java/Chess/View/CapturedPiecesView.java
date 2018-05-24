@@ -40,31 +40,10 @@ public class CapturedPiecesView extends JPanel{
 
     }
 
-    public final Dimension getPreferredSize() {
-        Dimension d = super.getPreferredSize();
-        Dimension prefSize;
-        Component c = getParent();
-        if (c == null) {
-            prefSize = new Dimension(
-                    (int) d.getWidth(), (int) d.getHeight());
-        } else if (c.getWidth() > d.getWidth() &&
-                c.getHeight() > d.getHeight()) {
-            prefSize = c.getSize();
-        } else {
-            prefSize = d;
-        }
-        int w = (int) prefSize.getWidth();
-        int h = (int) prefSize.getHeight();
-        // the smaller of the two sizes
-        int s = (w > h ? h : w);
-        return new Dimension(s, s);
-    }
-
 
     public void setPiecesIcons(Map<Character, ImageIcon> piecesIcons){
         this.piecesIcons=piecesIcons;
     }
-
 
     public void updateCapturedPiecesView(){
         for(int i=0; i<height; i++){

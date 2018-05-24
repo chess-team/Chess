@@ -38,7 +38,6 @@ public class MainPanelView extends JPanel {
 
         c.gridx = 2;
         c.gridy = 1;
-        c.fill = GridBagConstraints.NONE;
         c.anchor=GridBagConstraints.PAGE_END;
         this.add(playerMoveView,c);
     }
@@ -57,5 +56,13 @@ public class MainPanelView extends JPanel {
 
     public ChessboardView getChessboardView() {
         return chessboardView;
+    }
+
+    public void scale(int type) {
+        playerMoveView.scale(type);
+        chessboardView.scale(type);
+        capturedPiecesViewWhite.setPiecesIcons(chessboardView.getWhitePiecesIcons());
+        capturedPiecesViewBlack.setPiecesIcons(chessboardView.getBlackPiecesIcons());
+        updateMainPanelView();
     }
 }

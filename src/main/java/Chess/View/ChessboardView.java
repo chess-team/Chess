@@ -27,8 +27,8 @@ public class ChessboardView extends JPanel {
     private Color highlightColor = new Color(0, 255, 255);
     private Color highlightRedColor = new Color(220, 20, 60);
     private boolean rotated = false, rotation=false;
-    private JPanel[] digitLabels;
-    private JPanel[] letterLabels;
+    private JLabel[] digitLabels;
+    private JLabel[] letterLabels;
 
     ChessboardView() {
         super();
@@ -36,9 +36,9 @@ public class ChessboardView extends JPanel {
         width = StateOfGame.chessboard.getYWidth() + 2;
         setLayout(new GridLayout(width, height));
         chessboardSquares = new JButton[width - 2][height - 2];
-        digitLabels = new JPanel[height - 2];
-        letterLabels = new JPanel[width - 2];
-        initChessboardFrame(0, 0);
+        digitLabels = new JLabel[height - 2];
+        letterLabels = new JLabel[width - 2];
+        initChessboardFrame();
     }
 
     public Map<Character, ImageIcon> getWhitePiecesIcons() {
@@ -49,29 +49,9 @@ public class ChessboardView extends JPanel {
         return blackPiecesIcons;
     }
 
-    /*public final Dimension getPreferredSize() {
-        Dimension d = super.getPreferredSize();
-        Dimension prefSize;
-        Component c = getParent();
-        if (c == null) {
-            prefSize = new Dimension(
-                    (int) d.getWidth(), (int) d.getHeight());
-        } else if (c.getWidth() > d.getWidth() &&
-                c.getHeight() > d.getHeight()) {
-            prefSize = c.getSize();
-        } else {
-            prefSize = d;
-        }
-        int w = (int) prefSize.getWidth();
-        int h = (int) prefSize.getHeight();
-        // the smaller of the two sizes
-        int s = (w > h ? h : w);
-        return new Dimension(s, s);
-    }*/
-
 
     //chessboard with frame and labels
-    private void initChessboardFrame(int colorType, int iconsType) {
+    private void initChessboardFrame() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (isFrame(i, j)) {
@@ -82,7 +62,7 @@ public class ChessboardView extends JPanel {
                         label.setFont(new Font("Dialog", Font.BOLD, 18));
                         frame.setLayout(new GridBagLayout());
                         frame.add(label);
-                        digitLabels[i - 1] = frame;
+                        digitLabels[i - 1] = label;
                     }
                     if (i == height-1 && j > 0 && j < width - 1) {
                         String labels = "ABCDEFGH";
@@ -90,7 +70,7 @@ public class ChessboardView extends JPanel {
                         label.setFont(new Font("Dialog", Font.BOLD, 18));
                         frame.setLayout(new GridBagLayout());
                         frame.add(label);
-                        letterLabels[j - 1] = frame;
+                        letterLabels[j - 1] = label;
                     }
                     add(frame);
                 } else {
@@ -104,8 +84,8 @@ public class ChessboardView extends JPanel {
                 }
             }
         }
-        setColor(colorType);
-        setIcons(iconsType);
+        setColor(0);
+        setIcons();
     }
 
     public void setColor(int type) {
@@ -152,15 +132,9 @@ public class ChessboardView extends JPanel {
     }
 
 
-    private void setIcons(int type) {
-        switch (type) {
-            case 0:
+    private void setIcons() {
                 loadIconsType0();
-                break;
-            default:
-                loadIconsType0();
-                break;
-        }
+
         for (int i = 0; i < width - 2; i++) {
             for (int j = 0; j < height - 2; j++) {
                 Position position = new Position(i, j);
@@ -216,6 +190,94 @@ public class ChessboardView extends JPanel {
             buf = read(pic);
             whitePiecesIcons.put('W', new ImageIcon(buf));
             pic = new File("src/main/resources/whiteKnight1.png");
+            buf = read(pic);
+            whitePiecesIcons.put('K', new ImageIcon(buf));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadIconsType2() {
+        try {
+            BufferedImage buf;
+            File pic = new File("src/main/resources/blackPawn1small.png");
+            buf = read(pic);
+            blackPiecesIcons.put('P', new ImageIcon(buf));
+            pic = new File("src/main/resources/blackRook1small.png");
+            buf = read(pic);
+            blackPiecesIcons.put('R', new ImageIcon(buf));
+            pic = new File("src/main/resources/blackKing1small.png");
+            buf = read(pic);
+            blackPiecesIcons.put('W', new ImageIcon(buf));
+            pic = new File("src/main/resources/blackQueen1small.png");
+            buf = read(pic);
+            blackPiecesIcons.put('Q', new ImageIcon(buf));
+            pic = new File("src/main/resources/blackBishop1small.png");
+            buf = read(pic);
+            blackPiecesIcons.put('B', new ImageIcon(buf));
+            pic = new File("src/main/resources/blackKnight1small.png");
+            buf = read(pic);
+            blackPiecesIcons.put('K', new ImageIcon(buf));
+            pic = new File("src/main/resources/whiteRook1small.png");
+            buf = read(pic);
+            whitePiecesIcons.put('R', new ImageIcon(buf));
+            pic = new File("src/main/resources/whitePawn1small.png");
+            buf = read(pic);
+            whitePiecesIcons.put('P', new ImageIcon(buf));
+            pic = new File("src/main/resources/whiteBishop1small.png");
+            buf = read(pic);
+            whitePiecesIcons.put('B', new ImageIcon(buf));
+            pic = new File("src/main/resources/whiteQueen1small.png");
+            buf = read(pic);
+            whitePiecesIcons.put('Q', new ImageIcon(buf));
+            pic = new File("src/main/resources/whiteKing1small.png");
+            buf = read(pic);
+            whitePiecesIcons.put('W', new ImageIcon(buf));
+            pic = new File("src/main/resources/whiteKnight1small.png");
+            buf = read(pic);
+            whitePiecesIcons.put('K', new ImageIcon(buf));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadIconsType1() {
+        try {
+            BufferedImage buf;
+            File pic = new File("src/main/resources/blackPawn1medium.png");
+            buf = read(pic);
+            blackPiecesIcons.put('P', new ImageIcon(buf));
+            pic = new File("src/main/resources/blackRook1medium.png");
+            buf = read(pic);
+            blackPiecesIcons.put('R', new ImageIcon(buf));
+            pic = new File("src/main/resources/blackKing1medium.png");
+            buf = read(pic);
+            blackPiecesIcons.put('W', new ImageIcon(buf));
+            pic = new File("src/main/resources/blackQueen1medium.png");
+            buf = read(pic);
+            blackPiecesIcons.put('Q', new ImageIcon(buf));
+            pic = new File("src/main/resources/blackBishop1medium.png");
+            buf = read(pic);
+            blackPiecesIcons.put('B', new ImageIcon(buf));
+            pic = new File("src/main/resources/blackKnight1medium.png");
+            buf = read(pic);
+            blackPiecesIcons.put('K', new ImageIcon(buf));
+            pic = new File("src/main/resources/whiteRook1medium.png");
+            buf = read(pic);
+            whitePiecesIcons.put('R', new ImageIcon(buf));
+            pic = new File("src/main/resources/whitePawn1medium.png");
+            buf = read(pic);
+            whitePiecesIcons.put('P', new ImageIcon(buf));
+            pic = new File("src/main/resources/whiteBishop1medium.png");
+            buf = read(pic);
+            whitePiecesIcons.put('B', new ImageIcon(buf));
+            pic = new File("src/main/resources/whiteQueen1medium.png");
+            buf = read(pic);
+            whitePiecesIcons.put('Q', new ImageIcon(buf));
+            pic = new File("src/main/resources/whiteKing1medium.png");
+            buf = read(pic);
+            whitePiecesIcons.put('W', new ImageIcon(buf));
+            pic = new File("src/main/resources/whiteKnight1medium.png");
             buf = read(pic);
             whitePiecesIcons.put('K', new ImageIcon(buf));
         } catch (Exception e) {
@@ -326,8 +388,7 @@ public class ChessboardView extends JPanel {
                 frameLabel=new JLabel(""+(8-i));
             }
             frameLabel.setFont(new Font("Dialog", Font.BOLD, 18));
-            digitLabels[i].removeAll();
-            digitLabels[i].add(frameLabel);
+            digitLabels[i] = frameLabel;
         }
         String rotatedLabels = "HGFEDCBA", labels = "ABCDEFGH";
         for (int i = 1; i < width - 1; i++) {
@@ -338,8 +399,7 @@ public class ChessboardView extends JPanel {
                 label = new JLabel(rotatedLabels.substring(i - 1, i));
             }
             label.setFont(new Font("Dialog", Font.BOLD, 18));
-            letterLabels[i - 1].removeAll();
-            letterLabels[i - 1].add(label);
+            letterLabels[i - 1] = label;
         }
         rotated=!rotated;
 
@@ -347,6 +407,22 @@ public class ChessboardView extends JPanel {
 
     public void switchRotation(){
         rotation=!rotation;
+    }
+
+    public void scale(int type) {
+        if (type == 0) {
+            loadIconsType0();
+            for (int i = 0; i < height - 2; i++) digitLabels[i].setFont(new Font("Dialog", Font.BOLD, 18));
+            for (int i = 0; i < width - 2; i++) letterLabels[i].setFont(new Font("Dialog", Font.BOLD, 18));
+        } else if (type == 1) {
+            loadIconsType1();
+            for (int i = 0; i < height - 2; i++) digitLabels[i].setFont(new Font("Dialog", Font.BOLD, 16));
+            for (int i = 0; i < width - 2; i++) letterLabels[i].setFont(new Font("Dialog", Font.BOLD, 16));
+        } else {
+            loadIconsType2();
+            for (int i = 0; i < height - 2; i++) digitLabels[i].setFont(new Font("Dialog", Font.BOLD, 10));
+            for (int i = 0; i < width - 2; i++) letterLabels[i].setFont(new Font("Dialog", Font.BOLD, 10));
+        }
     }
 
 }
