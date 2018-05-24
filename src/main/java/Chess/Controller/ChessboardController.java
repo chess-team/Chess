@@ -132,7 +132,6 @@ class ChessboardController {
 
 
     private void checkState() {
-        System.out.println(StateOfGame.getStateOfGameplay());
         if (gameOver()) {
             showEndGameDialog();
             restartGame();
@@ -160,11 +159,14 @@ class ChessboardController {
     }
 
     void makeComputerMoves() {
+        int tmp = 0;
         while (!gameOver() && isComputerTurn()) {
-            System.out.println("AI made a move");
+            tmp++;
             StateOfGame.variant.changeState(player.getAIMove());
             mainPanelView.updateMainPanelView();
         }
+        if( tmp > 0 )
+            System.out.println("Number of AI moves: " + tmp);
         checkState();
     }
 
@@ -192,19 +194,24 @@ class ChessboardController {
     void undoMove() {
         if (modeOfGame.equals("Both")) StateOfGame.undoMove();
         else {
-            if (modeOfGame.equals("White")) {
-                while (StateOfGame.colorOfLastMove().equals(StateOfGameplay.BLACK_MOVE)) {
-                    StateOfGame.undoMove();
-                }
-            }
-            if (modeOfGame.equals("Black")) {
-                while (StateOfGame.colorOfLastMove().equals(StateOfGameplay.WHITE_MOVE)) {
-                    StateOfGame.undoMove();
-                }
+            while (lastMoveWasComputerMove()) {
+                StateOfGame.undoMove();
             }
             StateOfGame.undoMove();
+            makeComputerMoves();
         }
         mainPanelView.updateMainPanelView();
+    }
+
+    private boolean lastMoveWasComputerMove() {
+        if (StateOfGame.historyOfMoves.lastMove() == null)
+            return false;
+        if (modeOfGame.equals("White")) {
+            return StateOfGame.colorOfLastMove().equals(StateOfGameplay.BLACK_MOVE);
+        } else if (modeOfGame.equals("Black")) {
+            return StateOfGame.colorOfLastMove().equals(StateOfGameplay.WHITE_MOVE);
+        }
+        return false;
     }
 
     void switchRotation() {
