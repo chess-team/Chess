@@ -4,13 +4,10 @@ Class that hold information about move (change of state of game) that player
 can make.
  */
 
+import Chess.Model.*;
 import Chess.Model.ChessPieces.ChessPiece;
 import Chess.Model.ChessPieces.EmptySquare;
 import Chess.Model.ChessPieces.Knight;
-import Chess.Model.ChessUtil;
-import Chess.Model.Position;
-import Chess.Model.StateOfGame;
-import Chess.Model.StateOfGameplay;
 
 public class Move {
     public Position from, to;
@@ -31,7 +28,16 @@ public class Move {
     public Move(Position from, Position to, ChessPiece chosenChessPiece){
         this.from = from;
         this.to = to;
-        this.promoteTo = chosenChessPiece;
+        ChessPiece t = chosenChessPiece;
+        try {
+            t = chosenChessPiece.getClass().getConstructor(ChessColour.class, Position.class).
+                    newInstance(chosenChessPiece.getChessColour(), to);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        t.setPosition(to);
+        this.promoteTo = t;
         isPromotion = true;
     }
 

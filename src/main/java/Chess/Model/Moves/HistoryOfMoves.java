@@ -24,7 +24,14 @@ public class HistoryOfMoves implements Serializable{
     }
 
     public void addMove(Move v){
-        lastMoves.add(v);
+        Move t;
+        if(v.isPromotion){
+            t = new Move(v.from, v.to, v.promoteTo);
+        }
+        else {
+            t = new Move(v.from, v.to);
+        }
+        lastMoves.add(t);
         chessboardsStates.add(StateOfGame.chessboard.toString());
     }
 
