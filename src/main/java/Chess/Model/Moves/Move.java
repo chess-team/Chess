@@ -5,9 +5,7 @@ can make.
  */
 
 import Chess.Model.*;
-import Chess.Model.ChessPieces.ChessPiece;
-import Chess.Model.ChessPieces.EmptySquare;
-import Chess.Model.ChessPieces.Knight;
+import Chess.Model.ChessPieces.*;
 
 public class Move {
     public Position from, to;
@@ -72,7 +70,7 @@ public class Move {
 
     }
 
-    public boolean isBreakingRules() {
+    public boolean isBreakingMoveRules() {
         if (isOutsideBoard()) {
             return true;
         }
@@ -98,13 +96,29 @@ public class Move {
         if (movedChessPiece.isBreakingRules(this)) {
             return true;
         }
-
+        ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(from);
+        if (promoteTo != null && !(figure instanceof Pawn)) {
+            return true;
+        }
         // checks if move is not blocked by some chess piece
-        return !(StateOfGame.chessboard.getChessPieceOnPosition(from)
-                instanceof Knight) && ChessUtil.isMovePassingThroughFigure(this);
+        return !(figure instanceof Knight)
+                && ChessUtil.isMovePassingThroughFigure(this);
     }
 
-    public StateOfGameplay getMoveColor() {
+    public boolean isNotBreakingRules() {
+        ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(from);
+
+        if (figure instanceof King &&
+                differenceOnXCoordinate() > 1) {
+            int sign = ChessUtil.signum(to.x - from.x);
+            return StateOfGame.variant.validateMove(new Castling(to.translateByVector(sign, 0)));
+        }
+
+        return !isBreakingMoveRules() && getMoveColor() == StateOfGame.stateOfGameplay;
+
+    }
+
+    StateOfGameplay getMoveColor() {
         ChessPiece movedChessPiece = StateOfGame.chessboard.
                 getChessPieceOnPosition(from);
         switch (movedChessPiece.getChessColour()) {

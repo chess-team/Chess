@@ -30,7 +30,7 @@ public class DoubleMoveChess extends KillKingChess {
         ++numberOfConsecutiveSameColorMoves;
         if (numberOfConsecutiveSameColorMoves == 2) {
             numberOfConsecutiveSameColorMoves = 0;
-            swapColor();
+            //swapColor();
             swapPlayerColor();
         }
         inCaseOfEndOfGame();

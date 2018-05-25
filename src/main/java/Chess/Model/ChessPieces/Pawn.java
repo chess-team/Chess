@@ -23,18 +23,20 @@ public class Pawn extends ChessPiece {
     public ArrayList<Move> listOfPossibleMoves() {
         ArrayList<Move> resultList = new ArrayList<>();
 
-        int j = 0;
+        int y;
         switch (this.getChessColour()) {
             case BLACK:
-                j = -1;
+                y = -1;
                 break;
             case WHITE:
-                j = 1;
+                y = 1;
                 break;
+            default:
+                throw new RuntimeException();
         }
         for (int i = -1; i <= 1; ++i) {
             Move v = new Move(getPosition(),
-                    getPosition().translateByVector(i, j));
+                    getPosition().translateByVector(i, y));
 
             if (v.to.y == 0 || v.to.y == StateOfGame.chessboard.getYWidth() - 1) {
                 ArrayList<ChessPiece> temp = new ArrayList<>();
@@ -55,7 +57,7 @@ public class Pawn extends ChessPiece {
             }
         }
         Move v = new Move(getPosition(),
-                getPosition().translateByVector(0, 2 * j));
+                getPosition().translateByVector(0, 2 * y));
 
         if (StateOfGame.variant.validateMove(v)) {
             resultList.add(v);
@@ -90,6 +92,8 @@ public class Pawn extends ChessPiece {
                     return true;
                 }
                 break;
+            default:
+                throw new RuntimeException();
         }
         if (differenceOnYCoordinate == 2) {
             if (differenceOnXCoordinate != 0) {

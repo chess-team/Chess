@@ -22,17 +22,14 @@ public abstract class ChessPiece {
     abstract public ArrayList<Move> listOfPossibleMoves();
 
     public Position getPosition() {
-
         return positionOnChessboard;
     }
 
     public ChessColour getChessColour() {
-
         return this.chessColour;
     }
 
     public void setPosition(Position a) {
-
         this.positionOnChessboard = a;
     }
 

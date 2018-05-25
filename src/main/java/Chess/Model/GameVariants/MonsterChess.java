@@ -38,7 +38,7 @@ public class MonsterChess extends KillKingChess {
         }
         if (numberOfConsecutiveSameColorMoves == numberOfAllowedPlayerMoves) {
             numberOfConsecutiveSameColorMoves = 0;
-            swapColor();
+            //swapColor();
             swapPlayerColor();
         }
         inCaseOfEndOfGame();

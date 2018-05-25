@@ -3,7 +3,6 @@ package Chess.Model.GameVariants;
 import Chess.Model.*;
 import Chess.Model.ChessPieces.*;
 import Chess.Model.Moves.Move;
-import Chess.Model.Moves.SpecialMoves;
 
 import java.util.ArrayList;
 
@@ -16,12 +15,10 @@ abstract class VariantSimilarToClassicChess implements VariantOfGame {
 
     static {StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;}
 
-    abstract public SpecialMoves getSpecialMoves();
-
     // checks if move doesn't violate any rules about moving figures
     // without constraints about Chess.Model.ChessPieces.King protection.
-    boolean isMovePossibleWithoutKingProtection(Move move){
-        return !(move.isBreakingRules());
+    private boolean isMovePossibleWithoutKingProtection(Move move){
+        return !(move.isBreakingMoveRules());
     }
 
     // check if king is under attack

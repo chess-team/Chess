@@ -45,7 +45,7 @@ public class ProgressiveChessTakeAll extends KillKingChess {
         ++numberOfConsecutiveSameColorMoves;
         if (numberOfConsecutiveSameColorMoves == numberOfMovesInTurn) {
             numberOfConsecutiveSameColorMoves = 0;
-            swapColor();
+            //swapColor();
             swapPlayerColor();
             ++numberOfMovesInTurn;
         }

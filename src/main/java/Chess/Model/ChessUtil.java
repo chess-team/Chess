@@ -104,13 +104,13 @@ public class ChessUtil {
                 ChessColour colorOfChessPiece = StateOfGame.chessboard.
                         getChessPieceOnPosition(new Position(i, j)).getChessColour();
                 if (colorOfChessPiece == kingColor) continue;
-                if (!(new Move(new Position(i, j), place)).isBreakingRules()) {
+                if (!(new Move(new Position(i, j), place)).isBreakingMoveRules()) {
                     resultList.add(new Position(i, j));
                 } else if (!(new Move(new Position(i, j), place,
-                        new Queen(ChessColour.BLACK, new Position(i, j)))).isBreakingRules()) {
+                        new Queen(ChessColour.BLACK, new Position(i, j)))).isBreakingMoveRules()) {
                     resultList.add(new Position(i, j));
                 } else if (!(new Move(new Position(i, j), place,
-                        new Queen(ChessColour.WHITE, new Position(i, j)))).isBreakingRules()) {
+                        new Queen(ChessColour.WHITE, new Position(i, j)))).isBreakingMoveRules()) {
                     resultList.add(new Position(i, j));
                 }
             }
