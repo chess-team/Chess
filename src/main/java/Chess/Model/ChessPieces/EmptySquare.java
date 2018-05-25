@@ -9,11 +9,13 @@ Class uses null object pattern. Class represent that there is no figure
 on some position. Class is also used to print empty square.
  */
 
-public class EmptySquare extends ChessPiece{
+public class EmptySquare extends ChessPiece {
 
-    {label = '.';}
+    {
+        label = '.';
+    }
 
-    public EmptySquare(Position b){
+    public EmptySquare(Position b) {
         super(null, b);
     }
 

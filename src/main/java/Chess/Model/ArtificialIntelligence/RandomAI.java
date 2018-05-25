@@ -11,10 +11,10 @@ import java.util.concurrent.ThreadLocalRandom;
 /*
 AI making random moves
  */
-public class RandomAI implements AI{
+public class RandomAI implements AI {
     @Override
     public Move getAIMove() {
-        switch (StateOfGame.getStateOfGameplay()){
+        switch (StateOfGame.getStateOfGameplay()) {
             case WHITE_MOVE:
                 List<Move> tempList = ChessUtil.listOfAllMoves(ChessColour.WHITE);
                 int n = tempList.size();

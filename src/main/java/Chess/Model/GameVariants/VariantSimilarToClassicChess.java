@@ -36,8 +36,8 @@ abstract class VariantSimilarToClassicChess implements VariantOfGame {
     boolean isPlaceUnderAttack(
             Position place, ChessColour enemyColor) {
 
-        for(int i = 0; i < 8; ++i){
-            for(int j = 0; j < 8; ++j){
+        for(int i = 0; i < StateOfGame.chessboard.getXWidth(); ++i){
+            for(int j = 0; j < StateOfGame.chessboard.getYWidth(); ++j){
                 ChessColour colorOfChessPiece = StateOfGame.chessboard.
                         getChessPieceOnPosition(new Position(i,j)).getChessColour();
                 if(colorOfChessPiece != enemyColor)continue;

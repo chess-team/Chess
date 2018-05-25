@@ -48,7 +48,7 @@ public class ClassicChess extends VariantSimilarToClassicChess {
 
     // return true if castling move is correct.
     private boolean validateMove(Castling move) {
-        if(move.isBreakingRules()){
+        if (move.isBreakingRules()) {
             return false;
         }
 
@@ -199,12 +199,12 @@ public class ClassicChess extends VariantSimilarToClassicChess {
                 getChessPieceOnPosition(towerPosition).getChessColour();
 
         Position kingPosition = ChessUtil.getKingPosition(colorOfPlayer);
-        if(kingPosition == null) {
+        if (kingPosition == null) {
             throw new NullPointerException();
         }
         int sign = ChessUtil.signum(towerPosition.x - kingPosition.x);
-        Position newKingPosition = towerPosition.translateByVector(-sign,0);
-        Position newTowerPosition = newKingPosition.translateByVector(-sign,0);
+        Position newKingPosition = towerPosition.translateByVector(-sign, 0);
+        Position newTowerPosition = newKingPosition.translateByVector(-sign, 0);
         StateOfGame.chessboard.moveFigure(
                 new Move(kingPosition, newKingPosition));
 
@@ -215,14 +215,14 @@ public class ClassicChess extends VariantSimilarToClassicChess {
         changeStateOfGameplay();
     }
 
-    void inCaseOfEndOfGame(){
+    void inCaseOfEndOfGame() {
         ChessColour colorOfPossibleLoser = ChessColour.WHITE;
-        if(StateOfGame.stateOfGameplay == StateOfGameplay.BLACK_MOVE){
+        if (StateOfGame.stateOfGameplay == StateOfGameplay.BLACK_MOVE) {
             colorOfPossibleLoser = ChessColour.BLACK;
         }
-        if(ChessUtil.listOfAllMoves(colorOfPossibleLoser).isEmpty()) {
+        if (ChessUtil.listOfAllMoves(colorOfPossibleLoser).isEmpty()) {
             if (isKingUnderAttack(colorOfPossibleLoser)) {
-                switch (colorOfPossibleLoser){
+                switch (colorOfPossibleLoser) {
                     case WHITE:
                         StateOfGame.stateOfGameplay =
                                 StateOfGameplay.BLACK_WON;
@@ -240,50 +240,50 @@ public class ClassicChess extends VariantSimilarToClassicChess {
     }
 
 
-    private void drawRule50MovesWithoutCapture(){
-        List <String> states = StateOfGame.historyOfMoves
+    private void drawRule50MovesWithoutCapture() {
+        List<String> states = StateOfGame.historyOfMoves
                 .listOfChessboardStates();
         int n = states.size();
-        if(n > 50){
+        if (n > 50) {
             boolean isDraw;
-            String state = states.get(n-50);
+            String state = states.get(n - 50);
             int m = state.length();
             int emptySquareCountBefore = 0;
-            for(int i = 0; i < m; ++i){
-                if(state.charAt(i) == '.'){
+            for (int i = 0; i < m; ++i) {
+                if (state.charAt(i) == '.') {
                     emptySquareCountBefore++;
                 }
             }
             state = StateOfGame.chessboard.toString();
             m = state.length();
             int emptySquareCountNow = 0;
-            for(int i = 0; i < m; ++i){
-                if(state.charAt(i) == '.'){
+            for (int i = 0; i < m; ++i) {
+                if (state.charAt(i) == '.') {
                     emptySquareCountNow++;
                 }
             }
             isDraw = (emptySquareCountBefore == emptySquareCountNow);
-            if(isDraw){
+            if (isDraw) {
                 StateOfGame.stateOfGameplay = StateOfGameplay.DRAW;
             }
         }
     }
 
-    void drawRuleNoPossibleMove(ChessColour colorOfPossibleLoser){
-        if(ChessUtil.listOfAllMoves(colorOfPossibleLoser).isEmpty()) {
+    void drawRuleNoPossibleMove(ChessColour colorOfPossibleLoser) {
+        if (ChessUtil.listOfAllMoves(colorOfPossibleLoser).isEmpty()) {
             StateOfGame.stateOfGameplay = StateOfGameplay.DRAW;
         }
     }
 
-    void drawRule3TimesSamePosition(){
+    void drawRule3TimesSamePosition() {
         String stateOfChessboard = StateOfGame.chessboard.toString();
         List<String> previousStates = StateOfGame.historyOfMoves.
                 listOfChessboardStates();
         int count = 0;
-        for(String temp : previousStates){
-            if(temp.equals(stateOfChessboard))++count;
+        for (String temp : previousStates) {
+            if (temp.equals(stateOfChessboard)) ++count;
         }
-        if(count >= 3){
+        if (count >= 3) {
             StateOfGame.stateOfGameplay = StateOfGameplay.DRAW;
         }
     }
@@ -291,11 +291,11 @@ public class ClassicChess extends VariantSimilarToClassicChess {
     @Override
     public SpecialMoves getSpecialMoves() {
         return playerColor -> {
-            ArrayList <Move> resultList = new ArrayList<>();
-            for(int i = 0; i <= 7; i += 7){
-                for(int j = 0; j <= 7; j += 7){
+            ArrayList<Move> resultList = new ArrayList<>();
+            for (int i = 0; i <= 7; i += 7) {
+                for (int j = 0; j <= 7; j += 7) {
                     Castling move = new Castling(new Position(i, j));
-                    if(StateOfGame.variant.validateMove(move)){
+                    if (StateOfGame.variant.validateMove(move)) {
                         resultList.add(move);
                     }
                 }

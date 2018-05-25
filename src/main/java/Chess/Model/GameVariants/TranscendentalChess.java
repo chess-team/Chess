@@ -12,15 +12,15 @@ public class TranscendentalChess extends ClassicChess {
     public void initializeStateOfGame() {
         setClassicState();
         ArrayList<Integer> temp = new ArrayList<>();
-        for(int i = 1; i <= 8; ++i){
+        for (int i = 1; i <= 8; ++i) {
             temp.add(i);
         }
         Collections.shuffle(temp);
         StateOfGame.chessboard = new ClassicChessboard();
         setLineOfPawns(1, ChessColour.WHITE);
         setLineOfPawns(6, ChessColour.BLACK);
-        setLineOfFigures(0, ChessColour.WHITE,temp);
+        setLineOfFigures(0, ChessColour.WHITE, temp);
         Collections.shuffle(temp);
-        setLineOfFigures(7, ChessColour.BLACK,temp);
+        setLineOfFigures(7, ChessColour.BLACK, temp);
     }
 }

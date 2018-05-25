@@ -19,10 +19,10 @@ public class MonsterChess extends KillKingChess {
         StateOfGame.chessboard = new ClassicChessboard();
         StateOfGame.chessboard.setFigure(
                 new King(ChessColour.WHITE, new Position(
-                        4,0)));
-        for(int i = 2; i < 6; ++i){
+                        4, 0)));
+        for (int i = 2; i < 6; ++i) {
             StateOfGame.chessboard.setFigure(
-                    new Pawn(ChessColour.WHITE, new Position(i,1)));
+                    new Pawn(ChessColour.WHITE, new Position(i, 1)));
         }
         setLineOfPawns(6, ChessColour.BLACK);
         setLineOfFigures(7, ChessColour.BLACK);
@@ -33,10 +33,10 @@ public class MonsterChess extends KillKingChess {
     protected void changeStateOfGameplay() {
         ++numberOfConsecutiveSameColorMoves;
         int numberOfAllowedPlayerMoves = 2;
-        if(StateOfGame.stateOfGameplay == StateOfGameplay.BLACK_MOVE){
+        if (StateOfGame.stateOfGameplay == StateOfGameplay.BLACK_MOVE) {
             numberOfAllowedPlayerMoves = 1;
         }
-        if(numberOfConsecutiveSameColorMoves == numberOfAllowedPlayerMoves) {
+        if (numberOfConsecutiveSameColorMoves == numberOfAllowedPlayerMoves) {
             numberOfConsecutiveSameColorMoves = 0;
             swapColor();
             swapPlayerColor();

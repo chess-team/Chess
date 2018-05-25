@@ -21,17 +21,17 @@ public abstract class ChessPiece {
 
     abstract public ArrayList<Move> listOfPossibleMoves();
 
-    public Position getPosition(){
+    public Position getPosition() {
 
         return positionOnChessboard;
     }
 
-    public ChessColour getChessColour(){
+    public ChessColour getChessColour() {
 
         return this.chessColour;
     }
 
-    public void setPosition(Position a){
+    public void setPosition(Position a) {
 
         this.positionOnChessboard = a;
     }
@@ -40,12 +40,12 @@ public abstract class ChessPiece {
     @Override
     public String toString() {
         String ret = Character.toString(label);
-        if(this.chessColour == ChessColour.BLACK)
+        if (this.chessColour == ChessColour.BLACK)
             ret = Character.toString(Character.toLowerCase(label));
         return ret;
     }
 
-    ChessPiece(ChessColour a, Position b){
+    ChessPiece(ChessColour a, Position b) {
         this.chessColour = a;
         this.positionOnChessboard = b;
     }

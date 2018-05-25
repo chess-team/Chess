@@ -9,11 +9,11 @@ import Chess.Model.StateOfGame;
 AI making first move from the list.
 It is very simple - mainly for testing purposes.
  */
-public class anyMoveAI implements AI{
+public class anyMoveAI implements AI {
 
     @Override
     public Move getAIMove() {
-        switch (StateOfGame.getStateOfGameplay()){
+        switch (StateOfGame.getStateOfGameplay()) {
             case WHITE_MOVE:
                 return ChessUtil.listOfAllMoves(ChessColour.WHITE).get(0);
             case BLACK_MOVE:

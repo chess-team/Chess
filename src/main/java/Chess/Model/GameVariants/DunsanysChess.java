@@ -4,7 +4,7 @@ import Chess.Model.*;
 import Chess.Model.ChessPieces.Pawn;
 
 // modified version of Dunsany's Chess
-public class DunsanysChess extends ClassicChess{
+public class DunsanysChess extends ClassicChess {
 
     public void initializeStateOfGame() {
         super.initializeStateOfGame();
@@ -20,21 +20,21 @@ public class DunsanysChess extends ClassicChess{
     }
 
     @Override
-    protected void inCaseOfEndOfGame(){
+    protected void inCaseOfEndOfGame() {
         ChessColour colorOfPossibleLoser = ChessColour.WHITE;
-        if(StateOfGame.stateOfGameplay == StateOfGameplay.BLACK_MOVE){
+        if (StateOfGame.stateOfGameplay == StateOfGameplay.BLACK_MOVE) {
             colorOfPossibleLoser = ChessColour.BLACK;
         }
-        if(StateOfGame.chessboard.
-                getPositionOfChessPiece(Pawn.class, colorOfPossibleLoser) == null){
+        if (StateOfGame.chessboard.
+                getPositionOfChessPiece(Pawn.class, colorOfPossibleLoser) == null) {
             StateOfGame.stateOfGameplay =
                     StateOfGameplay.BLACK_WON;
             return;
         }
 
-        if(ChessUtil.listOfAllMoves(colorOfPossibleLoser).isEmpty()) {
+        if (ChessUtil.listOfAllMoves(colorOfPossibleLoser).isEmpty()) {
             if (isKingUnderAttack(colorOfPossibleLoser)) {
-                switch (colorOfPossibleLoser){
+                switch (colorOfPossibleLoser) {
                     case WHITE:
                         StateOfGame.stateOfGameplay =
                                 StateOfGameplay.BLACK_WON;
@@ -44,8 +44,7 @@ public class DunsanysChess extends ClassicChess{
                                 StateOfGameplay.WHITE_WON;
                         break;
                 }
-            }
-            else {
+            } else {
                 StateOfGame.stateOfGameplay = StateOfGameplay.DRAW;
             }
         }

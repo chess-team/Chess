@@ -10,14 +10,14 @@ public class Position {
     public final int x;
     public final int y;
 
-    public Position(int a, int b){
+    public Position(int a, int b) {
         this.x = a;
         this.y = b;
     }
 
     // position after translation by a vector [a,b]
-    public Position translateByVector(int a, int b){
-        return new Position(x+a, y+b);
+    public Position translateByVector(int a, int b) {
+        return new Position(x + a, y + b);
     }
 
     @Override
