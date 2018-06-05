@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListOfGameVariants {
-    public List<String> getNamesOfVariants(){
-        ArrayList <String> resultList = new ArrayList<>();
+    public List<String> getNamesOfVariants() {
+        ArrayList<String> resultList = new ArrayList<>();
         resultList.add("classic chess");
         resultList.add("upside down chess");
         resultList.add("chess 960");
@@ -21,8 +21,9 @@ public class ListOfGameVariants {
         resultList.add("Charge of the Light Brigade");
         return resultList;
     }
-    public VariantOfGame getInstance(String name){
-        switch (name){
+
+    public VariantOfGame getInstance(String name) {
+        switch (name) {
             case "classic chess":
                 return new ClassicChess();
             case "upside down chess":

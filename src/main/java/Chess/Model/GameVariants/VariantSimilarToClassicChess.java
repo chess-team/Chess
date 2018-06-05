@@ -3,7 +3,6 @@ package Chess.Model.GameVariants;
 import Chess.Model.*;
 import Chess.Model.ChessPieces.*;
 import Chess.Model.Moves.Move;
-import Chess.Model.Moves.SpecialMoves;
 
 import java.util.ArrayList;
 
@@ -16,12 +15,10 @@ abstract class VariantSimilarToClassicChess implements VariantOfGame {
 
     static {StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_MOVE;}
 
-    abstract public SpecialMoves getSpecialMoves();
-
     // checks if move doesn't violate any rules about moving figures
     // without constraints about Chess.Model.ChessPieces.King protection.
-    boolean isMovePossibleWithoutKingProtection(Move move){
-        return !(move.isBreakingRules());
+    private boolean isMovePossibleWithoutKingProtection(Move move){
+        return !(move.isBreakingMoveRules());
     }
 
     // check if king is under attack
@@ -36,8 +33,8 @@ abstract class VariantSimilarToClassicChess implements VariantOfGame {
     boolean isPlaceUnderAttack(
             Position place, ChessColour enemyColor) {
 
-        for(int i = 0; i < 8; ++i){
-            for(int j = 0; j < 8; ++j){
+        for(int i = 0; i < StateOfGame.chessboard.getXWidth(); ++i){
+            for(int j = 0; j < StateOfGame.chessboard.getYWidth(); ++j){
                 ChessColour colorOfChessPiece = StateOfGame.chessboard.
                         getChessPieceOnPosition(new Position(i,j)).getChessColour();
                 if(colorOfChessPiece != enemyColor)continue;

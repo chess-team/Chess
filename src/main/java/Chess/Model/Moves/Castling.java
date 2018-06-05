@@ -2,12 +2,12 @@ package Chess.Model.Moves;
 
 import Chess.Model.*;
 
-public class Castling extends SpecialMove{
+public class Castling extends SpecialMove {
     private final Position towerPosition;
 
     static public boolean castlingDisabled = false;
 
-    public Castling(Position positionOfTower){
+    public Castling(Position positionOfTower) {
         towerPosition = positionOfTower;
     }
 
@@ -17,13 +17,13 @@ public class Castling extends SpecialMove{
 
     @Override
     public String toString() {
-        return "castling - tower position:"  + towerPosition.toString();
+        return "castling - tower position:" + towerPosition.toString();
     }
 
     @Override
     public StateOfGameplay getMoveColor() {
         switch (StateOfGame.chessboard.
-                getChessPieceOnPosition(towerPosition).getChessColour()){
+                getChessPieceOnPosition(towerPosition).getChessColour()) {
             case BLACK:
                 return StateOfGameplay.BLACK_MOVE;
             case WHITE:
@@ -33,7 +33,7 @@ public class Castling extends SpecialMove{
     }
 
     @Override
-    public boolean isBreakingRules() {
+    public boolean isBreakingMoveRules() {
         return castlingDisabled;
     }
 }

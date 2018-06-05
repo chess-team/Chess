@@ -22,17 +22,17 @@ public class ProgressiveChessTakeAll extends KillKingChess {
 
     @Override
     void inCaseOfEndOfGame() {
-        if(ChessUtil.getNumberOfPiecesGivenColor(ChessColour.WHITE) == 0){
+        if (ChessUtil.getNumberOfPiecesGivenColor(ChessColour.WHITE) == 0) {
             StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_WON;
             return;
         }
-        if(ChessUtil.getNumberOfPiecesGivenColor(ChessColour.BLACK) == 0){
+        if (ChessUtil.getNumberOfPiecesGivenColor(ChessColour.BLACK) == 0) {
             StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_WON;
             return;
         }
 
         ChessColour colorOfPossibleLoser = ChessColour.WHITE;
-        if(StateOfGame.stateOfGameplay == StateOfGameplay.BLACK_MOVE){
+        if (StateOfGame.stateOfGameplay == StateOfGameplay.BLACK_MOVE) {
             colorOfPossibleLoser = ChessColour.BLACK;
         }
 
@@ -43,9 +43,9 @@ public class ProgressiveChessTakeAll extends KillKingChess {
     @Override
     protected void changeStateOfGameplay() {
         ++numberOfConsecutiveSameColorMoves;
-        if(numberOfConsecutiveSameColorMoves == numberOfMovesInTurn) {
+        if (numberOfConsecutiveSameColorMoves == numberOfMovesInTurn) {
             numberOfConsecutiveSameColorMoves = 0;
-            swapColor();
+            //swapColor();
             swapPlayerColor();
             ++numberOfMovesInTurn;
         }

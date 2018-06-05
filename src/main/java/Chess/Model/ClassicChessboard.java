@@ -13,27 +13,28 @@ public class ClassicChessboard implements Chessboard {
         return 8;
     }
 
-    public int getYWidth(){
+    public int getYWidth() {
         return 8;
     }
 
     // Uses standard x,y coordinates with coordinate system in left, bottom
     // corner.
     private final ChessPiece[][] board = new ChessPiece[8][8];
+
     {
-        for(int i = 0; i < 8; ++i){
-            for (int j = 0; j < 8; ++j){
-                board[i][j] = new EmptySquare(new Position(i,j));
+        for (int i = 0; i < 8; ++i) {
+            for (int j = 0; j < 8; ++j) {
+                board[i][j] = new EmptySquare(new Position(i, j));
             }
         }
     }
 
     public Position getPositionOfChessPiece(Class classOfFigure, ChessColour colorOfFigure) {
-        for(int i = 0; i < 8; ++i){
-            for (int j = 0; j < 8; ++j){
-                if(board[i][j].getClass() == classOfFigure
+        for (int i = 0; i < 8; ++i) {
+            for (int j = 0; j < 8; ++j) {
+                if (board[i][j].getClass() == classOfFigure
                         && board[i][j].getChessColour() == colorOfFigure)
-                    return new Position(i,j);
+                    return new Position(i, j);
             }
         }
         return null;
@@ -42,8 +43,8 @@ public class ClassicChessboard implements Chessboard {
     @Override
     public String toString() {
         StringBuilder ret = new StringBuilder();
-        for(int y = 7; y >= 0; --y){
-            for(int x = 0; x <= 7; ++x){
+        for (int y = 7; y >= 0; --y) {
+            for (int x = 0; x <= 7; ++x) {
                 ret.append(board[x][y].toString());
             }
             ret.append('\n');
@@ -58,17 +59,17 @@ public class ClassicChessboard implements Chessboard {
     }
 
     public ChessPiece getChessPieceOnPosition(Position a) {
-        if(a == null){
+        if (a == null) {
             return null;
         }
-        if(a.x >= getXWidth() || a.x < 0 ||
+        if (a.x >= getXWidth() || a.x < 0 ||
                 a.y >= getYWidth() || a.y < 0) {
             return null;
         }
         return board[a.x][a.y];
     }
 
-    public void moveFigure(Move v){
+    public void moveFigure(Move v) {
         board[v.to.x][v.to.y] = board[v.from.x][v.from.y];
         board[v.from.x][v.from.y] = new EmptySquare(new Position(v.from.x, v.from.y));
         board[v.to.x][v.to.y].setPosition(new Position(v.to.x, v.to.y));

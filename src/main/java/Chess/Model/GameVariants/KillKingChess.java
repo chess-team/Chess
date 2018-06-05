@@ -24,18 +24,18 @@ public class KillKingChess extends ClassicChess {
     }
 
     @Override
-    void inCaseOfEndOfGame(){
-        if(ChessUtil.getKingPosition(ChessColour.BLACK) == null){
+    void inCaseOfEndOfGame() {
+        if (ChessUtil.getKingPosition(ChessColour.BLACK) == null) {
             StateOfGame.stateOfGameplay = StateOfGameplay.WHITE_WON;
             return;
         }
-        if(ChessUtil.getKingPosition(ChessColour.WHITE) == null){
+        if (ChessUtil.getKingPosition(ChessColour.WHITE) == null) {
             StateOfGame.stateOfGameplay = StateOfGameplay.BLACK_WON;
             return;
         }
 
         ChessColour colorOfPossibleLoser = ChessColour.WHITE;
-        if(StateOfGame.stateOfGameplay == StateOfGameplay.BLACK_MOVE){
+        if (StateOfGame.stateOfGameplay == StateOfGameplay.BLACK_MOVE) {
             colorOfPossibleLoser = ChessColour.BLACK;
         }
 

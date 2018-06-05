@@ -15,7 +15,6 @@ public class BishopTest {
     public void testBishopMovement(){
         TestUtil.makeEmptyClassicChessboard();
 
-
         StateOfGame.chessboard.setFigure(
                 new Bishop(ChessColour.WHITE, new Position(7,7)));
 

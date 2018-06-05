@@ -9,52 +9,55 @@ import java.util.ArrayList;
 
 public class Pawn extends ChessPiece {
 
-    {label = 'P';}
+    {
+        label = 'P';
+    }
 
-    public Pawn(ChessColour a, Position b){
-        super(a,b);
+    public Pawn(ChessColour a, Position b) {
+        super(a, b);
     }
 
     static public boolean enPassantDisabled = false;
 
     @Override
     public ArrayList<Move> listOfPossibleMoves() {
-        ArrayList <Move> resultList = new ArrayList<>();
+        ArrayList<Move> resultList = new ArrayList<>();
 
-        int j = 0;
+        int y;
         switch (this.getChessColour()) {
             case BLACK:
-                j = -1;
+                y = -1;
                 break;
             case WHITE:
-                j = 1;
+                y = 1;
                 break;
+            default:
+                throw new RuntimeException();
         }
-        for(int i = -1; i <= 1; ++i) {
+        for (int i = -1; i <= 1; ++i) {
             Move v = new Move(getPosition(),
-                    getPosition().translateByVector(i, j));
+                    getPosition().translateByVector(i, y));
 
-            if(v.to.y == 0 || v.to.y == StateOfGame.chessboard.getYWidth() - 1){
-                ArrayList <ChessPiece> temp = new ArrayList<>();
-                temp.add(new Rook(getChessColour(),v.to));
-                temp.add(new Knight(getChessColour(),v.to));
-                temp.add(new Queen(getChessColour(),v.to));
-                temp.add(new Bishop(getChessColour(),v.to));
-                for(ChessPiece chessPiece : temp){
+            if (v.to.y == 0 || v.to.y == StateOfGame.chessboard.getYWidth() - 1) {
+                ArrayList<ChessPiece> temp = new ArrayList<>();
+                temp.add(new Rook(getChessColour(), v.to));
+                temp.add(new Knight(getChessColour(), v.to));
+                temp.add(new Queen(getChessColour(), v.to));
+                temp.add(new Bishop(getChessColour(), v.to));
+                for (ChessPiece chessPiece : temp) {
                     Move u = new Move(v.from, v.to, chessPiece);
                     if (StateOfGame.variant.validateMove(u)) {
                         resultList.add(u);
                     }
                 }
-            }
-            else {
+            } else {
                 if (StateOfGame.variant.validateMove(v)) {
                     resultList.add(v);
                 }
             }
         }
         Move v = new Move(getPosition(),
-                getPosition().translateByVector(0, 2*j));
+                getPosition().translateByVector(0, 2 * y));
 
         if (StateOfGame.variant.validateMove(v)) {
             resultList.add(v);
@@ -89,6 +92,8 @@ public class Pawn extends ChessPiece {
                     return true;
                 }
                 break;
+            default:
+                throw new RuntimeException();
         }
         if (differenceOnYCoordinate == 2) {
             if (differenceOnXCoordinate != 0) {
@@ -138,22 +143,22 @@ public class Pawn extends ChessPiece {
     }
 
     @SuppressWarnings("SpellCheckingInspection")
-    private boolean validateEnPassantMove(Move move){
-        if(enPassantDisabled)return false;
+    private boolean validateEnPassantMove(Move move) {
+        if (enPassantDisabled) return false;
         int differenceOnXCoordinate = move.to.x - move.from.x;
         int differenceOnYCoordinate = move.to.y - move.from.y;
         Position wantedPreviousMoveTo = move.from.translateByVector(
-                differenceOnXCoordinate,0);
-        if(!(StateOfGame.chessboard.
+                differenceOnXCoordinate, 0);
+        if (!(StateOfGame.chessboard.
                 getChessPieceOnPosition(wantedPreviousMoveTo)
-                instanceof Pawn)){
+                instanceof Pawn)) {
             return false;
         }
         Position wantedPreviousMoveFrom = move.from.translateByVector(
-                differenceOnXCoordinate,2*differenceOnYCoordinate);
+                differenceOnXCoordinate, 2 * differenceOnYCoordinate);
 
         Move wantedPreviousMove =
-                new Move(wantedPreviousMoveFrom,wantedPreviousMoveTo);
+                new Move(wantedPreviousMoveFrom, wantedPreviousMoveTo);
         Move previousMove = StateOfGame.historyOfMoves.lastMove();
         return wantedPreviousMove.equals(previousMove);
     }

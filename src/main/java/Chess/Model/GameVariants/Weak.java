@@ -10,13 +10,13 @@ import Chess.Model.StateOfGame;
 Game variant have name Weak!
 Black has 16 pawns, 7 knights, 1 king, and white classical starting situation.
     */
-public class Weak extends ClassicChess{
+public class Weak extends ClassicChess {
 
     @Override
     public void initializeStateOfGame() {
         super.initializeStateOfGame();
-        for(int i = 0; i < StateOfGame.chessboard.getXWidth(); ++i) {
-            if(i == 4){
+        for (int i = 0; i < StateOfGame.chessboard.getXWidth(); ++i) {
+            if (i == 4) {
                 continue;
             }
             StateOfGame.chessboard.setFigure(
@@ -27,7 +27,7 @@ public class Weak extends ClassicChess{
 
         StateOfGame.chessboard.setFigure(
                 new Pawn(ChessColour.BLACK, new Position(5, 5)));
-        for(int i = 1; i < 7; ++i){
+        for (int i = 1; i < 7; ++i) {
             StateOfGame.chessboard.setFigure(
                     new Pawn(ChessColour.BLACK, new Position(i, 4)));
         }

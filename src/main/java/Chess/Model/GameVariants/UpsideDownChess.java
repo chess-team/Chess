@@ -9,7 +9,7 @@ Chess that have different starting position that normal chess. White
 Chess pieces are swapped with black ones. (So pawns are one step from
 promotion).
  */
-public class UpsideDownChess extends ClassicChess{
+public class UpsideDownChess extends ClassicChess {
 
     @Override
     public void initializeStateOfGame() {

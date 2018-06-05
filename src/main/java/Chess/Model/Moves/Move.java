@@ -5,9 +5,7 @@ can make.
  */
 
 import Chess.Model.*;
-import Chess.Model.ChessPieces.ChessPiece;
-import Chess.Model.ChessPieces.EmptySquare;
-import Chess.Model.ChessPieces.Knight;
+import Chess.Model.ChessPieces.*;
 
 public class Move {
     public Position from, to;
@@ -18,22 +16,22 @@ public class Move {
     // should be one of {queen, knight, rook, bishop}
     public ChessPiece promoteTo;
 
-    Move(){}
+    Move() {
+    }
 
-    public Move (Position from, Position to){
+    public Move(Position from, Position to) {
         this.from = from;
         this.to = to;
     }
 
-    public Move(Position from, Position to, ChessPiece chosenChessPiece){
+    public Move(Position from, Position to, ChessPiece chosenChessPiece) {
         this.from = from;
         this.to = to;
         ChessPiece t = chosenChessPiece;
         try {
             t = chosenChessPiece.getClass().getConstructor(ChessColour.class, Position.class).
                     newInstance(chosenChessPiece.getChessColour(), to);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         t.setPosition(to);
@@ -43,7 +41,7 @@ public class Move {
 
     @Override
     public String toString() {
-        if(isPromotion){
+        if (isPromotion) {
             return "from " + from.toString() + " to " + to.toString() +
                     " promoted to " + promoteTo.toString();
         }
@@ -52,7 +50,7 @@ public class Move {
 
     @Override
     public boolean equals(Object obj) {
-        return  (obj instanceof Move)&&
+        return (obj instanceof Move) &&
                 obj.toString().equals(toString());
     }
 
@@ -72,42 +70,58 @@ public class Move {
 
     }
 
-    public boolean isBreakingRules(){
-        if(isOutsideBoard()){
+    public boolean isBreakingMoveRules() {
+        if (isOutsideBoard()) {
             return true;
         }
 
         ChessPiece movedChessPiece = StateOfGame.chessboard.
                 getChessPieceOnPosition(from);
 
-        if(movedChessPiece.getChessColour() ==
+        if (movedChessPiece.getChessColour() ==
                 StateOfGame.chessboard.
-                        getChessPieceOnPosition(to).getChessColour()){
+                        getChessPieceOnPosition(to).getChessColour()) {
             return true;
         }
 
         // checks if there is figure moved.
-        if(movedChessPiece instanceof EmptySquare){
+        if (movedChessPiece instanceof EmptySquare) {
             return true;
         }
 
 
-        if(differenceOnXCoordinate() + differenceOnYCoordinate() == 0){
+        if (differenceOnXCoordinate() + differenceOnYCoordinate() == 0) {
             return true;
         }
-        if(movedChessPiece.isBreakingRules(this)){
+        if (movedChessPiece.isBreakingRules(this)) {
             return true;
         }
-
+        ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(from);
+        if (promoteTo != null && !(figure instanceof Pawn)) {
+            return true;
+        }
         // checks if move is not blocked by some chess piece
-        return !(StateOfGame.chessboard.getChessPieceOnPosition(from)
-                instanceof Knight) && ChessUtil.isMovePassingThroughFigure(this);
+        return !(figure instanceof Knight)
+                && ChessUtil.isMovePassingThroughFigure(this);
     }
 
-    public StateOfGameplay getMoveColor(){
+    public boolean isNotBreakingRules() {
+        ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(from);
+
+        if (figure instanceof King &&
+                differenceOnXCoordinate() > 1) {
+            int sign = ChessUtil.signum(to.x - from.x);
+            return StateOfGame.variant.validateMove(new Castling(to.translateByVector(sign, 0)));
+        }
+
+        return !isBreakingMoveRules() && getMoveColor() == StateOfGame.stateOfGameplay;
+
+    }
+
+    StateOfGameplay getMoveColor() {
         ChessPiece movedChessPiece = StateOfGame.chessboard.
                 getChessPieceOnPosition(from);
-        switch (movedChessPiece.getChessColour()){
+        switch (movedChessPiece.getChessColour()) {
             case WHITE:
                 return StateOfGameplay.WHITE_MOVE;
             case BLACK:
