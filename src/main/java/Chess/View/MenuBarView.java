@@ -11,7 +11,8 @@ import java.io.File;
 public class MenuBarView extends JMenuBar {
 
     private JRadioButtonMenuItem[] colorButtons;
-    private JMenuItem newGame, undoLastMove, switchRotation;
+    private JMenuItem newGame, undoLastMove;
+    private JCheckBox rotation;
     private JRadioButtonMenuItem[] variantButtons;
     private JRadioButtonMenuItem Black, White, Both;
     private ListOfGameVariants variants = new ListOfGameVariants();
@@ -30,8 +31,9 @@ public class MenuBarView extends JMenuBar {
         optionsMenu.add(newGame);
         undoLastMove = new JMenuItem("Undo Last Move");
         optionsMenu.add(undoLastMove);
-        switchRotation = new JMenuItem("Rotation");
-        optionsMenu.add(switchRotation);
+        rotation = new JCheckBox("Rotation");
+        rotation.setHorizontalTextPosition(SwingConstants.LEFT);
+        optionsMenu.add(rotation);
         this.add(optionsMenu);
     }
 
@@ -100,7 +102,7 @@ public class MenuBarView extends JMenuBar {
     }
 
     public void addSwitchRotationListener(ActionListener actionListener) {
-        switchRotation.addActionListener(actionListener);
+        rotation.addActionListener(actionListener);
     }
 
     public void addChoosePlayerListener(ActionListener actionListener) {

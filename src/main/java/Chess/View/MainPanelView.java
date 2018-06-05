@@ -28,16 +28,20 @@ public class MainPanelView extends JPanel {
         capturedPiecesViewBlack.setPiecesIcons(chessboardView.getBlackPiecesIcons());
         playerMoveView= new PlayerMoveView();
         c.fill = GridBagConstraints.BOTH;
+        c.weightx = 0.2;
+        c.weighty = 0.2;
         this.add(capturedPiecesViewWhite,c);
         c.weightx = 0.5;
         c.weighty = 0.5;
         this.add(chessboardView,c);
-        c.weighty = 0;
-        c.weightx = 0;
+        c.weightx = 0.2;
+        c.weighty = 0.2;
         this.add(capturedPiecesViewBlack,c);
-
-        c.gridx = 2;
-        c.gridy = 1;
+        c.insets = new Insets(20, 0, 0, 0);
+        c.weightx = 0;
+        c.weighty = 0;
+        c.gridx = 1;
+        c.gridy = 3;
         c.anchor=GridBagConstraints.PAGE_END;
         this.add(playerMoveView,c);
     }

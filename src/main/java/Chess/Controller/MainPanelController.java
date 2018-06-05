@@ -21,6 +21,7 @@ public class MainPanelController {
         this.mainPanelView = mainFrameView.getMainPanelView();
         setKeyStrokes();
         addComponentResized();
+        addWindowListener();
     }
 
     private void setKeyStrokes() {
@@ -58,6 +59,22 @@ public class MainPanelController {
                     mainPanelView.scale(1);
                 } else {
                     mainPanelView.scale(0);
+                }
+            }
+        });
+    }
+
+    private void addWindowListener() {
+        mainFrameView.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent windowEvent) {
+                int confirmed = JOptionPane.showConfirmDialog(null,
+                        "Are you sure you want to exit?", "Exit Chess",
+                        JOptionPane.YES_NO_OPTION);
+                if (confirmed == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                } else {
+                    mainFrameView.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
                 }
             }
         });
