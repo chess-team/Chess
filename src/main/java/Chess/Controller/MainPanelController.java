@@ -3,9 +3,11 @@ package Chess.Controller;
 
 import Chess.View.MainFrameView;
 import Chess.View.MainPanelView;
+import Chess.View.TipOfTheDayView;
 
 import javax.swing.*;
 import java.awt.event.*;
+
 
 public class MainPanelController {
 
@@ -77,7 +79,13 @@ public class MainPanelController {
                     mainFrameView.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
                 }
             }
+
+            @Override
+            public void windowOpened(WindowEvent windowEvent) {
+                TipOfTheDayView.showDialog(mainFrameView);
+            }
         });
+
     }
 
 

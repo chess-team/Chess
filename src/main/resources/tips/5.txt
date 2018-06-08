@@ -1,0 +1,1 @@
+To start the New Game, try ctrl+N

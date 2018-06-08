@@ -1,0 +1,1 @@
+You can change colour of the chessboard in the Colour Menu.

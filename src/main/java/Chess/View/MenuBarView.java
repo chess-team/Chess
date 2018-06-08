@@ -126,11 +126,11 @@ public class MenuBarView extends JMenuBar {
     private void setColorButtonsIcons() {
         try {
             BufferedImage buf;
-            buf = ImageIO.read(new File("src/main/resources/colorType0.png"));
+            buf = ImageIO.read(new File("src/main/resources/icons/colorType0.png"));
             colorButtons[0].setIcon(new ImageIcon(buf));
-            buf = ImageIO.read(new File("src/main/resources/colorType1.png"));
+            buf = ImageIO.read(new File("src/main/resources/icons/colorType1.png"));
             colorButtons[1].setIcon(new ImageIcon(buf));
-            buf = ImageIO.read(new File("src/main/resources/colorType2.png"));
+            buf = ImageIO.read(new File("src/main/resources/icons/colorType2.png"));
             colorButtons[2].setIcon(new ImageIcon(buf));
         } catch (Exception e) {
             e.printStackTrace();
