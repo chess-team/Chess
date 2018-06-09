@@ -36,4 +36,12 @@ public class Castling extends SpecialMove {
     public boolean isBreakingMoveRules() {
         return castlingDisabled;
     }
+
+    @Override
+    public void changeState() {}
+
+    @Override
+    public boolean isBreakingRules() {
+        return false;
+    }
 }

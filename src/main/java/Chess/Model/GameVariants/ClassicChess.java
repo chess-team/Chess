@@ -34,6 +34,11 @@ public class ClassicChess extends VariantSimilarToClassicChess {
 
     }
 
+    // return true if move is correct.
+    public boolean validateMove(SpecialMove move) {
+        return !(move.isBreakingRules());
+    }
+
     // return true if castling move is correct.
     private boolean validateMove(Castling move) {
         if (move.isBreakingMoveRules()) {
@@ -101,32 +106,11 @@ public class ClassicChess extends VariantSimilarToClassicChess {
         isCheck = true;
         setClassicState();
         Castling.castlingDisabled = false;
-        //colorOfLastMovedPiece = ChessColour.BLACK;
         setLineOfPawns(1, ChessColour.WHITE);
         setLineOfPawns(6, ChessColour.BLACK);
         setLineOfFigures(0, ChessColour.WHITE);
         setLineOfFigures(7, ChessColour.BLACK);
     }
-
-    /*private ChessColour colorOfLastMovedPiece(){
-        switch(StateOfGame.colorOfLastMove()){
-            case BLACK_MOVE:
-                return ChessColour.BLACK;
-            case WHITE_MOVE:
-                return ChessColour.WHITE;
-        }
-    }*/
-
-    /*void swapColor() {
-        switch (colorOfLastMovedPiece) {
-            case BLACK:
-                colorOfLastMovedPiece = ChessColour.WHITE;
-                break;
-            case WHITE:
-                colorOfLastMovedPiece = ChessColour.BLACK;
-                break;
-        }
-    }*/
 
     private boolean isEnPassantMove(Move move){
         ChessPiece movedChessPiece = StateOfGame.chessboard.
@@ -137,34 +121,30 @@ public class ClassicChess extends VariantSimilarToClassicChess {
                 (movedChessPiece instanceof Pawn) &&
                 (targetChessPiece instanceof EmptySquare);
     }
-/*
-    @SuppressWarnings("SpellCheckingInspection")
-    private boolean validateEnPassantMove(Move move) {
-        int differenceOnXCoordinate = move.to.x - move.from.x;
-        int differenceOnYCoordinate = move.to.y - move.from.y;
-        Position wantedPreviousMoveTo = move.from.translateByVector(
-                differenceOnXCoordinate, 0);
-        if (!(StateOfGame.chessboard.
-                getChessPieceOnPosition(wantedPreviousMoveTo)
-                instanceof Pawn)) {
-            return false;
-        }
-        //return true;
-        Position wantedPreviousMoveFrom = move.from.translateByVector(
-                differenceOnXCoordinate, 2 * differenceOnYCoordinate);
 
-        Move wantedPreviousMove =
-                new Move(wantedPreviousMoveFrom, wantedPreviousMoveTo);
-        Move previousMove = StateOfGame.historyOfMoves.lastMove();
-        return wantedPreviousMove.equals(previousMove);
-    }*/
+    public void changeState(SpecialMove change){
+        change.changeState();
+        StateOfGame.historyOfMoves.addMove(change);
+        //TODO decide if include
+        /*
+        if(change instanceof KillFigureMove) {
+            ChessPiece targetPiece = StateOfGame.chessboard.
+                    getChessPieceOnPosition(change.to);
+
+            Character c = targetPiece.toString().charAt(0);
+            if (!c.equals('.')) {
+                StateOfGame.capturedPieces.add(c);
+            }
+        }*/
+        //
+        if(!(change instanceof BlockFigureMove))changeStateOfGameplay();
+    }
 
     public void changeState(Move change) {
         if (change instanceof Castling) {
             changeState((Castling) change);
             return;
         }
-        //change.changeState();
         ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(change.from);
 
         if (figure instanceof King &&
@@ -177,7 +157,6 @@ public class ClassicChess extends VariantSimilarToClassicChess {
         ChessPiece targetPiece = StateOfGame.chessboard.
                 getChessPieceOnPosition(change.to);
 
-        //swapColor();
         if (isEnPassantMove(change)) {
             Position previousMoveTo = StateOfGame.historyOfMoves.lastMove().to;
             targetPiece = StateOfGame.chessboard.
@@ -204,8 +183,6 @@ public class ClassicChess extends VariantSimilarToClassicChess {
 
 
     private void changeState(Castling change) {
-        //swapColor();
-        //change.changeState();
         Position towerPosition = change.getTowerPosition();
         ChessColour colorOfPlayer = StateOfGame.chessboard.
                 getChessPieceOnPosition(towerPosition).getChessColour();
