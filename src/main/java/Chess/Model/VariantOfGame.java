@@ -12,14 +12,10 @@ import Chess.Model.Moves.SpecialMoves;
 public interface VariantOfGame {
     boolean validateMove(Move move);
 
-    boolean validateMove(SpecialMove move);
-
     void initializeStateOfGame();
 
     // changes state after player move.
     void changeState(Move change);
-
-    void changeState(SpecialMove change);
 
     void changeStateWithoutEnd(Move change);
 

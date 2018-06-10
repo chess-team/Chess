@@ -13,7 +13,7 @@ Class holds information about chess pieces
 
 public abstract class ChessPiece {
 
-    private final ChessColour chessColour;
+    private ChessColour chessColour;
 
     private Position positionOnChessboard;
 
@@ -31,6 +31,10 @@ public abstract class ChessPiece {
 
     public void setPosition(Position a) {
         this.positionOnChessboard = a;
+    }
+
+    public void setColor(ChessColour a) {
+        this.chessColour = a;
     }
 
     // method used in printing chessBoard in text UI.

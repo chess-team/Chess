@@ -44,6 +44,6 @@ public class SetFigureMove extends SpecialMove{
 
     @Override
     public boolean isBreakingRules(){
-        return !(isKingTarget());
+        return (isKingTarget());
     }
 }

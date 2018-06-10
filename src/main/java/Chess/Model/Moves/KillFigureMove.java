@@ -7,7 +7,7 @@ import Chess.Model.Position;
 import Chess.Model.StateOfGame;
 
 public class KillFigureMove extends SpecialMove{
-    KillFigureMove(Position to) {
+    public KillFigureMove(Position to) {
         this.to = to;
     }
 

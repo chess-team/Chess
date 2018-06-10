@@ -63,13 +63,6 @@ class KillFigureMoveTest {
                 validateMove(new KillFigureMove(new Position(4, 6))));
         StateOfGame.variant.
                 changeState(new Move(new Position(7, 7), new Position(5,7)));
-        System.out.println(StateOfGame.chessboard);
-        System.out.println(StateOfGame.stateOfGameplay);
-        assertTrue(StateOfGame.variant.
-                validateMove(new KillFigureMove(new Position(4, 6))));
-        StateOfGame.variant.
-                changeState(new KillFigureMove(new Position(4, 6)));
-
     }
 
     @Test

@@ -1,6 +1,7 @@
 package Chess.Model;
 
-import Chess.Model.Moves.Move;
+import Chess.Model.ChessPieces.Queen;
+import Chess.Model.Moves.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -27,18 +28,40 @@ class textUI {
                         break;
                     }
                 }
+                // -3 - kill, -4 - set, -5 change color, -6 block  --- move
+                int x = inputInts.get(2);
+                int y = inputInts.get(3);
+                Position to = new Position(x,y);
+                Move v;
+                switch (inputInts.get(0)){
+                    case -3:
+                        v = new KillFigureMove(to);
+                        break;
+                    case -4:
+                        v = new SetFigureMove(to, new Queen(ChessColour.WHITE, to));
+                        break;
+                    case -5:
+                        v = new ChangeColorOfFigureMove(to);
+                        break;
+                    case -6:
+                        v = new BlockFigureMove(to);
+                        break;
+                    default:
+                        v = new Move(new Position(inputInts.get(0),
+                                inputInts.get(1)),
+                                to);
+                }
 
-                Move v = new Move(new Position(inputInts.get(0),
-                        inputInts.get(1)),
-                        new Position(inputInts.get(2), inputInts.get(3)));
                 if (StateOfGame.variant.validateMove(v)) {
                     StateOfGame.variant.changeState(v);
                     System.out.println(StateOfGame.chessboard);
+                    System.out.println(StateOfGame.stateOfGameplay);
                 } else {
                     System.out.println("invalid move\n");
                 }
 
-            } catch (Exception ignored) {
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }

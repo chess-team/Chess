@@ -15,8 +15,8 @@ public class ClassicChess extends VariantSimilarToClassicChess {
 
     // return true if move is correct.
     public boolean validateMove(Move move) {
-        if (move instanceof Castling) {
-            return validateMove((Castling) move);
+        if (move instanceof SpecialMove) {
+            return validateMove((SpecialMove) move);
         }
 
         ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(move.from);
@@ -35,7 +35,7 @@ public class ClassicChess extends VariantSimilarToClassicChess {
     }
 
     // return true if move is correct.
-    public boolean validateMove(SpecialMove move) {
+    private boolean validateMove(SpecialMove move) {
         if (move instanceof Castling) {
             return validateMove((Castling) move);
         }
@@ -158,8 +158,12 @@ public class ClassicChess extends VariantSimilarToClassicChess {
     }
 
     public void changeState(Move change) {
+        if(change instanceof SpecialMove){
+            changeState((SpecialMove)change);
+            return;
+        }
         changeStateWithoutEnd(change);
-        if(!(change instanceof BlockFigureMove))changeStateOfGameplay();
+        changeStateOfGameplay();
         inCaseOfEndOfGame();
     }
 
