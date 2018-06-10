@@ -3,6 +3,7 @@ package Chess.Model.GameVariants;
 import Chess.Model.*;
 import Chess.Model.ChessPieces.*;
 import Chess.Model.Moves.Move;
+import Chess.Model.Moves.SpecialMove;
 
 import java.util.ArrayList;
 
@@ -76,6 +77,14 @@ abstract class VariantSimilarToClassicChess implements VariantOfGame {
         tempTo.setPosition(v.to);
         StateOfGame.chessboard.setFigure(tempFrom);
         StateOfGame.chessboard.setFigure(tempTo);
+        return ret;
+    }
+
+    boolean isKingUnderAttackAfterMove(
+            ChessColour kingColor, SpecialMove v){
+        changeStateWithoutEnd(v);
+        boolean ret = isKingUnderAttack(kingColor);
+        StateOfGame.undoMove();
         return ret;
     }
 

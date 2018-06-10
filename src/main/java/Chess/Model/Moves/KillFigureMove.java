@@ -7,7 +7,7 @@ import Chess.Model.Position;
 import Chess.Model.StateOfGame;
 
 public class KillFigureMove extends SpecialMove{
-    public KillFigureMove(Position to) {
+    KillFigureMove(Position to) {
         this.to = to;
     }
 
@@ -23,6 +23,6 @@ public class KillFigureMove extends SpecialMove{
 
     @Override
     public boolean isBreakingRules(){
-        return !(isKingTarget() || isEmptySquareTarget());
+        return isKingTarget() || isEmptySquareTarget();
     }
 }

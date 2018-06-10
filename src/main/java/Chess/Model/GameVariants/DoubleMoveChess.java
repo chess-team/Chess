@@ -33,6 +33,6 @@ public class DoubleMoveChess extends KillKingChess {
             //swapColor();
             swapPlayerColor();
         }
-        inCaseOfEndOfGame();
+        //inCaseOfEndOfGame();
     }
 }

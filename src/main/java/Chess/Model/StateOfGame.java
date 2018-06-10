@@ -58,7 +58,7 @@ public class StateOfGame implements Serializable {
         List<Move> moves = historyOfMoves.listOfPreviousMoves();
         StateOfGame.variant.initializeStateOfGame();
         for (Move v : moves) {
-            StateOfGame.variant.changeState(v);
+            StateOfGame.variant.changeStateWithoutEnd(v);
         }
     }
 

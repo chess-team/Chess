@@ -36,7 +36,15 @@ public class ClassicChess extends VariantSimilarToClassicChess {
 
     // return true if move is correct.
     public boolean validateMove(SpecialMove move) {
-        return !(move.isBreakingRules());
+        if (move instanceof Castling) {
+            return validateMove((Castling) move);
+        }
+        ChessColour colorOfPlayer = ChessColour.BLACK;
+        if(StateOfGame.getStateOfGameplay() == StateOfGameplay.WHITE_MOVE){
+            colorOfPlayer = ChessColour.WHITE;
+        }
+        return !(move.isBreakingRules())
+                && !isKingUnderAttackAfterMove(colorOfPlayer, move);
     }
 
     // return true if castling move is correct.
@@ -122,7 +130,11 @@ public class ClassicChess extends VariantSimilarToClassicChess {
                 (targetChessPiece instanceof EmptySquare);
     }
 
-    public void changeState(SpecialMove change){
+    public void changeStateWithoutEnd(SpecialMove change) {
+        if (change instanceof Castling) {
+            changeState((Castling) change);
+            return;
+        }
         change.changeState();
         StateOfGame.historyOfMoves.addMove(change);
         //TODO decide if include
@@ -136,13 +148,56 @@ public class ClassicChess extends VariantSimilarToClassicChess {
                 StateOfGame.capturedPieces.add(c);
             }
         }*/
-        //
+        //;
+    }
+
+    public void changeState(SpecialMove change) {
+        changeStateWithoutEnd(change);
         if(!(change instanceof BlockFigureMove))changeStateOfGameplay();
+        inCaseOfEndOfGame();
     }
 
     public void changeState(Move change) {
+        changeStateWithoutEnd(change);
+        if(!(change instanceof BlockFigureMove))changeStateOfGameplay();
+        inCaseOfEndOfGame();
+    }
+
+    void changeStateOfGameplay() {
+        swapPlayerColor();
+        //inCaseOfEndOfGame();
+    }
+
+
+    private void changeState(Castling change) {
+        Position towerPosition = change.getTowerPosition();
+        ChessColour colorOfPlayer = StateOfGame.chessboard.
+                getChessPieceOnPosition(towerPosition).getChessColour();
+
+        Position kingPosition = ChessUtil.getKingPosition(colorOfPlayer);
+        if (kingPosition == null) {
+            throw new NullPointerException();
+        }
+        int sign = ChessUtil.signum(towerPosition.x - kingPosition.x);
+        Position newKingPosition = towerPosition.translateByVector(-sign, 0);
+        Position newTowerPosition = newKingPosition.translateByVector(-sign, 0);
+        StateOfGame.chessboard.moveFigure(
+                new Move(kingPosition, newKingPosition));
+
+        StateOfGame.chessboard.moveFigure(
+                new Move(towerPosition, newTowerPosition));
+
+        StateOfGame.historyOfMoves.addMove(change);
+        //changeStateOfGameplay();
+    }
+
+    public void changeStateWithoutEnd(Move change){
         if (change instanceof Castling) {
             changeState((Castling) change);
+            return;
+        }
+        if (change instanceof SpecialMove) {
+            changeState((SpecialMove) change);
             return;
         }
         ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(change.from);
@@ -173,35 +228,6 @@ public class ClassicChess extends VariantSimilarToClassicChess {
             StateOfGame.chessboard.setFigure(change.promoteTo);
         }
         StateOfGame.historyOfMoves.addMove(change);
-        changeStateOfGameplay();
-    }
-
-    void changeStateOfGameplay() {
-        swapPlayerColor();
-        inCaseOfEndOfGame();
-    }
-
-
-    private void changeState(Castling change) {
-        Position towerPosition = change.getTowerPosition();
-        ChessColour colorOfPlayer = StateOfGame.chessboard.
-                getChessPieceOnPosition(towerPosition).getChessColour();
-
-        Position kingPosition = ChessUtil.getKingPosition(colorOfPlayer);
-        if (kingPosition == null) {
-            throw new NullPointerException();
-        }
-        int sign = ChessUtil.signum(towerPosition.x - kingPosition.x);
-        Position newKingPosition = towerPosition.translateByVector(-sign, 0);
-        Position newTowerPosition = newKingPosition.translateByVector(-sign, 0);
-        StateOfGame.chessboard.moveFigure(
-                new Move(kingPosition, newKingPosition));
-
-        StateOfGame.chessboard.moveFigure(
-                new Move(towerPosition, newTowerPosition));
-
-        StateOfGame.historyOfMoves.addMove(change);
-        changeStateOfGameplay();
     }
 
     void inCaseOfEndOfGame() {

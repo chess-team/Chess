@@ -41,6 +41,6 @@ public class MonsterChess extends KillKingChess {
             //swapColor();
             swapPlayerColor();
         }
-        inCaseOfEndOfGame();
+        //inCaseOfEndOfGame();
     }
 }

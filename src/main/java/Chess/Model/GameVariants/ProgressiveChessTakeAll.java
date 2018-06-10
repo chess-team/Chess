@@ -49,6 +49,6 @@ public class ProgressiveChessTakeAll extends KillKingChess {
             swapPlayerColor();
             ++numberOfMovesInTurn;
         }
-        inCaseOfEndOfGame();
+        //inCaseOfEndOfGame();
     }
 }
