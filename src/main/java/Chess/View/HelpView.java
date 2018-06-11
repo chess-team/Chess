@@ -17,9 +17,7 @@ public class HelpView {
             name = command;
         }
         try {
-            BufferedImage bi;
-            File pic = new File("src/main/resources/icons/tip.png");
-            bi = read(pic);
+            BufferedImage bi = read(TipOfTheDayView.class.getResourceAsStream("/icons/tip.png"));
             File file = new File("src/main/resources/rules/"  + name );
             BufferedReader br = new BufferedReader(new FileReader(file));
             StringBuilder sb = new StringBuilder();

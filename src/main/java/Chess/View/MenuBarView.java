@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+import static javax.imageio.ImageIO.read;
+
 public class MenuBarView extends JMenuBar {
 
     private JRadioButtonMenuItem[] colorButtons;
@@ -186,13 +188,13 @@ public class MenuBarView extends JMenuBar {
 
     private void setColorButtonsIcons() {
         try {
-            BufferedImage buf;
-            buf = ImageIO.read(new File("src/main/resources/icons/colorType0.png"));
-            colorButtons[0].setIcon(new ImageIcon(buf));
-            buf = ImageIO.read(new File("src/main/resources/icons/colorType1.png"));
-            colorButtons[1].setIcon(new ImageIcon(buf));
-            buf = ImageIO.read(new File("src/main/resources/icons/colorType2.png"));
-            colorButtons[2].setIcon(new ImageIcon(buf));
+            BufferedImage bi;
+            bi = read(TipOfTheDayView.class.getResourceAsStream("/colorType0.png"));
+            colorButtons[0].setIcon(new ImageIcon(bi));
+            bi = read(TipOfTheDayView.class.getResourceAsStream("/colorType1.png"));
+            colorButtons[1].setIcon(new ImageIcon(bi));
+            bi = read(TipOfTheDayView.class.getResourceAsStream("/colorType2.png"));
+            colorButtons[2].setIcon(new ImageIcon(bi));
         } catch (Exception e) {
             e.printStackTrace();
         }

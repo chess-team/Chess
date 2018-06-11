@@ -6,7 +6,10 @@ import java.io.File;
 
 import javax.swing.*;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Random;
+import java.util.stream.Stream;
 
 import static javax.imageio.ImageIO.read;
 
@@ -15,9 +18,7 @@ public class TipOfTheDayView {
         Random rand = new Random();
         int num = rand.nextInt(50) + 1;
         try {
-            BufferedImage bi;
-            File pic = new File("src/main/resources/icons/tip.png");
-            bi = read(pic);
+            BufferedImage bi = read(TipOfTheDayView.class.getResourceAsStream("/icons/tip.png"));
             File file = new File("src/main/resources/tips/" + num + ".txt");
             BufferedReader br = new BufferedReader(new FileReader(file));
             StringBuilder sb = new StringBuilder();
