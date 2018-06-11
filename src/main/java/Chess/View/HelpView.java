@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.Random;
 
 import static javax.imageio.ImageIO.read;
@@ -18,8 +19,7 @@ public class HelpView {
         }
         try {
             BufferedImage bi = read(TipOfTheDayView.class.getResourceAsStream("/icons/tip.png"));
-            File file = new File("src/main/resources/rules/"  + name );
-            BufferedReader br = new BufferedReader(new FileReader(file));
+            BufferedReader br = new BufferedReader(new InputStreamReader(ChessboardView.class.getResourceAsStream("/rules/" + name)));
             StringBuilder sb = new StringBuilder();
             String tmp;
             while ((tmp = br.readLine()) != null) {
