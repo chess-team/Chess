@@ -1,6 +1,6 @@
 The white and black pieces are switched  so that White's pieces are on the 8th rank,
 with pawns on the 7th rank, one step away from promotion.
-The starting position looks like a standard chess starting position,
+The starting position looks like a standard chess starting position
 but from the other player's perspective.
 As the pawns are blocked by pieces in the starting position,
 the game always starts with a knight move and smother checkmates are common.

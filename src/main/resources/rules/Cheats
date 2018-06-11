@@ -1,10 +1,10 @@
 Cheats
-Kill figure - kill any chosen figure, but the king.
+Kill figure - kill any chosen figure but the king.
 
-Change color of figure - changes color of any chosen figure, but the king.
+Change color of figure - changes color of any chosen figure but the king.
 
 Set figure - set any chosen figure in the same color as moving player.
 
-Block figure - block any chosen figure for 6 moves (Cheat is also counted as 1 move), (it is counting both white and black moves).
+Block figure - block any chosen figure for 6 moves (Cheat is counted as 1 move), (Moves are counted both white and black).
 
 In variants with checkmate you can not make cheat that would allow enemy to capture your king.
