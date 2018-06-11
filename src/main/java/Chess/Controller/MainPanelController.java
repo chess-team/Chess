@@ -128,7 +128,7 @@ class MainPanelController {
 
             @Override
             public void windowOpened(WindowEvent windowEvent) {
-                TipOfTheDayView.showDialog(mainFrameView);
+                TipOfTheDayView.showDialog(mainFrameView,"Tip Of The Day");
             }
         });
 

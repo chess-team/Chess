@@ -2,9 +2,7 @@ package Chess.Controller;
 
 import Chess.Model.GameVariants.ListOfGameVariants;
 import Chess.Model.StateOfGame;
-import Chess.View.MainFrameView;
-import Chess.View.MainPanelView;
-import Chess.View.MenuBarView;
+import Chess.View.*;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -16,12 +14,14 @@ class MenuBarController {
     private MenuBarView menuBarView;
     private ChessboardController chessboardController;
     private ListOfGameVariants variants = new ListOfGameVariants();
+    private String gameVariant;
 
     MenuBarController(MainFrameView mainFrameView, MainPanelController mainPanelController) {
         this.mainFrameView = mainFrameView;
         this.menuBarView = mainFrameView.getMenuBarView();
         this.mainPanelView = mainFrameView.getMainPanelView();
         this.chessboardController = mainPanelController.getChessboardController();
+        gameVariant = variants.getNamesOfVariants().get(0);
         addListeners();
     }
 
@@ -31,6 +31,7 @@ class MenuBarController {
         addVariantOfGameListener();
         addColorListener();
         addCheatListener();
+        addHelpListener();
     }
 
     private void addOptionsListeners() {
@@ -74,6 +75,7 @@ class MenuBarController {
             chessboardController.setFromToNull();
             mainFrameView.updateView();
             chessboardController.makeComputerMoves();
+            gameVariant = actionEvent.getActionCommand();
         };
         menuBarView.addVariantOfGameListener(variantOfGameListener);
     }
@@ -113,6 +115,23 @@ class MenuBarController {
 
         };
         menuBarView.addColorListener(colorMenuListener);
+    }
+
+    private void addHelpListener(){
+        ActionListener helpListener = actionEvent -> {
+            switch (actionEvent.getActionCommand() ){
+                case "t":
+                    TipOfTheDayView.showDialog(mainFrameView,"Tip");
+                    break;
+                case "v":
+                    HelpView.showDialog(mainFrameView,"Game Variant Help",gameVariant);
+                    break;
+                case "c":
+                    HelpView.showDialog(mainFrameView,"Cheats","c");
+                    break;
+            }
+        };
+        menuBarView.addHelpListener(helpListener);
     }
 
 }

@@ -16,6 +16,7 @@ public class MenuBarView extends JMenuBar {
     private JRadioButtonMenuItem[] variantButtons;
     private JRadioButtonMenuItem Black, White, Both;
     private JRadioButtonMenuItem playFair, killFigure,changeColorOfFigure,setFigure,blockFigure;
+    private JMenuItem tip, cheatHelp, variantHelp;
     private ListOfGameVariants variants = new ListOfGameVariants();
 
     MenuBarView() {
@@ -25,6 +26,7 @@ public class MenuBarView extends JMenuBar {
         initVariantOfGameMenu();
         initCheatMenu();
         initColorMenu();
+        initHelpMenu();
     }
 
     private void initOptionsMenu() {
@@ -123,6 +125,20 @@ public class MenuBarView extends JMenuBar {
         this.add(colorMenu);
     }
 
+    private void initHelpMenu() {
+        JMenu helpMenu = new JMenu("Help");
+        tip = new JMenuItem("Tip");
+        tip.setActionCommand("t");
+        helpMenu.add(tip);
+        variantHelp = new JMenuItem("Variant of game");
+        variantHelp.setActionCommand("v");
+        helpMenu.add(variantHelp);
+        cheatHelp = new JMenuItem("Cheats");
+        cheatHelp.setActionCommand("c");
+        helpMenu.add(cheatHelp);
+        this.add(helpMenu);
+    }
+
 
     public void addNewGameListener(ActionListener actionListener) {
         newGame.addActionListener(actionListener);
@@ -160,6 +176,12 @@ public class MenuBarView extends JMenuBar {
         for (int i = 0; i < 3; i++) {
             colorButtons[i].addActionListener(actionListener);
         }
+    }
+
+    public void addHelpListener(ActionListener actionListener){
+        tip.addActionListener(actionListener);
+        variantHelp.addActionListener(actionListener);
+        cheatHelp.addActionListener(actionListener);
     }
 
     private void setColorButtonsIcons() {
