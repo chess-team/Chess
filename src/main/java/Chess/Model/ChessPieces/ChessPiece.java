@@ -17,6 +17,8 @@ public abstract class ChessPiece {
 
     private Position positionOnChessboard;
 
+    public int whenBlocked = -100;
+
     public char label;
 
     abstract public ArrayList<Move> listOfPossibleMoves();

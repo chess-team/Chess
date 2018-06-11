@@ -11,11 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class KillFigureMoveTest {
 
     @Test
-    void undoMove() {
-
-    }
-
-    @Test
     void changeState() {
         StateOfGame.variant = new ClassicChess();
         StateOfGame.variant.initializeStateOfGame();
@@ -63,9 +58,5 @@ class KillFigureMoveTest {
                 validateMove(new KillFigureMove(new Position(4, 6))));
         StateOfGame.variant.
                 changeState(new Move(new Position(7, 7), new Position(5,7)));
-    }
-
-    @Test
-    void isBreakingRules() {
     }
 }

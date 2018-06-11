@@ -20,7 +20,10 @@ public class ClassicChess extends VariantSimilarToClassicChess {
         }
 
         ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(move.from);
-
+        int m = StateOfGame.historyOfMoves.listOfChessboardStates().size();
+        if(figure.whenBlocked + 6 >= m){
+            return false;
+        }
         if (figure instanceof King &&
                 move.differenceOnXCoordinate() > 1) {
             int sign = ChessUtil.signum(move.to.x - move.from.x);
@@ -106,8 +109,12 @@ public class ClassicChess extends VariantSimilarToClassicChess {
                 return false;
             }
         }
-
-        return move.getMoveColor() == StateOfGame.stateOfGameplay;
+        int m = StateOfGame.historyOfMoves.listOfChessboardStates().size();
+        if(tower.whenBlocked + 6 >= m){
+            return false;
+        }
+        ChessPiece king = StateOfGame.chessboard.getChessPieceOnPosition(kingPosition);
+        return king.whenBlocked < m && move.getMoveColor() == StateOfGame.stateOfGameplay;
     }
 
     public void initializeStateOfGame() {
@@ -137,8 +144,7 @@ public class ClassicChess extends VariantSimilarToClassicChess {
         }
         change.changeState();
         StateOfGame.historyOfMoves.addMove(change);
-        //TODO decide if include
-        /*
+
         if(change instanceof KillFigureMove) {
             ChessPiece targetPiece = StateOfGame.chessboard.
                     getChessPieceOnPosition(change.to);
@@ -147,14 +153,13 @@ public class ClassicChess extends VariantSimilarToClassicChess {
             if (!c.equals('.')) {
                 StateOfGame.capturedPieces.add(c);
             }
-        }*/
-        //;
+        }
+        if(!(change instanceof BlockFigureMove))changeStateOfGameplay();
     }
 
     public void changeState(SpecialMove change) {
         changeStateWithoutEnd(change);
-        if(!(change instanceof BlockFigureMove))changeStateOfGameplay();
-        inCaseOfEndOfGame();
+        if(!(change instanceof BlockFigureMove))inCaseOfEndOfGame();
     }
 
     public void changeState(Move change) {
@@ -163,13 +168,11 @@ public class ClassicChess extends VariantSimilarToClassicChess {
             return;
         }
         changeStateWithoutEnd(change);
-        changeStateOfGameplay();
         inCaseOfEndOfGame();
     }
 
     void changeStateOfGameplay() {
         swapPlayerColor();
-        //inCaseOfEndOfGame();
     }
 
 
@@ -192,7 +195,7 @@ public class ClassicChess extends VariantSimilarToClassicChess {
                 new Move(towerPosition, newTowerPosition));
 
         StateOfGame.historyOfMoves.addMove(change);
-        //changeStateOfGameplay();
+        changeStateOfGameplay();
     }
 
     public void changeStateWithoutEnd(Move change){
@@ -232,6 +235,7 @@ public class ClassicChess extends VariantSimilarToClassicChess {
             StateOfGame.chessboard.setFigure(change.promoteTo);
         }
         StateOfGame.historyOfMoves.addMove(change);
+        changeStateOfGameplay();
     }
 
     void inCaseOfEndOfGame() {
