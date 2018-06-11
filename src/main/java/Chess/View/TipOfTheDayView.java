@@ -13,7 +13,7 @@ import static javax.imageio.ImageIO.read;
 public class TipOfTheDayView {
     public static void showDialog(JFrame frame) {
         Random rand = new Random();
-        int num = rand.nextInt(24) + 1;
+        int num = rand.nextInt(50) + 1;
         try {
             BufferedImage bi;
             File pic = new File("src/main/resources/icons/tip.png");
