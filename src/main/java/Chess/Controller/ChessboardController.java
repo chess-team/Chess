@@ -4,8 +4,7 @@ import Chess.Model.*;
 import Chess.Model.ArtificialIntelligence.AI;
 import Chess.Model.ArtificialIntelligence.RandomAI;
 import Chess.Model.ChessPieces.*;
-import Chess.Model.Moves.KillFigureMove;
-import Chess.Model.Moves.Move;
+import Chess.Model.Moves.*;
 import Chess.View.ChessboardView;
 import Chess.View.MainFrameView;
 import Chess.View.MainPanelView;
@@ -88,6 +87,16 @@ class ChessboardController {
             case "kf":
                 killFigure(position);
                 break;
+            case "cc":
+                changeColorOfFigure(position);
+                break;
+            case "sf":
+                setFigure(position);
+                break;
+            case "bf":
+                blockFigure(position);
+                break;
+
         }
     }
 
@@ -99,6 +108,71 @@ class ChessboardController {
             JOptionPane.showMessageDialog(mainFrameView, "Bad square");
         }
     }
+
+    private void changeColorOfFigure( Position position ){
+        ChangeColorOfFigureMove changeColorOfFigureMove = new ChangeColorOfFigureMove(position);
+        if( StateOfGame.variant.validateMove(changeColorOfFigureMove) ){
+            StateOfGame.variant.changeState(changeColorOfFigureMove);
+        }else {
+            JOptionPane.showMessageDialog(mainFrameView, "Bad square");
+        }
+
+    }
+
+    private void setFigure(Position position){
+        Object[] possibleValues = {"Queen", "Bishop", "Knight", "Rook", "Pawn"};
+        Object tmp =  JOptionPane.showInputDialog(null,
+                "Promote pawn to", "Promotion menu",
+                JOptionPane.INFORMATION_MESSAGE, null,
+                possibleValues, possibleValues[0]);
+        if ( tmp == null ){
+            return;
+        }
+        String figure = (String)tmp;
+        ChessColour color = ChessColour.WHITE;
+        if ( StateOfGame.getStateOfGameplay().equals(StateOfGameplay.BLACK_MOVE) ){
+            color = ChessColour.BLACK;
+        }
+
+        SetFigureMove setFigureMove = new SetFigureMove(position, newChessPiece(figure,color,position));
+        if( StateOfGame.variant.validateMove(setFigureMove) ){
+            StateOfGame.variant.changeState(setFigureMove);
+        }else {
+            JOptionPane.showMessageDialog(mainFrameView, "Bad move");
+        }
+    }
+
+    private void blockFigure(Position position){
+        BlockFigureMove blockFigureMove = new BlockFigureMove(position);
+        if( StateOfGame.variant.validateMove(blockFigureMove) ){
+            StateOfGame.variant.changeState(blockFigureMove);
+        }else {
+            JOptionPane.showMessageDialog(mainFrameView, "Bad square");
+        }
+    }
+
+
+    private ChessPiece newChessPiece(String figure, ChessColour colour, Position position ){
+        ChessPiece newChessPiece;
+        switch (figure) {
+            case "Queen":
+                newChessPiece = new Queen(colour, position);
+                break;
+            case "Rook":
+                newChessPiece = new Rook(colour, position);
+                break;
+            case "Knight":
+                newChessPiece = new Knight(colour, position);
+                break;
+            case "Bishop":
+                newChessPiece = new Bishop(colour, position);
+                break;
+            default:
+                newChessPiece = new Pawn(colour, position);
+        }
+        return newChessPiece;
+    }
+
 
     private void takePiece(Position position) {
         ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(position);
@@ -135,34 +209,23 @@ class ChessboardController {
 
     private void makePromotionMove(ChessPiece figure, Position from, Position to) {
         Object[] possibleValues = {"Queen", "Bishop", "Knight", "Rook"};
-        promote = (String) JOptionPane.showInputDialog(null,
+        Object tmp = JOptionPane.showInputDialog(null,
                 "Promote pawn to", "Promotion menu",
                 JOptionPane.INFORMATION_MESSAGE, null,
                 possibleValues, possibleValues[0]);
+        if ( tmp == null ){
+
+            return;
+        }
+        promote = (String)tmp;
         System.out.println(promote);
         Move move = getPromotionMove(figure, from, to);
         movePiece(move);
+
     }
 
     private Move getPromotionMove(ChessPiece figure, Position from, Position to) {
-        ChessPiece newChessPiece;
-        switch (promote) {
-            case "Queen":
-                newChessPiece = new Queen(figure.getChessColour(), to);
-                break;
-            case "Rook":
-                newChessPiece = new Rook(figure.getChessColour(), to);
-                break;
-            case "Knight":
-                newChessPiece = new Knight(figure.getChessColour(), to);
-                break;
-            case "Bishop":
-                newChessPiece = new Bishop(figure.getChessColour(), to);
-                break;
-            default:
-                newChessPiece = new Pawn(figure.getChessColour(), to);
-        }
-        return new Move(from, to, newChessPiece);
+        return new Move(from, to, newChessPiece(promote,figure.getChessColour(),to));
     }
 
 

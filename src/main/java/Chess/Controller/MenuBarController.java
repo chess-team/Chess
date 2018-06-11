@@ -89,6 +89,16 @@ class MenuBarController {
                 case "kf":
                     JOptionPane.showMessageDialog(mainFrameView, "Choose figure to kill");
                     break;
+                case "cc":
+                    JOptionPane.showMessageDialog(mainFrameView, "Choose figure to change color");
+                    break;
+                case "sf":
+                    JOptionPane.showMessageDialog(mainFrameView, "Choose square to place new figure");
+                    break;
+                case "bf":
+                    JOptionPane.showMessageDialog(mainFrameView, "Choose figure to block");
+                    break;
+
             }
         };
 

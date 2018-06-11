@@ -15,7 +15,7 @@ public class MenuBarView extends JMenuBar {
     private JCheckBox rotation;
     private JRadioButtonMenuItem[] variantButtons;
     private JRadioButtonMenuItem Black, White, Both;
-    private JRadioButtonMenuItem playFair, killFigure;
+    private JRadioButtonMenuItem playFair, killFigure,changeColorOfFigure,setFigure,blockFigure;
     private ListOfGameVariants variants = new ListOfGameVariants();
 
     MenuBarView() {
@@ -83,12 +83,25 @@ public class MenuBarView extends JMenuBar {
         playFair.setSelected(true);
         killFigure = new JRadioButtonMenuItem("Kill figure");
         killFigure.setActionCommand("kf");
+        changeColorOfFigure = new JRadioButtonMenuItem("Change color of figure");
+        changeColorOfFigure.setActionCommand("cc");
+        setFigure = new JRadioButtonMenuItem("Set figure");
+        setFigure.setActionCommand("sf");
+        blockFigure = new JRadioButtonMenuItem("Block figure");
+        blockFigure.setActionCommand("bf");
+
         ButtonGroup buttonGroup = new ButtonGroup();
         JMenu cheatMenu = new JMenu("Cheats");
         buttonGroup.add(playFair);
         cheatMenu.add(playFair);
         buttonGroup.add(killFigure);
         cheatMenu.add(killFigure);
+        buttonGroup.add(changeColorOfFigure);
+        cheatMenu.add(changeColorOfFigure);
+        buttonGroup.add(setFigure);
+        cheatMenu.add(setFigure);
+        buttonGroup.add(blockFigure);
+        cheatMenu.add(blockFigure);
         this.add(cheatMenu);
     }
 
@@ -138,6 +151,9 @@ public class MenuBarView extends JMenuBar {
     public void addCheatListener(ActionListener actionListener) {
         playFair.addActionListener(actionListener);
         killFigure.addActionListener(actionListener);
+        changeColorOfFigure.addActionListener(actionListener);
+        setFigure.addActionListener(actionListener);
+        blockFigure.addActionListener(actionListener);
     }
 
     public void addColorListener(ActionListener actionListener) {
