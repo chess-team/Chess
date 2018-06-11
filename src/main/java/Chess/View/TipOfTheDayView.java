@@ -1,12 +1,9 @@
 package Chess.View;
 
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
+import java.io.*;
 
 import javax.swing.*;
-import java.io.FileReader;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.Random;
 import java.util.stream.Stream;
@@ -19,8 +16,7 @@ public class TipOfTheDayView {
         int num = rand.nextInt(50) + 1;
         try {
             BufferedImage bi = read(TipOfTheDayView.class.getResourceAsStream("/icons/tip.png"));
-            File file = new File("src/main/resources/tips/" + num + ".txt");
-            BufferedReader br = new BufferedReader(new FileReader(file));
+            BufferedReader br = new BufferedReader(new InputStreamReader(ChessboardView.class.getResourceAsStream("/tips/" + num + ".txt")));
             StringBuilder sb = new StringBuilder();
             String tmp;
             while ((tmp = br.readLine()) != null) {
