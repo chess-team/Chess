@@ -4,6 +4,7 @@ import Chess.Model.*;
 import Chess.Model.ArtificialIntelligence.AI;
 import Chess.Model.ArtificialIntelligence.RandomAI;
 import Chess.Model.ChessPieces.*;
+import Chess.Model.Moves.KillFigureMove;
 import Chess.Model.Moves.Move;
 import Chess.View.ChessboardView;
 import Chess.View.MainFrameView;
@@ -21,14 +22,16 @@ class ChessboardController {
     private String promote;
     private AI player;
     private String modeOfGame;
+    private String selectedCheat;
 
     ChessboardController(MainFrameView mainFrameView) {
-        modeOfGame = "Both";
         this.mainFrameView = mainFrameView;
         this.mainPanelView = mainFrameView.getMainPanelView();
         this.chessboardView = this.mainPanelView.getChessboardView();
         player = new RandomAI();
         addButtonListener();
+        modeOfGame = "Both";
+        this.setPlayFair();
     }
 
     void setFromToNull() {
@@ -40,11 +43,24 @@ class ChessboardController {
         makeComputerMoves();
     }
 
+    void setSelectedCheat(String selectedCheat) {
+        this.selectedCheat = selectedCheat;
+    }
+    private void setPlayFair(){
+        mainFrameView.getMenuBarView().selectPlayFair();
+        this.selectedCheat = "pf";
+    }
+
     private void addButtonListener() {
         ActionListener buttonListener = actionEvent -> {
             String[] s = actionEvent.getActionCommand().split(" ", 2);
             Position position = new Position(Integer.valueOf(s[0]), Integer.valueOf(s[1]));
-            if (from == null) {
+            if( !selectedCheat.equals("pf") ){
+                makeCheatMove(position);
+                mainPanelView.updateMainPanelView();
+                checkState();
+                setPlayFair();
+            }else if (from == null) {
                 takePiece(position);
             } else {
                 ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(from);
@@ -64,6 +80,25 @@ class ChessboardController {
         chessboardView.setActionListener(buttonListener);
     }
 
+    private void makeCheatMove(Position position){
+        System.out.println(position);
+        switch (selectedCheat) {
+            case "pf":
+                break;
+            case "kf":
+                killFigure(position);
+                break;
+        }
+    }
+
+    private void killFigure(Position position){
+        KillFigureMove killFigureMove = new KillFigureMove(position);
+        if( StateOfGame.variant.validateMove(killFigureMove) ){
+            StateOfGame.variant.changeState(killFigureMove);
+        }else {
+            JOptionPane.showMessageDialog(mainFrameView, "Bad square");
+        }
+    }
 
     private void takePiece(Position position) {
         ChessPiece figure = StateOfGame.chessboard.getChessPieceOnPosition(position);
@@ -192,7 +227,9 @@ class ChessboardController {
     }
 
     void undoMove() {
-        if (modeOfGame.equals("Both")) StateOfGame.undoMove();
+        if (modeOfGame.equals("Both")) {
+            StateOfGame.undoMove();
+        }
         else {
             while (lastMoveWasComputerMove()) {
                 StateOfGame.undoMove();
