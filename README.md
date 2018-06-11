@@ -2,6 +2,7 @@
 Variants of chess game
 
 # Quick start
+Works on Windows and Linux.
 In IntelliJ IDEA -> file -> new -> Project from Version Control -> Git
 
 # Sources
