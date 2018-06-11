@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 
-public class MainPanelController {
+class MainPanelController {
 
     private MainFrameView mainFrameView;
 
@@ -46,8 +46,54 @@ public class MainPanelController {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 chessboardController.switchRotation();
+                mainFrameView.getMenuBarView().switchRotationButton();
+
             }
         });
+
+        mainPanelView.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.CTRL_MASK), "playFair");
+        mainPanelView.getActionMap().put("playFair", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JOptionPane.showMessageDialog(mainFrameView, "Congratulations - you decided to play fair");
+                chessboardController.setSelectedCheat("pf");
+            }
+        });
+        mainPanelView.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_MASK), "killFigure");
+        mainPanelView.getActionMap().put("killFigure", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JOptionPane.showMessageDialog(mainFrameView, "Choose figure to kill");
+                chessboardController.setSelectedCheat("kf");
+            }
+        });
+        mainPanelView.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_3, InputEvent.CTRL_MASK), "changeColourOfFigure");
+        mainPanelView.getActionMap().put("changeColourOfFigure", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JOptionPane.showMessageDialog(mainFrameView, "Choose figure to change color");
+                chessboardController.setSelectedCheat("cc");
+            }
+        });
+        mainPanelView.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_4, InputEvent.CTRL_MASK), "setFigure");
+        mainPanelView.getActionMap().put("setFigure", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JOptionPane.showMessageDialog(mainFrameView, "Choose square to place new figure");
+                chessboardController.setSelectedCheat("sf");
+            }
+        });
+        mainPanelView.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_5, InputEvent.CTRL_MASK), "blockFigure");
+        mainPanelView.getActionMap().put("blockFigure", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JOptionPane.showMessageDialog(mainFrameView, "Choose figure to block");
+                chessboardController.setSelectedCheat("bf");
+            }
+        });
+
+
+
     }
 
     private void addComponentResized() {
@@ -89,7 +135,7 @@ public class MainPanelController {
     }
 
 
-    public ChessboardController getChessboardController() {
+    ChessboardController getChessboardController() {
         return chessboardController;
     }
 

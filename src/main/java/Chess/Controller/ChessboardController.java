@@ -44,10 +44,12 @@ class ChessboardController {
 
     void setSelectedCheat(String selectedCheat) {
         this.selectedCheat = selectedCheat;
+        mainFrameView.getMenuBarView().setSelectedCheat(selectedCheat);
+        takePieceUndo();
     }
+
     private void setPlayFair(){
-        mainFrameView.getMenuBarView().selectPlayFair();
-        this.selectedCheat = "pf";
+        setSelectedCheat("pf");
     }
 
     private void addButtonListener() {
@@ -57,6 +59,7 @@ class ChessboardController {
             if( !selectedCheat.equals("pf") ){
                 makeCheatMove(position);
                 mainPanelView.updateMainPanelView();
+                makeComputerMoves();
                 checkState();
                 setPlayFair();
             }else if (from == null) {
@@ -67,11 +70,13 @@ class ChessboardController {
                 if (StateOfGame.variant.validateMove(move)) {
                     movePiece(move);
                     makeComputerMoves();
+                    checkState();
                 } else {
                     Move promotionMove = new Move(from, position, new Queen(figure.getChessColour(), position));
                     if (StateOfGame.variant.validateMove(promotionMove)) {
                         makePromotionMove(figure, from, position);
                         makeComputerMoves();
+                        checkState();
                     } else takePieceUndo();
                 }
             }
@@ -105,7 +110,7 @@ class ChessboardController {
         if( StateOfGame.variant.validateMove(killFigureMove) ){
             StateOfGame.variant.changeState(killFigureMove);
         }else {
-            JOptionPane.showMessageDialog(mainFrameView, "Bad square");
+            JOptionPane.showMessageDialog(mainFrameView, "Wrong square");
         }
     }
 
@@ -114,7 +119,7 @@ class ChessboardController {
         if( StateOfGame.variant.validateMove(changeColorOfFigureMove) ){
             StateOfGame.variant.changeState(changeColorOfFigureMove);
         }else {
-            JOptionPane.showMessageDialog(mainFrameView, "Bad square");
+            JOptionPane.showMessageDialog(mainFrameView, "Wrong square");
         }
 
     }
@@ -122,7 +127,7 @@ class ChessboardController {
     private void setFigure(Position position){
         Object[] possibleValues = {"Queen", "Bishop", "Knight", "Rook", "Pawn"};
         Object tmp =  JOptionPane.showInputDialog(null,
-                "Promote pawn to", "Promotion menu",
+                "Choose new figure", "New figure",
                 JOptionPane.INFORMATION_MESSAGE, null,
                 possibleValues, possibleValues[0]);
         if ( tmp == null ){
@@ -145,6 +150,7 @@ class ChessboardController {
     private void blockFigure(Position position){
         BlockFigureMove blockFigureMove = new BlockFigureMove(position);
         if( StateOfGame.variant.validateMove(blockFigureMove) ){
+            JOptionPane.showMessageDialog(mainFrameView, "Successful block");
             StateOfGame.variant.changeState(blockFigureMove);
         }else {
             JOptionPane.showMessageDialog(mainFrameView, "Bad square");
@@ -204,7 +210,6 @@ class ChessboardController {
         StateOfGame.variant.changeState(move);
         mainPanelView.updateMainPanelView();
         from = null;
-        //checkState();
     }
 
     private void makePromotionMove(ChessPiece figure, Position from, Position to) {
@@ -240,6 +245,7 @@ class ChessboardController {
         StateOfGame.variant.initializeStateOfGame();
         mainFrameView.updateView();
         makeComputerMoves();
+        setPlayFair();
     }
 
     private void showEndGameDialog() {
@@ -265,7 +271,6 @@ class ChessboardController {
         }
         if( tmp > 0 )
             System.out.println("Number of AI moves: " + tmp);
-        checkState();
     }
 
     private boolean gameOver() {
@@ -301,6 +306,7 @@ class ChessboardController {
             makeComputerMoves();
         }
         mainPanelView.updateMainPanelView();
+        setPlayFair();
     }
 
     private boolean lastMoveWasComputerMove() {

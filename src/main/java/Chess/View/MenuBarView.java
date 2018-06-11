@@ -29,11 +29,11 @@ public class MenuBarView extends JMenuBar {
 
     private void initOptionsMenu() {
         JMenu optionsMenu = new JMenu("Options");
-        newGame = new JMenuItem("New Game");
+        newGame = new JMenuItem("New Game (Ctrl+n)");
         optionsMenu.add(newGame);
-        undoLastMove = new JMenuItem("Undo Last Move");
+        undoLastMove = new JMenuItem("Undo Last Move (Ctrl+z)");
         optionsMenu.add(undoLastMove);
-        rotation = new JCheckBox("Rotation");
+        rotation = new JCheckBox("Rotation (Ctrl+r)");
         rotation.setHorizontalTextPosition(SwingConstants.LEFT);
         optionsMenu.add(rotation);
         this.add(optionsMenu);
@@ -78,16 +78,16 @@ public class MenuBarView extends JMenuBar {
 
     }
     private void initCheatMenu(){
-        playFair = new JRadioButtonMenuItem("Play fair");
+        playFair = new JRadioButtonMenuItem("Play fair (Ctrl+1)");
         playFair.setActionCommand("pf");
         playFair.setSelected(true);
-        killFigure = new JRadioButtonMenuItem("Kill figure");
+        killFigure = new JRadioButtonMenuItem("Kill figure (Ctrl+2)");
         killFigure.setActionCommand("kf");
-        changeColorOfFigure = new JRadioButtonMenuItem("Change color of figure");
+        changeColorOfFigure = new JRadioButtonMenuItem("Change color of figure (Ctrl+3)");
         changeColorOfFigure.setActionCommand("cc");
-        setFigure = new JRadioButtonMenuItem("Set figure");
+        setFigure = new JRadioButtonMenuItem("Set figure (Ctrl+4)");
         setFigure.setActionCommand("sf");
-        blockFigure = new JRadioButtonMenuItem("Block figure");
+        blockFigure = new JRadioButtonMenuItem("Block figure (Ctrl+5)");
         blockFigure.setActionCommand("bf");
 
         ButtonGroup buttonGroup = new ButtonGroup();
@@ -176,7 +176,34 @@ public class MenuBarView extends JMenuBar {
         }
     }
 
-    public void selectPlayFair(){
+    public void setSelectedCheat(String cheat){
         playFair.setSelected(true);
+        switch (cheat) {
+            case "pf":
+                playFair.setSelected(true);
+                break;
+            case "kf":
+                killFigure.setSelected(true);
+                break;
+            case "cc":
+                changeColorOfFigure.setSelected(true);
+                break;
+            case "sf":
+                setFigure.setSelected(true);
+                break;
+            case "bf":
+                blockFigure.setSelected(true);
+                break;
+        }
     }
+
+    public void switchRotationButton(){
+        if( rotation.isSelected() ){
+            rotation.setSelected(false);
+        }else {
+            rotation.setSelected(true);
+        }
+    }
+
+
 }

@@ -81,7 +81,6 @@ class MenuBarController {
     private void addCheatListener() {
         ActionListener cheatListener = actionEvent -> {
             System.out.println("Cheat : " + actionEvent.getActionCommand());
-            chessboardController.takePieceUndo();
             chessboardController.setSelectedCheat(actionEvent.getActionCommand());
             switch (actionEvent.getActionCommand()) {
                 case "pf":
