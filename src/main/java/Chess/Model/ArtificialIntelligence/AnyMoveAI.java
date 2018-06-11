@@ -9,7 +9,7 @@ import Chess.Model.StateOfGame;
 AI making first move from the list.
 It is very simple - mainly for testing purposes.
  */
-public class anyMoveAI implements AI {
+public class AnyMoveAI implements AI {
 
     @Override
     public Move getAIMove() {

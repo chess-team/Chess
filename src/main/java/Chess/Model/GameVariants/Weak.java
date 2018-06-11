@@ -7,7 +7,6 @@ import Chess.Model.Position;
 import Chess.Model.StateOfGame;
 
 /*
-Game variant have name Weak!
 Black has 16 pawns, 7 knights, 1 king, and white classical starting situation.
     */
 public class Weak extends ClassicChess {
