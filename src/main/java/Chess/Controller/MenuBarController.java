@@ -6,6 +6,7 @@ import Chess.View.MainFrameView;
 import Chess.View.MainPanelView;
 import Chess.View.MenuBarView;
 
+import javax.swing.*;
 import java.awt.event.ActionListener;
 
 class MenuBarController {
@@ -29,6 +30,7 @@ class MenuBarController {
         addChoosePlayerListener();
         addVariantOfGameListener();
         addColorListener();
+        addCheatListener();
     }
 
     private void addOptionsListeners() {
@@ -74,6 +76,23 @@ class MenuBarController {
             chessboardController.makeComputerMoves();
         };
         menuBarView.addVariantOfGameListener(variantOfGameListener);
+    }
+
+    private void addCheatListener() {
+        ActionListener cheatListener = actionEvent -> {
+            System.out.println("Cheat : " + actionEvent.getActionCommand());
+            chessboardController.takePieceUndo();
+            chessboardController.setSelectedCheat(actionEvent.getActionCommand());
+            switch (actionEvent.getActionCommand()) {
+                case "pf":
+                    break;
+                case "kf":
+                    JOptionPane.showMessageDialog(mainFrameView, "Choose figure to kill");
+                    break;
+            }
+        };
+
+        menuBarView.addCheatListener(cheatListener);
     }
 
     private void addColorListener() {

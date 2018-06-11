@@ -15,6 +15,7 @@ public class MenuBarView extends JMenuBar {
     private JCheckBox rotation;
     private JRadioButtonMenuItem[] variantButtons;
     private JRadioButtonMenuItem Black, White, Both;
+    private JRadioButtonMenuItem playFair, killFigure;
     private ListOfGameVariants variants = new ListOfGameVariants();
 
     MenuBarView() {
@@ -22,6 +23,7 @@ public class MenuBarView extends JMenuBar {
         initOptionsMenu();
         initChoosePlayerMenu();
         initVariantOfGameMenu();
+        initCheatMenu();
         initColorMenu();
     }
 
@@ -75,6 +77,21 @@ public class MenuBarView extends JMenuBar {
         this.add(variantOfGameMenu);
 
     }
+    private void initCheatMenu(){
+        playFair = new JRadioButtonMenuItem("Play fair");
+        playFair.setActionCommand("pf");
+        playFair.setSelected(true);
+        killFigure = new JRadioButtonMenuItem("Kill figure");
+        killFigure.setActionCommand("kf");
+        ButtonGroup buttonGroup = new ButtonGroup();
+        JMenu cheatMenu = new JMenu("Cheats");
+        buttonGroup.add(playFair);
+        cheatMenu.add(playFair);
+        buttonGroup.add(killFigure);
+        cheatMenu.add(killFigure);
+        this.add(cheatMenu);
+    }
+
 
     private void initColorMenu() {
         colorButtons = new JRadioButtonMenuItem[3];
@@ -92,6 +109,7 @@ public class MenuBarView extends JMenuBar {
         }
         this.add(colorMenu);
     }
+
 
     public void addNewGameListener(ActionListener actionListener) {
         newGame.addActionListener(actionListener);
@@ -117,6 +135,11 @@ public class MenuBarView extends JMenuBar {
         }
     }
 
+    public void addCheatListener(ActionListener actionListener) {
+        playFair.addActionListener(actionListener);
+        killFigure.addActionListener(actionListener);
+    }
+
     public void addColorListener(ActionListener actionListener) {
         for (int i = 0; i < 3; i++) {
             colorButtons[i].addActionListener(actionListener);
@@ -135,5 +158,9 @@ public class MenuBarView extends JMenuBar {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void selectPlayFair(){
+        playFair.setSelected(true);
     }
 }
