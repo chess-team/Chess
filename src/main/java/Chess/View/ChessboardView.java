@@ -168,9 +168,9 @@ public class ChessboardView extends JPanel {
             blackPiecesIcons.put('B', new ImageIcon(buf));
             buf = read(ChessboardView.class.getResourceAsStream("/blackKnight1.png"));
             blackPiecesIcons.put('K', new ImageIcon(buf));
-            buf = read(ChessboardView.class.getResourceAsStream("/whitePawn1.png"));
-            whitePiecesIcons.put('R', new ImageIcon(buf));
             buf = read(ChessboardView.class.getResourceAsStream("/whiteRook1.png"));
+            whitePiecesIcons.put('R', new ImageIcon(buf));
+            buf = read(ChessboardView.class.getResourceAsStream("/whitePawn1.png"));
             whitePiecesIcons.put('P', new ImageIcon(buf));
             buf = read(ChessboardView.class.getResourceAsStream("/whiteBishop1.png"));
             whitePiecesIcons.put('B', new ImageIcon(buf));
