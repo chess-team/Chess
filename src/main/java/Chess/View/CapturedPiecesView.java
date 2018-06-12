@@ -37,7 +37,6 @@ public class CapturedPiecesView extends JPanel{
                     add(capturedPieces[i][j]);
             }
         }
-        System.out.println(height + " " + width);
 
     }
 
