@@ -99,7 +99,7 @@ abstract class VariantSimilarToClassicChess implements VariantOfGame {
     // initialize chessboard with line of figures
     // permutation 1,2,3,4,5,6,7,8 - gives position like in standard
     // standard chess
-    void setLineOfFigures(int YCoordinate, ChessColour figuresColor,
+    public void setLineOfFigures(int YCoordinate, ChessColour figuresColor,
                           ArrayList<Integer> permutation){
 
         StateOfGame.chessboard.setFigure(

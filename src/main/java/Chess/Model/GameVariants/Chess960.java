@@ -22,6 +22,9 @@ public class Chess960 extends ClassicChess {
             temp.add(i);
         }
         Collections.shuffle(temp);
+        StateOfGame.historyOfMoves.white = temp;
+        StateOfGame.historyOfMoves.black = temp;
+
         StateOfGame.chessboard = new ClassicChessboard();
         setLineOfPawns(1, ChessColour.WHITE);
         setLineOfPawns(6, ChessColour.BLACK);

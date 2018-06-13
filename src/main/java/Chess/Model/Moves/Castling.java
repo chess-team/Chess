@@ -3,7 +3,7 @@ package Chess.Model.Moves;
 import Chess.Model.*;
 
 public class Castling extends SpecialMove {
-    private final Position towerPosition;
+    private Position towerPosition;
 
     static public boolean castlingDisabled = false;
 
@@ -12,6 +12,9 @@ public class Castling extends SpecialMove {
     }
 
     public Position getTowerPosition() {
+        if(towerPosition == null){
+            towerPosition = from.translateByVector(ChessUtil.signum(from.x - to.x), 0);
+        }
         return towerPosition;
     }
 

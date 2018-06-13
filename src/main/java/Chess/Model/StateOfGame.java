@@ -1,6 +1,8 @@
 package Chess.Model;
 
+import Chess.Model.GameVariants.Chess960;
 import Chess.Model.GameVariants.ClassicChess;
+import Chess.Model.GameVariants.TranscendentalChess;
 import Chess.Model.Moves.HistoryOfMoves;
 import Chess.Model.Moves.Move;
 
@@ -56,7 +58,23 @@ public class StateOfGame implements Serializable {
     // is used to undo move
     private static void reload() {
         List<Move> moves = historyOfMoves.listOfPreviousMoves();
+        ArrayList<Integer> white = historyOfMoves.white;
+        ArrayList<Integer> black = historyOfMoves.black;
         StateOfGame.variant.initializeStateOfGame();
+        if(StateOfGame.variant instanceof Chess960 || StateOfGame.variant instanceof TranscendentalChess) {
+            historyOfMoves.white = white;
+            historyOfMoves.black = black;
+        }
+        if(StateOfGame.variant instanceof Chess960){
+            Chess960 w = (Chess960) StateOfGame.variant;
+            w.setLineOfFigures(0, ChessColour.WHITE, white);
+            w.setLineOfFigures(7, ChessColour.BLACK, black);
+        }
+        if(StateOfGame.variant instanceof TranscendentalChess){
+            TranscendentalChess w = (TranscendentalChess) StateOfGame.variant;
+            w.setLineOfFigures(0, ChessColour.WHITE, white);
+            w.setLineOfFigures(7, ChessColour.BLACK, black);
+        }
         for (Move v : moves) {
             StateOfGame.variant.changeStateWithoutEnd(v);
         }
