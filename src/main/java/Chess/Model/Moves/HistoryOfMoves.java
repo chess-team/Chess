@@ -11,6 +11,8 @@ import java.util.List;
 Class holds information about moves made in game.
  */
 public class HistoryOfMoves implements Serializable {
+    public ArrayList <Integer> black;
+    public ArrayList <Integer> white;
     private final ArrayList<Move> lastMoves = new ArrayList<>();
     private final ArrayList<String> chessboardsStates =
             new ArrayList<>();
