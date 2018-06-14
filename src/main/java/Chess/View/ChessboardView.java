@@ -76,7 +76,6 @@ public class ChessboardView extends JPanel {
                 } else {
                     JButton newButton = new JButton();
                     newButton.setOpaque(true);
-                    newButton.setBorderPainted(false);
                     newButton.setFocusable(false);
                     newButton.revalidate();
                     newButton.setIcon(transparentIcon);
