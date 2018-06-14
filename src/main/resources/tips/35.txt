@@ -1,5 +1,4 @@
 "The combination player thinks forward; he starts from
-
 the given position, and tries the forceful moves in his mind"
 
 (Emanuel Lasker)
