@@ -16,13 +16,15 @@ public class TranscendentalChess extends ClassicChess {
             temp.add(i);
         }
         Collections.shuffle(temp);
-        StateOfGame.historyOfMoves.white = temp;
+        StateOfGame.historyOfMoves.white = new ArrayList<>();//temp;
+        StateOfGame.historyOfMoves.white.addAll(temp);
         StateOfGame.chessboard = new ClassicChessboard();
         setLineOfPawns(1, ChessColour.WHITE);
         setLineOfPawns(6, ChessColour.BLACK);
         setLineOfFigures(0, ChessColour.WHITE, temp);
         Collections.shuffle(temp);
-        StateOfGame.historyOfMoves.black = temp;
+        StateOfGame.historyOfMoves.black = new ArrayList<>();
+        StateOfGame.historyOfMoves.black.addAll(temp);
         setLineOfFigures(7, ChessColour.BLACK, temp);
     }
 }
